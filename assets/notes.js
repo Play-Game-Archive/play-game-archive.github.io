@@ -141,7 +141,10 @@ function switchAccount(user){
  return Promise.resolve();
 }
 let accountLoad=Promise.resolve();
-if(account)account.onChange(user=>{accountLoad=switchAccount(user);});
+if(account){
+ account.onChange(user=>{accountLoad=switchAccount(user);});
+ if(account.current)accountLoad=switchAccount(account.current);
+}
 const ready=(account?account.ready.then(()=>accountLoad):refresh().then(()=>pull())).then(()=>{
  const target=new URLSearchParams(location.search).get('note');
  if(target){const n=notes.find(n=>n.id===target);if(n)setTimeout(()=>jump(n),250);}
