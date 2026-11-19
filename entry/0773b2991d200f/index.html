@@ -1,0 +1,82 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="效用型AI是一类通过比较候选行动的数值评价来选择行为的方法。系统根据当前情境计算攻击、治疗、休息、交谈等行动的适合程度，再按最大分数、加权随机或分层筛选等规则作决定。这里的效用通常是设计目标的数值表达，可以反映生存、距离、需要或角色偏好；这里的效用是系统为行动设置的评价表示。"><title>效用型AI · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" >档案卡片</a><a href="../../concepts/" aria-current="page">索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="0773b2991d200f"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../concepts/?view=all">← 索引标签</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-75666aa9ee6" data-toc="h-75666aa9ee6">理论含义与游戏实践</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-ef48b911f3b" data-toc="h-ef48b911f3b">从状态到可比较的分数</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-b42c5438624" data-toc="h-b42c5438624">一个可以复算的选择例子</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-b184490c888" data-toc="h-b184490c888">因子组合的后果</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-7af9c9fd142" data-toc="h-7af9c9fd142">排名、随机性与行为连续性</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-503800cc9e9" data-toc="h-503800cc9e9">大型游戏中的分工</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-6c45e448e91" data-toc="h-6c45e448e91">与其他方法的区别</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-ca08b53a14a" data-toc="h-ca08b53a14a">评价、争论与局限</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1184d9947b1" data-toc="h-1184d9947b1">参考文献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header has-cover" id="entry-title"><figure class="entry-media kind-generated"><img src="../../assets/display/14752ce1193912b2ef9feae0.webp" alt="效用型AI，独立概念意象" width="1254" height="1254"></figure><div><a class="entry-kicker" href="../../concepts/">索引标签</a><p class="entry-original " lang="en">Utility AI</p><h1>效用型AI</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>效用型AI是一类通过比较候选行动的数值评价来选择行为的方法。系统根据当前情境计算攻击、治疗、休息、交谈等行动的适合程度，再按最大分数、加权随机或分层筛选等规则作决定。这里的效用通常是设计目标的数值表达，可以反映生存、距离、需要或角色偏好；这里的效用是系统为行动设置的评价表示。</p>
+<p>这一方法适合处理多个需求持续变化、无法简单排成永久优先顺序的情境。角色可能既饿又困，既想攻击又担心受伤；分数允许这些考虑随状态改变。但分数的计算和行动的选择是两个不同环节。相同评分可以配合不同选择规则，产生稳定、随机、保守或容易切换的行为，因此只知道一个角色“使用效用AI”，还不足以判断它会怎样行动。</p>
+</section><h2 id="h-75666aa9ee6" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">理论含义与游戏实践</span></h2>
+<div class="reading-block" id="p-bddece07f33"><p>决策理论中的期望效用，把不确定结果的效用按发生概率加权。游戏开发中所说的效用型AI经常借用这一比较思想，却未必完整建立结果概率模型。许多系统直接把血量、目标距离和危险程度转成分数，再组合为行动评价。把两种含义区分开，有助于判断数字代表预测的长期结果，还是一种为设计服务的即时偏好。</p>
+</div>
+<div class="reading-block" id="p-0e9747e0fa9"><p>格雷厄姆在2013年的《效用理论导论》中系统介绍了响应曲线、因子组合与动作选择；迪尔2015年的“双重效用推理”进一步区分优先等级和随机权重；韩隆与沃茨2017年介绍《龙腾世纪：审判》的效用评分架构。这些开发者文献展示了同一思路在不同系统中的具体实现，不构成全行业必须采用的统一格式，也不说明方法始于这些出版年份。 <a href="https://www.gameaipro.com/GameAIPro/GameAIPro_Chapter09_An_Introduction_to_Utility_Theory.pdf">Graham，2013</a></p>
+</div>
+<div class="reading-block" id="p-0bd11fedbaf"><p>游戏中的效用值往往带有角色立场。胆小者可能对风险赋予更高权重，饥饿者更重视食物，职责要求又可能压过个人需要。性格不一定由一句台词声明，而可以通过多次选择的倾向表现出来。然而，数值只编码开发者已经表达的考虑；如果忠诚、礼仪或剧情承诺从未进入候选过滤或评分，系统不会因为使用“效用”一词就自动理解这些关系。</p>
+</div>
+<h2 id="h-ef48b911f3b" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">从状态到可比较的分数</span></h2>
+<div class="reading-block" id="p-63ad79bb3f0"><p>评分首先需要确定候选行动。一个角色能够使用治疗药、攻击目标或撤退，但背包没有药时，治疗可能根本不应进入比较。把不可执行动作提前过滤，通常比给它一个随意的小分更清楚。过滤表达合法性或可行性，评分表达在合法候选中的偏好；混淆两者，会让高分行动反复被选中又无法执行。</p>
+</div>
+<div class="reading-block" id="p-8ae9da0955a"><p>原始指标的量纲通常不同。血量可能在零到一百之间，距离以米计算，等待时间以秒计算，直接相加会让数值范围大的指标支配结果。归一化或响应曲线把它们转换到可比较的评价尺度。常用零到一范围，是因为便于阅读与调试；并不存在所有效用系统都必须使用这一范围的数学要求。</p>
+</div>
+<div class="reading-block" id="p-3a0f7d1c38a"><p>响应曲线表达指标变化对偏好的影响。线性曲线使需求均匀增加，二次曲线可以让临近危险时增长更快，逻辑斯蒂曲线形成平滑阈值，分段曲线则允许设计者逐段调整。例如轻微饥饿时完全不考虑进食，中度饥饿时逐渐增加，接近极限时迅速变得紧急。这些曲线承担的是行为设计，而不是从角色身体中自动测出的客观心理规律。</p>
+</div>
+<div class="reading-block" id="p-270076db230"><p>曲线还需要处理边界。距离为零、最大血量为零或输入超出预期范围时，都可能使公式失效或产生异常值。截断、默认值与缺失数据处理应有明确含义。若不同角色的数据范围不同，共用同一曲线也可能带来意外偏差。看见一个漂亮曲线，并不等于它在所有实际输入上都能稳定工作。</p>
+</div>
+<h2 id="h-b42c5438624" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">一个可以复算的选择例子</span></h2>
+<div class="reading-block" id="p-ddd85661548"><p>设一个教学角色比较治疗与攻击。治疗的需求紧迫度为0.8，可实施质量为0.6；攻击的机会价值为0.5，命中条件为0.9。为了演示，两个动作都以七成权重评价第一项、三成评价第二项，得到治疗0.74、攻击0.62。若选择最高分，本次就治疗。这里的数字与指标为解释方法而构造，并非某款游戏实际使用的参数。</p>
+</div>
+<div class="reading-block" id="p-83f5577b28d"><p><span class="source-math" data-tex="$$U_{\text{治疗}}=0.7\times0.8+0.3\times0.6=0.74,$$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>U</mi><mtext>治疗</mtext></msub><mo>=</mo><mn>0.7</mn><mo>×</mo><mn>0.8</mn><mo>+</mo><mn>0.3</mn><mo>×</mo><mn>0.6</mn><mo>=</mo><mn>0.74</mn><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">U_{\text{治疗}}=0.7\times0.8+0.3\times0.6=0.74,</annotation></semantics></math></span></span>
+<span class="source-math" data-tex="$$U_{\text{攻击}}=0.7\times0.5+0.3\times0.9=0.62.$$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>U</mi><mtext>攻击</mtext></msub><mo>=</mo><mn>0.7</mn><mo>×</mo><mn>0.5</mn><mo>+</mo><mn>0.3</mn><mo>×</mo><mn>0.9</mn><mo>=</mo><mn>0.62.</mn></mrow><annotation encoding="application/x-tex">U_{\text{攻击}}=0.7\times0.5+0.3\times0.9=0.62.</annotation></semantics></math></span></span></p>
+</div>
+<div class="reading-block" id="p-9c0464a1aa5"><p>这个计算成立的前提，是两动作的最终分数已经按可比较的设计含义校准。如果治疗的一分表示绝对必需，攻击的一分却只是普通机会，直接比较就会误导。权重之和为一只保证一种数值形式，不能自动解决语义一致性。设计者需要检查典型局面中各行动的相对排序，以及分数变化是否产生预期的取舍。</p>
+</div>
+<div class="reading-block" id="p-b3d0b278ec1"><p>若采用按分数加权随机，治疗被选中的概率约为0.544，攻击约为0.456。它使相同状态不必永远产生相同行为，但也允许低分行动出现。紧急逃生时，随机选择危险动作可能破坏可信度。因此，随机性往往要放在已经过滤过的适当候选集合中，而不是把所有行动无条件放进同一个抽签池。</p>
+</div>
+<div class="reading-block" id="p-45dc65a980a"><p>期望效用可以提供另一种解释。例如某行动有四分之一概率获得效用八、四分之三概率获得效用零，期望效用为二。这里必须确实存在对结果概率与结果价值的估计。前述血量评分是指标的加权组合；期望收益则需要行动结果及其概率分布。</p>
+</div>
+<h2 id="h-b184490c888" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">因子组合的后果</span></h2>
+<div class="reading-block" id="p-94a4a688ec8"><p>加权和允许不同优点互相补偿：距离较远但目标价值很高的行动，仍可能得到高分。乘积则会让任一零因子把总分压到零，适合表达某些不可补偿的不足。两者没有普遍的优劣，关键在于指标关系。若“没有弹药”属于绝对不可行，作为过滤条件通常比把它混入许多软性偏好更容易理解。</p>
+</div>
+<div class="reading-block" id="p-dee6a21ab72"><p>乘积还会受到因子数量影响。三个都为0.8的因子相乘是0.512，五个相同因子相乘则约为0.328。若不同动作拥有不同数量的考虑项，直接比较乘积可能无意中惩罚描述更详细的动作。解决办法取决于评分含义，可以调整组合方式或做校准；候选项结构本身改变了动作被选中的机会。</p>
+</div>
+<div class="reading-block" id="p-1f6e7008259"><p>最大值、最小值或层次组合也能表达不同关系。最大值允许某个强烈理由独自触发行动，最小值强调最薄弱条件，先分组再评分则能表达紧急事务压过日常需求。这些操作改变的不只是算术，而是怎样理解理由之间的关系。设计时应通过具体情境验证，而不是因为某种组合在另一项目有效就照搬。</p>
+</div>
+<h2 id="h-7af9c9fd142" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">排名、随机性与行为连续性</span></h2>
+<div class="reading-block" id="p-ba1ad2b66ff"><p>迪尔的双重效用推理为行动同时设置等级与权重：先保留最高有效等级中的候选，再在其中按权重选择。其《动物园大亨2》案例用这种方式协调动物日常需要与更高优先的表演流程。这个做法把“哪类事情必须先处理”和“同类事情怎样变化”分开，避免一个普通但数值很高的日常活动压过必须完成的阶段任务。 <a href="https://www.gameaipro.com/GameAIPro2/GameAIPro2_Chapter03_Dual-Utility_Reasoning.pdf">Dill，2015</a></p>
+</div>
+<div class="reading-block" id="p-a8f5c063a5d"><p>最高分选择容易在边界附近频繁切换。治疗0.61、攻击0.60时开始治疗，下一帧分数稍变又转攻击，动作可能永远无法完成。可以为当前行动增加持续偏好，或要求新行动至少高出一定差值才允许切换。设差值为0.05，微小波动便不会立即抢占控制；危险事件仍应拥有单独的高优先中断规则。</p>
+</div>
+<div class="reading-block" id="p-90101b604a8"><p>另一种办法是限制重新决策时机，在动作结束、失败或关键事件出现时才比较。格雷厄姆以《模拟人生：中世纪》的互动队列说明动作承诺的重要性。承诺帮助角色形成连续行为，但过度锁定又可能让它在火灾时继续吃饭。真正需要设计的是哪些任务可中止、何时值得重算，以及中止之后如何清理资源。 <a href="https://www.gameaipro.com/GameAIPro/GameAIPro_Chapter09_An_Introduction_to_Utility_Theory.pdf">Graham，2013，第9.7节</a></p>
+</div>
+<div class="reading-block" id="p-443f2ec0e4c"><p>随机选择也需要区别不同层次。可以在最高若干候选中随机，在接近最高分的范围内随机，或先选需求再选满足该需求的对象。每种办法产生的变化范围不同。固定随机种子与记录候选分数，有助于重现问题；仅看最终动画，往往无法判断奇怪选择来自评分、抽样还是执行失败。</p>
+</div>
+<h2 id="h-503800cc9e9" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">大型游戏中的分工</span></h2>
+<div class="reading-block" id="p-74bd98d1c1e"><p>《龙腾世纪：审判》的开发者把候选描述为能够完成具体行为的一段方案，而不只是一个抽象技能名称。同一能力可以用于冲向敌人，也可以用来迅速离开危险区，需要作为不同使用方式加以评价。这个案例说明候选生成与评分同样重要：若候选集合没有包含撤退用途，再精细的评分也无法选择它。 <a href="https://www.gameaipro.com/GameAIPro3/GameAIPro3_Chapter31_Behavior_Decision_System_Dragon_Age_Inquisition%E2%80%99s_Utility_Scoring_Architecture.pdf">Hanlon与Watts，2017</a></p>
+</div>
+<div class="reading-block" id="p-2030def3648"><p>效用选择器通常只回答“现在更愿意做什么”，后续还要靠导航、动画、目标验证和任务控制完成动作。角色选择吃饭后，还需寻找座位并确认路径可达。把评分、预约资源与执行反馈连接起来，才能避免多个角色同时争用同一对象，或不断选择实际无法完成的高分互动。</p>
+</div>
+<div class="reading-block" id="p-6ff3ed60ab5"><p>大量候选会增加评价成本。可以先用廉价条件筛选，再对较少候选进行昂贵的路径或战术检查，也可以按事件更新部分分数。但缓存可能过期，过早筛选也可能丢掉真正好的选择。因此工程优化需要说明哪些信息可以延后，哪些条件变化必须立刻使评分失效，而不是只减少每帧调用次数。</p>
+</div>
+<div class="reading-block" id="p-81dbae39745"><p>冷却时间与持续偏好还承担不同功能。冷却可以让某能力在一段时间内不可再次使用，持续偏好则只提高当前行动继续执行的吸引力。一个动作可以允许立刻重选却不值得重选，也可以分数很高却因冷却不能执行。把可用性、偏好与中断分别记录，有助于解释看似相近但机制不同的行为变化。</p>
+</div>
+<h2 id="h-6c45e448e91" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">与其他方法的区别</span></h2>
+<div class="reading-block" id="p-a55d369f6f4"><p>普通行为树通过节点结构与优先顺序组织控制，效用型AI通过连续分数比较候选；两者可以组合。行为树负责区分战斗和日常，效用模块在战斗中选择技能，执行子树再处理移动与施放。这种分工使阶段约束保持明确，同时保留情境性的细致取舍。</p>
+</div>
+<div class="reading-block" id="p-618a038e9fc"><p>基于目标的行动规划比较能达到目标的行动序列；常见效用选择器只比较当前候选，不自动推导多步计划。最高即时分数可能导致长期资源耗尽，因此需要预测后果、加入计划或另外估计长期价值。把每次选择都做得数值上最高，并不能保证整场游戏的总结果最佳。</p>
+</div>
+<div class="reading-block" id="p-45489be5be1"><p>强化学习可以从经验学习价值函数或策略，而许多效用系统的曲线与权重由设计者手工制定。两者并不互斥：学习可以调整评分参数，效用结构也可以作为学习系统的一部分。但角色因为血量下降而改变分数，通常只是输入变化引发计算结果变化，不能单凭这一点说它已经学会新的行为。</p>
+</div>
+<div class="reading-block" id="p-36ce166dc3b"><p>历史与关系也可以作为评分输入。例如同伴刚帮助过角色，回报性行为的分数可以在一段时间内提高；相同物品被多次拒绝后，相关候选可以暂时降低吸引力。这些是需要明确编写和维护的状态关系，不是一个无记忆总分自行产生的社会理解。引入历史时，还要规定记录保留多久、哪些事件会使它失效。</p>
+</div>
+<div class="reading-block" id="p-f19d44c39ca"><p>分数日志可以帮助比较调整前后的行为范围。若提高攻击权重以后角色几乎从不治疗，原因可能是治疗曲线只在极窄区间内足够高；若增加一个新动作后旧动作全部消失，可能是尺度没有对齐。逐项观察曲线、候选覆盖与最终选择，比只围绕单一失败场景反复加权，更有助于维持整体可理解性。</p>
+</div>
+<div class="reading-block" id="p-82c01a60bf7"><p>玩家感受到的随机性也与时间结构有关。每帧重新抽签会产生抖动，每次完整互动之后抽签则形成可辨认的行为段落。相同概率分布放在不同决策时机，体验可能完全不同；因此随机程度应与动作持续时间一起调节。</p>
+</div>
+<h2 id="h-ca08b53a14a" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">评价、争论与局限</span></h2>
+<div class="reading-block" id="p-b6761fd2380"><p>效用系统的一个优点是能够保存可读的决策轨迹：候选为什么被排除，各因子贡献多少，何种规则决定最终选择。这样的可解释性需要工具和数据支持；如果数百条曲线缺少命名与含义，即使全部公式公开也很难理解。调试应观察候选排序随情境变化的过程，而不仅是调出某个局面的正确动作。</p>
+</div>
+<div class="reading-block" id="p-6229f88f9b0"><p>数值化也容易制造虚假的精确感。两个分数相差0.01，可能只反映任意权重，而不是可靠的心理差异；统一尺度还可能掩盖不可交换的剧情承诺。对于必须保持的规则，应明确作为约束或等级处理。对于需要人物复杂性的场景，则可以通过记忆、关系与阶段目标改变评分，而不能期待单个即时总分表达全部叙事含义。</p>
+</div>
+<div class="reading-block" id="p-284057ec224"><p>效用型AI把游戏角色的取舍转化为可调整、可追踪的比较过程。它能够以少量连续变量产生丰富变化，也把重要责任交给设计者：确定候选、解释尺度、处理冲突并维护行为连续性。评价它时，应同时检验决策的合理性、角色的可读性和整个执行系统的稳定性，分数本身只是这些关系的一种实现形式。</p>
+</div>
+<h2 id="h-1184d9947b1" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-chinese">参考文献</span></h2>
+<div class="reading-block" id="p-544f1c6eac6"><ol>
+<li>David “Rez” Graham，2013，An Introduction to Utility Theory，Game AI Pro，第九章：<a href="https://www.gameaipro.com/GameAIPro/GameAIPro_Chapter09_An_Introduction_to_Utility_Theory.pdf">作者章节原文</a>。</li>
+<li>Kevin Dill，2015，Dual-Utility Reasoning，Game AI Pro 2，第三章：<a href="https://www.gameaipro.com/GameAIPro2/GameAIPro2_Chapter03_Dual-Utility_Reasoning.pdf">作者章节原文</a>。</li>
+<li>Sebastian Hanlon、Cody Watts，2017，Behavior Decision System: Dragon Age Inquisition’s Utility Scoring Architecture，Game AI Pro 3，第三十一章：<a href="https://www.gameaipro.com/GameAIPro3/GameAIPro3_Chapter31_Behavior_Decision_System_Dragon_Age_Inquisition%E2%80%99s_Utility_Scoring_Architecture.pdf">开发者章节</a>。</li>
+</ol>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="0773b2991d200f"></div></section></main></div></body></html>

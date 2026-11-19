@@ -1,0 +1,77 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="行为树是一种组织自主角色控制流程的方法。它把较大的行为拆成可组合的任务，通过树形结构规定先检查什么、依次执行什么、失败后改试什么，以及正在进行的任务是否继续。游戏中的守卫巡逻、战斗与撤退，或生活模拟角色寻找食物、走到餐桌和进食，都可以用这样的结构表达。树形编辑器只是表现方式，真正决定行为的是节点状态、执行规则与中断机制。"><title>行为树 · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" >档案卡片</a><a href="../../concepts/" aria-current="page">索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="07a1cefc5d5b4f"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../concepts/?view=all">← 索引标签</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-75a5dc92945" data-toc="h-75a5dc92945">从角色控制到模块化结构</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-bd867f1772a" data-toc="h-bd867f1772a">节点怎样报告进展</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-6df1fb04253" data-toc="h-6df1fb04253">一个守卫例子</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-8c548be237f" data-toc="h-8c548be237f">黑板、感知与知识边界</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-7dcf3a9e2c3" data-toc="h-7dcf3a9e2c3">与规划和效用方法的区别</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-65e05bf39e9" data-toc="h-65e05bf39e9">游戏设计中的用途</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-69ebed56742" data-toc="h-69ebed56742">局限、评价与争论</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1184d9947b1" data-toc="h-1184d9947b1">参考文献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header has-cover" id="entry-title"><figure class="entry-media kind-generated"><img src="../../assets/display/3343696ead3bfe5b5a1864b6.webp" alt="行为树，独立概念意象" width="1254" height="1254"></figure><div><a class="entry-kicker" href="../../concepts/">索引标签</a><p class="entry-original " lang="en">Behavior Tree</p><h1>行为树</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>行为树是一种组织自主角色控制流程的方法。它把较大的行为拆成可组合的任务，通过树形结构规定先检查什么、依次执行什么、失败后改试什么，以及正在进行的任务是否继续。游戏中的守卫巡逻、战斗与撤退，或生活模拟角色寻找食物、走到餐桌和进食，都可以用这样的结构表达。树形编辑器只是表现方式，真正决定行为的是节点状态、执行规则与中断机制。</p>
+<p>行为树通常不负责发明游戏规则，也不必自动学习。设计者可以明确编写节点，规划器可以生成部分结构，学习系统也可以为某个叶节点提供策略。它的核心用途，是在变化的环境中协调这些任务，让复杂控制可以分层理解和复用。选择行为树并不等于已经解决感知、寻路、动画或战术评估，那些功能往往作为树中的具体任务被调用。</p>
+</section><h2 id="h-75a5dc92945" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">从角色控制到模块化结构</span></h2>
+<div class="reading-block" id="p-b9a57dc02ff"><p>行为树在游戏AI实践中发展起来，随后被机器人等领域采用。Michele Colledanchise与Petter Ögren的作者书稿以模块化和反应性解释这种传播：同一个子行为可以放进不同任务，而环境变化又能够重新影响控制流程。模块化减少模块之间需要预先知道的关系，节点组合还需满足接口和执行条件。 <a href="https://arxiv.org/abs/1709.00084">Colledanchise与Ögren，作者书稿，第1章</a></p>
+</div>
+<div class="reading-block" id="p-8afc3215e31"><p>有限状态机以当前状态与状态转换组织控制，例如巡逻发现敌人后转为战斗，受伤时再转为逃跑。状态机容易理解，也适合许多规模有限的问题；当大量行为需要互相打断时，显式转换关系可能迅速增多。行为树把部分转换逻辑放到父节点的组合规则中，使子任务通常只需向上报告结果，而不必逐一指定下一步跳到哪个独立状态。</p>
+</div>
+<div class="reading-block" id="p-cbd0831b3a2"><p>这种组织差异并不是表达能力的绝对高下。小型状态机可能比大树更清楚，层次状态机也能减少重复转换。行为树的实际优势往往来自开发流程：任务有统一的进入、运行、结束与取消约定，子树可以独立调试，再组合到更高层。若节点通过大量隐藏的全局变量互相影响，画面上的树再整齐，也可能失去这种优势。</p>
+</div>
+<h2 id="h-bd867f1772a" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">节点怎样报告进展</span></h2>
+<div class="reading-block" id="p-33154f87608"><p>经典表述把行为树看作有根的有向树。根向下发送一次执行请求，通常称为一次tick；被访问的节点向父节点返回成功、失败或运行中。成功意味着这个任务按照自己的约定已经完成，失败意味着当前不能完成，运行中意味着任务尚在持续。三种状态是控制协议，不是对角色道德、聪明程度或整场游戏胜负的评价。 <a href="https://arxiv.org/abs/1709.00084">Colledanchise与Ögren，第1.3节</a></p>
+</div>
+<div class="reading-block" id="p-b58e427cbbc"><p>例如，“到达掩体”在角色移动时返回运行中，抵达有效位置后返回成功，路径不存在或目标失效时返回失败。“是否看见敌人”通常立即返回成功或失败，因为它检查条件而非持续执行动作。动作与条件都能成为叶节点，但不同引擎可能把条件做成装饰器。判断一棵树时，需要先知道具体框架采用的节点语义。</p>
+</div>
+<div class="reading-block" id="p-9b4e9f1648d"><p>序列节点按顺序检查子节点，只有前一个成功才继续下一个；遇到失败或运行中，就把相应结果向上返回。所有子节点都成功，序列才成功。因此，“有目标、接近目标、攻击目标”可以形成一条序列。这里的顺序是任务依赖关系：没有目标时不应继续攻击，并不表示整条序列必须在同一帧完成。</p>
+</div>
+<div class="reading-block" id="p-e10c8ba8f2b"><p>选择或后备节点按优先顺序尝试子节点，遇到成功或运行中就停止，只有全部失败才失败。例如先尝试治疗，治疗不适用再尝试寻找掩体，最后巡逻。它不是自动计算哪个动作收益最大；优先级通常来自树中顺序。若希望根据连续数值比较行动，可以在其中加入效用选择器，但那属于对基本组合规则的扩展。</p>
+</div>
+<div class="reading-block" id="p-2085e65e860"><p>装饰器通常包住一个子节点，改变它的适用条件或返回结果，例如取反条件、限制重复次数或设置超时。并行节点则按约定同时推进多个子任务，并根据成功与失败阈值决定自身结果。这里的并行通常指在同一控制周期内协调多项行为，线程与共享资源则由具体实现管理。</p>
+</div>
+<h2 id="h-6df1fb04253" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">一个守卫例子</span></h2>
+<div class="reading-block" id="p-bebfced4bd8"><p>设定根部是优先选择器，依次放三项：危险时撤退、看见敌人时攻击、平时巡逻。第一项是“危险条件”与“撤退动作”的序列，第二项是“发现敌人”与“攻击动作”的序列。最初既无危险也无敌人，前两项失败，巡逻返回运行中。此时树的结果是继续巡逻，而非因为两个条件失败就让整个角色停止工作。</p>
+</div>
+<div class="reading-block" id="p-fa11dd07236"><p>下一次检查发现敌人，第二项开始运行，巡逻让出控制。随后危险条件成立时，第一项应当能够获得更高优先级。若使用反应式、从前部重新检查的组合方式，树可以转而撤退，并停止原先攻击。这一例子展示树的反应性，但它依赖框架确实重新评估条件、允许中断并正确取消旧动作，不能只凭节点摆放位置推断运行结果。</p>
+</div>
+<div class="reading-block" id="p-0244a87d37f"><p>另一种带记忆的序列可能从上次运行中的子节点继续，不再重复已经成功的前置步骤。这适合避免不断重做“拿出工具”等动作，却也可能错过环境变化。反应式与记忆式组合各有用途，需要明确哪些条件必须持续成立。把它们混用而不说明，常会出现角色已经失去目标却仍继续执行旧计划的错误。</p>
+</div>
+<div class="reading-block" id="p-60993fa17b5"><p>取消动作还需要清理现实中的副作用。例如攻击节点可能占有武器控制权、预订站位或启动循环动画；切换撤退后，应释放相关资源或通知动画系统过渡。单纯把返回值改为失败，不能保证这些工作完成。行为树的接口设计应把开始、持续、成功、失败与中止分别处理，让可视化流程与真实执行保持对应。</p>
+</div>
+<h2 id="h-8c548be237f" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">黑板、感知与知识边界</span></h2>
+<div class="reading-block" id="p-e22faf5ced9"><p>黑板是许多实现共享任务信息的方式，可以保存目标、最后看到的位置、选定掩体等。感知系统更新黑板，行为树读取相关数据作决定。黑板不等于全知数据库：若敌人已经躲到墙后，角色保存的可能只是最后观察位置。明确数据来源与有效时间，有助于同时解释角色行为和避免不公平的信息读取。</p>
+</div>
+<div class="reading-block" id="p-a08beef4db1"><p>共享数据必须有清楚的所有权。若寻路节点和战术节点同时修改目的地，树的局部逻辑可能看起来合理，执行却不断抖动。可以通过限定写入者、版本标记、资源锁或集中仲裁来解决，具体办法取决于系统。多人协调还需要区分每个角色自己的黑板与小队信息，避免把其他成员的发现无条件变成所有人的即时知识。</p>
+</div>
+<div class="reading-block" id="p-dd5559c0b7b"><p>Epic的虚幻引擎4.27文档描述了一种事件驱动的行为树实现：相关黑板值改变时触发观察与中止，减少无变化时反复遍历。它还使用条件装饰器、服务和简化并行等约定。这个案例说明行为树可以与引擎事件系统紧密结合，但这些优化与节点约定不是所有行为树都必然采用的统一标准。 <a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/behavior-tree-overview?application_version=4.27">Epic Games，UE4.27文档</a></p>
+</div>
+<h2 id="h-7dcf3a9e2c3" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">与规划和效用方法的区别</span></h2>
+<div class="reading-block" id="p-604681e366c"><p>行为树中的顺序通常由作者预先组织。目标导向行动规划则依据动作前提与效果，在运行时搜索满足目标的动作序列。树可以直接表现一个已经确定的战术流程，规划器则可能在条件改变后找到另一条组合路径。规划结果可以作为行为树里的任务执行，树也可以负责监测与中断计划，两者承担不同层次的工作。</p>
+</div>
+<div class="reading-block" id="p-a1fbf930999"><p>效用型AI给多个候选动作评分，适合比较连续变化的需求；普通优先选择器通过顺序和成功条件作选择。前者需要设计可比较的分数与切换机制，后者需要设计分支优先级和适用条件。一个角色完全可以在高层行为树中区分紧急、战斗与日常，再在某个分支里用效用评分选择具体对象。</p>
+</div>
+<div class="reading-block" id="p-52424695bc1"><p>强化学习可以学出动作选择策略，但普通行为树不因重复运行就自动更新。学习模块若作为叶节点接入，树仍可以约束何时调用它、允许控制哪些动作，以及失败时如何处理。把决策结构与学习机制分开，有助于说明角色到底在哪里适应，哪些行为仍由设计者明确规定。</p>
+</div>
+<div class="reading-block" id="p-d413df15c38"><p>条件节点最好避免隐藏的执行副作用。若一次“是否能攻击”的检查同时消耗弹药，父节点重新检查条件就可能改变世界，树的可读语义随之失效。需要改变世界的工作应放在有明确生命周期的动作中，查询则尽量保持一致。这是接口约定的一部分，有助于让调试图上的控制路径真实反映实际因果。</p>
+</div>
+<div class="reading-block" id="p-9512d3fbc99"><p>相同子树在不同父节点下，也需要明确失败的含义。例如寻找食物失败，可以表示当前房间没有食物，也可以表示整个地图都找不到。上层若把局部失败当成全局结论，就可能过早放弃任务。模块复用因而不仅复用节点排列，还要复用输入、输出、范围和中止约定；这些契约比树的外观更决定维护成本。</p>
+</div>
+<div class="reading-block" id="p-fb79f42352c"><p>在持续运行的场景中，还应检查低优先任务是否长期饥饿。高优先条件若不断短暂成立，巡逻或恢复工作可能始终得不到完成机会。优先关系、最短执行窗口与任务边界，共同规定哪些中断能够发生。</p>
+</div>
+<h2 id="h-65e05bf39e9" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">游戏设计中的用途</span></h2>
+<div class="reading-block" id="p-f9d3b9828a4"><p>行为树适合把角色职责表达成层次清楚的控制结构。战斗树可以把反应威胁、移动、使用能力与回收资源分开；生活模拟可以把寻找对象、预约对象、到达和互动分开；任务角色则可以在剧情阶段之外共享基本的移动与感知行为。复用降低重复工作，但共享子树变更后仍需要检查不同使用场景。</p>
+</div>
+<div class="reading-block" id="p-1af22661e2e"><p>树还提供了可观察的调试入口。开发者可以看到哪些条件失败、哪个节点持续运行、哪个高优先分支抢占了控制。若记录只显示最终动作而不保存条件与黑板变化，仍然难以还原原因。有效工具需要把树状态、时间和世界事件对齐，帮助区分条件数据过期、选择错误与动作执行失败。</p>
+</div>
+<div class="reading-block" id="p-d8bb1e52b99"><p>设计者可以通过明确分支塑造角色性格与可读性。例如谨慎守卫先找掩体再攻击，莽撞守卫先冲锋；受惊后观察一段时间，能让玩家理解其状态变化。这些表现需要与动画、音效和反应延迟共同设计。树的层次并不天然等于玩家能够理解的动机，内部合理的切换仍可能在画面上显得突兀。</p>
+</div>
+<div class="reading-block" id="p-40d6e32778d"><p>时间语义需要与节点返回值一起设计。例如等待两秒通常持续返回运行中，直到计时达到阈值才成功；如果每次tick都重新开始计时，它就可能永远等不到结束。计时器属于一次任务实例还是属于共享节点资产，应由实现明确。许多看似决策错误的停顿，实际来自生命周期管理不一致。</p>
+</div>
+<div class="reading-block" id="p-1f77dd22b48"><p>多个角色复用同一树资产，也不应共享彼此的运行状态。角色甲正在执行攻击，角色乙可能仍在巡逻；树的结构可以相同，计时、目标和当前执行位置需要分别保存。把结构复用与实例状态分开，既有利于性能管理，也有利于避免角色之间出现无法解释的互相干扰。</p>
+</div>
+<div class="reading-block" id="p-13ac801e165"><p>测试不只需要从树根顺利走到一个终点，还需要在动作进行到一半时改变目标、路径或资源。任务取消以后再次进入，是否能正确恢复，也属于重要情境。这样的检查针对控制协议本身，能够发现单次演示中看不出的资源泄漏、重复预约和永久运行问题。</p>
+</div>
+<h2 id="h-69ebed56742" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">局限、评价与争论</span></h2>
+<div class="reading-block" id="p-5e5fa06bc78"><p>大树也会出现重复、隐藏依赖和优先级混乱。若每种特殊情况都在根部加一个分支，低优先任务可能长期无法执行；若多个子树修改同一变量，局部复用会掩盖全局耦合。需要检查的不是树是否庞大，而是任务边界、数据契约和中断关系能否被理解。把树拆成多个资产，只改变文件数量，并不自动减少逻辑复杂度。</p>
+</div>
+<div class="reading-block" id="p-b87c97c1814"><p>节点成功与失败的定义也容易含混。“攻击成功”可以指发出攻击指令、完成动画、命中目标或消灭目标，这些含义对应不同的后续逻辑。团队应给任务定义明确的完成条件与超时条件。否则一个节点可能永久运行，或者过早成功，让下一个任务在前一任务尚未产生实际效果时启动。</p>
+</div>
+<div class="reading-block" id="p-538836800a5"><p>评价可以从典型情境、异常情境和时间连续性三方面展开：角色是否能完成任务，目标失效后能否恢复，以及频繁事件下是否出现来回切换。复用性应通过修改和组合成本检验，反应性应通过实际事件到动作变化的过程检验。树形结构、执行记录与玩家感受，共同呈现系统的组织和效果。</p>
+</div>
+<div class="reading-block" id="p-f653e154ee0"><p>行为树把角色控制从大量独立跳转组织成可返回结果的任务组合。它的价值来自统一接口、层次复用和对环境变化的响应，同时要求设计者认真处理状态、共享数据与取消动作。作为游戏AI的骨架，它能够承载规则、搜索或学习组件；骨架是否有效，仍取决于这些部分的约定能否在实际运行中一致成立。</p>
+</div>
+<h2 id="h-1184d9947b1" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">参考文献</span></h2>
+<div class="reading-block" id="p-900b43273ef"><ol>
+<li>Michele Colledanchise、Petter Ögren，2017起，Behavior Trees in Robotics and AI: An Introduction，作者书稿：<a href="https://arxiv.org/abs/1709.00084">作者预印本</a>。</li>
+<li>Epic Games，Behavior Tree Overview，Unreal Engine 4.27文档：<a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/behavior-tree-overview?application_version=4.27">官方版本文档</a>。</li>
+</ol>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="07a1cefc5d5b4f"></div></section></main></div></body></html>

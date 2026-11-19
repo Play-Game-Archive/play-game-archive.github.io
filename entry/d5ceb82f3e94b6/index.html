@@ -1,0 +1,130 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="自动课程是由计算过程根据学习者状态、任务结果或探索目标，动态选择接下来练习、学习或尝试什么的机制。它处理任务分布与顺序，而不只处理某个任务内部怎样行动。在游戏智能体中，自动课程可以安排从采集到制造的能力发展，也可以不断提出开放世界中的新目标。理解它需要同时说明谁规定发展方向、依据什么判断进步，以及系统究竟改变了模型参数、外部能力还是当前上下文。"><title>自动课程 · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" >档案卡片</a><a href="../../concepts/" aria-current="page">索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="d5ceb82f3e94b6"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../concepts/?view=all">← 索引标签</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-74b4318086a" data-toc="h-74b4318086a">一、课程为什么成为计算问题</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-043b87e4f81" data-toc="h-043b87e4f81">二、任务选择与行动规划</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-0ce2690ab3c" data-toc="h-0ce2690ab3c">三、谁规定课程的方向</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-78c076b7cf6" data-toc="h-78c076b7cf6">四、历史上的课程思路</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-f56f27971cd" data-toc="h-f56f27971cd">五、进步信号怎样定义</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-6ba7541cc70" data-toc="h-6ba7541cc70">六、新颖性不等于学习价值</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-fd005e20eea" data-toc="h-fd005e20eea">七、难度与能力前沿</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1e9d561589d" data-toc="h-1e9d561589d">八、前置关系并非总是一棵树</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-9d00d94c989" data-toc="h-9d00d94c989">九、Voyager的目标生成</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-71fd81d9ff3" data-toc="h-71fd81d9ff3">十、验证能力决定课程边界</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-28854322652" data-toc="h-28854322652">十一、失败之后继续还是切换</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-0806ab00336" data-toc="h-0806ab00336">十二、课程与技能库的反馈</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-cd6f7985632" data-toc="h-cd6f7985632">十三、参数学习与上下文适应</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-ed063867f6a" data-toc="h-ed063867f6a">十四、预算公平与比较</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-a6829311bd0" data-toc="h-a6829311bd0">十五、怎样验证迁移</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-860c079d428" data-toc="h-860c079d428">十六、课程的盲点与反馈偏差</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-eea42e040cc" data-toc="h-eea42e040cc">十七、面向人类玩家的自适应安排</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-9ecaf3cd91d" data-toc="h-9ecaf3cd91d">十八、游戏中的目标价值</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-3880e925e8b" data-toc="h-3880e925e8b">十九、如何阅读一条课程轨迹</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-853d0303045" data-toc="h-853d0303045">二十、课程的停止与重启</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1e9affe5124" data-toc="h-1e9affe5124">二十一、开放研究问题</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-01476d339e8" data-toc="h-01476d339e8">二十二、任务表示的粒度</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1d34e5f523e" data-toc="h-1d34e5f523e">二十三、环境恢复与不可逆成本</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-619282176a7" data-toc="h-619282176a7">二十四、失败资料也构成课程知识</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1184d9947b1" data-toc="h-1184d9947b1">参考文献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header has-cover" id="entry-title"><figure class="entry-media kind-generated"><img src="../../assets/display/ee2adce3a4a29c6d50e448af.webp" alt="自动课程 · 独立生成插图" width="1254" height="1254"></figure><div><a class="entry-kicker" href="../../concepts/">索引标签</a><p class="entry-original " lang="en">Automatic curriculum</p><h1>自动课程</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>自动课程是由计算过程根据学习者状态、任务结果或探索目标，动态选择接下来练习、学习或尝试什么的机制。它处理任务分布与顺序，而不只处理某个任务内部怎样行动。在游戏智能体中，自动课程可以安排从采集到制造的能力发展，也可以不断提出开放世界中的新目标。理解它需要同时说明谁规定发展方向、依据什么判断进步，以及系统究竟改变了模型参数、外部能力还是当前上下文。</p>
+</section><h2 id="h-74b4318086a" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">一、课程为什么成为计算问题</span></h2>
+<div class="reading-block" id="p-4e411616bc1"><p>面对大量可能任务，智能体不可能平均尝试所有事情。反复做已经熟练的任务会浪费交互，直接挑战遥不可及的目标又可能没有有效反馈。课程机制试图利用学习状态安排任务，使有限资源转化为更持久的能力。这里的资源包括环境步数、计算、模型调用、人工检查和世界中的可消耗物品。</p>
+</div>
+<div class="reading-block" id="p-247a115994e"><p>“先易后难”只是课程的一种直观形式。难度未必能够排成单一序列：智能体可能擅长采集却不擅长导航，擅长文字规划却不会识别对象。同一任务也会随着已有技能和当前资源而改变难度。自动课程因此更像在不断变化的能力地图上选择方向，而不是沿一条预先存在的梯子逐级上升。</p>
+</div>
+<h2 id="h-043b87e4f81" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">二、任务选择与行动规划</span></h2>
+<div class="reading-block" id="p-e34f09530f3"><p>课程回答“下一步尝试什么目标”，规划回答“怎样实现当前目标”。例如选择先学会制作照明工具，属于任务层的安排；决定到哪里找燃料、怎样返回工作台，则属于任务内部的控制。两个层次会交换信息，但可以分别失败：目标合适而计划错误，或计划正确却持续选择没有学习价值的任务。</p>
+</div>
+<div class="reading-block" id="p-c71a0f54f43"><p>区分这两个层次有助于解释开放式智能体。一个模型能够生成很长的行动计划，并不因此拥有课程；课程生成器提出的目标，还需要由智能体的行动能力来实现。研究应呈现目标如何产生、由谁接受、怎样验证完成，以及失败后如何改变任务分布。仅展示连续出现不同任务标题，无法说明课程机制具有适应性。</p>
+</div>
+<h2 id="h-0ce2690ab3c" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">三、谁规定课程的方向</span></h2>
+<div class="reading-block" id="p-7713071e30d"><p>自动化不会消除预设目标。设计者仍然决定任务空间、观察接口、成功标准和资源预算。有的课程以某个最终任务的表现为目标，有的追求多任务能力，有的追求探索覆盖。三者会产生不同选择：对最终任务没有帮助的丰富探索，在覆盖指标下可能很有价值。</p>
+</div>
+<div class="reading-block" id="p-62c84ebb7d2"><p>因此，讨论“自主选择目标”需要说明自主发生在哪一层。系统可以在预先限定的目标语言里自由提议，也可以从固定任务集合里调整采样概率，还可以修改目标本身。它们的自由度不同。一个看似开放的自然语言目标，最终仍需转换为环境中可执行和可验证的条件；行动空间由环境实际能够执行的动作与结果规定。</p>
+</div>
+<h2 id="h-78c076b7cf6" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">四、历史上的课程思路</span></h2>
+<div class="reading-block" id="p-e34b18cea73"><p>自动课程研究继承了一个朴素但重要的问题：训练材料的顺序会影响学习过程。在神经网络中，这可以表现为调整样本和任务的分布；在强化学习中，可以表现为改变目标、初始状态或环境难度；在语言智能体中，也可以表现为选择接下来生成和执行的任务，而不进行即时参数训练。</p>
+</div>
+<div class="reading-block" id="p-cf82b5d3315"><p>Graves等人的2017年研究把任务选择与学习进展信号连接，利用非平稳多臂老虎机安排训练分布。[1] 这说明课程可以依据正在变化的收益选择，而不只是由人预先排序。该论文研究神经网络训练，语言模型的外部技能积累则采用另一种学习组织方式；比较时必须保留学习机制的差别。</p>
+</div>
+<h2 id="h-f56f27971cd" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">五、进步信号怎样定义</span></h2>
+<div class="reading-block" id="p-574af3b2be8"><p>课程需要判断某类任务是否值得继续。当前成功率是一种信号，但它主要反映已经达到的水平；学习进展则关注表现是否正在改善。一个成功率很低却持续进步的任务，可能比一个完全熟练的任务更值得练习。另一方面，进展估计需要足够观察，单次成功很容易受到随机条件影响。</p>
+</div>
+<div class="reading-block" id="p-f520dea0fb1"><p>可以比较同类任务在不同时间窗口中的表现，也可以观察预测误差、解决成本或新能力的出现。每种指标都有盲点。减少行动步数可能意味着更高效率，也可能意味着提前放弃；产生更多新技能可能意味着能力增长，也可能只是重复命名。指标应与课程目的对应，并通过独立任务验证其是否真的促进学习。</p>
+</div>
+<h2 id="h-6ba7541cc70" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">六、新颖性不等于学习价值</span></h2>
+<div class="reading-block" id="p-d37b8dc69dc"><p>不断遇到新画面、新物品或新任务名称，可以提高表面多样性，却未必扩展能力。随机变化的环境可能持续产生不可预测输入，使系统追逐差异而没有形成可复用知识。反过来，对同一任务进行有控制的重复，有时更能辨别关键条件，形成稳定技能。</p>
+</div>
+<div class="reading-block" id="p-2bc2b50a36f"><p>游戏中的新颖性可以分层：访问新区域、发现新资源、学习新机制、形成新组合，彼此不能替代。一个只在地形间漫游的智能体，可能覆盖很多位置却始终不会制造工具。研究应说明探索指标覆盖的是观察空间、行动空间还是能力空间。把这些指标放在一起报告，能够揭示课程偏向了哪种发展。</p>
+</div>
+<h2 id="h-fd005e20eea" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">七、难度与能力前沿</span></h2>
+<div class="reading-block" id="p-de7cb66e5d9"><p>理想任务通常既不是毫无挑战，也不是完全无法接近。不过，“适中难度”不是一个固定成功率就能定义的。一次长任务失败，仍可能让智能体获得有用的中间技能；一个短任务反复成功，也可能是在测试可靠性。任务价值取决于学习阶段和后续用途。</p>
+</div>
+<div class="reading-block" id="p-54861db5989"><p>能力前沿可以理解为现有能力能够接近、但尚未稳定掌握的区域。选择前沿任务需要估计前置条件，例如是否已有工具、能否到达地点、是否理解操作。若系统总是低估自己，会长期停留在熟悉任务；高估自己则会频繁陷入不可完成目标。课程应允许通过实际结果修正能力模型，而非把语言模型的自信程度当作真实能力。</p>
+</div>
+<h2 id="h-1e9d561589d" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">八、前置关系并非总是一棵树</span></h2>
+<div class="reading-block" id="p-2b995e2d54b"><p>游戏任务经常存在依赖：制作某工具需要材料，材料又需要另一工具才能取得。但前置关系可能有替代路径，不一定是单线科技树。玩家可以交易、合作或利用环境绕过某个制造步骤。自动课程若只记住一种标准路线，便可能把可选路径误当成必经阶段。</p>
+</div>
+<div class="reading-block" id="p-f84434c1161"><p>依赖也可能随环境变化。同一种矿石在不同世界可得性不同，某个队友能够提供工具，则改变了个人学习的必要顺序。课程规划需要区分能力依赖、资源依赖与社会协作条件。把所有依赖都写成“先完成任务甲才能做乙”，容易过度僵化；更灵活的形式是检查乙需要哪些条件，以及这些条件可以通过哪些方式满足。</p>
+</div>
+<h2 id="h-9d00d94c989" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-chinese">九、Voyager的目标生成</span></h2>
+<div class="reading-block" id="p-e4a452f1f96"><p>Voyager使用语言模型根据环境状态、已完成和失败任务提出下一步目标。论文第2.1节说明，课程追求多样、可管理的任务，并利用模型已有知识帮助探索Minecraft。[2] 它不是从完全空白的知识状态开始；预训练模型对游戏机制的了解与现场获得的反馈共同参与任务选择。</p>
+</div>
+<div class="reading-block" id="p-e534a2f0f33"><p>系统提供的状态包括库存、装备、附近方块、位置等，部分信息在探索过程中逐步开放。课程生成因此受到观察接口和提示设计的实质影响。它能够自主提议目标，但提议空间并不脱离设计。评价这种机制时，既要看是否发现新目标，也要看这些目标是否与当前能力匹配，是否在相同预算下带来更广能力覆盖。</p>
+</div>
+<h2 id="h-71fd81d9ff3" data-heading><span class="anchor-alias" id="s-10"></span><span class="heading-chinese">十、验证能力决定课程边界</span></h2>
+<div class="reading-block" id="p-a270643fa0c"><p>Voyager的课程提示对某些任务设有限制，例如避免当时难以根据玩家状态可靠验证的建造、种植或交易目标。附录A.2.4保留了这些约束。[2] 目标生成与目标完成判定，是系统中的两项任务。课程的实际边界部分由评估器决定。</p>
+</div>
+<div class="reading-block" id="p-b49c143d983"><p>若完成标准不可靠，课程可能把未学会的任务标记为掌握，或者持续重复已经完成的任务。前者造成虚假的能力图谱，后者浪费资源并阻碍发展。扩大课程范围时，需要同步扩展观察和验证，而不是只放宽目标生成提示。任务提出、执行和评估应作为一个闭环研究，否则开放性容易停留在语言层面。</p>
+</div>
+<h2 id="h-28854322652" data-heading><span class="anchor-alias" id="s-11"></span><span class="heading-chinese">十一、失败之后继续还是切换</span></h2>
+<div class="reading-block" id="p-56573277536"><p>一次失败可能来自暂时障碍、错误代码、缺少前置能力，或任务本身不适合当前环境。课程机制应根据失败类型决定继续修正、先补条件还是更换目标。所有失败一律重试，会陷入循环；所有失败立即放弃，又可能永远学不会需要多次尝试的技能。</p>
+</div>
+<div class="reading-block" id="p-8b89b246ad0"><p>可以设置有限尝试预算，同时保留失败原因供以后重访。Voyager的实现通过若干轮代码修订后切换任务，体现了这种资源安排。[2] 具体次数是实验设置，不是通用最优值。研究更应说明切换规则如何影响探索覆盖、难题攻克与资源消耗，并检查失败任务是否获得新的条件后能够重新进入课程。</p>
+</div>
+<h2 id="h-0806ab00336" data-heading><span class="anchor-alias" id="s-12"></span><span class="heading-chinese">十二、课程与技能库的反馈</span></h2>
+<div class="reading-block" id="p-53714361359"><p>已有技能改变下一任务的可行性，新任务又决定未来会产生哪些技能。课程和技能库因此形成相互塑造的关系。如果课程只选择能够调用既有技能的目标，库可能难以突破；如果课程完全忽视既有能力，则可能重复学习或选择跨度过大的目标。</p>
+</div>
+<div class="reading-block" id="p-50eff957b8d"><p>可以把任务价值理解为对能力结构的预期影响：补足一个瓶颈、检验一个脆弱技能、形成一种新组合，或探索一种未知机制。这样的课程比简单追求任务数量更能支持累积发展。与此同时，预期价值只是估计，仍需要执行结果反馈。保存任务选择理由与实际收益，有助于研究系统的课程判断是否逐渐变得准确。</p>
+</div>
+<h2 id="h-cd6f7985632" data-heading><span class="anchor-alias" id="s-13"></span><span class="heading-chinese">十三、参数学习与上下文适应</span></h2>
+<div class="reading-block" id="p-bb5d637fa8f"><p>“学会”可能指模型权重改变，也可能指写入新程序、保存一段反思，或在当前上下文中形成临时计划。这些变化持续时间和迁移方式不同。课程在所作用的系统环节中，改变对应的训练、经验或任务组织。</p>
+</div>
+<div class="reading-block" id="p-6ffb0c9a525"><p>Reflexion通过语言反馈与外部记忆影响下一次尝试，并不以每次失败后的权重更新为必要步骤。[3] 它可作为课程之外的适应机制，与任务选择互补。一个系统若同时改变课程、记忆和代码，应通过对照区分各部分贡献，否则无法知道性能提升主要来自更合适的任务，还是来自更充分的单任务修复。</p>
+</div>
+<h2 id="h-ed063867f6a" data-heading><span class="anchor-alias" id="s-14"></span><span class="heading-chinese">十四、预算公平与比较</span></h2>
+<div class="reading-block" id="p-a1e7a3dbdb3"><p>课程系统可能使用额外的模型调用分析状态、生成目标、检验结果和总结失败。这些成本应计入比较。尝试次数、上下文长度、评估器与课程策略，共同影响任务完成表现。公平比较需要说明环境步数、计算预算、可见信息和失败重试是否一致。</p>
+</div>
+<div class="reading-block" id="p-f31e39b1e75"><p>还要区分训练预算与最终测试预算。某课程在训练时探索更多世界，测试时自然可能占优；这可以是有效方法，但应报告总成本。对于长期运行的游戏智能体，真实效率不仅是最终成功率，还包括达到某能力水平所需的交互量，以及维护记忆和技能库的持续开销。</p>
+</div>
+<h2 id="h-a6829311bd0" data-heading><span class="anchor-alias" id="s-15"></span><span class="heading-chinese">十五、怎样验证迁移</span></h2>
+<div class="reading-block" id="p-9a7919b5d24"><p>课程容易过度适应它反复选择的任务。系统在熟悉的配方、地图和提示措辞上进步，未必能在新组合中应用能力。迁移评估可以改变初始资源、任务表达、地图结构或目标组合，同时保留要研究的共同机制。改变太少会变成重复，改变太多又可能引入完全不同的能力要求。</p>
+</div>
+<div class="reading-block" id="p-d9b0c03ad37"><p>评估应标明迁移层次。已学技能在新位置重用、已有技能组合解决新目标、面对新机制自行探索，是不同难度的问题。一个总分可能掩盖系统只擅长其中一层。报告各层表现及代表性失败，有助于说明课程究竟建立了什么样的能力，而非仅给出“通用探索”的宽泛标签。</p>
+</div>
+<h2 id="h-860c079d428" data-heading><span class="anchor-alias" id="s-16"></span><span class="heading-chinese">十六、课程的盲点与反馈偏差</span></h2>
+<div class="reading-block" id="p-109d835beb4"><p>课程依赖已有结果估计价值，可能因此忽略尚未尝试的区域。缺乏成功记录的任务看起来没有收益，系统便不再尝试，进一步维持无记录状态。相反，某类任务偶然早期成功，可能得到过多资源，挤压其他方向。这种反馈偏差需要通过保留探索机会或不确定性估计来处理。</p>
+</div>
+<div class="reading-block" id="p-ead4d8aa2ce"><p>评估器也可能偏爱容易观察的成果。物品数量增加可直接检查，而协作质量、创意建造或探索理解较难测量；课程便可能系统性偏向前者。指标选择会塑造智能体的发展方向。课程指标规定了当前能够衡量和促进的能力范围。</p>
+</div>
+<h2 id="h-eea42e040cc" data-heading><span class="anchor-alias" id="s-17"></span><span class="heading-chinese">十七、面向人类玩家的自适应安排</span></h2>
+<div class="reading-block" id="p-8812d2244e3"><p>自动课程也可以用于教学游戏和训练系统，根据玩家表现安排练习。人的理解、兴趣与负担，需要采用对应的体验评价。同一玩家可能为了探索而故意尝试困难任务，也可能在已经掌握之后仍享受熟练操作。课程设计需要尊重这些活动目的。</p>
+</div>
+<div class="reading-block" id="p-6b64a00a2ae"><p>对人类使用者，可解释的建议与选择空间很重要。系统可以说明为什么推荐某任务，让玩家跳过、重做或更改方向。若课程把偏离推荐路线一律判断为低效，就会把自主探索压成单一标准路径。评价时应同时关注学习结果与玩家对安排的理解，而不是仅以通关速度判断课程是否成功。</p>
+</div>
+<h2 id="h-9ecaf3cd91d" data-heading><span class="anchor-alias" id="s-18"></span><span class="heading-chinese">十八、游戏中的目标价值</span></h2>
+<div class="reading-block" id="p-b02fc66847e"><p>开放世界里，值得做的事未必都能化为能力增长。建造一个没有资源收益的纪念物、陪伴另一玩家，可能在游戏生活中具有意义。自动课程若只优化可计数的技能积累，会把这些活动排除。这个边界不是算法缺陷的同义词，而是其目标定义所带来的选择。</p>
+</div>
+<div class="reading-block" id="p-de95df333a7"><p>设计者可以为不同活动设置不同评估方式，或让玩家参与确定课程方向。但增加多个指标也会产生冲突：效率、多样性、合作和审美不能总化为同一尺度。研究应保留这些冲突的可见性，说明某种课程促进了哪些实践，又使哪些实践较难出现。自动化任务选择也包含价值安排。</p>
+</div>
+<h2 id="h-3880e925e8b" data-heading><span class="anchor-alias" id="s-19"></span><span class="heading-chinese">十九、如何阅读一条课程轨迹</span></h2>
+<div class="reading-block" id="p-21ae7837618"><p>一条连续任务列表能够展示发展过程，但需要结合状态和理由阅读。相同的任务顺序，可能来自预设脚本，也可能来自动态判断；没有状态记录，二者看起来一样。至少应保留任务提出时的能力与资源、选择依据、尝试成本、结果和之后的变化。</p>
+</div>
+<div class="reading-block" id="p-501460aa4c0"><p>分析时可以寻找转折：一次失败是否促使系统补足前置技能，一个新工具是否打开新的任务区域，某个长期重复是否暴露指标漏洞。这样的过程研究可以解释总分背后的机制。它也能发现成功率掩盖的问题，例如系统通过不断选择简单任务维持高分，却没有接近更广阔的能力空间。</p>
+</div>
+<h2 id="h-853d0303045" data-heading><span class="anchor-alias" id="s-20"></span><span class="heading-chinese">二十、课程的停止与重启</span></h2>
+<div class="reading-block" id="p-f1e4a16f7a9"><p>自动课程不仅需要决定下一任务，还需要决定何时停止练习。停止过早会把偶然成功当作掌握，停止过晚则会浪费资源。可以通过重复验证、置信度或跨情景测试判断是否稳定，但每种方法都带来成本。对于高风险或不可逆行动，确认要求也应高于可轻易重试的操作。</p>
+</div>
+<div class="reading-block" id="p-dcafb438184"><p>掌握并非永久状态。环境更新、工具变化或长期不用，都可能使旧能力需要重新验证。课程可以把维护任务纳入安排，在关键依赖失效时重新练习。这样，课程不再只是从新手到熟练的一次上升过程，而成为持续调整能力结构的机制。其目标应是保持可用能力，而不是永远增长完成任务的历史计数。</p>
+</div>
+<h2 id="h-1e9affe5124" data-heading><span class="anchor-alias" id="s-21"></span><span class="heading-chinese">二十一、开放研究问题</span></h2>
+<div class="reading-block" id="p-a5f25cff509"><p>自动课程的一个核心难题，是怎样在未知任务空间中估计长期价值。某项目前看不到即时收益的探索，可能后来成为关键前置；某个看似进步迅速的任务，可能只是在利用评估器漏洞。课程需要把短期反馈与长期迁移联系起来，而这无法仅靠当前成功率解决。</p>
+</div>
+<div class="reading-block" id="p-005817034ce"><p>另一个难题是如何比较不同开放环境中的课程。任务名称、世界资源与接口能力差异很大，统一排行榜容易失去解释力。更可行的研究是公开目标语言、观察权限、预算、失败记录和能力测试，使他人能够重建课程如何产生发展。课程的价值在于可追踪地改变学习机会，证据也应围绕这种改变组织。</p>
+</div>
+<h2 id="h-01476d339e8" data-heading><span class="anchor-alias" id="s-22"></span><span class="heading-chinese">二十二、任务表示的粒度</span></h2>
+<div class="reading-block" id="p-9c2995f039f"><p>“探索地下区域”与“在入口附近找到一块铁矿”不仅难度不同，反馈密度也不同。大目标能够容纳自主安排，却可能让失败难以定位；小目标便于验证，却可能把探索变成过度分割的清单。课程可以在不同粒度间切换，但需要说明拆分标准，防止为了提高完成数把一个任务任意切成许多条。</p>
+</div>
+<div class="reading-block" id="p-eaa2fc03aa3"><p>任务粒度还会影响学习者对进展的理解。连续完成小任务可以形成明确反馈，长期目标则提供方向。研究可以检查二者如何配合：小任务是否真正服务于能力扩展，长期目标是否根据新证据调整。任务标题的数量和长度都不是充分指标，关键是这些单位与实际行动结构是否相符。</p>
+</div>
+<h2 id="h-1d34e5f523e" data-heading><span class="anchor-alias" id="s-23"></span><span class="heading-chinese">二十三、环境恢复与不可逆成本</span></h2>
+<div class="reading-block" id="p-2c2d7ea9551"><p>课程常假定任务可以反复尝试，但游戏世界可能不会自动恢复。一次失败会消耗稀缺材料、改变地形或触发敌对关系，导致下一次尝试面临不同问题。若实验允许无限重置，而实际应用不允许，两者的学习成本就不能直接相比。课程需要把世界状态的持续变化纳入决策。</p>
+</div>
+<div class="reading-block" id="p-a68c6ce71bb"><p>可逆试验适合快速探索，不可逆试验则需要更谨慎地选择目标与前置检查。评价中应报告是否重置地图、补充资源或恢复角色状态。否则，一个看似自主成长的系统，可能在每次失败后都得到未计入的环境援助。明确恢复条件，可以使课程效率和长期生存能力得到分别判断。</p>
+</div>
+<h2 id="h-619282176a7" data-heading><span class="anchor-alias" id="s-24"></span><span class="heading-chinese">二十四、失败资料也构成课程知识</span></h2>
+<div class="reading-block" id="p-18d7a0b1671"><p>失败任务列表不仅用于避免重复，还能够表示当前能力的未知边界。记录失败时缺少什么条件，可以让系统在获得新工具后重新考虑旧目标。单纯把失败任务永久排除，会失去这种机会；不保留原因而不断重访，又会造成无效循环。课程记忆应能够区分暂不可行、方法错误、验证不足和环境不支持。</p>
+</div>
+<div class="reading-block" id="p-2497c19b0c4"><p>这类记录也有助于人类理解课程如何发展。某个长期目标迟迟未完成，可能源于资源短缺而非规划能力不足。把失败原因与后续能力变化关联，可以检验课程是否真正利用了经验。重要的不是系统能为每次失败生成解释，而是这些解释能否在条件变化后作出准确预测，并指导更有效的任务选择。</p>
+</div>
+<div class="reading-block" id="p-dfc13b32f67"><p>课程研究最终需要把任务选择与能力变化连起来。选择记录、执行证据和迁移测试共同构成这条链，缺少其中一环，都容易把活动数量误认成学习进展。</p>
+</div>
+<h2 id="h-1184d9947b1" data-heading><span class="anchor-alias" id="s-25"></span><span class="heading-chinese">参考文献</span></h2>
+<div class="reading-block" id="p-cbe59486d69"><ol>
+<li>Graves, Alex, Marc G. Bellemare, Jacob Menick, Rémi Munos, and Koray Kavukcuoglu. 2017. “Automated Curriculum Learning for Neural Networks.” <em>Proceedings of Machine Learning Research</em> 70: 1311–1320。本文使用页1311—1312的任务选择、学习进展与研究目标说明。<a href="https://proceedings.mlr.press/v70/graves17a.html">正式书目与原论文</a>。</li>
+<li>Wang, Guanzhi, Yuqi Xie, Yunfan Jiang, Ajay Mandlekar, Chaowei Xiao, Yuke Zhu, Linxi Fan, and Anima Anandkumar. 2023/2024. “Voyager: An Open-Ended Embodied Agent with Large Language Models.” arXiv:2305.16291；TMLR，2024。重点第2.1—2.3节、附录A.2.3状态信息开放安排与A.2.4课程提示。<a href="../../entry/a35ee2f2799296/">Voyager：基于大语言模型的开放式具身智能体</a>；<a href="https://arxiv.org/abs/2305.16291">论文记录</a>。</li>
+<li>Shinn, Noah, Federico Cassano, Edward Berman, Ashwin Gopinath, Karthik Narasimhan, and Shunyu Yao. 2023. “Reflexion: Language Agents with Verbal Reinforcement Learning.” arXiv:2303.11366。本文用于区分任务选择与第3节页3—5的跨尝试适应机制，限制见第5节页9。<a href="../../entry/4338098d6bcc23/">Reflexion：基于语言强化学习的语言智能体</a>；<a href="https://arxiv.org/abs/2303.11366">论文记录</a>。</li>
+</ol>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="d5ceb82f3e94b6"></div></section></main></div></body></html>

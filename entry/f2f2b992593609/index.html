@@ -1,0 +1,97 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="Federico Cassano 是研究代码语言模型、程序生成和智能体训练的研究者。其学术工作包括多编程语言评估框架 MultiPL-E、低资源编程语言数据方法 MultiPL-T、OpenTau 类型预测、代码编辑基准和 Reflexion。工业研究则涉及代码模型训练与基础设施：截至2026年11月，本人主页写明在 SpaceXSI（所链接域名为 x.ai）从事 Grok 预训练，并将领导 Cursor Composer 系列研究列为既往经历。本人主页"><title>Federico Cassano · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" aria-current="page">档案卡片</a><a href="../../concepts/" >索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="f2f2b992593609"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../archives/?view=all">← 档案卡片</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1d6f9314166" data-toc="h-1d6f9314166">一、研究背景与身份变化</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-443c0c95b04" data-toc="h-443c0c95b04">二、为什么需要多编程语言评估</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-cb2b3c99481" data-toc="h-cb2b3c99481">三、测试通过与语言能力</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-0b0715b696a" data-toc="h-0b0715b696a">四、MultiPL-T 与低资源数据</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-e76813f9e9f" data-toc="h-e76813f9e9f">五、OpenTau：在类型约束中搜索</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-735e3720945" data-toc="h-735e3720945">六、代码编辑作为独立任务</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-a7b3df57206" data-toc="h-a7b3df57206">七、Reflexion 与执行经验</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-a18ecb0ded9" data-toc="h-a18ecb0ded9">八、从短程序到软件工程代理</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-0cc647c766e" data-toc="h-0cc647c766e">九、Composer 系列与团队归属</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-95d4e37d04d" data-toc="h-95d4e37d04d">十、预训练、后训练与工具环境</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-b2e7abb763f" data-toc="h-b2e7abb763f">十一、生成式开发中的作者与责任</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-a6a2104aaae" data-toc="h-a6a2104aaae">十二、研究贡献与争论</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-0668e6aaec4" data-toc="h-0668e6aaec4">参考文献与原始资料</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header " id="entry-title"><div><a class="entry-kicker" href="../../archives/">档案卡片</a><p class="entry-original " lang="en">Federico Cassano</p><h1>费代里科·卡萨诺</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>Federico Cassano 是研究代码语言模型、程序生成和智能体训练的研究者。其学术工作包括多编程语言评估框架 MultiPL-E、低资源编程语言数据方法 MultiPL-T、OpenTau 类型预测、代码编辑基准和 Reflexion。工业研究则涉及代码模型训练与基础设施：截至2026年11月，本人主页写明在 SpaceXSI（所链接域名为 x.ai）从事 Grok 预训练，并将领导 Cursor Composer 系列研究列为既往经历。<a href="https://federico.codes/">本人主页</a></p>
+<p>Cassano 的问题不限于如何生成一段代码。他的工作持续考察生成结果怎样接受类型、测试、指令与真实开发环境的约束，以及训练资料与语言覆盖怎样影响能力。编程语言在这里既是输出对象，也是检验模型推断的形式系统；从短函数到长期软件任务，评价与基础设施的变化构成其研究的重要部分。</p>
+</section><h2 id="h-1d6f9314166" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">一、研究背景与身份变化</span></h2>
+<div class="reading-block" id="p-57e8b33bfe4"><p>Cassano 的本人介绍记载，他在意大利成长，曾长期玩和托管 Counter-Strike 服务器；在 Northeastern 未完成的本科阶段，与 Arjun Guha 在 Programming Research Lab 开展研究，并曾在 Scale AI、Roblox 和 Trail of Bits 任研究职位。这些是本人公开的有限履历，不应进一步推测未说明的学位、职级或各项工作日期。</p>
+</div>
+<div class="reading-block" id="p-c7d13ae0395"><p>2025年 CHASE 会议人物页将其介绍为 Cursor 研究科学家，关注 CodeLLM 训练方法与基础设施；2026年核验的本人页则已将 Cursor 写为过去，并把当前工作指向 Grok 预训练。两者属于不同时间截面，不能以旧会议页覆盖新的自述。<a href="https://conf.researchr.org/profile/chase-2025/federicocassano1">CHASE 2025资料</a></p>
+</div>
+<div class="reading-block" id="p-a27d73f7622"><p>公开署名能够证明参与某项研究，却不完整呈现每位作者承担的劳动。因此，本文区分个人履历、共同论文和团队技术报告；本人关于领导系列研究的说明，不能被扩展为后续每一版本与全部组件都由其独立完成。</p>
+</div>
+<h2 id="h-443c0c95b04" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">二、为什么需要多编程语言评估</span></h2>
+<div class="reading-block" id="p-fc5b12c1736"><p>MultiPL-E 针对代码模型评估长期集中于少量语言的问题，将以测试驱动的程序生成基准转换到其他编程语言。2022年预印本以 Cassano 为首位作者，后来正式论文题名使用“Scalable and Polyglot”的表述。原工作将 HumanEval 与 MBPP 扩展到另外18种语言。<a href="https://arxiv.org/abs/2208.08227">原始预印本</a></p>
+</div>
+<div class="reading-block" id="p-17e916529e7"><p>这种比较的重点不只是排行榜增加列数。模型在一种语言中表现好，可能来自训练数据丰富，也可能与常见库、语法和题型有关；另一种语言又可能要求不同的类型、内存或表达方式。多语言测试使这些差异进入可观察范围。</p>
+</div>
+<div class="reading-block" id="p-919466566d5"><p>跨语言基准还需要尽量保持任务语义。如果题目要求、测试输入与输出在翻译中改变，分数就不再比较同一问题。评估框架需要同时处理程序签名、测试和语言特有约定，而不能只把英文提示换成不同语法。</p>
+</div>
+<h2 id="h-cb2b3c99481" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">三、测试通过与语言能力</span></h2>
+<div class="reading-block" id="p-15277a8bda3"><p>单元测试把代码生成变成可以执行的任务，但通过测试并不穷尽正确性。测试集可能没有覆盖边界，程序可能针对样例取巧，语言运行时与库版本又会影响结果。MultiPL-E 的意义在于建立更广泛、可扩展的共同比较条件，而不是宣布一个分数能代表全部编程能力。</p>
+</div>
+<div class="reading-block" id="p-74db3377aa0"><p>语言间的可比性也不是天然成立。某些题在一种语言中有简洁内置操作，在另一种语言中需要更多实现；同样的错误消息又可能提供不同反馈。研究者应检查任务翻译是否公平，并在必要时记录无法直接对应的特性。</p>
+</div>
+<div class="reading-block" id="p-b8d65dfb412"><p>对游戏开发工具，这种问题具有实际意义。项目可能混合脚本、着色器、构建文件和底层语言，擅长某种语言的模型未必能够维护整个工程。评价应覆盖实际使用的语言和接口，也要检验跨文件关系，而不能只依赖一组独立函数题。</p>
+</div>
+<h2 id="h-0b0715b696a" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">四、MultiPL-T 与低资源数据</span></h2>
+<div class="reading-block" id="p-395c0396384"><p>MultiPL-T 将关注点从评估转向训练资料，研究怎样把高资源编程语言中的知识转移到低资源语言。原作者资料将它描述为翻译与验证相结合的数据管线，利用已有代码及测试构建新的训练材料。<a href="https://arxiv.org/abs/2308.09895">原作者论文记录</a></p>
+</div>
+<div class="reading-block" id="p-c93fbc55573"><p>具体管线先为带注释的Python代码生成测试，过滤有问题的测试与覆盖不足的材料，再翻译到目标语言并用测试验证。论文使用Julia、Lua、OCaml、R和Racket等语言，并以开放模型及资料支持基准去污染和重复实验。这使“迁移知识”落实为可以检查的资料生成步骤。</p>
+</div>
+<div class="reading-block" id="p-a9ee7b709e3"><p>这里的低资源指可供模型学习的公开资料相对少。语言社群规模、代码托管习惯和资料许可都会影响训练可见度。模型的差异表现因此既有技术因素，也与数字知识分布有关。</p>
+</div>
+<div class="reading-block" id="p-5461600b0bd"><p>合成数据需要质量控制。翻译若保留了表面形式却改变行为，会把错误引入新语言；测试能够过滤一部分问题，也受其覆盖范围限制。研究应分别报告生成量、验证后保留量与最终训练效果，避免把大量新增文本本身视为能力提高的证据。</p>
+</div>
+<h2 id="h-e76813f9e9f" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">五、OpenTau：在类型约束中搜索</span></h2>
+<div class="reading-block" id="p-5980de18e38"><p>OpenTau 研究可选类型语言中的类型预测，Cassano 与 Ming-Ho Yee、Noah Shinn、Guha 和 Steven Holtzen 共同署名。方法通过程序分解和搜索组织候选类型，并设计 fill-in-the-type 训练，回应上下文长度、类型检查与评价问题。<a href="https://arxiv.org/abs/2305.17145">2023年论文</a></p>
+</div>
+<div class="reading-block" id="p-2d977050ec1"><p>类型预测的目标不是给每个变量贴上听起来合理的名称。注释必须与程序操作和调用关系相容，也应保留有用信息。过度宽泛的注释即使减少错误提示，仍可能削弱类型系统发现问题的能力；错误的具体类型又可能破坏本来合法的代码。</p>
+</div>
+<div class="reading-block" id="p-e6d432daf08"><p>这使生成模型与形式检查器形成互补。模型提出候选，程序结构与类型检查限制候选，搜索决定怎样组合局部选择。这里的正确性条件比一般文本评价更明确，但仍需要说明所用语言、检查设置和质量指标，不能用“通过检查”替代全部语义判断。</p>
+</div>
+<h2 id="h-735e3720945" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">六、代码编辑作为独立任务</span></h2>
+<div class="reading-block" id="p-9702a2c0cde"><p>《Can It Edit?》以已有程序和自然语言修改指令为研究对象，Cassano 为首位作者，2023年公开、2024年发表于 COLM。论文提出代码编辑评估以及训练资料，考察新增功能、修复、删除或替换实现等指令。<a href="https://arxiv.org/abs/2312.12450">论文</a></p>
+</div>
+<div class="reading-block" id="p-0eac3b847b9"><p>编辑比从零生成多了一组保留要求。用户希望某处变化，同时仍然依赖已有接口、风格和行为。模型若把整个程序重写成另一种实现，可能通过部分功能测试，却未满足修改约束；若过于保守，又可能保留了应当修复的错误。</p>
+</div>
+<div class="reading-block" id="p-1ec7f8b4276"><p>因此，评价需要把修改目标与保留条件同时写清。代码是否运行、测试是否通过、指令是否被遵守和变化是否影响其他功能，分别提供证据。这个区别也适用于创作工具：生成一段新脚本与维护一件已有作品，是不同能力。</p>
+</div>
+<h2 id="h-a7b3df57206" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">七、Reflexion 与执行经验</span></h2>
+<div class="reading-block" id="p-7407b41884f"><p>Cassano 是 Reflexion 的共同作者，在 arXiv 2303.11366v4 中列第二位、单位为 Northeastern。该2023年六人署名版本研究如何把失败轨迹与结果评价转成文字经验，供下一次尝试使用；它与其他版本的作者名单需要分开记录。<a href="https://arxiv.org/abs/2303.11366v4">v4原文</a></p>
+</div>
+<div class="reading-block" id="p-0aeffa2377d"><p>对于编程，关键是让反馈进入修改，而不只让模型再写一次。编译器、运行结果和测试可以指明某些错误，反思则尝试将这些结果组织为改进建议。外部证据为语言生成提供约束，经验记忆使下一轮有机会避免相同失败。</p>
+</div>
+<div class="reading-block" id="p-f6b2d16058c"><p>这仍然依赖验证质量。自写测试可能错误，模型也可能误判失败原因。Reflexion 通过有限实验说明一种可工作的经验组织方法，不保证任何自由文本反思都有效。评价应看后续行为是否改进，并与同样预算的直接重试比较。</p>
+</div>
+<h2 id="h-a18ecb0ded9" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">八、从短程序到软件工程代理</span></h2>
+<div class="reading-block" id="p-dbdc05f5834"><p>Cassano 的工业研究面向代码模型在实际开发流程中的训练。Cursor 在2025年 Composer 技术介绍中强调，模型通过开发环境中的强化学习练习读取、编辑、搜索和执行等工具，并同时追求任务质量与交互速度。<a href="https://cursor.com/blog/composer">团队技术介绍</a></p>
+</div>
+<div class="reading-block" id="p-619a2a35bfd"><p>这里的任务单位已经不只是一段函数。代理需要定位相关文件，理解工程约束，修改后检验，并根据错误继续行动。模型能力由环境、工具和训练目标共同塑造，单次代码续写分数不足以描述整个系统。</p>
+</div>
+<div class="reading-block" id="p-55ffac2527f"><p>速度也不只是每秒生成多少 token。更准确的检索、更少无效尝试和适当并行可以减少完成任务时间；为了更快而过早停止验证，又可能增加返工。交互软件需要在延迟、成本与可靠性之间建立清楚的评价。</p>
+</div>
+<h2 id="h-0cc647c766e" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-chinese">九、Composer 系列与团队归属</span></h2>
+<div class="reading-block" id="p-461ec839beb"><p>本人主页将领导 Composer 系列研究列为既往工作。Cursor 的 Composer 2 报告以团队署名说明持续预训练、强化学习与真实开发任务的结合，并明确记录其所使用的基础模型。人物的参与关系与报告中每项技术的集体归属应当同时保留。<a href="https://cursor.com/resources/Composer2.pdf">Composer 2技术报告</a></p>
+</div>
+<div class="reading-block" id="p-76ed0f847bd"><p>持续预训练与运行时反思发生在不同位置。前者更新模型参数、改变其广泛行为倾向；后者在当前任务中组织经验。强化学习又通过任务结果塑造策略。它们可以组合，但不能因为都涉及“改进”就被看成同一机制。</p>
+</div>
+<div class="reading-block" id="p-be68e670752"><p>技术报告中的内部基准同样具有范围。它能够反映团队目标中的任务，却需要与公开测试、接口设置和预算共同阅读。某个版本在一组任务中的领先，不构成所有项目、语言与开发者工作方式上的永久优势。</p>
+</div>
+<h2 id="h-95d4e37d04d" data-heading><span class="anchor-alias" id="s-10"></span><span class="heading-chinese">十、预训练、后训练与工具环境</span></h2>
+<div class="reading-block" id="p-ec3986708de"><p>当前本人介绍将 Cassano 的工作定位于 Grok 预训练。这个身份说明其研究已进入更广泛的基础模型阶段，但公开资料没有给出足够细节来划定每项组件责任；不应补造其负责的模型层、数据规模或训练决策。</p>
+</div>
+<div class="reading-block" id="p-3653531e8a5"><p>在其可见研究谱系中，可以区分数据制作、模型训练、工具组织与结果评估。数据决定可学习的覆盖，训练塑造表示与策略，工具决定行动条件，评估检验最终结果。一个环节的改进可以帮助其他环节，却不能代替它们。</p>
+</div>
+<div class="reading-block" id="p-9a4c7562fe2"><p>这也有助于理解代码模型产业中的开放与封闭。公开数据、模型和基准支持独立比较，生产系统则可能包含未公开的管线。介绍一项系统时应说明哪些证据可供复核，哪些只有团队报告，避免把产品可用性与研究完全可复现混为一谈。</p>
+</div>
+<h2 id="h-b2e7abb763f" data-heading><span class="anchor-alias" id="s-11"></span><span class="heading-chinese">十一、生成式开发中的作者与责任</span></h2>
+<div class="reading-block" id="p-3a91eecc2e5"><p>代码生成进入游戏创作以后，作者不只选择想要什么功能，也要判断系统改动了什么。测试、版本对照和可解释的变更帮助人保持判断；只展示最终运行画面，可能隐藏错误、依赖和未经要求的重构。</p>
+</div>
+<div class="reading-block" id="p-f5d6f6a7875"><p>Cassano 的类型、编辑与评估研究提供了较具体的尺度：生成物应接受所处系统的约束。对于游戏，约束可以包括规则一致性、存档兼容、脚本接口和多人状态；这些需要按项目检验，不能由某一通用代码分数保证。</p>
+</div>
+<div class="reading-block" id="p-78ebcd73c8d"><p>同时，程序正确性不等于玩法有意义。机关的实现需要与当前节奏配合；对白系统的生成也需要人物关系的设计。AI工具的价值需要由作者和玩家的实际使用说明，技术评价与创作评价各自保留任务。</p>
+</div>
+<h2 id="h-a6a2104aaae" data-heading><span class="anchor-alias" id="s-12"></span><span class="heading-chinese">十二、研究贡献与争论</span></h2>
+<div class="reading-block" id="p-a306eed2e70"><p>Cassano 的公开成果使代码模型研究从单语函数生成扩展到多语种覆盖、低资源数据、类型约束、编辑指令及长期工具任务。贯穿其中的是把语言模型放进可执行、可检查的条件，而不是只依靠输出的表面合理性。</p>
+</div>
+<div class="reading-block" id="p-70c8149992e"><p>这些方法也提出进一步问题：测试覆盖是否充分，跨语言比较是否公平，合成资料是否带来错误循环，内部基准是否代表实际需求，以及工业训练的成本如何影响可复现性。不同问题需要不同证据，不能只用一次总分上升作答。</p>
+</div>
+<div class="reading-block" id="p-b0182f4e652"><p>对其人物研究，应持续区分论文、个人自述与企业团队报告。它们分别说明公开方法、个人经历和系统目标；将这些材料联系起来，可以理解其工作如何由编程语言研究走向大规模模型训练，也能避免以职位变化替代实际贡献分析。</p>
+</div>
+<h2 id="h-0668e6aaec4" data-heading><span class="anchor-alias" id="s-13"></span><span class="heading-chinese">参考文献与原始资料</span></h2>
+<div class="reading-block" id="p-8adac294b63"><ul>
+<li>Cassano. <a href="https://federico.codes/">本人网站</a>；<a href="https://conf.researchr.org/profile/chase-2025/federicocassano1">CHASE 2025人物页</a>。当前与历史职位分别核验。</li>
+<li>Cassano等. <a href="https://arxiv.org/abs/2208.08227">MultiPL-E</a>，2022预印本、2023正式发表；<a href="https://arxiv.org/abs/2308.09895">MultiPL-T原作者记录</a>。</li>
+<li>Cassano等. <a href="https://arxiv.org/abs/2305.17145">OpenTau</a>，2023；<a href="https://arxiv.org/abs/2312.12450">Can It Edit?</a>，2023/2024。</li>
+<li>Shinn等. <a href="https://arxiv.org/abs/2303.11366v4">Reflexion v4</a>，2023。方法核对用户提供全文。</li>
+<li>Cursor Team. <a href="https://cursor.com/blog/composer">Composer</a>，2025；<a href="https://cursor.com/resources/Composer2.pdf">Composer 2 Technical Report</a>，2026。团队方法与个人角色分开记录。</li>
+</ul>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="f2f2b992593609"></div></section></main></div></body></html>

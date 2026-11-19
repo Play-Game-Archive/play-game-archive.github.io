@@ -1,0 +1,1687 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="Reflexion把任务反馈写成下一次尝试可用的文字经验。文章区分行动生成、结果评估与自我反思三个模块，讨论怎样保存反馈、怎样发现测试本身的错误，并在家务任务、问答与程序生成中比较这种做法的效果。"><title>Reflexion：基于语言强化学习的语言智能体 · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" aria-current="page">文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" >档案卡片</a><a href="../../concepts/" >索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="4338098d6bcc23"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../articles/?view=all">← 文章</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-entry-intro" aria-label="展开或收起简介"><span>▸</span></button><a href="#entry-intro" data-toc="entry-intro">简介</a></div><ul id="tree-entry-intro" class="toc-children" hidden><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00001" data-toc="u-RF00001">题名与出版说明</a></div></li></ul></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00003" data-toc="u-RF00003">摘要</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00005" data-toc="u-RF00005">1 引言</a></div></li><li class="toc-node depth-2"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-u-RF00017" aria-label="展开或收起2 相关工作"><span>▸</span></button><a href="#u-RF00017" data-toc="u-RF00017">2 相关工作</a></div><ul id="tree-u-RF00017" class="toc-children" hidden><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00018" data-toc="u-RF00018">推理与决策</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00024" data-toc="u-RF00024">编程</a></div></li></ul></li><li class="toc-node depth-2"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-u-RF00026" aria-label="展开或收起3 Reflexion：通过言语反思进行强化"><span>▸</span></button><a href="#u-RF00026" data-toc="u-RF00026">3 Reflexion：通过言语反思进行强化</a></div><ul id="tree-u-RF00026" class="toc-children" hidden><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00032" data-toc="u-RF00032">行动者</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00034" data-toc="u-RF00034">评估器</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00036" data-toc="u-RF00036">自我反思</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00038" data-toc="u-RF00038">记忆</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00040" data-toc="u-RF00040">Reflexion过程</a></div></li></ul></li><li class="toc-node depth-2"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-u-RF00042" aria-label="展开或收起4 实验"><span>▸</span></button><a href="#u-RF00042" data-toc="u-RF00042">4 实验</a></div><ul id="tree-u-RF00042" class="toc-children" hidden><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00044" data-toc="u-RF00044">4.1 序列决策：ALFWorld</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00047" data-toc="u-RF00047">结果</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00049" data-toc="u-RF00049">分析</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00055" data-toc="u-RF00055">4.2 推理：HotpotQA</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00058" data-toc="u-RF00058">结果</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00065" data-toc="u-RF00065">分析</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00067" data-toc="u-RF00067">4.3 编程</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00074" data-toc="u-RF00074">结果</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00076" data-toc="u-RF00076">分析</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00080" data-toc="u-RF00080">消融研究</a></div></li></ul></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00083" data-toc="u-RF00083">5 局限</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00085" data-toc="u-RF00085">6 更广泛的影响</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00088" data-toc="u-RF00088">7 结论</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00090" data-toc="u-RF00090">8 可复现性</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00092" data-toc="u-RF00092">参考文献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00124" data-toc="u-RF00124">A 使用其他模型的评估</a></div></li><li class="toc-node depth-2"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-u-RF00130" aria-label="展开或收起B 决策"><span>▸</span></button><a href="#u-RF00130" data-toc="u-RF00130">B 决策</a></div><ul id="tree-u-RF00130" class="toc-children" hidden><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00137" data-toc="u-RF00137">B.1 在WebShop上的局限</a></div></li></ul></li><li class="toc-node depth-2"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-u-RF00142" aria-label="展开或收起C 编程"><span>▸</span></button><a href="#u-RF00142" data-toc="u-RF00142">C 编程</a></div><ul id="tree-u-RF00142" class="toc-children" hidden><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00144" data-toc="u-RF00144">C.1 函数实现示例（HumanEval Python）</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00149" data-toc="u-RF00149">C.2 Reflexion行动者指令</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00153" data-toc="u-RF00153">C.3 Reflexion自我反思指令与示例</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00155" data-toc="u-RF00155">C.4 Reflexion编程中去除自我反思的消融示例</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00157" data-toc="u-RF00157">C.5 Reflexion编程中去除测试生成的消融示例</a></div></li></ul></li><li class="toc-node depth-2"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-u-RF00159" aria-label="展开或收起D 推理"><span>▸</span></button><a href="#u-RF00159" data-toc="u-RF00159">D 推理</a></div><ul id="tree-u-RF00159" class="toc-children" hidden><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00160" data-toc="u-RF00160">D.1 完整示例</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00166" data-toc="u-RF00166">D.2 思维链 + Reflexion</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00171" data-toc="u-RF00171">D.3 HotPotQA思维链（GT）+ Reflexion</a></div></li><li class="toc-node depth-3"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-u-RF00177" aria-label="展开或收起D.4 HotPotQA情景记忆（EPM）消融提示"><span>▸</span></button><a href="#u-RF00177" data-toc="u-RF00177">D.4 HotPotQA情景记忆（EPM）消融提示</a></div><ul id="tree-u-RF00177" class="toc-children" hidden><li class="toc-node depth-4"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00178" data-toc="u-RF00178">D.4.1（EPM）思维链 + Reflexion</a></div></li><li class="toc-node depth-4"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-RF00183" data-toc="u-RF00183">D.4.2（EPM）思维链（GT）+ Reflexion</a></div></li></ul></li></ul></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-47322ba90eb" data-toc="h-47322ba90eb">署名与许可</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header " id="entry-title"><div><a class="entry-kicker" href="../../articles/">文章</a><p class="entry-original " lang="en">Reflexion: Language Agents with Verbal Reinforcement Learning</p><h1>Reflexion：基于语言强化学习的语言智能体</h1><p class="citation">Noah Shinn 诺亚·希恩 / Federico Cassano 费代里科·卡萨诺 / Edward Berman 爱德华·伯曼 / Ashwin Gopinath 阿什温·戈皮纳特 / Karthik Narasimhan 卡尔蒂克·纳拉西姆汉 / Shunyu Yao 姚顺雨 · 2023 · 2026汉译</p></div></header><div class="reading-toolbar"><div class="language-switch" role="group" aria-label="阅读语言"><button data-language="both" aria-pressed="true">对照</button><button data-language="zh" aria-pressed="false">汉译</button><button data-language="original" aria-pressed="false">原文</button></div><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro textual-foreign" id="entry-intro" data-heading><h2>简介</h2><p>Reflexion把任务反馈写成下一次尝试可用的文字经验。文章区分行动生成、结果评估与自我反思三个模块，讨论怎样保存反馈、怎样发现测试本身的错误，并在家务任务、问答与程序生成中比较这种做法的效果。</p>
+</section><div class="bilingual-pair" id="u-RF00001" data-heading><div class="original" lang="en"><p>Reflexion: Language Agents with   Verbal Reinforcement Learning</p>
+</div><div class="translation" lang="zh"><p>Reflexion：以言语强化学习为基础的语言智能体</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00002"><div class="original" lang="en"><p>Noah Shinn
+Northeastern University
+<a href="mailto:noahshinn024@gmail.com">noahshinn024@gmail.com</a>
+Federico Cassano
+Northeastern University
+<a href="mailto:cassano.f@northeastern.edu">cassano.f@northeastern.edu</a>
+Edward Berman
+Northeastern University
+<a href="mailto:berman.ed@northeastern.edu">berman.ed@northeastern.edu</a>
+Ashwin Gopinath
+Massachusetts Institute of Technology
+<a href="mailto:agopi@mit.edu">agopi@mit.edu</a>
+Karthik Narasimhan
+Princeton University
+<a href="mailto:karthikn@princeton.edu">karthikn@princeton.edu</a>
+Shunyu Yao
+Princeton University
+<a href="mailto:shunyuy@princeton.edu">shunyuy@princeton.edu</a></p>
+</div><div class="translation" lang="zh"><p>Noah Shinn
+美国东北大学
+<a href="mailto:noahshinn024@gmail.com">noahshinn024@gmail.com</a>
+Federico Cassano
+美国东北大学
+<a href="mailto:cassano.f@northeastern.edu">cassano.f@northeastern.edu</a>
+Edward Berman
+美国东北大学
+<a href="mailto:berman.ed@northeastern.edu">berman.ed@northeastern.edu</a>
+Ashwin Gopinath
+麻省理工学院
+<a href="mailto:agopi@mit.edu">agopi@mit.edu</a>
+Karthik Narasimhan
+普林斯顿大学
+<a href="mailto:karthikn@princeton.edu">karthikn@princeton.edu</a>
+Shunyu Yao
+普林斯顿大学
+<a href="mailto:shunyuy@princeton.edu">shunyuy@princeton.edu</a></p>
+</div></div>
+<h2 id="u-RF00003" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-original" lang="en">Abstract
+
+</span><span class="heading-chinese">摘要
+
+</span></h2>
+<div class="bilingual-pair" id="u-RF00004"><div class="original" lang="en"><p>Large language models (LLMs) have been increasingly used to interact with external environments (e.g., games, compilers, APIs) as goal-driven agents. However, it remains challenging for these language agents to quickly and efficiently learn from trial-and-error as traditional reinforcement learning methods require extensive training samples and expensive model fine-tuning. We propose Reflexion, a novel framework to reinforce language agents not by updating weights, but instead through linguistic feedback. Concretely, Reflexion agents verbally reflect on task feedback signals, then maintain their own reflective text in an episodic memory buffer to induce better decision-making in subsequent trials. Reflexion is flexible enough to incorporate various types (scalar values or free-form language) and sources (external or internally simulated) of feedback signals, and obtains significant improvements over a baseline agent across diverse tasks (sequential decision-making, coding, language reasoning). For example, Reflexion achieves a 91% pass@1 accuracy on the HumanEval coding benchmark, surpassing the previous state-of-the-art GPT-4 that achieves 80%. We also conduct ablation and analysis studies using different feedback signals, feedback incorporation methods, and agent types, and provide insights into how they affect performance. We release all code, demos, and datasets at <a href="https://github.com/noahshinn024/reflexion">https://github.com/noahshinn024/reflexion</a>.</p>
+</div><div class="translation" lang="zh"><p>大语言模型（LLM）越来越多地被用作目标驱动的智能体，与外部环境（如游戏、编译器和API）交互。然而，让这些语言智能体迅速而高效地从试错中学习，仍然是一项挑战，因为传统强化学习方法需要大量训练样本和代价高昂的模型微调。我们提出Reflexion，一种通过语言反馈而非更新权重来强化语言智能体的新框架。具体而言，Reflexion智能体以语言反思任务反馈信号，随后将自身生成的反思文本保存在情景记忆缓冲区中，以促使后续尝试作出更好的决策。Reflexion十分灵活，能够纳入不同类型（标量或自由形式语言）和不同来源（外部或内部模拟）的反馈信号，并在多种任务（序列决策、编程、语言推理）中相较基线智能体取得显著提升。例如，Reflexion在HumanEval编程基准上的pass@1准确率达到91%，超过此前达到80%的最先进模型GPT-4。我们还使用不同的反馈信号、反馈纳入方式和智能体类型进行消融与分析研究，探讨它们如何影响表现。全部代码、演示和数据集发布于<a href="https://github.com/noahshinn024/reflexion。">https://github.com/noahshinn024/reflexion。</a></p>
+</div></div>
+<h2 id="u-RF00005" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-original" lang="en">1 Introduction
+
+</span><span class="heading-chinese">1 引言
+
+</span></h2>
+<div class="bilingual-pair" id="u-RF00006"><div class="original" lang="en"><p>Recent works such as ReAct [30], SayCan [1], Toolformer [22], HuggingGPT [23], generative agents [19], and WebGPT [17] have demonstrated the feasibility of autonomous decision-making agents that are built on top of a large language model (LLM) core. These methods use LLMs to generate text and <code>actions</code> that can be used in API calls and executed in an environment. Since they rely on massive models with an enormous number of parameters, such approaches have been so far limited to using in-context examples as a way of teaching the agents, since more traditional optimization schemes like reinforcement learning with gradient descent require substantial amounts of compute and time.</p>
+</div><div class="translation" lang="zh"><p>ReAct [30]、SayCan [1]、Toolformer [22]、HuggingGPT [23]、生成式智能体 [19]和WebGPT [17]等近期工作，已展示了以大语言模型（LLM）为核心构建自主决策智能体的可行性。这些方法使用LLM生成文本和“行动”，后者可以用于API调用并在环境中执行。由于依赖参数数量极其庞大的巨型模型，这些方法迄今主要只能通过上下文示例来教导智能体，因为使用梯度下降的强化学习等更传统的优化方案，需要大量算力和时间。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00007"><div class="original" lang="en"><p>Preprint. Under review.</p>
+</div><div class="translation" lang="zh"><p>预印本。审稿中。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00008"><div class="original" lang="en"><p><span class="page-mark" title="原书第2页">2</span></p>
+<p>In this paper, we propose an alternative approach called Reflexion that uses verbal reinforcement to help agents learn from prior failings. Reflexion converts binary or scalar feedback from the environment into verbal feedback in the form of a textual summary, which is then added as additional context for the LLM agent in the next episode. This self-reflective feedback acts as a `semantic&#39; gradient signal by providing the agent with a concrete direction to improve upon, helping it learn from prior mistakes to perform better on the task. This is akin to how humans iteratively learn to accomplish complex tasks in a few-shot manner -- by reflecting on their previous failures in order to form an improved plan of attack for the next attempt. For example, in figure 1, a Reflexion agent learns to optimize its own behavior to solve decision-making, programming, and reasoning tasks through trial, error, and self-reflection.</p>
+</div><div class="translation" lang="zh"><p><span class="page-mark" title="原书第2页">2</span></p>
+<p>本文提出一种名为Reflexion的替代方法，利用言语强化帮助智能体从以往的失败中学习。Reflexion将环境给出的二元或标量反馈转换为文本摘要形式的言语反馈，随后在下一个回合中将其作为额外上下文提供给LLM智能体。这种自我反思反馈为智能体指出具体的改进方向，起到“语义”梯度信号的作用，帮助它从以往错误中学习，从而更好地完成任务。这类似于人类以少样本的方式迭代学习复杂任务：通过反思先前的失败，为下一次尝试制定改进后的行动方案。例如，在图1中，Reflexion智能体通过尝试、出错和自我反思，学会优化自身行为，以解决决策、编程和推理任务。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00009"><div class="original" lang="en"><p>Generating useful reflective feedback is challenging since it requires a good understanding of where the model made mistakes (i.e. the credit assignment problem [25]) as well as the ability to generate a summary containing actionable insights for improvement. We explore three ways for doing this -- simple binary environment feedback, pre-defined heuristics for common failure cases, and self-evaluation such as binary classification using LLMs (decision-making) or self-written unit tests (programming). In all implementations, the evaluation signal is amplified to natural language experience summaries which can be stored in long-term memory.</p>
+</div><div class="translation" lang="zh"><p>生成有用的反思反馈并不容易，因为这既需要充分理解模型在哪些地方犯了错（即信用分配问题 [25]），也需要能够生成包含可付诸行动的改进见解的摘要。我们探索了三种实现途径：简单的二元环境反馈、针对常见失败情形预先定义的启发式方法，以及自我评估，例如利用LLM进行二元分类（决策任务），或自行编写单元测试（编程任务）。在所有实现中，评估信号都被扩展为能够存入长期记忆的自然语言经验摘要。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00010"><div class="original" lang="en"><p>Reflexion has several advantages compared to more traditional RL approaches like policy or value-based learning: 1) it is lightweight and doesn&#39;t require finetuning the LLM, 2) it allows for more nuanced forms of feedback (e.g. targeted changes in actions), compared to scalar or vector rewards that are challenging to perform accurate credit assignment with, 3) it allows for a more explicit and interpretable form of episodic memory over prior experiences, and 4) it provides more explicit hints for actions in future episodes. At the same time, it does have the disadvantages of relying on the power of the LLM&#39;s self-evaluation capabilities (or heuristics) and not having a formal guarantee for success. However, as LLM capabilities improve, we only expect this paradigm to get better over time.</p>
+</div><div class="translation" lang="zh"><p>相较于基于策略或价值学习等更传统的强化学习方法，Reflexion具有几项优势：1）它较为轻量，不需要微调LLM；2）相较于难以据之进行精确信用分配的标量或向量奖励，它能够提供更细致的反馈形式（例如有针对性地改变行动）；3）它能以更明确、可解释的情景记忆形式保存以往经验；4）它为未来回合中的行动提供更明确的提示。同时，它也存在不足：依赖LLM的自我评估能力（或启发式方法），而且没有成功的形式化保证。不过，随着LLM能力的增强，我们预期这一范式只会随时间进一步改善。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00011"><div class="original" lang="en"><p>We perform experiments on (1) decision-making tasks to test sequential action choices over long trajectories, (2) reasoning tasks to test knowledge-intensive, single-step generation improvement, and (3) programming tasks to teach the agent to effectively use external tools such as compilers and interpreters. Across all three types of tasks, we observe Reflexion agents are better decision-makers, reasoners, and programmers. More concretely, Reflexion agents improve on decision-making AlfWorld [24] tasks over strong baseline approaches by an absolute 22% in 12 iterative learning steps, and on reasoning questions in HotPotQA [28] by 20%, and Python programming tasks on HumanEval [6] by as much as 11%.</p>
+</div><div class="translation" lang="zh"><p>我们在三类任务上开展实验：（1）决策任务，用于测试长轨迹中的序列行动选择；（2）推理任务，用于测试知识密集型单次生成的改进；（3）编程任务，用于教导智能体有效使用编译器、解释器等外部工具。在这三类任务中，我们观察到Reflexion智能体都能作出更好的决策、推理和编程。更具体地说，经过12步迭代学习，Reflexion智能体在AlfWorld [24]决策任务上相较强基线的表现绝对提高22个百分点；在HotPotQA [28]推理问题上提高20%；在HumanEval [6]的Python编程任务上，提升幅度最高达11%。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00012"><div class="original" lang="en"><p>To summarize, our contributions are the following:</p>
+</div><div class="translation" lang="zh"><p>概括而言，我们的贡献如下：</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00013"><div class="original" lang="en"><p>We propose Reflexion, a new paradigm for <code>verbal</code> reinforcement that parameterizes a policy as an agent&#39;s memory encoding paired with a choice of LLM parameters.</p>
+</div><div class="translation" lang="zh"><p>我们提出Reflexion，一种新的“言语”强化范式，将智能体的记忆编码与选定的LLM参数相配合，用以参数化策略。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00014"><div class="original" lang="en"><p>We explore this emergent property of self-reflection in LLMs and empirically show that self-reflection is extremely useful to learn complex tasks over a handful of trials.</p>
+</div><div class="translation" lang="zh"><p>我们探索LLM中涌现的自我反思特性，并以实证结果表明，自我反思对于通过少量尝试学会复杂任务极其有用。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00015"><div class="original" lang="en"><p>We introduce LeetcodeHardGym, a code-generation RL gym environment consisting of 40 challenging Leetcode questions (<code>hard-level</code>) in 19 programming languages.</p>
+</div><div class="translation" lang="zh"><p>我们推出LeetcodeHardGym，一个用于代码生成的强化学习gym环境，包含40道具有挑战性的Leetcode题目（难度为“hard-level”），涵盖19种编程语言。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00016"><div class="original" lang="en"><p>We show that Reflexion achieves improvements over strong baselines across several tasks, and achieves state-of-the-art results on various code generation benchmarks.</p>
+</div><div class="translation" lang="zh"><p>我们表明，Reflexion在多种任务上优于强基线，并在若干代码生成基准上取得最先进的结果。</p>
+</div></div>
+<h2 id="u-RF00017" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-original" lang="en">2 Related work
+
+</span><span class="heading-chinese">2 相关工作
+
+</span></h2>
+<h3 id="u-RF00018" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-original" lang="en">Reasoning and decision-making
+
+</span><span class="heading-chinese">推理与决策
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00019"><div class="original" lang="en"><p>Self-Refine [15] employs an iterative framework for self-refinement to autonomously improve generation through self-evaluation. These self-evaluation and self-improvement steps are conditioned on given task constraints, such as &quot;How can this generation be written in a more positive way&quot;. Self-Refine is effective but is limited to single-generation reasoning tasks. Pryzant et al. [21] performs a similar semantic prompt-writing optimization, but is also limited to single-generation tasks. Paul et al. [20] fine-tune critic models to provide intermediate feedback within trajectories to improve reasoning responses. Xie et al. [27] use stochastic beam search over actions to perform a more efficient decision-making search strategy which allows the agent to use foresight advantage due to its self-evaluation component. Yoran et al. [31] and Nair et al. <span class="page-mark" title="原书第3页">3</span> [16] use decider models to reason over several generations. Kim et al. [10] use a retry pattern over a fixed number of steps without an evaluation step. Goodman [9] perform a qualitative evaluation step that proposes optimizations to the previous generation. In this paper, we show that several of these concepts can be enhanced with self-reflection to build a persisting memory of self-reflective experiences which allows an agent to identify its own errors and self-suggest lessons to learn from its mistakes over time.</p>
+</div><div class="translation" lang="zh"><p>Self-Refine [15]采用迭代式的自我改进框架，通过自我评估自主改进生成结果。这些自我评估和自我改进步骤以给定的任务约束为条件，例如“怎样才能将这一生成结果写得更积极一些”。Self-Refine有效，但仅限于单次生成的推理任务。Pryzant等人 [21]进行了类似的语义层面提示编写优化，但同样局限于单次生成任务。Paul等人 [20]微调评判者模型，在轨迹中提供中间反馈，以改进推理回答。Xie等人 [27]对行动使用随机束搜索，实施更高效的决策搜索策略；其自我评估组件使智能体能够利用前瞻优势。Yoran等人 [31]和Nair等人 <span class="page-mark" title="原书第3页">3</span> [16]使用决策者模型，对多个生成结果进行推理。Kim等人 [10]在固定步数内采用重试模式，不设评估步骤。Goodman [9]进行定性评估，对先前的生成结果提出优化建议。本文表明，其中若干概念能够通过自我反思得到增强，构建持续保存自我反思经验的记忆，使智能体能够识别自身错误，并随时间推移，自行提出可从错误中吸取的教训。</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00021"><div class="original" lang="en"><p>(a) Task → (b) Trajectory → (c) Evaluation (internal / external) → (d) Reflection → (e) Next Trajectory</p>
+<ol>
+<li><p>Decision making
+(a) You are in the middle of a room [...] Task: clean some pan and put it in countertop.
+(b) [...]
+Action:take pan1 from stoveburner1
+Obs:Nothing happens. [...]
+Action:clean pan1 with sinkbasin1
+Obs:Nothing happens. [...]
+(c) Rule/LM Heuristic:
+Hallucination.
+(d) [...] tried to pick up the pan in stoveburner 1 [...] but the pan was not in stoveburner 1. [...]
+(e) [...] Action: take pan 1 from stoveburner 2
+[...] Obs: You put the pan 1 in countertop 1.</p>
+</li>
+<li><p>Programming
+(a) Task: You are given a list of two strings [...] of open &#39;(&#39; or close &#39;)&#39; parentheses only [...]
+(b)
+def match_parens(lst):
+ if s1.count(&#39;(&#39;) + s2.count(&#39;(&#39;) == s1.count(&#39;)&#39;) + s2.count(&#39;)&#39;): [...]
+ return &#39;No&#39;
+(c) Self-generated unit tests fail:
+assert match_parens(...)
+(d) [...] wrong because it only checks if the total count of open and close parentheses is equal [...] order of parentheses [...]
+(e) [...]
+ return &#39;Yes&#39; if check(S1) or check(S2) else &#39;No&#39;</p>
+</li>
+<li><p>Reasoning
+(a) Task: What profession does John Lanchester and Alan Dean Foster have in common?
+(b) Think: [...] novelist, journalist, critic [...] novelist, screenwriter [...] common is novelist and screenwriter.
+Action: “novelist, screenwriter”
+(c) Environment Binary Reward:
+0
+(d) [...] failed because I incorrectly assumed that they both had the same multiple professions. [...] accurately identifying their professions.
+(e) Think: [...] So the profession John Lanchester and Alan Dean Foster have in common is novelist.
+Action: “novelist”</p>
+</li>
+</ol>
+</div><div class="translation" lang="zh"><p>（a）任务 →（b）轨迹 →（c）评估（内部／外部）→（d）反思 →（e）下一条轨迹</p>
+<ol>
+<li><p>决策
+（a）你位于一个房间中央[...]。任务：清洗某个平底锅，并把它放到操作台上。
+（b）[...]
+行动：从炉头1拿起平底锅1。
+观察：什么也没发生。[...]
+行动：用水槽1清洗平底锅1。
+观察：什么也没发生。[...]
+（c）规则／语言模型启发式方法：
+幻觉。
+（d）[...]尝试拿起炉头1上的平底锅[...]，但平底锅并不在炉头1上。[...]
+（e）[...]行动：从炉头2拿起平底锅1。
+[...]观察：你把平底锅1放在了操作台1上。</p>
+</li>
+<li><p>编程
+（a）任务：给定一个包含两个字符串的列表[...]，字符串仅由左括号“(”或右括号“)”组成[...]。
+（b）</p>
+</li>
+</ol>
+<pre><code class="language-python">def match_parens(lst):
+    if s1.count(&#39;(&#39;) + s2.count(&#39;(&#39;) == s1.count(&#39;)&#39;) + s2.count(&#39;)&#39;): [...]
+    return &#39;No&#39;
+</code></pre>
+<p>（c）自行生成的单元测试失败：</p>
+<pre><code class="language-python">assert match_parens(...)
+</code></pre>
+<p>（d）[...]错误的原因在于，它仅检查左括号与右括号的总数是否相等[...]括号的顺序[...]。
+（e）[...]</p>
+<pre><code class="language-python">    return &#39;Yes&#39; if check(S1) or check(S2) else &#39;No&#39;
+</code></pre>
+<ol start="3">
+<li>推理
+（a）任务：John Lanchester和Alan Dean Foster有哪些共同的职业？
+（b）思考：[...]小说家、记者、评论家[...]小说家、编剧[...]共同的职业是小说家和编剧。
+行动：“小说家、编剧”
+（c）环境二元奖励：
+0
+（d）[...]失败，是因为我错误地假定，他们都同时拥有相同的多个职业。[...]准确识别他们的职业。
+（e）思考：[...]所以John Lanchester和Alan Dean Foster共同的职业是小说家。
+行动：“小说家”</li>
+</ol>
+</div></div>
+<div class="bilingual-pair" id="u-RF00022"><div class="original" lang="en"><p>Figure 1: Reflexion works on decision-making 4.1, programming 4.3, and reasoning 4.2 tasks.</p>
+</div><div class="translation" lang="zh"><p>图1：Reflexion适用于决策（4.1）、编程（4.3）和推理（4.2）任务。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00023"><div class="original" lang="en"><p>Related work on reasoning and decision-making</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Self refine</th>
+<th>Hidden constraints</th>
+<th>Decision making</th>
+<th>Binary reward</th>
+<th>Memory</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Self-refine [15]</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>Beam search [27]</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>Reflexion (ours)</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody></table>
+<p>Related work on programming</p>
+<table>
+<thead>
+<tr>
+<th>Approach Test execution</th>
+<th>Test execution</th>
+<th>Debugging</th>
+<th>Self-generated tests</th>
+<th>Multiple languages</th>
+<th>Self-reflection</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AlphaCode [14]</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✓</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>CodeT [5]</td>
+<td>✓</td>
+<td>✗</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>Self-debugging [7]</td>
+<td>✓</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>CodeRL [12]</td>
+<td>✓</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>Reflexion (ours)</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody></table>
+</div><div class="translation" lang="zh"><p>关于推理与决策的相关工作</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>自我改进</th>
+<th>隐藏约束</th>
+<th>决策</th>
+<th>二元奖励</th>
+<th>记忆</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Self-refine [15]</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>Beam search [27]</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>Reflexion（本文）</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody></table>
+<p>关于编程的相关工作</p>
+<table>
+<thead>
+<tr>
+<th>方法／测试执行</th>
+<th>测试执行</th>
+<th>调试</th>
+<th>自行生成测试</th>
+<th>多种语言</th>
+<th>自我反思</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AlphaCode [14]</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✓</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>CodeT [5]</td>
+<td>✓</td>
+<td>✗</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>Self-debugging [7]</td>
+<td>✓</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>CodeRL [12]</td>
+<td>✓</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>Reflexion（本文）</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody></table>
+</div></div>
+<h3 id="u-RF00024" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-original" lang="en">Programming
+
+</span><span class="heading-chinese">编程
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00025"><div class="original" lang="en"><p>Several past and recent works employ variations of test-driven development or code debugging practices. AlphaCode [14] evaluates a set of generations on hidden test cases. CodeT [5] uses self-generated unit tests that are used to score generated function implementations. Self-Debugging [7] employs a debugging component that is used to improve existing implementations given feedback from a code execution environment. CodeRL [12] sets the problem in an RL framework using an actor-critic setup to debug programs given feedback from an execution environment. AlphaCode, Self-Debugging and CodeRL are effective in fixing less-complex program bugs, but they rely upon ground truth test cases that invalidate pass@1 eligibility, and do not use self-reflection to bridge the gap between error identification and implementation improvement. CodeT does not access hidden test cases but does not implement a self-learning step to improve code writing.</p>
+</div><div class="translation" lang="zh"><p>过去和近期的一些工作采用了测试驱动开发或代码调试实践的不同变体。AlphaCode [14]利用隐藏测试用例评估一组生成结果。CodeT [5]使用自行生成的单元测试，对生成的函数实现评分。Self-Debugging [7]采用调试组件，根据代码执行环境提供的反馈，改进现有实现。CodeRL [12]将问题置于强化学习框架中，采用行动者—评判者结构，根据执行环境的反馈调试程序。AlphaCode、Self-Debugging与CodeRL能够有效修复复杂度较低的程序错误，但它们依赖真实测试用例，因而不具备按pass@1评估的资格；它们也不利用自我反思来弥合识别错误与改进实现之间的差距。CodeT不访问隐藏测试用例，但也没有实现用于改进代码编写的自我学习步骤。</p>
+</div></div>
+<h2 id="u-RF00026" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-original" lang="en">3 Reflexion: reinforcement via verbal reflection
+
+</span><span class="heading-chinese">3 Reflexion：通过言语反思进行强化
+
+</span></h2>
+<div class="bilingual-pair" id="u-RF00027"><div class="original" lang="en"><p>We develop a modular formulation for Reflexion, utilizing three distinct models: an Actor, denoted as <span class="source-math" data-tex="$M_a$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">M_a</annotation></semantics></math></span></span>, which generates text and actions; an Evaluator model, represented by <span class="source-math" data-tex="$M_e$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>e</mi></msub></mrow><annotation encoding="application/x-tex">M_e</annotation></semantics></math></span></span>, that scores the outputs produced by <span class="source-math" data-tex="$M_a$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">M_a</annotation></semantics></math></span></span>; and a Self-Reflection model, denoted as <span class="source-math" data-tex="$M_{sr}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mrow><mi>s</mi><mi>r</mi></mrow></msub></mrow><annotation encoding="application/x-tex">M_{sr}</annotation></semantics></math></span></span>, which generates verbal reinforcement cues to assist the Actor in self-improvement. We provide a detailed description of each of these models and subsequently elucidate their collaborative functioning within the Reflexion framework.</p>
+</div><div class="translation" lang="zh"><p>我们为Reflexion构建了一种模块化表述，使用三种不同的模型：行动者（Actor），记作<span class="source-math" data-tex="$M_a$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">M_a</annotation></semantics></math></span></span>，生成文本和行动；评估器（Evaluator）模型，记作<span class="source-math" data-tex="$M_e$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>e</mi></msub></mrow><annotation encoding="application/x-tex">M_e</annotation></semantics></math></span></span>，对<span class="source-math" data-tex="$M_a$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">M_a</annotation></semantics></math></span></span>生成的输出评分；以及自我反思（Self-Reflection）模型，记作<span class="source-math" data-tex="$M_{sr}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mrow><mi>s</mi><mi>r</mi></mrow></msub></mrow><annotation encoding="application/x-tex">M_{sr}</annotation></semantics></math></span></span>，生成言语强化线索，帮助行动者自我改进。下面先详细介绍各个模型，再阐明它们在Reflexion框架中如何协同工作。</p>
+</div></div>
+<div class="bilingual-pair" id="p-75e1b6c30e2"><div class="original" lang="en"><p><span class="page-mark" title="原书第4页">4</span></p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00029"><div class="original" lang="en"><p>ActionObs / Reward
+Trajectory
+(short-term memory)
+Experience
+(long-term memory)
+Self-reflection (LM)
+Agent
+Actor (LM)
+Environment
+Evaluator (LM)
+External feedback
+Internal
+feedback
+Reflective
+text</p>
+</div><div class="translation" lang="zh"><p>行动；观察／奖励
+轨迹
+（短期记忆）
+经验
+（长期记忆）
+自我反思（语言模型）
+智能体
+行动者（语言模型）
+环境
+评估器（语言模型）
+外部反馈
+内部反馈
+反思文本</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00030"><div class="original" lang="en"><p>Algorithm 1: Reinforcement via self-reflection
+Initialize Actor, Evaluator, Self-Reflection:
+<span class="source-math" data-tex="$M_a$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">M_a</annotation></semantics></math></span></span>, <span class="source-math" data-tex="$M_e$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>e</mi></msub></mrow><annotation encoding="application/x-tex">M_e</annotation></semantics></math></span></span>, <span class="source-math" data-tex="$M_{sr}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mrow><mi>s</mi><mi>r</mi></mrow></msub></mrow><annotation encoding="application/x-tex">M_{sr}</annotation></semantics></math></span></span>
+Initialize policy <span class="source-math" data-tex="$\pi_{\theta}(a_i | s_i)$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mi mathvariant="normal">∣</mi><msub><mi>s</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\pi_{\theta}(a_i | s_i)</annotation></semantics></math></span></span>, <span class="source-math" data-tex="$\theta = \{M_a, mem\}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo>=</mo><mo stretchy="false">{</mo><msub><mi>M</mi><mi>a</mi></msub><mo separator="true">,</mo><mi>m</mi><mi>e</mi><mi>m</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\theta = \{M_a, mem\}</annotation></semantics></math></span></span>
+Generate initial trajectory using <span class="source-math" data-tex="$\pi_{\theta}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mi>θ</mi></msub></mrow><annotation encoding="application/x-tex">\pi_{\theta}</annotation></semantics></math></span></span>
+Evaluate <span class="source-math" data-tex="$\tau_0$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\tau_0</annotation></semantics></math></span></span> using <span class="source-math" data-tex="$M_e$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>e</mi></msub></mrow><annotation encoding="application/x-tex">M_e</annotation></semantics></math></span></span>
+Generate initial self-reflection <span class="source-math" data-tex="$sr_0$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><msub><mi>r</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">sr_0</annotation></semantics></math></span></span> using <span class="source-math" data-tex="$M_{sr}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mrow><mi>s</mi><mi>r</mi></mrow></msub></mrow><annotation encoding="application/x-tex">M_{sr}</annotation></semantics></math></span></span>
+Set <span class="source-math" data-tex="$mem ← [sr_0]$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>e</mi><mi>m</mi><mo>←</mo><mo stretchy="false">[</mo><mi>s</mi><msub><mi>r</mi><mn>0</mn></msub><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">mem ← [sr_0]</annotation></semantics></math></span></span>
+Set <span class="source-math" data-tex="$t = 0$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">t = 0</annotation></semantics></math></span></span>
+While <span class="source-math" data-tex="$M_e$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>e</mi></msub></mrow><annotation encoding="application/x-tex">M_e</annotation></semantics></math></span></span> not pass or <span class="source-math" data-tex="$t &lt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>&lt;</mo></mrow><annotation encoding="application/x-tex">t &lt;</annotation></semantics></math></span></span> max trials
+Generate <span class="source-math" data-tex="$\tau_t = {[a_0, o_0, … a_i, o_i]}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mi>t</mi></msub><mo>=</mo><mrow><mo stretchy="false">[</mo><msub><mi>a</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mi>o</mi><mn>0</mn></msub><mo separator="true">,</mo><mo>…</mo><msub><mi>a</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>o</mi><mi>i</mi></msub><mo stretchy="false">]</mo></mrow></mrow><annotation encoding="application/x-tex">\tau_t = {[a_0, o_0, … a_i, o_i]}</annotation></semantics></math></span></span> using <span class="source-math" data-tex="$\pi_{\theta}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mi>θ</mi></msub></mrow><annotation encoding="application/x-tex">\pi_{\theta}</annotation></semantics></math></span></span>
+Evaluate <span class="source-math" data-tex="$\tau_t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\tau_t</annotation></semantics></math></span></span> using <span class="source-math" data-tex="$M_e$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>e</mi></msub></mrow><annotation encoding="application/x-tex">M_e</annotation></semantics></math></span></span>
+Generate self-reflection <span class="source-math" data-tex="$sr_t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><msub><mi>r</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">sr_t</annotation></semantics></math></span></span> using <span class="source-math" data-tex="$M_{sr}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mrow><mi>s</mi><mi>r</mi></mrow></msub></mrow><annotation encoding="application/x-tex">M_{sr}</annotation></semantics></math></span></span>
+Append <span class="source-math" data-tex="$sr_t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><msub><mi>r</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">sr_t</annotation></semantics></math></span></span> to <span class="source-math" data-tex="$mem$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>e</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">mem</annotation></semantics></math></span></span>
+Increment <span class="source-math" data-tex="$t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span></span>
+End while
+Return</p>
+</div><div class="translation" lang="zh"><p>算法1：通过自我反思进行强化
+初始化行动者、评估器、自我反思模型：
+<span class="source-math" data-tex="$M_a$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">M_a</annotation></semantics></math></span></span>、<span class="source-math" data-tex="$M_e$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>e</mi></msub></mrow><annotation encoding="application/x-tex">M_e</annotation></semantics></math></span></span>、<span class="source-math" data-tex="$M_{sr}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mrow><mi>s</mi><mi>r</mi></mrow></msub></mrow><annotation encoding="application/x-tex">M_{sr}</annotation></semantics></math></span></span>
+初始化策略<span class="source-math" data-tex="$\pi_{\theta}(a_i | s_i)$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><msub><mi>a</mi><mi>i</mi></msub><mi mathvariant="normal">∣</mi><msub><mi>s</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\pi_{\theta}(a_i | s_i)</annotation></semantics></math></span></span>，<span class="source-math" data-tex="$\theta = \{M_a, mem\}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo>=</mo><mo stretchy="false">{</mo><msub><mi>M</mi><mi>a</mi></msub><mo separator="true">,</mo><mi>m</mi><mi>e</mi><mi>m</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\theta = \{M_a, mem\}</annotation></semantics></math></span></span>
+使用<span class="source-math" data-tex="$\pi_{\theta}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mi>θ</mi></msub></mrow><annotation encoding="application/x-tex">\pi_{\theta}</annotation></semantics></math></span></span>生成初始轨迹
+使用<span class="source-math" data-tex="$M_e$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>e</mi></msub></mrow><annotation encoding="application/x-tex">M_e</annotation></semantics></math></span></span>评估<span class="source-math" data-tex="$\tau_0$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\tau_0</annotation></semantics></math></span></span>
+使用<span class="source-math" data-tex="$M_{sr}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mrow><mi>s</mi><mi>r</mi></mrow></msub></mrow><annotation encoding="application/x-tex">M_{sr}</annotation></semantics></math></span></span>生成初始自我反思<span class="source-math" data-tex="$sr_0$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><msub><mi>r</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">sr_0</annotation></semantics></math></span></span>
+令<span class="source-math" data-tex="$mem ← [sr_0]$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>e</mi><mi>m</mi><mo>←</mo><mo stretchy="false">[</mo><mi>s</mi><msub><mi>r</mi><mn>0</mn></msub><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">mem ← [sr_0]</annotation></semantics></math></span></span>
+令<span class="source-math" data-tex="$t = 0$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">t = 0</annotation></semantics></math></span></span>
+当<span class="source-math" data-tex="$M_e$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>e</mi></msub></mrow><annotation encoding="application/x-tex">M_e</annotation></semantics></math></span></span>未通过，或<span class="source-math" data-tex="$t &lt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>&lt;</mo></mrow><annotation encoding="application/x-tex">t &lt;</annotation></semantics></math></span></span>最大尝试次数时
+　使用<span class="source-math" data-tex="$\pi_{\theta}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mi>θ</mi></msub></mrow><annotation encoding="application/x-tex">\pi_{\theta}</annotation></semantics></math></span></span>生成<span class="source-math" data-tex="$\tau_t = {[a_0, o_0, … a_i, o_i]}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mi>t</mi></msub><mo>=</mo><mrow><mo stretchy="false">[</mo><msub><mi>a</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mi>o</mi><mn>0</mn></msub><mo separator="true">,</mo><mo>…</mo><msub><mi>a</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>o</mi><mi>i</mi></msub><mo stretchy="false">]</mo></mrow></mrow><annotation encoding="application/x-tex">\tau_t = {[a_0, o_0, … a_i, o_i]}</annotation></semantics></math></span></span>
+　使用<span class="source-math" data-tex="$M_e$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>e</mi></msub></mrow><annotation encoding="application/x-tex">M_e</annotation></semantics></math></span></span>评估<span class="source-math" data-tex="$\tau_t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\tau_t</annotation></semantics></math></span></span>
+　使用<span class="source-math" data-tex="$M_{sr}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mrow><mi>s</mi><mi>r</mi></mrow></msub></mrow><annotation encoding="application/x-tex">M_{sr}</annotation></semantics></math></span></span>生成自我反思<span class="source-math" data-tex="$sr_t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><msub><mi>r</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">sr_t</annotation></semantics></math></span></span>
+　将<span class="source-math" data-tex="$sr_t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><msub><mi>r</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">sr_t</annotation></semantics></math></span></span>附加到<span class="source-math" data-tex="$mem$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>e</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">mem</annotation></semantics></math></span></span>
+　递增<span class="source-math" data-tex="$t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span></span>
+结束循环
+返回</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00031"><div class="original" lang="en"><p>Figure 2: (a) Diagram of Reflexion. (b) Reflexion reinforcement algorithm</p>
+</div><div class="translation" lang="zh"><p>图2：（a）Reflexion示意图。（b）Reflexion强化算法。</p>
+</div></div>
+<h3 id="u-RF00032" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-original" lang="en">Actor
+
+</span><span class="heading-chinese">行动者
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00033"><div class="original" lang="en"><p>The Actor is built upon a large language model (LLM) that is specifically prompted to generate the necessary text and actions conditioned on the state observations. Analogous to traditional policy-based RL setups, we sample an action or generation, <span class="source-math" data-tex="$a_t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">a_t</annotation></semantics></math></span></span>, from the current policy <span class="source-math" data-tex="$\pi_{\theta}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mi>θ</mi></msub></mrow><annotation encoding="application/x-tex">\pi_{\theta}</annotation></semantics></math></span></span> at time <span class="source-math" data-tex="$t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span></span>, receive an observation from the environment <span class="source-math" data-tex="$o_t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>o</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">o_t</annotation></semantics></math></span></span>. We explore various Actor models, including Chain of Thought [26] and ReAct [30]. These diverse generation models allow us to explore different aspects of text and action generation within the Reflexion framework, providing valuable insights into their performance and effectiveness. In addition, we also add a memory component mem that provides additional context to this agent. This adaption was inspired by Brooks et al. [3], who suggest a policy iteration approach using in-context learning. Details on how this is populated are provided below.</p>
+</div><div class="translation" lang="zh"><p>行动者以大语言模型（LLM）为基础，借助专门设计的提示，根据状态观察生成所需文本和行动。类似于传统的基于策略的强化学习设置，我们在时间<span class="source-math" data-tex="$t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span></span>从当前策略<span class="source-math" data-tex="$\pi_{\theta}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>π</mi><mi>θ</mi></msub></mrow><annotation encoding="application/x-tex">\pi_{\theta}</annotation></semantics></math></span></span>采样一个行动或生成结果<span class="source-math" data-tex="$a_t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">a_t</annotation></semantics></math></span></span>，并接收来自环境的观察<span class="source-math" data-tex="$o_t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>o</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">o_t</annotation></semantics></math></span></span>。我们探索了不同的行动者模型，包括思维链 [26]与ReAct [30]。这些不同的生成模型使我们能够在Reflexion框架内探索文本和行动生成的不同方面，为理解它们的表现和有效性提供有价值的见解。此外，我们还加入记忆组件mem，为该智能体提供额外上下文。这一改动受到Brooks等人 [3]的启发，他们提出了利用上下文学习进行策略迭代的方法。下文将详细说明如何填充这一记忆组件。</p>
+</div></div>
+<h3 id="u-RF00034" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-original" lang="en">Evaluator
+
+</span><span class="heading-chinese">评估器
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00035"><div class="original" lang="en"><p>The Evaluator component of the Reflexion framework plays a crucial role in assessing the quality of the generated outputs produced by the Actor. It takes as input a generated trajectory and computes a reward score that reflects its performance within the given task context. Defining effective value and reward functions that apply to semantic spaces is difficult, so we investigate several variants of the Evaluator model. For reasoning tasks, we explore reward functions based on exact match (EM) grading, ensuring that the generated output aligns closely with the expected solution. In decision-making tasks, we employ pre-defined heuristic functions that are tailored to specific evaluation criteria. Additionally, we experiment with using a different instantiation of an LLM itself as an Evaluator, generating rewards for decision-making and programming tasks. This multi-faceted approach to Evaluator design allows us to examine different strategies for scoring generated outputs, offering insights into their effectiveness and suitability across a range of tasks.</p>
+</div><div class="translation" lang="zh"><p>Reflexion框架中的评估器组件，对评判行动者生成输出的质量起着关键作用。它以生成的轨迹为输入，计算一个反映其在给定任务情境中表现的奖励分数。为语义空间定义有效的价值函数和奖励函数并不容易，因此我们考察了评估器模型的若干变体。在推理任务中，我们探索了基于精确匹配（EM）评分的奖励函数，以确保生成输出与预期解答紧密一致。在决策任务中，我们采用针对具体评估标准预先定义的启发式函数。此外，我们还尝试将LLM本身的另一个实例用作评估器，为决策和编程任务生成奖励。这样从多个方面设计评估器，使我们得以考察对生成输出评分的不同策略，了解它们在不同任务中的有效性与适用性。</p>
+</div></div>
+<h3 id="u-RF00036" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-original" lang="en">Self-reflection
+
+</span><span class="heading-chinese">自我反思
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00037"><div class="original" lang="en"><p>The Self-Reflection model instantiated as an LLM, plays a crucial role in the Reflexion framework by generating verbal self-reflections to provide valuable feedback for future trials. Given a sparse reward signal, such as a binary success status (success/fail), the current trajectory, and its persistent memory mem, the self-reflection model generates nuanced and specific feedback. This feedback, which is more informative than scalar rewards, is then stored in the agent&#39;s memory (mem). For instance, in a multi-step decision-making task, when the agent receives a failure signal, it can infer that a specific action <span class="source-math" data-tex="$a_i$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">a_i</annotation></semantics></math></span></span> led to subsequent incorrect actions <span class="source-math" data-tex="$a_{i+1}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">a_{i+1}</annotation></semantics></math></span></span> and <span class="source-math" data-tex="$a_{i+2}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mrow><mi>i</mi><mo>+</mo><mn>2</mn></mrow></msub></mrow><annotation encoding="application/x-tex">a_{i+2}</annotation></semantics></math></span></span>. The agent can then verbally state that it should have taken a different action, <span class="source-math" data-tex="$a_i&#39;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>a</mi><mi>i</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msubsup></mrow><annotation encoding="application/x-tex">a_i&#x27;</annotation></semantics></math></span></span>, which would have resulted in <span class="source-math" data-tex="$a_{i+1}&#39;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>a</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msubsup></mrow><annotation encoding="application/x-tex">a_{i+1}&#x27;</annotation></semantics></math></span></span> and <span class="source-math" data-tex="$a_{i+2}&#39;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>a</mi><mrow><mi>i</mi><mo>+</mo><mn>2</mn></mrow><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msubsup></mrow><annotation encoding="application/x-tex">a_{i+2}&#x27;</annotation></semantics></math></span></span>, and store this experience in its memory. In subsequent trials, the agent can leverage its past experiences to adapt its decision-making approach at time <span class="source-math" data-tex="$t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span></span> by choosing action <span class="source-math" data-tex="$a_i&#39;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>a</mi><mi>i</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msubsup></mrow><annotation encoding="application/x-tex">a_i&#x27;</annotation></semantics></math></span></span>. This iterative process of trial, error, self-reflection, and persisting memory enables the agent to rapidly improve its decision-making ability in various environments by utilizing informative feedback signals.</p>
+</div><div class="translation" lang="zh"><p>自我反思模型由LLM实现，通过生成言语形式的自我反思，为未来尝试提供有价值的反馈，在Reflexion框架中发挥关键作用。给定稀疏奖励信号，例如二元成功状态（成功／失败）、当前轨迹及持续保存的记忆mem，自我反思模型会生成细致而具体的反馈。这些反馈比标量奖励包含更多信息，随后被存入智能体的记忆（mem）。例如，在多步决策任务中，当智能体收到失败信号时，它可以推断某个特定行动<span class="source-math" data-tex="$a_i$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">a_i</annotation></semantics></math></span></span>导致了后续错误行动<span class="source-math" data-tex="$a_{i+1}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">a_{i+1}</annotation></semantics></math></span></span>与<span class="source-math" data-tex="$a_{i+2}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mrow><mi>i</mi><mo>+</mo><mn>2</mn></mrow></msub></mrow><annotation encoding="application/x-tex">a_{i+2}</annotation></semantics></math></span></span>。随后，智能体可以用语言说明，自己本应采取另一个行动<span class="source-math" data-tex="$a_i&#39;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>a</mi><mi>i</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msubsup></mrow><annotation encoding="application/x-tex">a_i&#x27;</annotation></semantics></math></span></span>，那样就会产生<span class="source-math" data-tex="$a_{i+1}&#39;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>a</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msubsup></mrow><annotation encoding="application/x-tex">a_{i+1}&#x27;</annotation></semantics></math></span></span>与<span class="source-math" data-tex="$a_{i+2}&#39;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>a</mi><mrow><mi>i</mi><mo>+</mo><mn>2</mn></mrow><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msubsup></mrow><annotation encoding="application/x-tex">a_{i+2}&#x27;</annotation></semantics></math></span></span>，并将这一经验存入记忆。在后续尝试中，智能体可以利用以往经验，选择行动<span class="source-math" data-tex="$a_i&#39;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>a</mi><mi>i</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msubsup></mrow><annotation encoding="application/x-tex">a_i&#x27;</annotation></semantics></math></span></span>，从而调整时间<span class="source-math" data-tex="$t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span></span>的决策方式。这个由尝试、出错、自我反思及持续记忆构成的迭代过程，使智能体能够利用信息丰富的反馈信号，迅速提高在不同环境中的决策能力。</p>
+</div></div>
+<h3 id="u-RF00038" data-heading><span class="anchor-alias" id="s-10"></span><span class="heading-original" lang="en">Memory
+
+</span><span class="heading-chinese">记忆
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00039"><div class="original" lang="en"><p>Core components of the Reflexion process are the notion of short-term and long-term memory. At inference time, the Actor conditions its decisions on short and long-term memory, similar <span class="page-mark" title="原书第5页">5</span> to the way that humans remember fine-grain recent details while also recalling distilled important experiences from long-term memory. In the RL setup, the trajectory history serves as the short-term memory while outputs from the Self-Reflection model are stored in long-term memory. These two memory components work together to provide context that is specific but also influenced by lessons learned over several trials, which is a key advantage of Reflexion agents over other LLM action choice works.</p>
+</div><div class="translation" lang="zh"><p>短期记忆与长期记忆的概念，是Reflexion过程的核心组成部分。在推断时，行动者依据短期和长期记忆作出决策，就像<span class="page-mark" title="原书第5页">5</span>人类既记住近期的细节，也从长期记忆中回想提炼后的重要经验一样。在强化学习设置中，轨迹历史充当短期记忆，而自我反思模型的输出则存入长期记忆。这两种记忆组件协同提供上下文：它既包含具体信息，也受到多次尝试中所学教训的影响。这是Reflexion智能体相较于其他LLM行动选择工作的一个主要优势。</p>
+</div></div>
+<h3 id="u-RF00040" data-heading><span class="anchor-alias" id="s-11"></span><span class="heading-original" lang="en">The Reflexion process
+
+</span><span class="heading-chinese">Reflexion过程
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00041"><div class="original" lang="en"><p>Reflexion is formalized as an iterative optimization process in 1. In the first trial, the Actor produces a trajectory <span class="source-math" data-tex="$\tau_0$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\tau_0</annotation></semantics></math></span></span> by interacting with the environment. The Evaluator then produces a score <span class="source-math" data-tex="$r_0$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">r_0</annotation></semantics></math></span></span> which is computed as <span class="source-math" data-tex="$r_t = M_e(\tau_0)$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mi>t</mi></msub><mo>=</mo><msub><mi>M</mi><mi>e</mi></msub><mo stretchy="false">(</mo><msub><mi>τ</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">r_t = M_e(\tau_0)</annotation></semantics></math></span></span>. <span class="source-math" data-tex="$r_t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">r_t</annotation></semantics></math></span></span> is only a scalar reward for trial <span class="source-math" data-tex="$t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span></span> that improves as task-specific performance increases. After the first trial, to amplify <span class="source-math" data-tex="$r_0$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">r_0</annotation></semantics></math></span></span> to a feedback form that can be used for improvement by an LLM, the Self-Reflection model analyzes the set of <span class="source-math" data-tex="$\{\tau_0, r_0\}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">{</mo><msub><mi>τ</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mi>r</mi><mn>0</mn></msub><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{\tau_0, r_0\}</annotation></semantics></math></span></span> to produce a summary <span class="source-math" data-tex="$sr_0$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><msub><mi>r</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">sr_0</annotation></semantics></math></span></span> which is stored in the memory mem. <span class="source-math" data-tex="$sr_t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><msub><mi>r</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">sr_t</annotation></semantics></math></span></span> is a verbal experience feedback for trial <span class="source-math" data-tex="$t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span></span>. The Actor, Evaluator, and Self-Reflection models work together through trials in a loop until the Evaluator deems <span class="source-math" data-tex="$\tau_t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\tau_t</annotation></semantics></math></span></span> to be correct. As mentioned in 3, the memory component of Reflexion is crucial to its effectiveness. After each trial <span class="source-math" data-tex="$t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span></span>, <span class="source-math" data-tex="$sr_t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><msub><mi>r</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">sr_t</annotation></semantics></math></span></span>, is appended mem. In practice, we bound mem by a maximum number of stored experiences, <span class="source-math" data-tex="$\Omega$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Ω</mi></mrow><annotation encoding="application/x-tex">\Omega</annotation></semantics></math></span></span> (usually set to 1-3) to adhere to max context LLM limitations.</p>
+</div><div class="translation" lang="zh"><p>算法1将Reflexion形式化为一个迭代优化过程。在第一次尝试中，行动者通过与环境交互生成轨迹<span class="source-math" data-tex="$\tau_0$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\tau_0</annotation></semantics></math></span></span>。随后，评估器生成分数<span class="source-math" data-tex="$r_0$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">r_0</annotation></semantics></math></span></span>，其计算式为<span class="source-math" data-tex="$r_t = M_e(\tau_0)$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mi>t</mi></msub><mo>=</mo><msub><mi>M</mi><mi>e</mi></msub><mo stretchy="false">(</mo><msub><mi>τ</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">r_t = M_e(\tau_0)</annotation></semantics></math></span></span>。<span class="source-math" data-tex="$r_t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">r_t</annotation></semantics></math></span></span>仅是尝试<span class="source-math" data-tex="$t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span></span>的标量奖励，随具体任务表现的提升而提高。在第一次尝试之后，为将<span class="source-math" data-tex="$r_0$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">r_0</annotation></semantics></math></span></span>扩展为LLM可据之改进的反馈形式，自我反思模型分析集合<span class="source-math" data-tex="$\{\tau_0, r_0\}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">{</mo><msub><mi>τ</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mi>r</mi><mn>0</mn></msub><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{\tau_0, r_0\}</annotation></semantics></math></span></span>，生成摘要<span class="source-math" data-tex="$sr_0$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><msub><mi>r</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">sr_0</annotation></semantics></math></span></span>并存入记忆mem。<span class="source-math" data-tex="$sr_t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><msub><mi>r</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">sr_t</annotation></semantics></math></span></span>是尝试<span class="source-math" data-tex="$t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span></span>的言语经验反馈。行动者、评估器与自我反思模型在多次尝试中循环协作，直到评估器判定<span class="source-math" data-tex="$\tau_t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>τ</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\tau_t</annotation></semantics></math></span></span>正确为止。如第3节所述，记忆组件对于Reflexion的有效性至关重要。每次尝试<span class="source-math" data-tex="$t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span></span>之后，都会将<span class="source-math" data-tex="$sr_t$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><msub><mi>r</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">sr_t</annotation></semantics></math></span></span>附加到mem中。在实践中，我们用最多保存的经验数量<span class="source-math" data-tex="$\Omega$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Ω</mi></mrow><annotation encoding="application/x-tex">\Omega</annotation></semantics></math></span></span>（通常设为1-3）来限制mem，以适应LLM的最大上下文限制。</p>
+</div></div>
+<h2 id="u-RF00042" data-heading><span class="anchor-alias" id="s-12"></span><span class="heading-original" lang="en">4 Experiments
+
+</span><span class="heading-chinese">4 实验
+
+</span></h2>
+<div class="bilingual-pair" id="u-RF00043"><div class="original" lang="en"><p>We evaluate various natural language RL setups on decision-making, reasoning, and code generation tasks. Specifically, we challenge an agent to perform search-based question answering on HotPotQA [28], multi-step tasks in common household environments in AlfWorld [24], and code writing tasks in competition-like environments with interpreters and compilers in HumanEval [6], MBPP [2], and LeetcodeHard, a new benchmark. Most notably, Reflexion improves performance over strong baselines by 22% in AlfWorld, 20% in HotPotQA, and 11% on HumanEval.</p>
+</div><div class="translation" lang="zh"><p>我们在决策、推理和代码生成任务上评估不同的自然语言强化学习设置。具体而言，我们要求智能体完成HotPotQA [28]中基于搜索的问答、AlfWorld [24]中普通家庭环境内的多步任务，以及HumanEval [6]、MBPP [2]和新基准LeetcodeHard中类似竞赛、配有解释器和编译器的环境里的代码编写任务。尤其值得关注的是，相较强基线，Reflexion在AlfWorld上提升22%，在HotPotQA上提升20%，在HumanEval上提升11%。</p>
+</div></div>
+<h3 id="u-RF00044" data-heading><span class="anchor-alias" id="s-13"></span><span class="heading-original" lang="en">4.1 Sequential decision making: ALFWorld
+
+</span><span class="heading-chinese">4.1 序列决策：ALFWorld
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00045"><div class="original" lang="en"><p>AlfWorld is a suite of text-based environments that challenge an agent to solve multi-step tasks in a variety of interactive environments based on TextWorld [8]. Following Yao et al. [30], we run the agent in 134 AlfWorld environments across six different tasks, including finding hidden objects (e.g., finding a spatula in a drawer), moving objects (e.g., moving a knife to the cutting board), and manipulating objects with other objects (e.g., chilling a tomato in the fridge). We use ReAct [30] as the action generator as Yao et al. [30] has shown success in long trajectory decision-making using explicit intermediate thoughts. AlfWorld tasks naturally require a self-evaluation step as the environment can only signal if a task is complete. To achieve fully autonomous behavior, we implement two self-evaluation techniques: natural language classification using an LLM and a hand-written heuristic. The heuristic is simple: if the agent executes the same action and receives the same response for more than 3 cycles, or if the number of actions taken in the current environment exceeds 30 (inefficient planning), we self-reflect. In the baseline runs, if self-reflection is suggested, we skip the self-reflection process, reset the environment, and start a new trial. In the Reflexion runs, the agent uses self-reflection to find its mistake, update its memory, reset the environment, and start a new trial. To avoid very long prompt windows that may exceed the maximum limit, we truncate the agent&#39;s memory to the last 3 self-reflections (experiences).</p>
+</div><div class="translation" lang="zh"><p>AlfWorld是一套基于文本的环境，要求智能体在基于TextWorld [8]的多种交互环境中解决多步任务。遵循Yao等人 [30]的做法，我们让智能体在134个AlfWorld环境中运行，涵盖六种不同任务，包括寻找隐藏物品（如在抽屉里找铲子）、移动物品（如将刀移到砧板上），以及借助其他物品操作某物（如将番茄放入冰箱冷却）。我们使用ReAct [30]作为行动生成器，因为Yao等人 [30]已展示了借助显式中间思考进行长轨迹决策的成功。AlfWorld任务自然需要自我评估步骤，因为环境只能给出任务是否完成的信号。为了实现完全自主的行为，我们实现了两种自我评估技术：使用LLM进行自然语言分类，以及人工编写的启发式规则。该规则很简单：如果智能体执行相同行动并收到相同响应，连续超过3个循环，或者在当前环境中执行的行动数超过30（规划低效），便进行自我反思。在基线运行中，如果建议进行自我反思，我们就跳过反思过程，重置环境，开始新的尝试。在Reflexion运行中，智能体则通过自我反思找出错误、更新记忆、重置环境，再开始新的尝试。为避免提示窗口过长而超过上限，我们仅保留智能体最近3次自我反思（经验），截去更早的记忆。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00046"><div class="original" lang="en"><p>To avoid syntactic errors, we provide two domain-specific few-shot trajectories to the agent. We use the same few-shot trajectory examples as Yao et al. [30] with GPT-3 for the LLM. AlfWorld tasks, ReAct few-shot prompts, and Reflexion examples are included in the appendix.</p>
+</div><div class="translation" lang="zh"><p>为避免语法错误，我们向智能体提供两条针对该领域的少样本轨迹。我们采用与Yao等人 [30]相同的少样本轨迹示例，并以GPT-3作为LLM。AlfWorld任务、ReAct少样本提示和Reflexion示例均列于附录。</p>
+</div></div>
+<h3 id="u-RF00047" data-heading><span class="anchor-alias" id="s-14"></span><span class="heading-original" lang="en">Results
+
+</span><span class="heading-chinese">结果
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00048"><div class="original" lang="en"><p>ReAct + Reflexion significantly outperforms ReAct by completing 130 out of 134 tasks using the simple heuristic to detect hallucinations and inefficient planning. Further, ReAct + Reflexion learns to solve additional tasks by learning in 12 consecutive trials. In the ReAct-only approach, we see that performance increase halts between trials 6 and 7.</p>
+</div><div class="translation" lang="zh"><p>ReAct + Reflexion利用简单启发式规则检测幻觉和低效规划，完成了134项任务中的130项，显著优于ReAct。此外，ReAct + Reflexion通过连续12次尝试中的学习，学会解决更多任务。对于仅使用ReAct的方法，我们观察到，表现的提升在第6次与第7次尝试之间停止。</p>
+</div></div>
+<h3 id="u-RF00049" data-heading><span class="anchor-alias" id="s-15"></span><span class="heading-original" lang="en">Analysis
+
+</span><span class="heading-chinese">分析
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00050"><div class="original" lang="en"><p>A common error in baseline failed AlfWorld trajectories is when an agent thinks that it has possession of an item but does not actually have the item. The agent proceeds to execute several actions in a long trajectory and is not able to backtrack its actions to find the mistake. Reflexion <span class="page-mark" title="原书第6页">6</span> eliminates almost all of these cases by using self-reflection to distill long, failed trajectories into relevant experiences that can are used as &quot;self-hints&quot; in the future. There are two main cases in which long-term memory helps an agent in AlfWorld: 1) An early mistake in a long trajectory can be easily identified. The agent can suggest a new action choice or even a new long-term plan. 2) There are too many surfaces/containers to check for an item. The agent can exploit its experience memory over several trials to thoroughly search a room. In 3, the learning curve suggests that the learning process occurs over several experiences, meaning that the agent is successfully balancing cases 1 and 2 shown in the immediate spike in the improvement between the first two trials, then a steady increase over the next 11 trials to a near-perfect performance. On the other hand, 3 shows a ReAct-only agent converging at a hallucination rate of 22% with no signs of long-term recovery.</p>
+</div><div class="translation" lang="zh"><p>基线方法在AlfWorld失败轨迹中的一个常见错误，是智能体以为自己已持有某件物品，实际却没有。智能体接着在长轨迹中执行多个行动，却无法回溯自己的行动以找出错误。Reflexion<span class="page-mark" title="原书第6页">6</span>通过自我反思，将冗长的失败轨迹提炼为相关经验，供未来用作“自我提示”，从而消除了几乎全部此类情形。在AlfWorld中，长期记忆主要在两种情况下帮助智能体：1）能够轻易识别长轨迹中较早出现的错误。智能体可以提出新的行动选择，甚至新的长期计划。2）需要检查的物体表面或容器太多，难以找到某件物品。智能体可以利用多次尝试积累的经验记忆，彻底搜索一个房间。图3中的学习曲线表明，学习过程发生在多次经验之间，意味着智能体成功地平衡了情况1与情况2：前两次尝试之间的表现立即大幅提高，此后11次尝试稳步上升，接近完美表现。另一方面，图3显示，仅使用ReAct的智能体收敛于22%的幻觉率，看不到长期恢复的迹象。</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00052"><div class="original" lang="en"><p>0 2 4 6 8 10
+Trial Number
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0Proportion of Solved Environments
+(a) ALFWorld Success Rate
+ReAct only
+ReAct + Reflexion (Heuristic)
+ReAct + Reflexion (GPT)</p>
+</div><div class="translation" lang="zh"><p>0 2 4 6 8 10
+尝试编号
+0.5 0.6 0.7 0.8 0.9 1.0
+已解决环境的比例
+（a）ALFWorld成功率
+仅ReAct
+ReAct + Reflexion（启发式）
+ReAct + Reflexion（GPT）</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00053"><div class="original" lang="en"><p>0 2 4 6 8 10
+Trial Number
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5Proportion of Environments
+(a) ALFWorld Success Rate
+ReAct only - hallucination
+ReAct only - inefficient planning
+ReAct + Reflexion - hallucination
+ReAct + Reflexion - inefficient planning</p>
+</div><div class="translation" lang="zh"><p>0 2 4 6 8 10
+尝试编号
+0.0 0.1 0.2 0.3 0.4 0.5
+环境比例
+（a）ALFWorld成功率
+仅ReAct——幻觉
+仅ReAct——低效规划
+ReAct + Reflexion——幻觉
+ReAct + Reflexion——低效规划</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00054"><div class="original" lang="en"><p>Figure 3: (a) AlfWorld performance across 134 tasks showing cumulative proportions of solved tasks using self-evaluation techniques of (Heuristic) and (GPT) for binary classification. (b) Classification of AlfWorld trajectories by reason of failure.</p>
+</div><div class="translation" lang="zh"><p>图3：（a）AlfWorld在134项任务上的表现，展示使用启发式方法（Heuristic）与GPT进行二元分类自我评估时，已解决任务的累积比例。（b）按失败原因对AlfWorld轨迹分类。</p>
+</div></div>
+<h3 id="u-RF00055" data-heading><span class="anchor-alias" id="s-16"></span><span class="heading-original" lang="en">4.2 Reasoning: HotpotQA
+
+</span><span class="heading-chinese">4.2 推理：HotpotQA
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00056"><div class="original" lang="en"><p>HotPotQA [28] is a Wikipedia-based dataset with 113k question-and-answer pairs that challenge agents to parse content and reason over several supporting documents. To test improvement in reasoning only ability, we implement Reflexion + Chain-of-Thought (CoT) [26] for step-by-step <span class="source-math" data-tex="$Q \rightarrow A$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">Q \rightarrow A</annotation></semantics></math></span></span> and <span class="source-math" data-tex="$Q$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math></span></span>, <span class="source-math" data-tex="$C_{gt} \rightarrow A$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mrow><mi>g</mi><mi>t</mi></mrow></msub><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">C_{gt} \rightarrow A</annotation></semantics></math></span></span> implementations, where <span class="source-math" data-tex="$Q$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math></span></span> is the question, <span class="source-math" data-tex="$C_{gt}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mrow><mi>g</mi><mi>t</mi></mrow></msub></mrow><annotation encoding="application/x-tex">C_{gt}</annotation></semantics></math></span></span> is the ground truth context from the dataset, and <span class="source-math" data-tex="$A$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span></span> is the final answer. Since CoT is not a multi-step decision-making technique, we give <span class="source-math" data-tex="$C_{gt}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mrow><mi>g</mi><mi>t</mi></mrow></msub></mrow><annotation encoding="application/x-tex">C_{gt}</annotation></semantics></math></span></span> to the agent so that we can isolate the reasoning behavior over large sections of the provided text. To test holistic question and answering ability, which requires reasoning and action choice, we implement a Reflexion + ReAct [30] agent that can retrieve relevant context using a Wikipedia API and infer answers using step-by-step explicit thinking. For CoT implementations, we use 6-shot prompting; for ReAct, we use 2-shot prompting, and for self-reflection, we use 2-shot prompting. All examples can be found in the appendix.</p>
+</div><div class="translation" lang="zh"><p>HotPotQA [28]是一个基于维基百科的数据集，包含113k个问答对，要求智能体解析内容，并依据若干支持文档进行推理。为仅测试推理能力的改进，我们实现了Reflexion + 思维链（CoT）[26]，分别采用逐步的<span class="source-math" data-tex="$Q \rightarrow A$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">Q \rightarrow A</annotation></semantics></math></span></span>和<span class="source-math" data-tex="$Q$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math></span></span>、<span class="source-math" data-tex="$C_{gt} \rightarrow A$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mrow><mi>g</mi><mi>t</mi></mrow></msub><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">C_{gt} \rightarrow A</annotation></semantics></math></span></span>设置，其中<span class="source-math" data-tex="$Q$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math></span></span>是问题，<span class="source-math" data-tex="$C_{gt}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mrow><mi>g</mi><mi>t</mi></mrow></msub></mrow><annotation encoding="application/x-tex">C_{gt}</annotation></semantics></math></span></span>是数据集中的真实上下文，<span class="source-math" data-tex="$A$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span></span>是最终答案。由于CoT不是一种多步决策技术，我们将<span class="source-math" data-tex="$C_{gt}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mrow><mi>g</mi><mi>t</mi></mrow></msub></mrow><annotation encoding="application/x-tex">C_{gt}</annotation></semantics></math></span></span>提供给智能体，从而单独考察它针对所给大段文本的推理行为。为测试需要推理和行动选择的整体问答能力，我们实现了Reflexion + ReAct [30]智能体，借助维基百科API检索相关上下文，并通过逐步的显式思考推断答案。对于CoT实现，我们使用6样本提示；对于ReAct，使用2样本提示；对于自我反思，也使用2样本提示。全部示例均见附录。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00057"><div class="original" lang="en"><p>Robustly evaluating natural language answers is a long-standing problem in NLP. Therefore, between trials, we use exact match answer grading using the environment to give a binary success signal to the agent. After each trial, the self-reflection loop is employed to amplify the binary signal, similar to the decision-making setup 4.1 in AlfWorld with a memory size of 3 experiences.</p>
+</div><div class="translation" lang="zh"><p>稳健评估自然语言答案，是自然语言处理领域长期存在的问题。因此，在两次尝试之间，我们利用环境进行答案精确匹配评分，为智能体提供二元成功信号。每次尝试之后，都会使用自我反思循环来扩展这一二元信号，类似于AlfWorld中第4.1节的决策设置，记忆容量为3条经验。</p>
+</div></div>
+<h3 id="u-RF00058" data-heading><span class="anchor-alias" id="s-17"></span><span class="heading-original" lang="en">Results
+
+</span><span class="heading-chinese">结果
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00059"><div class="original" lang="en"><p>Reflexion outperforms all baseline approaches by significant margins over several learning steps. Furthermore, ReAct-only, CoT-only, and CoT (GT)-only implementations fail to probabilistically improve on any tasks, meaning that no failed tasks from the first trial from any of the baseline approaches were able to be solved in subsequent trials using a temperature of 0.7 In the Reflexion runs, we allowed the agent to gather experience and retry on failed tasks until it produced 3 consecutive failed attempts on the particular task. Naturally, the CoT (GT) achieved higher accuracy scores as it was given access to the ground truth context of the question. Still, the CoT (GT) agent is unable to correctly infer the correct answer for 39% of the questions, but Reflexion helps the agent to correct its mistakes without access to the ground truth answer to improve its accuracy by 14%.</p>
+</div><div class="translation" lang="zh"><p>经过若干学习步骤，Reflexion以显著幅度优于所有基线方法。此外，仅ReAct、仅CoT以及仅CoT（GT）的实现，都未能通过概率性的重试在任何任务上取得改进：也就是说，使用0.7的温度时，任何基线方法在第一次尝试中失败的任务，都未能在后续尝试中得到解决。在Reflexion运行中，我们允许智能体积累经验，并重试失败任务，直到它在该项任务上连续失败3次为止。CoT（GT）能够获得问题的真实上下文，因此自然取得更高的准确率。不过，CoT（GT）智能体仍无法对39%的问题正确推断出答案；Reflexion则在不访问真实答案的情况下，帮助智能体纠正错误，使其准确率提高14%。</p>
+</div></div>
+<div class="bilingual-pair" id="p-adf4581c5ac"><div class="original" lang="en"><p><span class="page-mark" title="原书第7页">7</span></p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00061"><div class="original" lang="en"><p>0 2 4 6
+Trial Number
+0.2
+0.4
+0.6
+0.8Proportion of Solved Tasks
+(a) HotPotQA Success Rate
+CoT only
+ReAct only
+CoT + Reflexion
+ReAct + Reflexion</p>
+</div><div class="translation" lang="zh"><p>0 2 4 6
+尝试编号
+0.2 0.4 0.6 0.8
+已解决任务的比例
+（a）HotPotQA成功率
+仅CoT
+仅ReAct
+CoT + Reflexion
+ReAct + Reflexion</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00062"><div class="original" lang="en"><p>0 1 2 3 4 5 6 7
+Trial Number
+0.4
+0.6
+0.8
+1.0Proportion of Solved Tasks
+(b) HotPotQA CoT (GT)
+CoT (GT) only
+CoT (GT) + Reflexion</p>
+</div><div class="translation" lang="zh"><p>0 1 2 3 4 5 6 7
+尝试编号
+0.4 0.6 0.8 1.0
+已解决任务的比例
+（b）HotPotQA CoT（GT）
+仅CoT（GT）
+CoT（GT）+ Reflexion</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00063"><div class="original" lang="en"><p>0 1 2 3 4
+Trial Number
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0Proportion of Solved Tasks
+(c) HotPotQA Episodic Memory
+CoT (GT) only
+CoT (GT) EPM
+CoT (GT) EPM + Reflexion</p>
+</div><div class="translation" lang="zh"><p>0 1 2 3 4
+尝试编号
+0.5 0.6 0.7 0.8 0.9 1.0
+已解决任务的比例
+（c）HotPotQA情景记忆
+仅CoT（GT）
+CoT（GT）EPM
+CoT（GT）EPM + Reflexion</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00064"><div class="original" lang="en"><p>Figure 4: Chain-of-Thought (CoT) and ReAct. Reflexion improves search, information retrieval, and reasoning capabilities on 100 HotPotQA questions. (a) Reflexion ReAct vs Reflexion CoT (b) Reflexion CoT (GT) for reasoning only (c) Reflexion vs episodic memory ablation.</p>
+</div><div class="translation" lang="zh"><p>图4：思维链（CoT）与ReAct。Reflexion在100道HotPotQA问题上提升了搜索、信息检索和推理能力。（a）Reflexion ReAct与Reflexion CoT比较；（b）仅考察推理的Reflexion CoT（GT）；（c）Reflexion与情景记忆的消融比较。</p>
+</div></div>
+<h3 id="u-RF00065" data-heading><span class="anchor-alias" id="s-18"></span><span class="heading-original" lang="en">Analysis
+
+</span><span class="heading-chinese">分析
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00066"><div class="original" lang="en"><p>We perform an ablation experiment to isolate the advantage of the self-reflective step for reasoning using CoT (GT) as the baseline approach 4. Recall that CoT (GT) uses Chain-of-Thought reasoning with provided ground truth context, which tests reasoning ability over long contexts. Next, we add an element of episodic memory (EPM) by including the most recent trajectory. For the Reflexion agent, we implement the standard self-reflection step as a final pass. Intuitively, we test if the agent is iteratively learning more effectively by using verbal explanation using language written in the first person. 4 shows that self-reflection improves learning by an 8% absolute boost over the episodic memory learning advantage. This result supports the argument that refinement-only approaches are not as effective as self-reflection-guided refinement approaches.</p>
+</div><div class="translation" lang="zh"><p>我们以CoT（GT）为基线方法开展消融实验，单独考察自我反思步骤对推理的优势，见图4。回顾前文，CoT（GT）利用给定的真实上下文进行思维链推理，测试针对长上下文的推理能力。接着，我们通过纳入最近一次轨迹，加入情景记忆（EPM）要素。对于Reflexion智能体，我们将标准自我反思步骤作为最后一轮处理。直观地说，我们测试的是：使用第一人称语言写出的言语解释，能否让智能体更有效地迭代学习。图4表明，在情景记忆所带来学习优势的基础上，自我反思又使表现绝对提高8个百分点。该结果支持这样的判断：仅做改进的方法，不如由自我反思引导改进的方法有效。</p>
+</div></div>
+<h3 id="u-RF00067" data-heading><span class="anchor-alias" id="s-19"></span><span class="heading-original" lang="en">4.3 Programming
+
+</span><span class="heading-chinese">4.3 编程
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00068"><div class="original" lang="en"><p>We evaluate the baseline and Reflexion approaches on Python and Rust code writing on MBPP [2], HumanEval [6], and LeetcodeHardGym, our new dataset. MBPP and HumanEval measure function body generation accuracy given natural language descriptions. We use a benchmark language compiler, MultiPL-E [4], to translate subsets of HumanEval and MBPP to the Rust language. MultiPL-E is a collection of small compilers that can be used to translate Python benchmark questions to 18 other languages. We include experiments for Rust code generation to demonstrate that Reflexion implementations for code generation are language-agnostic and can be used for interpreted and compiled languages. Lastly, we introduce a new benchmark, LeetcodeHardGym, which is an interactive programming gym that contains 40 Leetcode hard-rated questions that have been released after October 8, 2022, which is the pre-training cutoff date of GPT-4 [18].</p>
+</div><div class="translation" lang="zh"><p>我们在MBPP [2]、HumanEval [6]以及我们的新数据集LeetcodeHardGym上，对基线方法与Reflexion方法进行Python和Rust代码编写评估。MBPP与HumanEval衡量根据自然语言描述生成函数体的准确率。我们使用基准语言编译器MultiPL-E [4]，将HumanEval与MBPP的子集转换为Rust语言。MultiPL-E是一组小型编译器，可将Python基准题目转换为另外18种语言。我们纳入Rust代码生成实验，以展示Reflexion的代码生成实现不依赖具体语言，既可用于解释型语言，也可用于编译型语言。最后，我们推出新基准LeetcodeHardGym，这是一个交互式编程gym，包含40道评级为hard的Leetcode题目；这些题目都发布于2022年10月8日之后，而该日期是GPT-4 [18]的预训练截止日期。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00069"><div class="original" lang="en"><p>The task of programming presents a unique opportunity to use more grounded self-evaluation practices such as self-generated unit test suites. Thus, our Reflexion-based programming task implementation is eligible for pass@1 accuracy reporting. To generate a test suite, we use Chain-of-Thought prompting [26] to produce diverse, extensive tests with corresponding natural language descriptions. Then, we filter for syntactically valid test statements by attempting to construct a valid abstract syntax tree (AST) for each proposed test. Finally, we sample <span class="source-math" data-tex="$n$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span></span> tests from the collection of generated unit tests to produce a test suite <span class="source-math" data-tex="$T$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span></span>, denoted as <span class="source-math" data-tex="$\{t_0, t_1, …, t_n\}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">{</mo><msub><mi>t</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mi>t</mi><mn>1</mn></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>t</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{t_0, t_1, …, t_n\}</annotation></semantics></math></span></span>. We set <span class="source-math" data-tex="$n$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span></span> to a maximum of 6 unit tests. Aside from the unit test suite component, the setup for the learning loop for a Reflexion programming agent is identical to the reasoning and decision-making agents with a max memory limit of 1 experience.</p>
+</div><div class="translation" lang="zh"><p>编程任务提供了独特机会，使我们能够采用更有实据的自我评估实践，例如自行生成单元测试套件。因此，我们基于Reflexion的编程任务实现，具备报告pass@1准确率的资格。为生成测试套件，我们使用思维链提示 [26]，产生多样而广泛的测试及相应的自然语言描述。接着，我们尝试为每个提出的测试构建有效的抽象语法树（AST），以筛选语法有效的测试语句。最后，从生成的单元测试集合中采样<span class="source-math" data-tex="$n$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span></span>个测试，形成测试套件<span class="source-math" data-tex="$T$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span></span>，记作<span class="source-math" data-tex="$\{t_0, t_1, …, t_n\}$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">{</mo><msub><mi>t</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mi>t</mi><mn>1</mn></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>t</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{t_0, t_1, …, t_n\}</annotation></semantics></math></span></span>。我们将<span class="source-math" data-tex="$n$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span></span>的最大值设为6个单元测试。除单元测试套件组件之外，Reflexion编程智能体的学习循环设置，与推理和决策智能体相同，记忆上限为1条经验。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00070"><div class="original" lang="en"><table>
+<thead>
+<tr>
+<th>Benchmark + Language</th>
+<th>Prev SOTA Pass@1</th>
+<th>SOTA Pass@1</th>
+<th>Reflexion Pass@1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HumanEval (PY)</td>
+<td>65.8 (CodeT [5] + GPT-3.5)</td>
+<td>80.1 (GPT-4)</td>
+<td>91.0</td>
+</tr>
+<tr>
+<td>HumanEval (RS)</td>
+<td>--</td>
+<td>60.0 (GPT-4)</td>
+<td>68.0</td>
+</tr>
+<tr>
+<td>MBPP (PY)</td>
+<td>67.7 (CodeT [5] + Codex [6])</td>
+<td>80.1 (GPT-4)</td>
+<td>77.1</td>
+</tr>
+<tr>
+<td>MBPP (RS)</td>
+<td>--</td>
+<td>70.9 (GPT-4)</td>
+<td>75.4</td>
+</tr>
+<tr>
+<td>Leetcode Hard (PY)</td>
+<td>--</td>
+<td>7.5 (GPT-4)</td>
+<td>15.0</td>
+</tr>
+</tbody></table>
+</div><div class="translation" lang="zh"><table>
+<thead>
+<tr>
+<th>基准＋语言</th>
+<th>此前最先进方法的Pass@1</th>
+<th>最先进方法的Pass@1</th>
+<th>Reflexion的Pass@1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HumanEval (PY)</td>
+<td>65.8 (CodeT [5] + GPT-3.5)</td>
+<td>80.1 (GPT-4)</td>
+<td>91.0</td>
+</tr>
+<tr>
+<td>HumanEval (RS)</td>
+<td>--</td>
+<td>60.0 (GPT-4)</td>
+<td>68.0</td>
+</tr>
+<tr>
+<td>MBPP (PY)</td>
+<td>67.7 (CodeT [5] + Codex [6])</td>
+<td>80.1 (GPT-4)</td>
+<td>77.1</td>
+</tr>
+<tr>
+<td>MBPP (RS)</td>
+<td>--</td>
+<td>70.9 (GPT-4)</td>
+<td>75.4</td>
+</tr>
+<tr>
+<td>Leetcode Hard (PY)</td>
+<td>--</td>
+<td>7.5 (GPT-4)</td>
+<td>15.0</td>
+</tr>
+</tbody></table>
+</div></div>
+<div class="bilingual-pair" id="u-RF00071"><div class="original" lang="en"><p>Table 1: Pass@1 accuracy for various model-strategy-language combinations. The base strategy is a single code generation sample. All instruction-based models follow zero-shot code generation.</p>
+</div><div class="translation" lang="zh"><p>表1：不同模型—策略—语言组合的pass@1准确率。基础策略为单次代码生成采样。所有基于指令的模型均采用零样本代码生成。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00072"><div class="original" lang="en"><p><span class="page-mark" title="原书第8页">8</span></p>
+<table>
+<thead>
+<tr>
+<th>Benchmark + Language</th>
+<th>Base</th>
+<th>Reflexion</th>
+<th>TP</th>
+<th>FN</th>
+<th>FP</th>
+<th>TN</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HumanEval (PY)</td>
+<td>0.80</td>
+<td>0.91</td>
+<td>0.99</td>
+<td>0.40</td>
+<td>0.01</td>
+<td>0.60</td>
+</tr>
+<tr>
+<td>MBPP (PY)</td>
+<td>0.80</td>
+<td>0.77</td>
+<td>0.84</td>
+<td>0.59</td>
+<td>0.16</td>
+<td>0.41</td>
+</tr>
+<tr>
+<td>HumanEval (RS)</td>
+<td>0.60</td>
+<td>0.68</td>
+<td>0.87</td>
+<td>0.37</td>
+<td>0.13</td>
+<td>0.63</td>
+</tr>
+<tr>
+<td>MBPP (RS)</td>
+<td>0.71</td>
+<td>0.75</td>
+<td>0.84</td>
+<td>0.51</td>
+<td>0.16</td>
+<td>0.49</td>
+</tr>
+</tbody></table>
+</div><div class="translation" lang="zh"><p><span class="page-mark" title="原书第8页">8</span></p>
+<table>
+<thead>
+<tr>
+<th>基准＋语言</th>
+<th>基线</th>
+<th>Reflexion</th>
+<th>TP</th>
+<th>FN</th>
+<th>FP</th>
+<th>TN</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HumanEval (PY)</td>
+<td>0.80</td>
+<td>0.91</td>
+<td>0.99</td>
+<td>0.40</td>
+<td>0.01</td>
+<td>0.60</td>
+</tr>
+<tr>
+<td>MBPP (PY)</td>
+<td>0.80</td>
+<td>0.77</td>
+<td>0.84</td>
+<td>0.59</td>
+<td>0.16</td>
+<td>0.41</td>
+</tr>
+<tr>
+<td>HumanEval (RS)</td>
+<td>0.60</td>
+<td>0.68</td>
+<td>0.87</td>
+<td>0.37</td>
+<td>0.13</td>
+<td>0.63</td>
+</tr>
+<tr>
+<td>MBPP (RS)</td>
+<td>0.71</td>
+<td>0.75</td>
+<td>0.84</td>
+<td>0.51</td>
+<td>0.16</td>
+<td>0.49</td>
+</tr>
+</tbody></table>
+</div></div>
+<div class="bilingual-pair" id="u-RF00073"><div class="original" lang="en"><p>Table 2: Overall accuracy and test generation performance for HumanEval and MBPP. For Rust, HumanEval is the hardest 50 problems from HumanEval Python translated to Rust with MultiPL-E [4]. TP: unit tests pass, solution pass; FN: unit tests fail, solution pass; FP: unit tests pass, solution fail; TN: unit tests fail, solution fail.</p>
+</div><div class="translation" lang="zh"><p>表2：HumanEval与MBPP的总体准确率及测试生成表现。在Rust情形下，HumanEval取自HumanEval Python中最难的50道题，借助MultiPL-E [4]转换为Rust。TP：单元测试通过，解答通过；FN：单元测试失败，解答通过；FP：单元测试通过，解答失败；TN：单元测试失败，解答失败。</p>
+</div></div>
+<h3 id="u-RF00074" data-heading><span class="anchor-alias" id="s-20"></span><span class="heading-original" lang="en">Results
+
+</span><span class="heading-chinese">结果
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00075"><div class="original" lang="en"><p>Reflexion outperforms all baseline accuracies and sets new state-of-the-art standards on all benchmarks for Python and Rust except for MBPP Python 1. We further investigate the inferior performance of Reflexion on MBPP Python.</p>
+</div><div class="translation" lang="zh"><p>除MBPP Python以外，Reflexion在所有Python与Rust基准上都超过了全部基线准确率，并创下新的最先进水平，见表1。我们进一步研究Reflexion在MBPP Python上表现较差的原因。</p>
+</div></div>
+<h3 id="u-RF00076" data-heading><span class="anchor-alias" id="s-21"></span><span class="heading-original" lang="en">Analysis
+
+</span><span class="heading-chinese">分析
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00077"><div class="original" lang="en"><p>We acknowledge that self-reflecting code-generation agents are bound to their ability to write diverse, comprehensive tests. Therefore, in the case in which the model generates a flaky test suite, it is possible that all tests pass on an incorrect solution and lead to a false positive label on a code completion [11]. On the other hand, if the model produces an incorrectly written test suite, it is possible for some of the tests to fail on a correct solution, leading to a self-reflection generation that is conditioned on a false negative code completion. Given the implementation of Reflexion, false negatives are preferred over false positives as the agent may be able to use self-reflection to identify the incorrect test(s) and prompt itself to keep the original code completion intact. On the other hand, if an invalid test suite returns a false positive completion (all internal test cases pass but the implementation is incorrect), the agent will prematurely report an invalid submission. In 2, various conditions are measured to analyze performance beyond pass@1 accuracy. Previously, we displayed the inferior performance of Reflexion to the baseline GPT-4 on MBPP Python. In 2, we observe a notable discrepancy between the false positive labels produced by internal test execution, P(not pass@1 generation correct | tests pass). That is, the probability that a submission will fail given that it passes all unit tests. For HumanEval and MBPP Python, the baseline pass@1 accuracies are relatively similar, 82% and 80%, respectively. However, the false positive test execution rate for MBPP Python is 16.3% while the rate for HumanEval Python is a mere 1.4%, leading to 91% overall accuracy 1.</p>
+</div><div class="translation" lang="zh"><p>我们承认，进行自我反思的代码生成智能体，受限于其编写多样而全面的测试的能力。因此，如果模型生成了不稳定的测试套件，便可能出现错误解答通过全部测试的情况，导致代码补全结果被标记为假阳性 [11]。另一方面，如果模型编写的测试套件有误，则可能出现正确解答未通过某些测试的情况，从而基于一个假阴性的代码补全结果生成自我反思。根据Reflexion的实现方式，假阴性优于假阳性，因为智能体可能通过自我反思识别错误测试，并提示自己保留原代码补全结果。相反，若无效测试套件返回假阳性的补全结果（所有内部测试用例均通过，但实现有误），智能体就会过早报告无效提交。表2测量了不同情形，以分析pass@1准确率之外的表现。此前，我们已展示Reflexion在MBPP Python上逊于基线GPT-4。表2中，内部测试执行产生的假阳性标记——<code>P(not pass@1 generation correct | tests pass)</code>——呈现明显差异，即提交通过全部单元测试时，该提交仍会失败的概率。对于HumanEval与MBPP Python，基线pass@1准确率相近，分别为82%与80%。然而，MBPP Python的测试执行假阳性率为16.3%，HumanEval Python则仅为1.4%，从而产生表1所示91%的总体准确率。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00078"><div class="original" lang="en"><table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Test Generation</th>
+<th>Self-reflection</th>
+<th>Pass@1 (Acc)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Base model</td>
+<td>False</td>
+<td>False</td>
+<td>0.60</td>
+</tr>
+<tr>
+<td>Test generation omission</td>
+<td>False</td>
+<td>True</td>
+<td>0.52</td>
+</tr>
+<tr>
+<td>Self-reflection omission</td>
+<td>True</td>
+<td>False</td>
+<td>0.60</td>
+</tr>
+<tr>
+<td>Reflexion</td>
+<td>True</td>
+<td>True</td>
+<td>0.68</td>
+</tr>
+</tbody></table>
+</div><div class="translation" lang="zh"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>测试生成</th>
+<th>自我反思</th>
+<th>Pass@1（准确率）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基础模型</td>
+<td>False</td>
+<td>False</td>
+<td>0.60</td>
+</tr>
+<tr>
+<td>省略测试生成</td>
+<td>False</td>
+<td>True</td>
+<td>0.52</td>
+</tr>
+<tr>
+<td>省略自我反思</td>
+<td>True</td>
+<td>False</td>
+<td>0.60</td>
+</tr>
+<tr>
+<td>Reflexion</td>
+<td>True</td>
+<td>True</td>
+<td>0.68</td>
+</tr>
+</tbody></table>
+</div></div>
+<div class="bilingual-pair" id="u-RF00079"><div class="original" lang="en"><p>Table 3: Pass@1 accuracy for various compromised approaches on the Reflexion approach using GPT-4 as the base model on HumanEval Rust - 50 hardest problems</p>
+</div><div class="translation" lang="zh"><p>表3：以GPT-4为基础模型，在HumanEval Rust中最难的50道题上，对Reflexion进行不同组件删减后的pass@1准确率。</p>
+</div></div>
+<h3 id="u-RF00080" data-heading><span class="anchor-alias" id="s-22"></span><span class="heading-original" lang="en">Ablation study
+
+</span><span class="heading-chinese">消融研究
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00081"><div class="original" lang="en"><p>We test the composite approach of Reflexion for test generation and self-reflection cooperation on a subset of the 50 hardest HumanEval Rust problems. Our Rust compiler environment provides verbose error logs and helpful debugging hints, therefore serving as a good playground for compromised approaches. First, we omit internal test generation and execution steps, which test the agent to self-reflect without guidance from current implementations. 3 shows an inferior 52% vs 60% (baseline) accuracy, which suggests that the agent is unable to determine if the current implementation is correct without unit tests. Therefore, the agent must participate in all iterations of the run without the option to return early, performing harmful edits to the implementation.</p>
+</div><div class="translation" lang="zh"><p>我们在HumanEval Rust中最难的50道题的一个子集上，测试Reflexion中测试生成与自我反思协作的组合方法。我们的Rust编译器环境提供详尽的错误日志与有用的调试提示，因此是检验组件删减方法的良好试验场。首先，我们省略内部测试生成和执行步骤，测试智能体在缺乏当前实现所提供指导时进行自我反思的能力。表3显示，其准确率较差，为52%，而基线为60%，这提示没有单元测试时，智能体无法判断当前实现是否正确。因此，智能体不得不参与整次运行的全部迭代，无法提前返回，进而对实现作出有害修改。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00082"><div class="original" lang="en"><p>Next, we test self-reflection contribution by omitting the natural language explanation step following failed unit test suite evaluations. Intuitively, this challenges the agent to combine the tasks of error identification and implementation improvement across all failed unit tests. Interestingly, the compromised agent does not improve performance over the baseline run. We observe that the test generation and code compilation steps are able to catch syntax and logic errors, but the implementation fixes do not reflect these indications. These empirical results suggest that several recent works that <span class="page-mark" title="原书第9页">9</span> propose blind trial and error debugging techniques without self-reflection are ineffective on harder tasks such as writing complex programs in Rust.</p>
+</div><div class="translation" lang="zh"><p>接着，我们省略单元测试套件评估失败之后的自然语言解释步骤，以测试自我反思的贡献。直观地说，这要求智能体针对全部失败的单元测试，将识别错误与改进实现两项任务结合起来。有意思的是，删去该组件后的智能体相较基线运行并没有改善表现。我们观察到，测试生成和代码编译步骤能够发现语法与逻辑错误，但对实现所作的修正未能体现这些提示。这些实证结果提示，近期若干工作<span class="page-mark" title="原书第9页">9</span>提出的不使用自我反思的盲目试错调试技术，在编写复杂Rust程序等较难任务上并不奏效。</p>
+</div></div>
+<h2 id="u-RF00083" data-heading><span class="anchor-alias" id="s-23"></span><span class="heading-original" lang="en">5 Limitations
+
+</span><span class="heading-chinese">5 局限
+
+</span></h2>
+<div class="bilingual-pair" id="u-RF00084"><div class="original" lang="en"><p>At its core, Reflexion is an optimization technique that uses natural language to do policy optimization. Policy optimization is a powerful approach to improve action choice through experience, but it may still succumb to non-optimal local minima solutions. In this study, we limit long-term memory to a sliding window with maximum capacity, but we encourage future work to extend the memory component of Reflexion with more advanced structures such as vector embedding databases or traditional SQL databases. Specific to code generation, there are many practical limitations to test-driven development in specifying accurate input-output mappings such as non-deterministic generator functions, impure functions that interact with APIs, functions that vary output according to hardware specifications, or functions that invoke parallel or concurrent behavior that may be difficult to predict.</p>
+</div><div class="translation" lang="zh"><p>从核心上说，Reflexion是一种利用自然语言进行策略优化的优化技术。策略优化能够通过经验有效改善行动选择，但仍可能陷入非最优的局部极小解。在本研究中，我们将长期记忆限制在具有最大容量的滑动窗口内，同时鼓励未来工作采用向量嵌入数据库或传统SQL数据库等更高级的结构，扩展Reflexion的记忆组件。具体到代码生成，测试驱动开发在准确规定输入—输出映射方面存在许多实际限制，例如非确定性的生成器函数、与API交互的非纯函数、随硬件规格改变输出的函数，以及调用难以预测的并行或并发行为的函数。</p>
+</div></div>
+<h2 id="u-RF00085" data-heading><span class="anchor-alias" id="s-24"></span><span class="heading-original" lang="en">6 Broader impact
+
+</span><span class="heading-chinese">6 更广泛的影响
+
+</span></h2>
+<div class="bilingual-pair" id="u-RF00086"><div class="original" lang="en"><p>Large language models are increasingly used to interact with external environments (e.g. the Internet, software, robotics, etc.) and humans. Our work has the potential of reinforcing and empowering these agents toward greater automation and work efficiency, but it also amplifies the risks when these agents were put into misuse. We believe that this direction of research will need more effort in safety and ethical considerations.</p>
+</div><div class="translation" lang="zh"><p>大语言模型越来越多地被用于同外部环境（如互联网、软件、机器人等）及人类交互。我们的工作有潜力强化这些智能体的能力，提高自动化程度与工作效率；但当这些智能体被滥用时，它也会放大风险。我们认为，这一研究方向需要在安全与伦理考量方面作出更多努力。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00087"><div class="original" lang="en"><p>On the other hand, reinforcement learning has suffered from its black-box policy and optimization setups in which interpretability and alignment have been challenging. Our proposed “verbal” reinforcement learning might address some of the issues and turn autonomous agents more interpretable and diagnosable. For example, in the case of tool-usage that may be too hard for humans to understand, self-reflections could be monitored to ensure proper intent before using the tool.</p>
+</div><div class="translation" lang="zh"><p>另一方面，强化学习受制于黑箱式的策略与优化设置，可解释性和对齐一直是难题。我们提出的“言语”强化学习，或许能解决其中部分问题，使自主智能体更容易解释和诊断。例如，当工具使用过于复杂、难以为人理解时，可以监控自我反思，以便在使用工具前确保意图恰当。</p>
+</div></div>
+<h2 id="u-RF00088" data-heading><span class="anchor-alias" id="s-25"></span><span class="heading-original" lang="en">7 Conclusion
+
+</span><span class="heading-chinese">7 结论
+
+</span></h2>
+<div class="bilingual-pair" id="u-RF00089"><div class="original" lang="en"><p>In this work, we present Reflexion, an approach that leverages verbal reinforcement to teach agents to learn from past mistakes. We empirically show that Reflexion agents significantly outperform currently widely-used decision-making approaches by utilizing self-reflection. In future work, Reflexion could be used to employ more advanced techniques that have been thoroughly studied in traditional RL settings, such as value learning in natural language or off-policy exploration techniques.</p>
+</div><div class="translation" lang="zh"><p>本文提出Reflexion，一种利用言语强化来教导智能体从以往错误中学习的方法。我们通过实证表明，Reflexion智能体利用自我反思，显著优于目前广泛采用的决策方法。未来，Reflexion可用于采用传统强化学习中已得到深入研究的更高级技术，例如以自然语言进行价值学习，或采用离策略探索技术。</p>
+</div></div>
+<h2 id="u-RF00090" data-heading><span class="anchor-alias" id="s-26"></span><span class="heading-original" lang="en">8 Reproducibility
+
+</span><span class="heading-chinese">8 可复现性
+
+</span></h2>
+<div class="bilingual-pair" id="u-RF00091"><div class="original" lang="en"><p>We highly advise others to use isolated execution environments when running autonomous code writing experiments as the generated code is not validated before execution.</p>
+</div><div class="translation" lang="zh"><p>在开展自主代码编写实验时，我们强烈建议使用隔离的执行环境，因为生成的代码在执行之前并未经过验证。</p>
+</div></div>
+<h2 id="u-RF00092" data-heading><span class="anchor-alias" id="s-27"></span><span class="heading-original" lang="en"><span class="page-mark" title="原书第10页">10</span>
+
+References
+
+</span><span class="heading-chinese"><span class="page-mark" title="原书第10页">10</span>
+
+参考文献
+
+</span></h2>
+<div class="bilingual-pair" id="u-RF00093"><div class="original" lang="en"><p>[1] Ahn, M., Brohan, A., Brown, N., Chebotar, Y., Cortes, O., David, B., Finn, C., Gopalakrishnan, K., Hausman, K., Herzog, A., et al. (2022). Do as i can, not as i say: Grounding language in robotic affordances. arXiv preprint arXiv:2204.01691.</p>
+</div><div class="translation" lang="zh"><p>[1] Ahn, M., Brohan, A., Brown, N., Chebotar, Y., Cortes, O., David, B., Finn, C., Gopalakrishnan, K., Hausman, K., Herzog, A., et al. (2022). 照我能做的去做，而非照我说的去做：将语言扎根于机器人的可供性。arXiv预印本arXiv:2204.01691。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00094"><div class="original" lang="en"><p>[2] Austin, J., Odena, A., Nye, M., Bosma, M., Michalewski, H., Dohan, D., Jiang, E., Cai, C., Terry, M., Le, Q., et al. (2021). Program synthesis with large language models. arXiv preprint arXiv:2108.07732.</p>
+</div><div class="translation" lang="zh"><p>[2] Austin, J., Odena, A., Nye, M., Bosma, M., Michalewski, H., Dohan, D., Jiang, E., Cai, C., Terry, M., Le, Q., et al. (2021). 利用大语言模型进行程序合成。arXiv预印本arXiv:2108.07732。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00095"><div class="original" lang="en"><p>[3] Brooks, E., Walls, L., Lewis, R. L., and Singh, S. (2022). In-context policy iteration. arXiv preprint arXiv:2210.03821.</p>
+</div><div class="translation" lang="zh"><p>[3] Brooks, E., Walls, L., Lewis, R. L., and Singh, S. (2022). 上下文策略迭代。arXiv预印本arXiv:2210.03821。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00096"><div class="original" lang="en"><p>[4] Cassano, F., Gouwar, J., Nguyen, D., Nguyen, S., Phipps-Costin, L., Pinckney, D., Yee, M.-H., Zi, Y., Anderson, C. J., Feldman, M. Q., Guha, A., Greenberg, M., and Jangda, A. (2022). Multipl-e: A scalable and extensible approach to benchmarking neural code generation.</p>
+</div><div class="translation" lang="zh"><p>[4] Cassano, F., Gouwar, J., Nguyen, D., Nguyen, S., Phipps-Costin, L., Pinckney, D., Yee, M.-H., Zi, Y., Anderson, C. J., Feldman, M. Q., Guha, A., Greenberg, M., and Jangda, A. (2022). MultiPL-E：一种可扩展、可延伸的神经代码生成基准评估方法。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00097"><div class="original" lang="en"><p>[5] Chen, B., Zhang, F., Nguyen, A., Zan, D., Lin, Z., Lou, J.-G., and Chen, W. (2022). Codet: Code generation with generated tests. arXiv preprint arXiv:2207.10397.</p>
+</div><div class="translation" lang="zh"><p>[5] Chen, B., Zhang, F., Nguyen, A., Zan, D., Lin, Z., Lou, J.-G., and Chen, W. (2022). CodeT：利用生成的测试进行代码生成。arXiv预印本arXiv:2207.10397。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00098"><div class="original" lang="en"><p>[6] Chen, M., Tworek, J., Jun, H., Yuan, Q., Pinto, H. P. d. O., Kaplan, J., Edwards, H., Burda, Y., Joseph, N., Brockman, G., et al. (2021). Evaluating large language models trained on code. arXiv preprint arXiv:2107.03374.</p>
+</div><div class="translation" lang="zh"><p>[6] Chen, M., Tworek, J., Jun, H., Yuan, Q., Pinto, H. P. d. O., Kaplan, J., Edwards, H., Burda, Y., Joseph, N., Brockman, G., et al. (2021). 评估以代码训练的大语言模型。arXiv预印本arXiv:2107.03374。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00099"><div class="original" lang="en"><p>[7] Chen, X., Lin, M., Schärli, N., and Zhou, D. (2023). Teaching large language models to self-debug. arXiv preprint arXiv:2304.05128.</p>
+</div><div class="translation" lang="zh"><p>[7] Chen, X., Lin, M., Schärli, N., and Zhou, D. (2023). 教大语言模型自我调试。arXiv预印本arXiv:2304.05128。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00100"><div class="original" lang="en"><p>[8] Côté, M.-A., Kádár, A., Yuan, X., Kybartas, B., Barnes, T., Fine, E., Moore, J., Hausknecht, M., El Asri, L., Adada, M., et al. (2019). Textworld: A learning environment for text-based games. In Computer Games: 7th Workshop, CGW 2018, Held in Conjunction with the 27th International Conference on Artificial Intelligence, IJCAI 2018, Stockholm, Sweden, July 13, 2018, Revised Selected Papers 7, pages 41--75. Springer.</p>
+</div><div class="translation" lang="zh"><p>[8] Côté, M.-A., Kádár, A., Yuan, X., Kybartas, B., Barnes, T., Fine, E., Moore, J., Hausknecht, M., El Asri, L., Adada, M., et al. (2019). TextWorld：面向文本游戏的学习环境。载《计算机游戏：第7届研讨会CGW 2018，与第27届国际人工智能会议IJCAI 2018同期举行，瑞典斯德哥尔摩，2018年7月13日，修订精选论文7》，第41--75页。Springer。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00101"><div class="original" lang="en"><p>[9] Goodman, N. (2023). Meta-prompt: A simple self-improving language agent. noahgoodman.substack.com.</p>
+</div><div class="translation" lang="zh"><p>[9] Goodman, N. (2023). Meta-prompt：一个简单的、自我改进的语言智能体。noahgoodman.substack.com。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00102"><div class="original" lang="en"><p>[10] Kim, G., Baldi, P., and McAleer, S. (2023). Language models can solve computer tasks. arXiv preprint arXiv:2303.17491.</p>
+</div><div class="translation" lang="zh"><p>[10] Kim, G., Baldi, P., and McAleer, S. (2023). 语言模型能够解决计算机任务。arXiv预印本arXiv:2303.17491。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00103"><div class="original" lang="en"><p>[11] Lam, W., Winter, S., Wei, A., Xie, T., Marinov, D., and Bell, J. (2020). A large-scale longitudinal study of flaky tests. Proc. ACM Program. Lang., 4(OOPSLA).</p>
+</div><div class="translation" lang="zh"><p>[11] Lam, W., Winter, S., Wei, A., Xie, T., Marinov, D., and Bell, J. (2020). 关于不稳定测试的大规模纵向研究。<em>Proc. ACM Program. Lang.</em>, 4(OOPSLA)。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00104"><div class="original" lang="en"><p>[12] Le, H., Wang, Y., Gotmare, A. D., Savarese, S., and Hoi, S. C. H. (2022). Coderl: Mastering code generation through pretrained models and deep reinforcement learning. Advances in Neural Information Processing Systems, 35:21314--21328.</p>
+</div><div class="translation" lang="zh"><p>[12] Le, H., Wang, Y., Gotmare, A. D., Savarese, S., and Hoi, S. C. H. (2022). CodeRL：通过预训练模型与深度强化学习掌握代码生成。<em>Advances in Neural Information Processing Systems</em>, 35:21314--21328。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00105"><div class="original" lang="en"><p>[13] Li, R., Allal, L. B., Zi, Y., Muennighoff, N., Kocetkov, D., Mou, C., Marone, M., Akiki, C., Li, J., Chim, J., et al. (2023). Starcoder: may the source be with you! arXiv preprint arXiv:2305.06161.</p>
+</div><div class="translation" lang="zh"><p>[13] Li, R., Allal, L. B., Zi, Y., Muennighoff, N., Kocetkov, D., Mou, C., Marone, M., Akiki, C., Li, J., Chim, J., et al. (2023). StarCoder：愿源码与你同在！arXiv预印本arXiv:2305.06161。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00106"><div class="original" lang="en"><p>[14] Li, Y., Choi, D., Chung, J., Kushman, N., Schrittwieser, J., Leblond, R., Eccles, T., Keeling, J., Gimeno, F., Dal Lago, A., et al. (2022). Competition-level code generation with alphacode. Science, 378(6624):1092--1097.</p>
+</div><div class="translation" lang="zh"><p>[14] Li, Y., Choi, D., Chung, J., Kushman, N., Schrittwieser, J., Leblond, R., Eccles, T., Keeling, J., Gimeno, F., Dal Lago, A., et al. (2022). 利用AlphaCode实现竞赛级代码生成。<em>Science</em>, 378(6624):1092--1097。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00107"><div class="original" lang="en"><p>[15] Madaan, A., Tandon, N., Gupta, P., Hallinan, S., Gao, L., Wiegreffe, S., Alon, U., Dziri, N., Prabhumoye, S., Yang, Y., et al. (2023). Self-refine: Iterative refinement with self-feedback. arXiv preprint arXiv:2303.17651.</p>
+</div><div class="translation" lang="zh"><p>[15] Madaan, A., Tandon, N., Gupta, P., Hallinan, S., Gao, L., Wiegreffe, S., Alon, U., Dziri, N., Prabhumoye, S., Yang, Y., et al. (2023). Self-Refine：借助自我反馈迭代改进。arXiv预印本arXiv:2303.17651。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00108"><div class="original" lang="en"><p>[16] Nair, V., Schumacher, E., Tso, G., and Kannan, A. (2023). Dera: Enhancing large language model completions with dialog-enabled resolving agents. arXiv preprint arXiv:2303.17071.</p>
+</div><div class="translation" lang="zh"><p>[16] Nair, V., Schumacher, E., Tso, G., and Kannan, A. (2023). DERA：利用支持对话的解决问题智能体，增强大语言模型的补全结果。arXiv预印本arXiv:2303.17071。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00109"><div class="original" lang="en"><p>[17] Nakano, R., Hilton, J., Balaji, S., Wu, J., Ouyang, L., Kim, C., Hesse, C., Jain, S., Kosaraju, V., Saunders, W., et al. (2021). Webgpt: Browser-assisted question-answering with human feedback. arXiv preprint arXiv:2112.09332.</p>
+</div><div class="translation" lang="zh"><p>[17] Nakano, R., Hilton, J., Balaji, S., Wu, J., Ouyang, L., Kim, C., Hesse, C., Jain, S., Kosaraju, V., Saunders, W., et al. (2021). WebGPT：结合人类反馈、由浏览器辅助的问答。arXiv预印本arXiv:2112.09332。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00110"><div class="original" lang="en"><p>[18] OpenAI (2023). Gpt-4 technical report. ArXiv.</p>
+</div><div class="translation" lang="zh"><p>[18] OpenAI (2023). GPT-4技术报告。ArXiv。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00111"><div class="original" lang="en"><p><span class="page-mark" title="原书第11页">11</span></p>
+<p>[19] Park, J. S., O&#39;Brien, J. C., Cai, C. J., Morris, M. R., Liang, P., and Bernstein, M. S. (2023). Generative agents: Interactive simulacra of human behavior. arXiv preprint arXiv:2304.03442.</p>
+</div><div class="translation" lang="zh"><p><span class="page-mark" title="原书第11页">11</span></p>
+<p>[19] Park, J. S., O&#39;Brien, J. C., Cai, C. J., Morris, M. R., Liang, P., and Bernstein, M. S. (2023). 生成式智能体：人类行为的交互式拟像。arXiv预印本arXiv:2304.03442。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00112"><div class="original" lang="en"><p>[20] Paul, D., Ismayilzada, M., Peyrard, M., Borges, B., Bosselut, A., West, R., and Faltings, B. (2023). Refiner: Reasoning feedback on intermediate representations. arXiv preprint arXiv:2304.01904.</p>
+</div><div class="translation" lang="zh"><p>[20] Paul, D., Ismayilzada, M., Peyrard, M., Borges, B., Bosselut, A., West, R., and Faltings, B. (2023). Refiner：对中间表征提供推理反馈。arXiv预印本arXiv:2304.01904。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00113"><div class="original" lang="en"><p>[21] Pryzant, R., Iter, D., Li, J., Lee, Y. T., Zhu, C., and Zeng, M. (2023). Automatic prompt optimization with&quot; gradient descent&quot; and beam search. arXiv preprint arXiv:2305.03495.</p>
+</div><div class="translation" lang="zh"><p>[21] Pryzant, R., Iter, D., Li, J., Lee, Y. T., Zhu, C., and Zeng, M. (2023). 利用“梯度下降”与束搜索自动优化提示。arXiv预印本arXiv:2305.03495。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00114"><div class="original" lang="en"><p>[22] Schick, T., Dwivedi-Yu, J., Dessì, R., Raileanu, R., Lomeli, M., Zettlemoyer, L., Cancedda, N., and Scialom, T. (2023). Toolformer: Language models can teach themselves to use tools. arXiv preprint arXiv:2302.04761.</p>
+</div><div class="translation" lang="zh"><p>[22] Schick, T., Dwivedi-Yu, J., Dessì, R., Raileanu, R., Lomeli, M., Zettlemoyer, L., Cancedda, N., and Scialom, T. (2023). Toolformer：语言模型能够教会自己使用工具。arXiv预印本arXiv:2302.04761。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00115"><div class="original" lang="en"><p>[23] Shen, Y., Song, K., Tan, X., Li, D., Lu, W., and Zhuang, Y. (2023). Hugginggpt: Solving ai tasks with chatgpt and its friends in huggingface. arXiv preprint arXiv:2303.17580.</p>
+</div><div class="translation" lang="zh"><p>[23] Shen, Y., Song, K., Tan, X., Li, D., Lu, W., and Zhuang, Y. (2023). HuggingGPT：在Hugging Face上利用ChatGPT及其伙伴解决AI任务。arXiv预印本arXiv:2303.17580。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00116"><div class="original" lang="en"><p>[24] Shridhar, M., Yuan, X., Côté, M.-A., Bisk, Y., Trischler, A., and Hausknecht, M. (2021). ALFWorld: Aligning Text and Embodied Environments for Interactive Learning. In Proceedings of the International Conference on Learning Representations (ICLR).</p>
+</div><div class="translation" lang="zh"><p>[24] Shridhar, M., Yuan, X., Côté, M.-A., Bisk, Y., Trischler, A., and Hausknecht, M. (2021). ALFWorld：对齐文本与具身环境以进行交互学习。载国际学习表征会议（ICLR）论文集。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00117"><div class="original" lang="en"><p>[25] Sutton, R. S. and Barto, A. G. (2018). Reinforcement Learning: An Introduction. The MIT Press, second edition.</p>
+</div><div class="translation" lang="zh"><p>[25] Sutton, R. S. and Barto, A. G. (2018). 《强化学习：导论》。The MIT Press，第2版。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00118"><div class="original" lang="en"><p>[26] Wei, J., Wang, X., Schuurmans, D., Bosma, M., Chi, E., Le, Q., and Zhou, D. (2022). Chain of thought prompting elicits reasoning in large language models. arXiv preprint arXiv:2201.11903.</p>
+</div><div class="translation" lang="zh"><p>[26] Wei, J., Wang, X., Schuurmans, D., Bosma, M., Chi, E., Le, Q., and Zhou, D. (2022). 思维链提示激发大语言模型的推理能力。arXiv预印本arXiv:2201.11903。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00119"><div class="original" lang="en"><p>[27] Xie, Y., Kawaguchi, K., Zhao, Y., Zhao, X., Kan, M.-Y., He, J., and Xie, Q. (2023). Decomposition enhances reasoning via self-evaluation guided decoding. arXiv preprint arXiv:2305.00633.</p>
+</div><div class="translation" lang="zh"><p>[27] Xie, Y., Kawaguchi, K., Zhao, Y., Zhao, X., Kan, M.-Y., He, J., and Xie, Q. (2023). 通过自我评估引导的解码，以分解增强推理。arXiv预印本arXiv:2305.00633。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00120"><div class="original" lang="en"><p>[28] Yang, Z., Qi, P., Zhang, S., Bengio, Y., Cohen, W. W., Salakhutdinov, R., and Manning, C. D. (2018). HotpotQA: A dataset for diverse, explainable multi-hop question answering. In Conference on Empirical Methods in Natural Language Processing (EMNLP).</p>
+</div><div class="translation" lang="zh"><p>[28] Yang, Z., Qi, P., Zhang, S., Bengio, Y., Cohen, W. W., Salakhutdinov, R., and Manning, C. D. (2018). HotpotQA：用于多样、可解释多跳问答的数据集。载自然语言处理实证方法会议（EMNLP）。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00121"><div class="original" lang="en"><p>[29] Yao, S., Chen, H., Yang, J., and Narasimhan, K. (preprint). Webshop: Towards scalable real-world web interaction with grounded language agents. In ArXiv.</p>
+</div><div class="translation" lang="zh"><p>[29] Yao, S., Chen, H., Yang, J., and Narasimhan, K. (preprint). WebShop：利用有现实依据的语言智能体，迈向可扩展的真实世界网络交互。载ArXiv。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00122"><div class="original" lang="en"><p>[30] Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., and Cao, Y. (2023). ReAct: Synergizing reasoning and acting in language models. In International Conference on Learning Representations (ICLR).</p>
+</div><div class="translation" lang="zh"><p>[30] Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., and Cao, Y. (2023). ReAct：协同语言模型中的推理与行动。载国际学习表征会议（ICLR）。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00123"><div class="original" lang="en"><p>[31] Yoran, O., Wolfson, T., Bogin, B., Katz, U., Deutch, D., and Berant, J. (2023). Answering questions by meta-reasoning over multiple chains of thought. arXiv preprint arXiv:2304.13007.</p>
+</div><div class="translation" lang="zh"><p>[31] Yoran, O., Wolfson, T., Bogin, B., Katz, U., Deutch, D., and Berant, J. (2023). 对多条思维链作元推理以回答问题。arXiv预印本arXiv:2304.13007。</p>
+</div></div>
+<h2 id="u-RF00124" data-heading><span class="anchor-alias" id="s-28"></span><span class="heading-original" lang="en"><span class="page-mark" title="原书第12页">12</span>
+
+A Evaluation with additional models
+
+</span><span class="heading-chinese"><span class="page-mark" title="原书第12页">12</span>
+
+A 使用其他模型的评估
+
+</span></h2>
+<div class="bilingual-pair" id="u-RF00125"><div class="original" lang="en"><p>We further investigated the applicability of trial-and-error problem-solving with models of various strengths. We found that the ability to specify self-corrections is an emergent quality of stronger, larger models.</p>
+</div><div class="translation" lang="zh"><p>我们进一步考察了不同能力模型进行试错式问题求解的适用性。我们发现，提出具体自我纠正方案的能力，是更强、更大模型中涌现的特性。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00126"><div class="original" lang="en"><table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Pass@1 accuracy (avg over 8 trials)</th>
+<th>Pass@1 accuracy (std)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Baseline</td>
+<td>0.26</td>
+<td>0.00481</td>
+</tr>
+<tr>
+<td>Reflexion</td>
+<td>0.26</td>
+<td>0.00305</td>
+</tr>
+</tbody></table>
+</div><div class="translation" lang="zh"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>Pass@1准确率（8次尝试的平均值）</th>
+<th>Pass@1准确率（标准差）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基线</td>
+<td>0.26</td>
+<td>0.00481</td>
+</tr>
+<tr>
+<td>Reflexion</td>
+<td>0.26</td>
+<td>0.00305</td>
+</tr>
+</tbody></table>
+</div></div>
+<div class="bilingual-pair" id="u-RF00127"><div class="original" lang="en"><p>Table 4: Pass@1 accuracy on HumanEval Python using starchat-beta [13].</p>
+</div><div class="translation" lang="zh"><p>表4：使用starchat-beta [13]在HumanEval Python上得到的pass@1准确率。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00128"><div class="original" lang="en"><table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Baseline accuracy</th>
+<th>Reflexion accuracy</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CoT (GT) + text-davinci-003</td>
+<td>0.60</td>
+<td>0.77</td>
+</tr>
+<tr>
+<td>CoT (GT) + gpt-3.5-turbo</td>
+<td>0.57</td>
+<td>0.71</td>
+</tr>
+<tr>
+<td>CoT (GT) + gpt-4</td>
+<td>0.68</td>
+<td>0.80</td>
+</tr>
+<tr>
+<td>ReAct + text-davinci-003</td>
+<td>0.30</td>
+<td>0.55</td>
+</tr>
+<tr>
+<td>ReAct + gpt-3.5-turbo</td>
+<td>0.26</td>
+<td>0.38</td>
+</tr>
+<tr>
+<td>ReAct + gpt-4</td>
+<td>0.39</td>
+<td>0.51</td>
+</tr>
+</tbody></table>
+</div><div class="translation" lang="zh"><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>基线准确率</th>
+<th>Reflexion准确率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CoT (GT) + text-davinci-003</td>
+<td>0.60</td>
+<td>0.77</td>
+</tr>
+<tr>
+<td>CoT (GT) + gpt-3.5-turbo</td>
+<td>0.57</td>
+<td>0.71</td>
+</tr>
+<tr>
+<td>CoT (GT) + gpt-4</td>
+<td>0.68</td>
+<td>0.80</td>
+</tr>
+<tr>
+<td>ReAct + text-davinci-003</td>
+<td>0.30</td>
+<td>0.55</td>
+</tr>
+<tr>
+<td>ReAct + gpt-3.5-turbo</td>
+<td>0.26</td>
+<td>0.38</td>
+</tr>
+<tr>
+<td>ReAct + gpt-4</td>
+<td>0.39</td>
+<td>0.51</td>
+</tr>
+</tbody></table>
+</div></div>
+<div class="bilingual-pair" id="u-RF00129"><div class="original" lang="en"><p>Table 5: Pass@1 accuracy on 100 HotPotQA using various models.</p>
+</div><div class="translation" lang="zh"><p>表5：使用不同模型在100道HotPotQA题目上得到的pass@1准确率。</p>
+</div></div>
+<h2 id="u-RF00130" data-heading><span class="anchor-alias" id="s-29"></span><span class="heading-original" lang="en"><span class="page-mark" title="原书第13页">13</span>
+
+B Decision-making
+
+</span><span class="heading-chinese"><span class="page-mark" title="原书第13页">13</span>
+
+B 决策
+
+</span></h2>
+<div class="bilingual-pair source-lines-pair" id="u-RF00132"><div class="original" lang="en"><p>Environment: You are in the middle of a room. Looking quickly around you, you see a bed 1, a desk 2, a desk 1, a drawer 6, a drawer 5, a drawer 4, a drawer 3, a drawer 2, a drawer 1, a garbagecan 1, a laundryhamper 1, a safe 1, a shelf 6, a shelf 5, a shelf 4, a shelf 3, a shelf 2, and a shelf 1.
+Task: examine the mug with the desklamp.</p>
+</div><div class="translation" lang="zh"><p>环境：你位于一个房间中央。迅速环顾四周，你看到床1、书桌2、书桌1、抽屉6、抽屉5、抽屉4、抽屉3、抽屉2、抽屉1、垃圾桶1、洗衣篮1、保险箱1、置物架6、置物架5、置物架4、置物架3、置物架2和置物架1。
+任务：用台灯查看马克杯。</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00133"><div class="original" lang="en"><p>Trial #1
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> think: To solve the task, I need to find and take a mug, then find and use a desklamp.
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> think: First I need to find a mug. A mug is more likely to appear in drawer (1-6), desk (1-2), shelf (1-6), garbagecan (1), laundryhamper (1). I can check one by one, starting with drawer 1.
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> go to drawer 1
+The drawer 1 is closed.
+…
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> open drawer 6
+You open the drawer 6. The drawer 6 is open. In it, you see a keychain 2.
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> go to desk 1
+On the desk 1, you see a creditcard 3, a desklamp 1, a laptop 2, a mug 1, a pen 1, and a pencil 1.
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> think: Now I find a mug (1). Next, I need to take it.
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> take mug 1 from desk 1
+You pick up the mug 1 from the desk 1.
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> think: Now I take a mug (1). Next, I need to find a desklamp. A desklamp is more likely to appear in desk (1-2), sidetable (1-2), shelf (1-6), bed (1), drawer (1-6). I can check one by one, starting with desk 1.
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> go to desk 1
+Nothing happens.
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> go to desk 2
+On the desk 2, you see a alarmclock 1, a bowl 1, a mug 3, a pencil 3, and a pencil 2.
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> think: Now I find a desklamp (1). Next, I need to use it.
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> use desklamp 1
+Nothing happens.
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> use desklamp 1
+Nothing happens.
+Status: Fail</p>
+</div><div class="translation" lang="zh"><p>尝试1
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> 思考：要完成任务，我需要找到并拿起一个马克杯，然后找到并使用一盏台灯。
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> 思考：首先要找马克杯。马克杯比较可能出现在抽屉（1-6）、书桌（1-2）、置物架（1-6）、垃圾桶（1）、洗衣篮（1）中。我可以从抽屉1开始，逐一检查。
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> 前往抽屉1。
+抽屉1是关闭的。
+…
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> 打开抽屉6。
+你打开了抽屉6。抽屉6已打开。里面有钥匙链2。
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> 前往书桌1。
+书桌1上有信用卡3、台灯1、笔记本电脑2、马克杯1、钢笔1和铅笔1。
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> 思考：现在我找到了马克杯（1）。接下来需要拿起它。
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> 从书桌1拿起马克杯1。
+你从书桌1拿起了马克杯1。
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> 思考：现在我拿到了马克杯（1）。接下来要找台灯。台灯比较可能出现在书桌（1-2）、边桌（1-2）、置物架（1-6）、床（1）、抽屉（1-6）处。我可以从书桌1开始，逐一检查。
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> 前往书桌1。
+什么也没发生。
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> 前往书桌2。
+书桌2上有闹钟1、碗1、马克杯3、铅笔3和铅笔2。
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> 思考：现在我找到了台灯（1）。接下来需要使用它。
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> 使用台灯1。
+什么也没发生。
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> 使用台灯1。
+什么也没发生。
+状态：失败</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00134"><div class="original" lang="en"><p>Reflection: In this environment, my plan was to find a mug then find and use a desklamp. However, the task says to examine the mug with the desklamp. I should have looked for the desklamp first, then looked for the mug. I noticed that the desklamp was found on desk 1. In the next trial, I will go to desk 1, find the lamp, then look for the mug and examine it with the desklamp.</p>
+</div><div class="translation" lang="zh"><p>反思：在这个环境中，我的计划是先找马克杯，再找到并使用台灯。然而，任务说的是用台灯查看马克杯。我本应先找台灯，再找马克杯。我注意到，台灯是在书桌1上找到的。下一次尝试时，我会前往书桌1，找到台灯，再找马克杯，并用台灯查看它。</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00135"><div class="original" lang="en"><p>Trial #2
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> go to desk 1
+On the desk 1, you see a creditcard 3, a desklamp 1, a laptop 2, a mug 1, a pen 1, and a pencil 1.
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> think: To solve the task, I need to find and take a mug, then find and use a desklamp.
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> take mug 1 from desk 1
+You pick up the mug 1 from the desk 1.
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> think: To solve the task, I need to find and take a mug, then find and use a desklamp.
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> use desklamp 1
+You turn on the desklamp 1.
+Status: Success</p>
+</div><div class="translation" lang="zh"><p>尝试2
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> 前往书桌1。
+书桌1上有信用卡3、台灯1、笔记本电脑2、马克杯1、钢笔1和铅笔1。
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> 思考：要完成任务，我需要找到并拿起一个马克杯，然后找到并使用一盏台灯。
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> 从书桌1拿起马克杯1。
+你从书桌1拿起了马克杯1。
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> 思考：要完成任务，我需要找到并拿起一个马克杯，然后找到并使用一盏台灯。
+<span class="source-math" data-tex="$&gt;$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span></span> 使用台灯1。
+你打开了台灯1。
+状态：成功</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00136"><div class="original" lang="en"><p>Figure 5: [Top] An AlfWorld trajectory in which the agent failed due to inefficient planning. In the reflection, the agent recognizes that it should have looked for the desklamp then the mug, not the mug then the desklamp. [Bottom] The agent is able to correct its reasoning trace and execute a sequence of actions in a concise manner.</p>
+</div><div class="translation" lang="zh"><p>图5：[上] 一条因规划低效而使智能体失败的AlfWorld轨迹。在反思中，智能体意识到自己本应先找台灯、再找马克杯，而不是先找马克杯、再找台灯。[下] 智能体能够纠正其推理轨迹，以简洁的方式执行一连串行动。</p>
+</div></div>
+<h3 id="u-RF00137" data-heading><span class="anchor-alias" id="s-30"></span><span class="heading-original" lang="en"><span class="page-mark" title="原书第14页">14</span>
+
+B.1 WebShop Limitation
+
+</span><span class="heading-chinese"><span class="page-mark" title="原书第14页">14</span>
+
+B.1 在WebShop上的局限
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00138"><div class="original" lang="en"><p>In 5, we briefly state that Reflexion struggles to overcome local minima choices that require extremely creative behavior to escape. We observe this shortcoming in an experiment on WebShop [29]. WebShop is a web-based problem-solving benchmark that tests agents to navigate an e-commerce website to locate and purchase products given requests from clients. We test a two-shot ReAct + Reflexion agent in 100 environments. However, after only four trials, we terminate the runs as the agent does not show signs of improvement 6. Further, the agent does not generate helpful, intuitive self-reflections after failed attempts. We conclude that Reflexion is unable to solve tasks that require a significant amount of diversity and exploration. In AlfWorld, the agent is able to adequately explore new environments because the permissible actions can be seen in the observations. In HotPotQA, the agent faces a similar WebShop search query task but is more successful as the search space for Wikipedia articles is more diverse and requires less precise search queries. A common problem for e-commerce search engines is properly handling ambiguity in natural language search interpretations. Thus, WebShop presents a task that requires very diverse and unique behavior from a Reflexion agent.</p>
+</div><div class="translation" lang="zh"><p>在第5节中，我们简要指出，Reflexion难以克服需要极富创造性的行为才能摆脱的局部极小选择。我们在WebShop [29]实验中观察到了这一缺点。WebShop是一个基于网络的问题求解基准，测试智能体能否根据客户要求，浏览电子商务网站，找到并购买产品。我们在100个环境中测试了一个采用2样本提示的ReAct + Reflexion智能体。然而，仅经过四次尝试，我们便终止运行，因为智能体未显示出改进迹象，见图6。此外，智能体在尝试失败之后，也没有生成有用、直观的自我反思。我们据此得出结论，Reflexion无法解决需要大量多样性与探索的任务。在AlfWorld中，智能体能够充分探索新环境，因为观察中可以看到允许的行动。在HotPotQA中，智能体面对的是类似WebShop的搜索查询任务，却表现得更成功，因为维基百科文章的搜索空间更多样，所需查询的精确度也较低。电子商务搜索引擎的一个常见问题，是妥善处理自然语言搜索解释中的歧义。因此，WebShop提出了一项要求Reflexion智能体表现出高度多样且独特行为的任务。</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00140"><div class="original" lang="en"><p>0.0 0.5 1.0 1.5 2.0 2.5 3.0
+Trial Number
+0.10
+0.15
+0.20
+0.25
+0.30
+0.35
+0.40
+0.45
+0.50Proportion of Solved Environments
+WebShop Success Rate
+ReAct only
+ReAct + Reflexion</p>
+</div><div class="translation" lang="zh"><p>0.0 0.5 1.0 1.5 2.0 2.5 3.0
+尝试编号
+0.10 0.15 0.20 0.25 0.30 0.35 0.40 0.45 0.50
+已解决环境的比例
+WebShop成功率
+仅ReAct
+ReAct + Reflexion</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00141"><div class="original" lang="en"><p>Figure 6: Reflexion vs React performance on WebShop across 100 customer shopping requests. ReAct + Reflexion fails to significantly outperform ReAct.</p>
+</div><div class="translation" lang="zh"><p>图6：Reflexion与ReAct在100项客户购物请求上的WebShop表现。ReAct + Reflexion未能显著优于ReAct。</p>
+</div></div>
+<h2 id="u-RF00142" data-heading><span class="anchor-alias" id="s-31"></span><span class="heading-original" lang="en">C Programming
+
+</span><span class="heading-chinese">C 编程
+
+</span></h2>
+<div class="bilingual-pair" id="u-RF00143"><div class="original" lang="en"><p>Programming LLM calls require strict instructions to produce function bodies only, due to the extensive dialogue training of the LLMs. A few programming examples are reported below with instructions highlighted in blue and templates. See the full implementation at <a href="https://github.com/noahshinn024/reflexion">https://github.com/noahshinn024/reflexion</a>.</p>
+</div><div class="translation" lang="zh"><p>由于LLM接受过大量对话训练，用于编程的LLM调用需要严格的指令，要求仅生成函数体。下面列出若干编程示例，指令以蓝色高亮，并附上模板。完整实现见<a href="https://github.com/noahshinn024/reflexion。">https://github.com/noahshinn024/reflexion。</a></p>
+</div></div>
+<h3 id="u-RF00144" data-heading><span class="anchor-alias" id="s-32"></span><span class="heading-original" lang="en">C.1 Programming function implementation example (HumanEval Python)
+
+</span><span class="heading-chinese">C.1 函数实现示例（HumanEval Python）
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00145"><div class="original" lang="en"><p>Sample function signature:</p>
+</div><div class="translation" lang="zh"><p>函数签名示例：</p>
+</div></div>
+<div class="bilingual-pair source-code-pair" id="u-RF00146"><div class="original" lang="en"><pre><code class="language-python">def minSubArraySum(nums):
+    &quot;&quot;&quot;
+    Given an array of integers nums, find the minimum sum of any
+    non-empty sub-array of nums.
+    Example
+    minSubArraySum([2, 3, 4, 1, 2, 4]) == 1
+</code></pre>
+<p><span class="page-mark" title="原书第15页">15</span></p>
+<pre><code class="language-python">    minSubArraySum([-1, -2, -3]) == -6
+    &quot;&quot;&quot;
+</code></pre>
+</div><div class="translation" lang="zh"><p>给定一个整数数组<code>nums</code>，求<code>nums</code>的任意非空子数组的最小和。</p>
+<p>示例</p>
+<pre><code class="language-python">minSubArraySum([2, 3, 4, 1, 2, 4]) == 1
+</code></pre>
+<p><span class="page-mark" title="原书第15页">15</span></p>
+<pre><code class="language-python">minSubArraySum([-1, -2, -3]) == -6
+</code></pre>
+</div></div>
+<div class="bilingual-pair" id="u-RF00147"><div class="original" lang="en"><p>Sample function body implementation:</p>
+</div><div class="translation" lang="zh"><p>函数体实现示例：</p>
+</div></div>
+<div class="bilingual-pair source-code-pair" id="u-RF00148"><div class="original" lang="en"><pre><code class="language-python">    min_sum = float(&#39;inf&#39;)
+    for i in range(len(nums)):
+        current_sum = 0
+        for j in range(i, len(nums)):
+            current_sum += nums[j]
+            if current_sum &lt; min_sum:
+                min_sum = current_sum
+    return min_sum
+</code></pre>
+</div></div>
+<h3 id="u-RF00149" data-heading><span class="anchor-alias" id="s-33"></span><span class="heading-original" lang="en">C.2 Reflexion Actor instruction
+
+</span><span class="heading-chinese">C.2 Reflexion行动者指令
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00150"><div class="original" lang="en"><p>You are a Python writing assistant. You will be given your previous implementation of a function, a series of unit tests results, and your self-reflection on your previous implementation. Apply the necessary changes below by responding only with the improved body of the function. Do not include the signature in your response. The first line of your response should have 4 spaces of indentation so that it fits syntactically with the user provided signature. You will be given a few examples by the user.</p>
+</div><div class="translation" lang="zh"><p>你是一名Python编写助手。你将收到自己此前对某个函数的实现、一系列单元测试结果，以及你对先前实现所作的自我反思。请据此作出必要修改，回答时只给出改进后的函数体，不要包含函数签名。回答的第一行应缩进4个空格，使其在语法上与用户提供的函数签名匹配。用户将给你几个示例。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00151"><div class="original" lang="en"><p>Reflexion Actor generations follow the form:
+(Instruction)
+(Function implementation)
+(Unit test feedback)
+(Self-reflection)
+(Instruction for next function implmentation)</p>
+</div><div class="translation" lang="zh"><p>Reflexion行动者的生成遵循以下形式：
+（指令）
+（函数实现）
+（单元测试反馈）
+（自我反思）
+（下一次函数实现的指令）</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00152"><div class="original" lang="en"><p>Full examples are shown in <a href="https://github.com/noahshinn024/reflexion">https://github.com/noahshinn024/reflexion</a></p>
+</div><div class="translation" lang="zh"><p>完整示例见<a href="https://github.com/noahshinn024/reflexion。">https://github.com/noahshinn024/reflexion。</a></p>
+</div></div>
+<h3 id="u-RF00153" data-heading><span class="anchor-alias" id="s-34"></span><span class="heading-original" lang="en">C.3 Reflexion Self-reflection instruction and example
+
+</span><span class="heading-chinese">C.3 Reflexion自我反思指令与示例
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00154"><div class="original" lang="en"><p>You are a Python writing assistant. You will be given your previous implementation of a function, a series of unit tests results, and your self-reflection on your previous implementation. Apply the necessary changes below by responding only with the improved body of the function. Do not include the signature in your response. The first line of your response should have 4 spaces of indentation so that it fits syntactically with the user provided signature. You will be given a few examples by the user. Reflexion Self-Reflection generations follow the form:
+(Instruction)
+(Function implementation)
+(Unit test feedback)</p>
+</div><div class="translation" lang="zh"><p>你是一名Python编写助手。你将收到自己此前对某个函数的实现、一系列单元测试结果，以及你对先前实现所作的自我反思。请据此作出必要修改，回答时只给出改进后的函数体，不要包含函数签名。回答的第一行应缩进4个空格，使其在语法上与用户提供的函数签名匹配。用户将给你几个示例。Reflexion自我反思的生成遵循以下形式：
+（指令）
+（函数实现）
+（单元测试反馈）</p>
+</div></div>
+<h3 id="u-RF00155" data-heading><span class="anchor-alias" id="s-35"></span><span class="heading-original" lang="en">C.4 Reflexion programming no Self-Reflection ablation example
+
+</span><span class="heading-chinese">C.4 Reflexion编程中去除自我反思的消融示例
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00156"><div class="original" lang="en"><p>Reflexion no Self-Reflection ablation Actor generations follow the form:
+(Instruction)
+(Function implementation)
+(Unit test feedback)
+<del>(Self-reflection)</del>
+(Instruction for next function implmentation)</p>
+</div><div class="translation" lang="zh"><p>Reflexion在去除自我反思的消融设置下，行动者的生成遵循以下形式：
+（指令）
+（函数实现）
+（单元测试反馈）
+<del>（自我反思）</del>
+（下一次函数实现的指令）</p>
+</div></div>
+<h3 id="u-RF00157" data-heading><span class="anchor-alias" id="s-36"></span><span class="heading-original" lang="en">C.5 Reflexion programming no test generation ablation example
+
+</span><span class="heading-chinese">C.5 Reflexion编程中去除测试生成的消融示例
+
+</span></h3>
+<div class="bilingual-pair" id="u-RF00158"><div class="original" lang="en"><p>Reflexion no test generation ablation Actor generations follow the form:
+(Instruction)
+<span class="page-mark" title="原书第16页">16</span> (Function implementation)
+<del>(Unit test feedback)</del>
+(Self-reflection)
+(Instruction for next function implmentation)</p>
+</div><div class="translation" lang="zh"><p>Reflexion在去除测试生成的消融设置下，行动者的生成遵循以下形式：
+（指令）
+<span class="page-mark" title="原书第16页">16</span> （函数实现）
+<del>（单元测试反馈）</del>
+（自我反思）
+（下一次函数实现的指令）</p>
+</div></div>
+<h2 id="u-RF00159" data-heading><span class="anchor-alias" id="s-37"></span><span class="heading-original" lang="en"><span class="page-mark" title="原书第17页">17</span>
+
+D Reasoning
+
+</span><span class="heading-chinese"><span class="page-mark" title="原书第17页">17</span>
+
+D 推理
+
+</span></h2>
+<h3 id="u-RF00160" data-heading><span class="anchor-alias" id="s-38"></span><span class="heading-original" lang="en">D.1 Full example
+
+</span><span class="heading-chinese">D.1 完整示例
+
+</span></h3>
+<div class="bilingual-pair source-lines-pair" id="u-RF00162"><div class="original" lang="en"><p>Trial #1: Question: Grown-Ups starred the actor who was best known for which role on &quot;&#39;Allo &#39;Allo!&quot;?
+Thought 1: I need to search Grown-Ups and &quot;&#39;Allo &#39;Allo!&quot;, find the actor who starred in Grown-Ups, then find the role he was best known for in &quot;&#39;Allo &#39;Allo!&quot;.
+Action 1: Search[Grown-Ups]
+Observation 1: Grown-Ups is a 1980 British BBC television film devised and directed by Mike Leigh. It stars Lesley Manville, Philip Davis, Brenda Blethyn, Janine Duvitski, Lindsay Duncan and Sam Kelly. It was edited by Robin Sales and produced by Louis Marks for the BBC, and originally shown on BBC 2 on 28 November 1980.
+Thought 2: Grown-Ups starred Lesley Manville, Philip Davis, Brenda Blethyn, Janine Duvitski, Lindsay Duncan and Sam Kelly. I need to search &quot;&#39;Allo &#39;Allo!&quot; and find which actor was best known for which role.
+Action 2: Search[&quot;&#39;Allo &#39;Allo!&quot;]
+Observation 2: Could not find [&quot;&#39;Allo &#39;Allo!&quot;]. Similar: [&quot;&#39;Allo &#39;Allo!&quot;, &quot;List of &#39;Allo &#39;Allo! characters&quot;, &#39;Gorden Kaye&#39;, &quot;&#39;Allo &#39;Allo! (series 2)&quot;, &#39;Allô, allô&#39;, &#39;Francesca Gonshaw&#39;, &quot;&#39;Allo &#39;Allo! (series 4)&quot;, &#39;Kim Hartman&#39;, &quot;&#39;Allo &#39;Allo! (series 6)&quot;, &#39;Jeremy Lloyd&#39;]
+Thought 3: To find the actor who was best known for which role on &quot;&#39;Allo &#39;Allo!&quot;, I can search Gorden Kaye.
+Action 3: Search[Gorden Kaye]
+Observation 3: Gordon Irving Kaye (7 April 1941 – 23 January 2017), known professionally as Gorden Kaye, was an English actor, best known for playing womanising café owner René Artois in the television comedy series &#39;Allo &#39;Allo!.
+Thought 4: Gorden Kaye was best known for playing womanising café owner René Artois in the television comedy series &quot;&#39;Allo &#39;Allo!&quot;. So the answer is Rene Artois.
+Action 4: Finish[Rene Artois]
+Observation 4: Answer is INCORRECT</p>
+</div><div class="translation" lang="zh"><p>尝试1：问题：参演《Grown-Ups》的那位演员，以在《&#39;Allo &#39;Allo!》中扮演哪个角色而最为知名？
+思考1：我需要搜索《Grown-Ups》和《&#39;Allo &#39;Allo!》，找出参演《Grown-Ups》的演员，再找出他在《&#39;Allo &#39;Allo!》中最知名的角色。
+行动1：Search[Grown-Ups]
+观察1：《Grown-Ups》是一部1980年的英国BBC电视电影，由Mike Leigh构思并执导。主演包括Lesley Manville、Philip Davis、Brenda Blethyn、Janine Duvitski、Lindsay Duncan和Sam Kelly。该片由Robin Sales剪辑，Louis Marks为BBC制作，于1980年11月28日在BBC 2首播。
+思考2：《Grown-Ups》的主演包括Lesley Manville、Philip Davis、Brenda Blethyn、Janine Duvitski、Lindsay Duncan和Sam Kelly。我需要搜索《&#39;Allo &#39;Allo!》，找出哪个演员以什么角色最为知名。
+行动2：Search[&quot;&#39;Allo &#39;Allo!&quot;]
+观察2：未找到[&quot;&#39;Allo &#39;Allo!&quot;]。相似结果：[&quot;&#39;Allo &#39;Allo!&quot;, &quot;List of &#39;Allo &#39;Allo! characters&quot;, &#39;Gorden Kaye&#39;, &quot;&#39;Allo &#39;Allo! (series 2)&quot;, &#39;Allô, allô&#39;, &#39;Francesca Gonshaw&#39;, &quot;&#39;Allo &#39;Allo! (series 4)&quot;, &#39;Kim Hartman&#39;, &quot;&#39;Allo &#39;Allo! (series 6)&quot;, &#39;Jeremy Lloyd&#39;]
+思考3：为了找出哪个演员以在《&#39;Allo &#39;Allo!》中扮演什么角色而最为知名，我可以搜索Gorden Kaye。
+行动3：Search[Gorden Kaye]
+观察3：Gordon Irving Kaye（1941年4月7日—2017年1月23日），以Gorden Kaye这一艺名为人所知，是一位英格兰演员，最著名的角色是电视喜剧《&#39;Allo &#39;Allo!》中拈花惹草的咖啡馆老板René Artois。
+思考4：Gorden Kaye最著名的角色是电视喜剧《&#39;Allo &#39;Allo!》中拈花惹草的咖啡馆老板René Artois。所以答案是Rene Artois。
+行动4：Finish[Rene Artois]
+观察4：答案错误</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00163"><div class="original" lang="en"><p>Trial #2: Question: Grown-Ups starred the actor who was best known for which role on &quot;&#39;Allo &#39;Allo!&quot;?
+Thought 1: I need to search the actor who was best known for a role on &quot;&#39;Allo &#39;Allo!&quot; and find out what role they were best known for.
+Action 1: Search[Grown-Ups]
+Observation 1: Grown-Ups is a 1980 British BBC television film devised and directed by Mike Leigh. It stars Lesley Manville, Philip Davis, Brenda Blethyn, Janine Duvitski, Lindsay Duncan and Sam Kelly. It was edited by Robin Sales and produced by Louis Marks for the BBC, and originally shown on BBC 2 on 28 November 1980.
+Thought 2: The paragraph does not mention the actor who was best known for a role on &quot;&#39;Allo &#39;Allo!&quot;. I need to search the actor&#39;s name instead.
+Action 2: Search[Sam Kelly]
+Observation 2: Roger Michael Kelly (19 December 1943 – 14 June 2014), known by the stage name Sam Kelly, was an English actor who appeared in film, television, radio and theatre. He is best known for his roles as Captain Hans Geering in &#39;Allo &#39;Allo!, Warren in Porridge, Sam in On the Up, and Ted Liversidge in Barbara.
+Thought 3: Sam Kelly is best known for his role as Captain Hans Geering in &quot;&#39;Allo &#39;Allo!&quot;, so the answer is Captain Hans Geering.
+Action 3: Finish[Captain Hans Geering]
+Observation 3: Answer is CORRECT</p>
+</div><div class="translation" lang="zh"><p>尝试2：问题：参演《Grown-Ups》的那位演员，以在《&#39;Allo &#39;Allo!》中扮演哪个角色而最为知名？
+思考1：我需要搜索那个以在《&#39;Allo &#39;Allo!》中扮演某个角色而最为知名的演员，并找出他最知名的角色是什么。
+行动1：Search[Grown-Ups]
+观察1：《Grown-Ups》是一部1980年的英国BBC电视电影，由Mike Leigh构思并执导。主演包括Lesley Manville、Philip Davis、Brenda Blethyn、Janine Duvitski、Lindsay Duncan和Sam Kelly。该片由Robin Sales剪辑，Louis Marks为BBC制作，于1980年11月28日在BBC 2首播。
+思考2：这一段并未提到哪位演员以在《&#39;Allo &#39;Allo!》中扮演某个角色而最为知名。我需要改为搜索演员的名字。
+行动2：Search[Sam Kelly]
+观察2：Roger Michael Kelly（1943年12月19日—2014年6月14日），艺名Sam Kelly，是一位活跃于电影、电视、广播和戏剧的英格兰演员。他最知名的角色包括《&#39;Allo &#39;Allo!》中的Hans Geering上尉、《Porridge》中的Warren、《On the Up》中的Sam，以及《Barbara》中的Ted Liversidge。
+思考3：Sam Kelly以在《&#39;Allo &#39;Allo!》中扮演Hans Geering上尉而最为知名，因此答案是Captain Hans Geering。
+行动3：Finish[Captain Hans Geering]
+观察3：答案正确</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00164"><div class="original" lang="en"><p>Reflection: I searched the wrong title for the show, &quot;&#39;Allo &#39;Allo!&quot;, which resulted in no results. I should have searched the show&#39;s main character, Gorden Kaye, to find the role he was best known for in the show.</p>
+</div><div class="translation" lang="zh"><p>反思：我搜索了错误的剧名“&#39;Allo &#39;Allo!”，导致没有结果。我本应搜索该剧的主要人物Gorden Kaye，以找到他在剧中最为知名的角色。</p>
+</div></div>
+<div class="bilingual-pair" id="u-RF00165"><div class="original" lang="en"><p>Figure 7: Two HotPotQA trials within the same environment and task. The Reflexion + ReAct agent uses self-reflection to determine a better search method for the next trial.</p>
+</div><div class="translation" lang="zh"><p>图7：同一环境、同一任务中的两次HotPotQA尝试。Reflexion + ReAct智能体利用自我反思，为下一次尝试确定更好的搜索方法。</p>
+</div></div>
+<h3 id="u-RF00166" data-heading><span class="anchor-alias" id="s-39"></span><span class="heading-original" lang="en"><span class="page-mark" title="原书第18页">18</span>
+
+D.2 Chain-of-Thought + Reflexion
+
+</span><span class="heading-chinese"><span class="page-mark" title="原书第18页">18</span>
+
+D.2 思维链 + Reflexion
+
+</span></h3>
+<div class="bilingual-pair source-lines-pair" id="u-RF00168"><div class="original" lang="en"><p>Trial #1: Question: What profession does John Lanchester and Alan Dean Foster have in common?
+Thought 1: Let&#39;s think step by step. John Lanchester is a novelist, journalist, and critic. Alan Dean Foster is a novelist and screenwriter. So the profession John Lanchester and Alan Dean Foster have in common is novelist and screenwriter.
+Action 1: Finish[novelist and screenwriter]
+Observation 1: Answer is INCORRECT</p>
+</div><div class="translation" lang="zh"><p>尝试1：问题：John Lanchester和Alan Dean Foster有什么共同的职业？
+思考1：让我们一步步思考。John Lanchester是小说家、记者和评论家。Alan Dean Foster是小说家和编剧。因此，John Lanchester和Alan Dean Foster共同的职业是小说家和编剧。
+行动1：Finish[novelist and screenwriter]
+观察1：答案错误</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00169"><div class="original" lang="en"><p>Trial #2: Question: What profession does John Lanchester and Alan Dean Foster have in common?
+Thought 1: Let&#39;s think step by step. John Lanchester is a novelist, journalist, and financial journalist. Alan Dean Foster is a novelist and screenwriter. So the profession John Lanchester and Alan Dean Foster have in common is novelist.
+Action 1: Finish[novelist]
+Observation 1: Answer is CORRECT</p>
+</div><div class="translation" lang="zh"><p>尝试2：问题：John Lanchester和Alan Dean Foster有什么共同的职业？
+思考1：让我们一步步思考。John Lanchester是小说家、记者和财经记者。Alan Dean Foster是小说家和编剧。因此，John Lanchester和Alan Dean Foster共同的职业是小说家。
+行动1：Finish[novelist]
+观察1：答案正确</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00170"><div class="original" lang="en"><p>Reflection: My reasoning for the profession John Lanchester and Alan Dean Foster have in common failed because I incorrectly assumed that they both had the same profession. In the future, when attempting this question, I should focus on better researching the individual backgrounds of both authors to ensure that I am accurately identifying their professions. Additionally, I should consider the possibility that they may have multiple professions in common.</p>
+</div><div class="translation" lang="zh"><p>反思：我对John Lanchester和Alan Dean Foster共同职业所作的推理失败，是因为我错误地假定两人的职业相同。今后尝试回答这一问题时，我应更认真地研究两位作者各自的背景，以确保准确识别他们的职业。此外，我应考虑他们可能拥有多个共同职业的情况。</p>
+</div></div>
+<h3 id="u-RF00171" data-heading><span class="anchor-alias" id="s-40"></span><span class="heading-original" lang="en">D.3 HotPotQA Chain-of-Thought (GT) + Reflexion
+
+</span><span class="heading-chinese">D.3 HotPotQA思维链（GT）+ Reflexion
+
+</span></h3>
+<div class="bilingual-pair source-lines-pair" id="u-RF00173"><div class="original" lang="en"><p>Context: The Battle of White Plains was a battle in the New York and New Jersey campaign of the American Revolutionary War fought on October 28, 1776, near White Plains, New York. Following the retreat ...</p>
+</div><div class="translation" lang="zh"><p>上下文：白原之战是美国独立战争期间纽约与新泽西战役中的一场战斗，于1776年10月28日在纽约州白原附近进行。撤退之后……</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00174"><div class="original" lang="en"><p>Trial #1: Question: What was a series of battles during the Revolutionary War, for control of New York City and the state of New Jersey, fought on October 28, 1776 near White Plains, New York?
+Thought 1: The question is asking about a series of battles during the Revolutionary War for control of New York City and the state of New Jersey, fought on October 28, 1776 near White Plains, New York. From the context, I know that this was the Battle of White Plains.
+Action 1: Finish[Battle of White Plains]
+Observation 1: Answer is INCORRECT</p>
+</div><div class="translation" lang="zh"><p>尝试1：问题：独立战争期间，为争夺纽约市和新泽西州的控制权，于1776年10月28日在纽约州白原附近进行的一系列战斗，是什么？
+思考1：问题问的是独立战争期间，为争夺纽约市和新泽西州的控制权，于1776年10月28日在纽约州白原附近进行的一系列战斗。从上下文可知，这是白原之战。
+行动1：Finish[Battle of White Plains]
+观察1：答案错误</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00175"><div class="original" lang="en"><p>Trial #2: Question: What was a series of battles during the Revolutionary War, for control of New York City and the state of New Jersey, fought on October 28, 1776 near White Plains, New York?
+Thought 1: The question is asking for a series of battles during the Revolutionary War, for control of New York City and the state of New Jersey, fought on October 28, 1776 near White Plains, New York. Based on the context, I know that this series of battles was the New York and New Jersey campaign.
+Action 1: Finish[The New York and New Jersey campaign]
+Observation 1: Answer is CORRECT</p>
+</div><div class="translation" lang="zh"><p>尝试2：问题：独立战争期间，为争夺纽约市和新泽西州的控制权，于1776年10月28日在纽约州白原附近进行的一系列战斗，是什么？
+思考1：问题要找的是独立战争期间，为争夺纽约市和新泽西州的控制权，于1776年10月28日在纽约州白原附近进行的一系列战斗。根据上下文，我知道这一系列战斗是纽约与新泽西战役。
+行动1：Finish[The New York and New Jersey campaign]
+观察1：答案正确</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00176"><div class="original" lang="en"><p>Reflection: Upon reflecting on the incorrect answer I provided, I realize that I may not have provided enough context to accurately answer the question. The question asked for a series of battles, but I only provided the name of one battle. To better answer this question in the future, I will make sure to provide more context, such as the name of the campaign, which was the New York and New Jersey campaign, and the fact that it was a series of battles. Additionally, I will make sure to include the dates of the battles, as well as the locations, to ensure that my answer is comprehensive and accurate.</p>
+</div><div class="translation" lang="zh"><p>反思：反思自己给出的错误答案后，我意识到，我可能未提供足够的上下文来准确回答问题。问题问的是一系列战斗，而我只给出了一场战斗的名称。为了今后更好地回答这个问题，我会确保提供更多上下文，例如战役名称，即纽约与新泽西战役，以及它包含一系列战斗这一事实。此外，我会确保列出这些战斗的日期和地点，使答案全面而准确。</p>
+</div></div>
+<h3 id="u-RF00177" data-heading><span class="anchor-alias" id="s-41"></span><span class="heading-original" lang="en"><span class="page-mark" title="原书第19页">19</span>
+
+D.4 HotPotQA episodic memory (EPM) ablation prompts
+
+</span><span class="heading-chinese"><span class="page-mark" title="原书第19页">19</span>
+
+D.4 HotPotQA情景记忆（EPM）消融提示
+
+</span></h3>
+<h4 id="u-RF00178" data-heading><span class="anchor-alias" id="s-42"></span><span class="heading-original" lang="en">D.4.1 (EPM) Chain-of-Thought + Reflexion
+
+</span><span class="heading-chinese">D.4.1（EPM）思维链 + Reflexion
+
+</span></h4>
+<div class="bilingual-pair source-lines-pair" id="u-RF00180"><div class="original" lang="en"><p>Trial #1: Question: Which of Jonny Craig and Pete Doherty has been a member of more bands ?
+Thought 1: Let&#39;s think step by step. Jonny Craig has been a member of six bands, including Emarosa, Dance Gavin Dance, and Slaves. Pete Doherty has been a member of seven bands, including The Libertines, Babyshambles, and The Puta Madres. So Pete Doherty has been a member of more bands.
+Action 1: Finish[Pete Doherty]
+Observation 1: Answer is INCORRECT</p>
+</div><div class="translation" lang="zh"><p>尝试1：问题：Jonny Craig与Pete Doherty，谁曾加入的乐队更多？
+思考1：让我们一步步思考。Jonny Craig曾加入6支乐队，包括Emarosa、Dance Gavin Dance和Slaves。Pete Doherty曾加入7支乐队，包括The Libertines、Babyshambles和The Puta Madres。因此，Pete Doherty曾加入的乐队更多。
+行动1：Finish[Pete Doherty]
+观察1：答案错误</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00181"><div class="original" lang="en"><p>Trial #2: Question: Which of Jonny Craig and Pete Doherty has been a member of more bands ?
+Thought 1: Let&#39;s think step by step. I will research the past and current bands of both musicians to ensure that I am accurately comparing their band memberships. After researching, I have found that Jonny Craig has been a member of seven bands, including Emarosa, Dance Gavin Dance, and Slaves. Pete Doherty has been a member of seven bands, including The Libertines, Babyshambles, and The Puta Madres. So Jonny Craig has been a member of more bands.
+Action 2: Finish[Jonny Craig]
+Observation 2: Answer is CORRECT</p>
+</div><div class="translation" lang="zh"><p>尝试2：问题：Jonny Craig与Pete Doherty，谁曾加入的乐队更多？
+思考1：让我们一步步思考。我会研究两位音乐人过去与现在所属的乐队，以确保准确比较他们的乐队成员经历。研究之后，我发现Jonny Craig曾加入7支乐队，包括Emarosa、Dance Gavin Dance和Slaves。Pete Doherty曾加入7支乐队，包括The Libertines、Babyshambles和The Puta Madres。因此，Jonny Craig曾加入的乐队更多。
+行动2：Finish[Jonny Craig]
+观察2：答案正确</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00182"><div class="original" lang="en"><p>Reflection: My reasoning for which musician has been a member of more bands failed because I did not take into account that Jonny Craig has been a member of more bands in the past, even though Pete Doherty is currently a member of more bands. In the future, when attempting this question, I should focus on researching the past and current bands of both musicians to ensure that I am accurately comparing their band memberships.</p>
+</div><div class="translation" lang="zh"><p>反思：我对哪位音乐人曾加入更多乐队所作的推理失败，是因为没有考虑到，虽然Pete Doherty目前所属的乐队更多，但Jonny Craig过去曾加入的乐队更多。今后尝试回答这一问题时，我应着重研究两位音乐人过去与现在所属的乐队，以确保准确比较他们的乐队成员经历。</p>
+</div></div>
+<h4 id="u-RF00183" data-heading><span class="anchor-alias" id="s-43"></span><span class="heading-original" lang="en">D.4.2 (EPM) Chain-of-Thought (GT) + Reflexion
+
+</span><span class="heading-chinese">D.4.2（EPM）思维链（GT）+ Reflexion
+
+</span></h4>
+<div class="bilingual-pair source-lines-pair" id="u-RF00185"><div class="original" lang="en"><p>Context: Hari Bahadur Basnet is a Nepalese politician. He is the head of the Foreign Relations Department of the Rastriya Janashakti Party. Basnet holds a M.Sc. in Engineering.
+A Master of Science (Latin: &quot;Magister Scientiae&quot; ; abbreviated MS, M.S., MSc, M.Sc., MSci, M.Sci., ScM, Sc.M., SciM or Sci.M.) is a master&#39;s degree in the field of science...</p>
+</div><div class="translation" lang="zh"><p>上下文：Hari Bahadur Basnet是一名尼泊尔政治人物。他是Rastriya Janashakti Party对外关系部门的负责人。Basnet拥有工程学理学硕士学位（M.Sc.）。
+理学硕士（拉丁语：“Magister Scientiae”；缩写为MS、M.S.、MSc、M.Sc.、MSci、M.Sci.、ScM、Sc.M.、SciM或Sci.M.）是科学领域的硕士学位……</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00186"><div class="original" lang="en"><p>Trial #1: Question: The head of the Foreign Relations Department of the Rastriya Janashakti Party holds a degree that can be abbreviated MS, M.S., or ScM, in what field?
+(Previous trajectory)
+Thought 1: The question is asking what field of study the head of the Foreign Relations Department of the Rastriya Janashakti Party holds a degree in. From the context, I know that the degree is a Master of Science degree, which is typically granted for studies in sciences, engineering, and medicine.
+Action 1: Finish[Sciences, Engineering, and Medicine]
+Observation 1: Answer is INCORRECT</p>
+</div><div class="translation" lang="zh"><p>尝试1：问题：Rastriya Janashakti Party对外关系部门负责人所持学位，可缩写为MS、M.S.或ScM；这个学位属于什么领域？
+（前一次轨迹）
+思考1：问题问的是Rastriya Janashakti Party对外关系部门负责人的学位属于哪个研究领域。从上下文可知，这个学位是理学硕士，通常是针对科学、工程和医学方面的学习而授予的学位。
+行动1：Finish[Sciences, Engineering, and Medicine]
+观察1：答案错误</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00187"><div class="original" lang="en"><p>Trial #2: Question: The head of the Foreign Relations Department of the Rastriya Janashakti Party holds a degree that can be abbreviated MS, M.S., or ScM, in what field?
+(Previous trajectory)
+Thought 1: The question is asking what field of study the head of the Foreign Relations Department of the Rastriya Janashakti Party holds a degree in. From the context, I know that the degree is a Master of Science degree, which is typically granted for studies in sciences, engineering, and medicine. However, the question is asking for the field of study, not the degree. Based on the context, I know that Hari Bahadur Basnet holds a M.Sc. in Engineering.
+Action 1: Finish[Engineering]
+Observation 1: Answer is CORRECT</p>
+</div><div class="translation" lang="zh"><p>尝试2：问题：Rastriya Janashakti Party对外关系部门负责人所持学位，可缩写为MS、M.S.或ScM；这个学位属于什么领域？
+（前一次轨迹）
+思考1：问题问的是Rastriya Janashakti Party对外关系部门负责人的学位属于哪个研究领域。从上下文可知，这个学位是理学硕士，通常是针对科学、工程和医学方面的学习而授予的学位。然而，问题问的是研究领域，而不是学位。根据上下文，我知道Hari Bahadur Basnet拥有工程学理学硕士学位。
+行动1：Finish[Engineering]
+观察1：答案正确</p>
+</div></div>
+<div class="bilingual-pair source-lines-pair" id="u-RF00188"><div class="original" lang="en"><p>Reflection: For the first trial, I misunderstood the question. I thought the question was asking for a category of degrees, rather than a specific degree. I learned from my mistake and in the second trial, I focused more closely on the question to understand that it was asking for a specific field of study.</p>
+</div><div class="translation" lang="zh"><p>反思：第一次尝试时，我误解了问题。我以为问题问的是一类学位，而不是某个具体学位。我从错误中吸取了教训，在第二次尝试时更仔细地关注问题，明白它问的是某个具体的研究领域。</p>
+</div></div>
+<h2 id="h-47322ba90eb" data-heading><span class="anchor-alias" id="s-44"></span><span class="heading-chinese">署名与许可</span></h2>
+<div class="bilingual-pair" id="p-3db3762bcee"><div class="translation" lang="zh"><p>Noah Shinn 诺亚·希恩、Federico Cassano 费代里科·卡萨诺、Edward Berman 爱德华·伯曼、Ashwin Gopinath 阿什温·戈皮纳特、Karthik Narasimhan 卡尔蒂克·纳拉西姆汉、Shunyu Yao 姚顺雨。原作采用 <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>。此处为转录、汉译及阅读排版。 <a href="https://arxiv.org/abs/2303.11366v4">查看原出版来源</a></p>
+</div></div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="4338098d6bcc23"></div></section></main></div></body></html>

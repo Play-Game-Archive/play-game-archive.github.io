@@ -1,0 +1,86 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="约束满足是把一个问题表示成变量、各变量允许的取值，以及这些取值之间必须成立的关系，再寻找合法赋值的方法。一个关卡可以把每个房间的类型设为变量，把战斗、商店和休息点设为候选值，再规定入口不能是首领房、相邻房间不能全是高强度战斗、钥匙必须能够在穿过对应锁门之前取得。求解器负责寻找同时符合这些要求的组合。"><title>约束满足 · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" >档案卡片</a><a href="../../concepts/" aria-current="page">索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="dfbf16be295771"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../concepts/?view=all">← 索引标签</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-35ef7fd7aba" data-toc="h-35ef7fd7aba">变量、定义域与约束</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-d3f901365e9" data-toc="h-d3f901365e9">一致性研究的历史线索</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-36e8cb797c2" data-toc="h-36e8cb797c2">搜索为什么需要剪枝</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-e26dc258cd2" data-toc="h-e26dc258cd2">约束传播怎样收窄候选</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-9e17c8e4963" data-toc="h-9e17c8e4963">搜索顺序与性能</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-fbb4808480f" data-toc="h-fbb4808480f">游戏内容生成中的用途</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-6ad6e8cc1bf" data-toc="h-6ad6e8cc1bf">硬条件、偏好与优化</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-0a7286e1407" data-toc="h-0a7286e1407">与邻近方法的区别</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-9418eede97c" data-toc="h-9418eede97c">评价、局限与设计意义</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1184d9947b1" data-toc="h-1184d9947b1">参考文献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header has-cover" id="entry-title"><figure class="entry-media kind-generated"><img src="../../assets/display/6b45fa4a978c183a7b11c68f.webp" alt="约束满足，独立概念意象" width="1254" height="1254"></figure><div><a class="entry-kicker" href="../../concepts/">索引标签</a><p class="entry-original " lang="en">Constraint Satisfaction</p><h1>约束满足</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>约束满足是把一个问题表示成变量、各变量允许的取值，以及这些取值之间必须成立的关系，再寻找合法赋值的方法。一个关卡可以把每个房间的类型设为变量，把战斗、商店和休息点设为候选值，再规定入口不能是首领房、相邻房间不能全是高强度战斗、钥匙必须能够在穿过对应锁门之前取得。求解器负责寻找同时符合这些要求的组合。</p>
+<p>约束满足问题通常缩写为CSP。其结果首先回答“是否符合条件”，不直接回答“是否最好玩”。如果有多个合法关卡，怎样选择更有趣的一种，需要额外的目标、排序或设计评价。它的主要优势，是把应当成立的要求与具体搜索流程部分分离，让修改规则不必总是重写整个生成算法。</p>
+</section><h2 id="h-35ef7fd7aba" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">变量、定义域与约束</span></h2>
+<div class="reading-block" id="p-8fd77587493"><p>变量表示需要确定的项目，可以是房间类型、宝物位置、任务分配或角色装备。定义域是一个变量允许采用的值集合，约束限定一个或多个变量的联合取值。把“房间一不能放首领”写成一元约束，把“相邻房间类型不同”写成二元约束，把“全图恰好两个休息点”写成涉及多个变量的约束，便能明确要求作用于哪里。</p>
+</div>
+<div class="reading-block" id="p-1163c6999c4"><p>解是对全部相关变量的赋值，并且满足全部约束。部分赋值先确定其中一部分变量；它可能仍有可行延伸，也可能已经与某条约束冲突。定义域非空也不保证有解，因为多个变量的选择可能彼此无法兼容。理解这种局部与整体的区别，是理解约束传播能力边界的基础。</p>
+</div>
+<div class="reading-block" id="p-e37870c5e3e"><p>有限定义域问题把每个变量的候选限制为可枚举的小集合，适合许多游戏配置任务。浮点数虽有有限的机器表示，枚举全部取值的成本仍然很高。模型是否可解，需要看变量数量、候选规模、约束结构与求解办法，而不是只看“有限”这个词。</p>
+</div>
+<div class="reading-block" id="p-bdf8e300c40"><p>数学上可以把问题写成变量集合、定义域集合与约束集合的组合。表达时还要说明每条约束的作用域与判定方式。一个看似简单的“关卡必须可通关”，可能需要对路径、钥匙状态与能力变化进行复杂推理。给要求起了名字，不等于已经把它编码成求解器能够正确检查的条件。</p>
+</div>
+<div class="reading-block" id="p-5f10eb866bf"><p><span class="source-math" data-tex="$$\text{CSP}=(X,D,C).$$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>CSP</mtext><mo>=</mo><mo stretchy="false">(</mo><mi>X</mi><mo separator="true">,</mo><mi>D</mi><mo separator="true">,</mo><mi>C</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\text{CSP}=(X,D,C).</annotation></semantics></math></span></span></p>
+</div>
+<h2 id="h-d3f901365e9" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">一致性研究的历史线索</span></h2>
+<div class="reading-block" id="p-167ad79247c"><p>麦克沃思1977年的《关系网络中的一致性》讨论了回溯搜索反复遇到相同局部冲突的问题，并分析节点、弧与路径一致性等性质。其核心思想是尽早删除不可能得到支持的候选值，减少无谓搜索。论文不是说只要做一次局部检查就能解决任意问题，而是研究哪些不一致可以通过相应算法提前发现。 <a href="https://www.cs.ubc.ca/~mack/Publications/AI77.pdf">Mackworth，1977</a></p>
+</div>
+<div class="reading-block" id="p-8dee3c1aba3"><p>普尔与麦克沃思的作者教材进一步把定义、搜索与一致性算法放在统一框架中。福格德与霍斯威尔2015年的游戏开发章节，则以有限定义域求解器展示变量、收窄候选、撤销与搜索如何实际组合。这些资料分别提供了理论基础、问题表述与工程实现视角，呈现了约束求解方法的发展。</p>
+</div>
+<h2 id="h-36e8cb797c2" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">搜索为什么需要剪枝</span></h2>
+<div class="reading-block" id="p-19971717c77"><p>最直接的办法是枚举所有组合，最后检查约束。若十六个格子各有六种选择，组合数量就是六的十六次方，约为2.82万亿。即使每次检查很快，完整枚举也可能远超可用预算。这个数字来自一个统一候选规模的教学设定，实际关卡的有效规模还取决于约束能排除多少组合。</p>
+</div>
+<div class="reading-block" id="p-d86bffe86e5"><p>回溯搜索逐步给变量赋值，一旦当前选择已经违反约束，就不再向下扩展。例如已确定相邻两房都不能同时是首领房，在第二个房间也选首领时便可以立即拒绝，无需等地图其他位置全部决定。失败后撤销最近选择，尝试另一个值，必要时继续向更早的选择回退。</p>
+</div>
+<div class="reading-block" id="p-b20e95e4d38"><p>前向检查在一次赋值后，从尚未赋值的相关变量中删除已经不兼容的值。若房间甲已设成商店，规则又要求相邻房间乙类型不同，就可以从乙的候选中删除商店。它比单纯等待乙被赋值时才发现冲突更主动，但只检查当前赋值影响的局部关系，并不能保证剩余变量之间没有更深冲突。</p>
+</div>
+<div class="reading-block" id="p-c6214797c4a"><p>撤销机制必须同时恢复被传播删除的候选。若回退到先前分支，却忘记把当时临时排除的值放回，求解器可能错误地宣称无解。开发者可以复制状态，也可以记录修改轨迹并回滚。后者较节约复制成本，但更依赖清楚的状态边界。搜索正确性既取决于推理，也取决于实现能否忠实恢复分支。</p>
+</div>
+<h2 id="h-e26dc258cd2" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">约束传播怎样收窄候选</span></h2>
+<div class="reading-block" id="p-5466f309d49"><p>对于一个二元约束，某变量的一个值若在另一变量的当前候选中找不到任何相容值，就可以删除。例如甲必须小于乙，而乙最大只能取四，那么甲取四便没有支持。删除之后又可能让别的值失去支持，因此需要反复处理受影响的关系，直到没有进一步变化或出现空定义域。</p>
+</div>
+<div class="reading-block" id="p-840bbc60b57"><p>以三个变量甲、乙、丙为例，它们初始都能取一至四，约束是甲小于乙、乙小于丙。传播可以把甲收窄为一或二，乙为二或三，丙为三或四。这个结果仍然保留多个解，例如一二三、一二四、一三四、二三四。传播消除了必然不可能的候选，却不负责在这些合法组合中选出最有趣的一个。</p>
+</div>
+<div class="reading-block" id="p-19d32e1f246"><p>麦克沃思论文中的弧一致性算法通过检查支持并重新安排受影响的弧，避免每删除一个值就无条件重扫全部关系。广义弧一致性把支持概念扩展到涉及多个变量的单条约束。实现可以用队列记录待处理工作，但应避免把同一关系重复加入过多次。传播调度影响效率，正确删除条件则影响结果是否可靠。 <a href="https://artint.info/3e/html/ArtInt3e.Ch4.S3.html">Mackworth，1977；Poole与Mackworth，第4.3节</a></p>
+</div>
+<div class="reading-block" id="p-3be5bca8240"><p>局部一致性有严格边界。设三个互相相邻的区域都只能用红或绿两色，并要求每对邻区不同。每条边单独看都有支持：红能配绿，绿能配红，因此它可以是弧一致的。但三个区域形成三角形，整体无法只用两色完成。这个例子说明，没有空定义域并不等于已经得到全局可行解，仍可能需要搜索或更强推理。</p>
+</div>
+<div class="reading-block" id="p-76f472306c0"><p>若给第三个区域增加蓝色并固定为蓝，前两个区域就可分别用红与绿。改变定义域改变了问题本身；采用更强算法则是在同一个问题上发现更多后果。两者不能混淆。设计工具如果为了解决失败而自动放宽约束，应明确告诉设计者改了什么，否则得到的虽然是一个结果，却未必符合原先要求。</p>
+</div>
+<h2 id="h-9e17c8e4963" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">搜索顺序与性能</span></h2>
+<div class="reading-block" id="p-0457223b10d"><p>先选择候选最少的变量，是一种常见的最受约束变量启发式。它尝试让难以满足的位置尽早暴露冲突，避免在许多自由变量上花完时间才发现关键位置无解。候选值也可以按对其他变量的限制程度排序。启发式改变搜索效率，通常不改变完整问题的合法解集合。</p>
+</div>
+<div class="reading-block" id="p-59f7f82a838"><p>随机打乱取值顺序，可以让多次运行得到不同结果，但并不保证均匀抽样所有解。早期分支拥有多少可完成方案、失败后怎样回退，都影响最终分布。若某种房间配置经常出现，原因可能在搜索顺序，而不在合法解本身更多。需要多样性时，应记录采样策略并测量生成分布，而不是只确认每次随机种子不同。</p>
+</div>
+<div class="reading-block" id="p-656aab22124"><p>完整的有限搜索在穷尽全部分支后，可以证明没有满足当前模型的解；时间到了还没找到，只能说明本次预算不足。工具应区分有解、已证无解和未知。把超时直接显示成“规则冲突”，可能诱使设计者删除本来合理的要求，也会让性能问题伪装成设计问题。</p>
+</div>
+<h2 id="h-fbb4808480f" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">游戏内容生成中的用途</span></h2>
+<div class="reading-block" id="p-084b9d6f7e6"><p>约束方法适合配置相互关联的内容，例如房间布置、装备组合、角色阵容或任务资源。设计者可以表达“至少一个治疗者”“稀有宝物不相邻”“某类敌人总数有限”等要求，再让求解器寻找实例。它尤其适合要求清楚、候选有限、局部选择会相互影响的问题，而不必手写大量尝试与修补代码。</p>
+</div>
+<div class="reading-block" id="p-930136e1b4a"><p>地砖相邻合法，只能保证相邻关系符合模型。若要求入口能到出口，还需要路径连通约束或后续验证；若有锁门与钥匙，又需要考虑玩家状态如何变化。一个所有砖块边缘都接得很整齐的地图，仍然可能把出口封死。抽象方式规定了求解器能够保证的性质，也决定了视觉一致性与可玩性怎样进入模型。</p>
+</div>
+<div class="reading-block" id="p-ac5a54ca713"><p>约束还可以用于设计工具而非运行时。离线生成允许较长搜索、人工筛选和精细诊断；实时生成需要严格预算与可用回退。福格德与霍斯威尔强调简单有限域求解器适合某些较容易的游戏问题，困难实例可能需要更强工具或移到制作流程中处理。方法是否合适，应依据具体规模和约束密度检验。 <a href="https://www.gameaipro.com/GameAIPro2/GameAIPro2_Chapter26_Rolling_Your_Own_Finite-Domain_Constraint_Solver.pdf">Foged与Horswill，2015，第302页</a></p>
+</div>
+<div class="reading-block" id="p-8d3acf561b3"><p>设计者与求解器之间也存在工作分配。人负责定义什么值得出现、哪些关系必须成立，机器负责组合与检查。若所有合法结果都缺乏节奏，求解器并没有违背规则，问题可能在于模型漏掉了重要设计要求。另一方面，过多要求也可能让可行空间过窄，造成重复或无解。查看约束的实际影响，有助于调整设计而非盲目增加规则。</p>
+</div>
+<div class="reading-block" id="p-f84df3af09b"><p>一种做法是把每个时间步中节点与边的标签设成变量，让文法规则约束相邻时间步之间的变化，再要求最后一步已经完成游戏。求解器于是同时确定关卡结构和一条与其相容的通关过程。可行性证明来自这个明确的状态模型，模型之外的运动、界面误读和玩家策略仍需另行考察。这样的联合编码也会增加求解成本：在相同研究中，单独生成任务图的配置通常只需数秒，加入完整机制序列的Dormans-slots配置，中位时间为585.38秒。应比较具体规模、规则和约束，而不能从“声明式”直接推出实时可用。<a href="https://ceur-ws.org/Vol-4090/short5.pdf">Cooper与Bazzaz，2025</a></p>
+</div>
+<h2 id="h-6ad6e8cc1bf" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">硬条件、偏好与优化</span></h2>
+<div class="reading-block" id="p-7c831a5fdd4"><p>普通约束满足把要求看作必须满足的条件。若希望尽量缩短主路、尽量平均分配资源，便进入约束优化或带偏好的模型，需要定义比较标准。违反某条软约束的代价不能与硬性不可行混为一谈。最好的合法解仍然必须合法，而一个分数较高但违反必要条件的结果不能自动被接受。 <a href="https://artint.info/3e/html/ArtInt3e.Ch4.S8.html">Poole与Mackworth，2023，第4.8节</a></p>
+</div>
+<div class="reading-block" id="p-9446175e3b5"><p>多个目标还可能冲突。增加支路提高探索空间，却延长通关时间；资源分布更均匀，又可能削弱角色差异。用单一加权总分可以作取舍，但权重表达了设计判断，不是数学求解器替团队发现的客观答案。也可以保留多个互不支配的方案供人比较，使工具支持判断而不掩盖价值选择。</p>
+</div>
+<h2 id="h-0a7286e1407" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">与邻近方法的区别</span></h2>
+<div class="reading-block" id="p-c9ca607be8a"><p>图文法通过规则逐步构造或改写结构，约束满足先表达变量之间的合法关系，再寻找赋值。前者容易把某些设计模式写成可复用生成步骤，后者容易表达多个位置必须共同遵守的条件。混合流程可以先用文法生成任务骨架，再由约束求解安排对象与资源，两种方法并不需要彼此排斥。</p>
+</div>
+<div class="reading-block" id="p-278ebad37ee"><p>布尔可满足性把问题表示成布尔公式，满足模理论结合特定理论中的关系，回答集编程则有自己的逻辑语义。许多有限约束问题能转换到这些框架，但转换方式与求解器能力不同。不能因为都能找到合法组合，就把它们当成完全相同的算法；游戏开发中应根据表达需求、性能和工具支持选择。 <a href="https://smt-lib.org/about.shtml">SMT-LIB官方说明</a>、<a href="https://www.cs.utexas.edu/~ai-lab/pub-view.php?PubID=126815">Lifschitz作者摘要</a></p>
+</div>
+<div class="reading-block" id="p-61700c2b14a"><p>行为树、效用选择与行动规划主要组织运行中的行为决策，约束满足更一般地寻找符合条件的配置。它也能用于任务分配或决策子问题，但不自动提供角色的持续执行过程。求得“谁去哪个掩体”的分配以后，仍需导航、资源预约和失败反馈，才能让抽象赋值在动态世界中成立。</p>
+</div>
+<div class="reading-block" id="p-51556718359"><p>约束冲突的解释也影响工具体验。仅返回“无解”无法告诉设计者是所有资源太少，还是入口与首领位置要求互相矛盾。某些求解工具能够提供冲突子集或相关诊断，简单实现也可以记录最近失败的约束。这样的信息需要说明解释范围：一个失败分支中的冲突，并不一定就是整个问题无解的全部原因。</p>
+</div>
+<div class="reading-block" id="p-6e564af919b"><p>动态世界还会使已求得的配置过期。小队分配完成后成员死亡，原先满足人数要求的方案便需要重算或局部修复。是否冻结既有承诺、允许哪些重新分配，以及怎样处理暂时没有合法解，都属于接入运行系统时的设计问题。静态求解结果的正确性，需要与使用它的时间范围一起理解。</p>
+</div>
+<h2 id="h-9418eede97c" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-chinese">评价、局限与设计意义</span></h2>
+<div class="reading-block" id="p-217716d34b4"><p>评价需要检查约束是否编码正确、求解过程是否可靠，以及结果是否符合玩家体验。可以使用小规模已知答案验证推理，用真实规模记录耗时与失败分布，再观察生成内容的可读性和重复程度。只展示几张成功关卡，会掩盖某些种子下的长时间搜索，也无法说明结果空间是否足够丰富。</p>
+</div>
+<div class="reading-block" id="p-7439e9c7203"><p>约束满足使游戏设计中的“必须同时成立”成为明确而可检查的对象。它能够减少相互修补的临时代码，也把模型遗漏、规则冲突与计算成本暴露出来。其价值不在于用形式条件代替设计判断，而在于让要求、求解和体验评价各有可追踪的依据，并使复杂内容组合能够被系统地讨论与修改。</p>
+</div>
+<h2 id="h-1184d9947b1" data-heading><span class="anchor-alias" id="s-10"></span><span class="heading-chinese">参考文献</span></h2>
+<div class="reading-block" id="p-76a4b8625a5"><ol>
+<li>Alan K. Mackworth，1977，Consistency in Networks of Relations，Artificial Intelligence 8，99–118：<a href="https://www.cs.ubc.ca/~mack/Publications/AI77.pdf">作者原论文</a>。</li>
+<li>David L. Poole、Alan K. Mackworth，2023，Artificial Intelligence: Foundations of Computational Agents，第三版，第四章：<a href="https://artint.info/3e/html/ArtInt3e.Ch4.S1.html">变量与约束</a>、<a href="https://artint.info/3e/html/ArtInt3e.Ch4.S2.html">搜索求解</a>、<a href="https://artint.info/3e/html/ArtInt3e.Ch4.S3.html">一致性算法</a>、<a href="https://artint.info/3e/html/ArtInt3e.Ch4.S8.html">优化</a>。</li>
+<li>Leif Foged、Ian Horswill，2015，Rolling Your Own Finite-Domain Constraint Solver，Game AI Pro 2，第二十六章：<a href="https://www.gameaipro.com/GameAIPro2/GameAIPro2_Chapter26_Rolling_Your_Own_Finite-Domain_Constraint_Solver.pdf">作者章节原文</a>。</li>
+<li>SMT-LIB Initiative，About SMT：<a href="https://smt-lib.org/about.shtml">官方说明</a>。</li>
+<li>Vladimir Lifschitz，2008，What Is Answer Set Programming?：<a href="https://www.cs.utexas.edu/~ai-lab/pub-view.php?PubID=126815">作者机构论文摘要页</a>。</li>
+</ol>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="dfbf16be295771"></div></section></main></div></body></html>

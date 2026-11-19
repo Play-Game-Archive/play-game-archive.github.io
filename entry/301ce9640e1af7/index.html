@@ -1,0 +1,78 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="图文法是用一组规则生成或改写图结构的方法。这里的“图”指由节点和边组成的关系结构，可以表示房间连接、任务依赖、道路或角色关系，并不专指图片。规则说明某种局部结构在什么条件下可以替换为另一种结构，反复应用规则便形成一系列推导。在游戏AI与程序化内容生成中，它提供了把设计知识写成可执行结构规则的方式。"><title>图文法 · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" >档案卡片</a><a href="../../concepts/" aria-current="page">索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="301ce9640e1af7"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../concepts/?view=all">← 索引标签</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-9bffaf662c4" data-toc="h-9bffaf662c4">从字符串改写到关系改写</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-e29503bfe62" data-toc="h-e29503bfe62">一条规则包含什么</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-590ef4c05e1" data-toc="h-590ef4c05e1">一个任务生成例子</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-dcefd320dd3" data-toc="h-dcefd320dd3">任务结构与空间结构</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-4e284ee9528" data-toc="h-4e284ee9528">规则控制与生成分布</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-dbcc69dbb89" data-toc="h-dbcc69dbb89">作者控制与协作设计</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-6c45e448e91" data-toc="h-6c45e448e91">与其他方法的区别</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-ca08b53a14a" data-toc="h-ca08b53a14a">评价、争论与局限</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1184d9947b1" data-toc="h-1184d9947b1">参考文献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header has-cover" id="entry-title"><figure class="entry-media kind-generated"><img src="../../assets/display/6ab6333147700180c2d6bc26.webp" alt="图文法，独立概念意象" width="1254" height="1254"></figure><div><a class="entry-kicker" href="../../concepts/">索引标签</a><p class="entry-original " lang="en">Graph Grammar</p><h1>图文法</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>图文法是用一组规则生成或改写图结构的方法。这里的“图”指由节点和边组成的关系结构，可以表示房间连接、任务依赖、道路或角色关系，并不专指图片。规则说明某种局部结构在什么条件下可以替换为另一种结构，反复应用规则便形成一系列推导。在游戏AI与程序化内容生成中，它提供了把设计知识写成可执行结构规则的方式。</p>
+<p>例如，设计者可以规定一个简单挑战能够扩展为“取得钥匙、通过锁门、领取奖励”，也可以把一段直线路径改成有支路的布局。图文法关心节点之间怎样相连、具有何种标签以及这些关系怎样改变。最终画面仍需要几何布局、美术资源和引擎规则配合；一张正确的任务关系图，不会自动变成可以游玩的三维关卡。</p>
+</section><h2 id="h-9bffaf662c4" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">从字符串改写到关系改写</span></h2>
+<div class="reading-block" id="p-164024bc995"><p>生成文法可以用替换规则描述结构。字符串文法把符号串的一部分替换为另一段符号串，图文法则把对象扩展为节点与边，因此能够直接表达分支、汇合和非线性连接。任务并不总是排成一条线：玩家可以先完成两个支线中的任一个，再共同解锁主线。这样的关系适合用图表达，而不必先强行排成唯一顺序。</p>
+</div>
+<div class="reading-block" id="p-4705b8faf4b"><p>图变换研究中存在多种形式化方法，对节点身份、标签、删除条件与外部连接的处理并不相同。普伦普2010年的图程序论文展示了一种基于规则与控制结构的语言：左侧描述匹配结构，右侧描述改写结果，并用标号说明哪些节点得到保留。这是理解形式化图改写的具体例子，不应被当成所有图文法都必须采用的唯一语法。 <a href="https://eprints.whiterose.ac.uk/195072/1/Plump.IWS.10.pdf">Plump，2010</a></p>
+</div>
+<div class="reading-block" id="p-6f2ed23dfd1"><p>多尔曼斯与巴克斯2011年的游戏生成论文，把图文法用于动作冒险游戏的任务结构，并与空间生成区分。其重点是让钥匙、锁、挑战顺序和分支等设计原则进入生成过程，而不只是先随机铺房间、最后放置物品。这项工作展示了结构化生成在游戏关卡中的一种应用。 <a href="https://pure.hva.nl/ws/files/149264/453867_Dormans_Bakkes_-_Generating_Missions_and_Spaces_for_Adaptable_Play_Experiences.pdf">Dormans与Bakkes，2011</a></p>
+</div>
+<h2 id="h-e29503bfe62" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">一条规则包含什么</span></h2>
+<div class="reading-block" id="p-24b799ca5c9"><p>图通常需要节点类型、边类型以及可选属性。任务图里的节点可以是起点、战斗、钥匙、门和终点，边可以表示前进路线，也可以表示某把钥匙打开某扇门。两种边的含义不同：能走到门口，不表示已经有权通过门；钥匙与门有关联，也不表示它们在空间上相邻。规则必须保持这些语义区别。</p>
+</div>
+<div class="reading-block" id="p-9bc407e94cf"><p>左侧模式决定哪里可以应用规则。若规则要求一条从挑战节点通往奖励节点的边，就不能任意匹配两个没有连接的节点。匹配可能还检查标签、属性或否定条件，例如目标节点尚未被扩展，或两个节点之间不存在另一类边。是否允许多个模式节点匹配同一个对象，要由所用形式系统明确规定。</p>
+</div>
+<div class="reading-block" id="p-81add7813f9"><p>右侧决定保留、删除或增加哪些元素。被保留的节点维持身份，因此外部系统仍可引用它；新节点则需要新的标识与属性。若删除一个仍与其他节点相连的节点，外部边如何处理就成为关键问题。有些形式化方法要求满足删除条件，有些定义额外的连接规则。图的替换通过明确的匹配与连接规则处理边界。</p>
+</div>
+<div class="reading-block" id="p-acbab0e0967"><p>一次成功改写称为一次推导步骤，连续步骤形成推导序列。相同规则在不同位置应用，或不同规则先后应用，都可能得到不同结果。规则集合描述允许的变换，控制策略决定实际选择的路径。仅列出规则，还不足以说明一个生成器最终会产生何种分布、何时停止或如何处理失败。</p>
+</div>
+<h2 id="h-590ef4c05e1" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">一个任务生成例子</span></h2>
+<div class="reading-block" id="p-254c5f8a0c7"><p>构造一个教学用任务图，起点连接一个尚未展开的挑战节点，再连接终点。第一条规则把挑战替换为“钥匙、锁门、奖励”三个节点，并把入口接到钥匙、钥匙接到锁门、锁门接到奖励、奖励接回原出口。同时增加钥匙到锁门的“开启”关系。这个规则把可走路线与功能依赖一起生成，避免只出现一扇没有对应钥匙的门。</p>
+</div>
+<div class="reading-block" id="p-a418433de1c"><p>第二条规则可以在钥匙之前加入一场战斗，并保留原来的入口出口；第三条规则可以增加一条不影响主线的奖励支路。若先应用一次战斗规则，再应用一次支路规则，得到的是一种具体推导，而不是文法允许的全部关卡。每一步都可以记录所用规则、匹配节点与随机种子，使生成结果能够追溯和重现。</p>
+</div>
+<div class="reading-block" id="p-c888d90a85a"><p>上述例子仍然需要检查可玩性。若后来的规则把钥匙移到锁门之后，主线可能形成自锁；若增加一条绕过门的通道，钥匙可能失去意义。所谓保证正确，必须说明保证的是哪一种性质，以及每条规则为什么保持它。规则名字叫“添加安全支路”，并不构成安全证明，实际连边方式才决定结果。</p>
+</div>
+<div class="reading-block" id="p-d3fe0d0209d"><p>多尔曼斯与巴克斯的论文区分了任务中的通行边与钥匙、锁的关系，并用规则重排任务位置。它还讨论先让玩家遇见障碍、再寻找解决物的设计安排。这里“先遇见锁”指玩家获得问题意识，不等于先穿过锁门；可达性、观察顺序与通过条件是不同关系，生成模型需要相应表达。 <a href="https://pure.hva.nl/ws/files/149264/453867_Dormans_Bakkes_-_Generating_Missions_and_Spaces_for_Adaptable_Play_Experiences.pdf">Dormans与Bakkes，2011，第220—222页</a></p>
+</div>
+<h2 id="h-dcefd320dd3" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">任务结构与空间结构</span></h2>
+<div class="reading-block" id="p-55073c0fb35"><p>任务图回答玩家需要完成什么、哪些内容相互依赖；空间图回答地点怎样连接；几何布局进一步回答门、墙与走廊放在哪里。两个任务节点之间有一条边，并不说明它们应该相隔两米，也不说明地图中能画出不交叉的走廊。把这些层次分开，有助于定位生成失败发生在哪一步。</p>
+</div>
+<div class="reading-block" id="p-dfe047ecece"><p>2011年论文先生成任务，再安排空间，并讨论用图布局和形状文法补充房间细节。作者也指出，可以探索先形成空间结构再匹配任务的流程。因此，“先任务后空间”是一个具体方法选择，而非图文法的定义。项目应依据主要设计约束决定顺序：谜题依赖优先时与地形连贯优先时，合适的流程可能不同。 <a href="https://pure.hva.nl/ws/files/149264/453867_Dormans_Bakkes_-_Generating_Missions_and_Spaces_for_Adaptable_Play_Experiences.pdf">Dormans与Bakkes，2011，第222—223页</a></p>
+</div>
+<div class="reading-block" id="p-8a2ba945930"><p>把抽象图放进真实地图时，需要处理房间大小、路径交叉、高度和移动能力。图论上相连的两个区域，可能因为门太窄或跳跃距离过长而无法通过；几何上接近的区域，也可能因为墙体与能力限制并不相通。可玩性检查应在实际移动规则或可靠抽象模型上进行，不能只检查图中是否存在一条线。</p>
+</div>
+<div class="reading-block" id="p-2558807d260"><p>视觉细节也会改变体验。相同任务图可以呈现为洞穴、城堡或太空站，路径长度、视野和地标会影响节奏与方向感。图文法可以规定部分结构关系，却不能单独保证审美上的多样性。改变房间贴图而保持同一任务节奏，可能只是表面变化；改变关键依赖与选择后果，才会形成另一种体验层面的变化。</p>
+</div>
+<div class="reading-block" id="p-5cbfc567561"><p>关卡生成还可以把两类改写放进同一个形式系统：一类创建节点、钥匙和锁等结构，另一类表示玩家沿图移动、取得物品和开启锁门。求解器不只寻找一个最终图，还寻找满足规则的图序列，并要求终态达到完成条件。这样，结构与一次可行通关过程可以相互约束。不过，存在通关序列只证明指定模型内的可达性；它仍没有证明难度适宜、路径有趣，或真实玩家会理解关卡。规则对何时出现某物、何时允许移动的区分，也会影响生成的结构分布。<a href="https://ceur-ws.org/Vol-4090/short5.pdf">Cooper与Bazzaz，2025</a></p>
+</div>
+<h2 id="h-4e284ee9528" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">规则控制与生成分布</span></h2>
+<div class="reading-block" id="p-3e951d83954"><p>递归规则使有限规则产生大量结构，但也可能永不停止。例如一个挑战不断展开成两个新的挑战，若没有终止条件，节点数量会持续增长。可以限制推导步数、节点预算、递归深度，或用明确的终结规则消除待展开符号。概率上通常会停止，与严格保证有限步停止，也不是同一种结论。</p>
+</div>
+<div class="reading-block" id="p-88a595d517f"><p>随机挑选适用规则能够提供变化，却不会自然均匀覆盖全部结果。同一个最终图可能由多条推导序列得到，另一个图只有一条路径；不同匹配位置的数量也会影响出现概率。若把“每条规则等概率”直接解释成“每种关卡等概率”，便忽略了推导结构。需要均匀抽样时，必须另外研究目标空间与采样方式。</p>
+</div>
+<div class="reading-block" id="p-b3756de9cec"><p>规则顺序可能改变可用条件。先扩展支路会增加后续匹配位置，先封闭出口则可能禁止另一规则。这种非交换性可以成为设计工具，也可能造成难以发现的偏差。控制语言可以明确阶段、重复次数和失败处理，普伦普的图程序研究正展示了规则集合与控制结构结合的意义，而不只是无约束地随机改写。</p>
+</div>
+<div class="reading-block" id="p-651e4fe003c"><p>不同推导是否总得到等价结果，属于合流性一类问题；所有推导是否最终停止，则是终止性问题。游戏生成器常常有意追求多个不同结果，所以不一定要求唯一最终图。但至少需要知道哪些差异是允许的变化，哪些差异会破坏目标。形式性质应服务于具体设计要求，而不是把“所有结果一样”误当成普遍质量标准。</p>
+</div>
+<h2 id="h-dbcc69dbb89" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">作者控制与协作设计</span></h2>
+<div class="reading-block" id="p-8fd1960e6fe"><p>图文法可以把反复出现的设计结构封装为规则。一个“获得新能力后重新访问旧区域”的结构，可以在不同主题下复用，同时保留能力、障碍与路径之间的联系。设计者控制的是结构关系，而不必逐个手摆全部实例。这种复用仍然需要理解规则交互，规则越多不一定表示可控性越强。</p>
+</div>
+<div class="reading-block" id="p-ea7a8e22b97"><p>混合主动式工具让人选择节点、查看适用规则，再由系统完成局部改写。多尔曼斯与巴克斯的原型允许设计者参与规则选择，说明图文法不只适合完全自动生成。人可以保留关键节奏、叙事安排与审美判断，机器承担重复连接与一致性检查。工具是否有效，要看修改是否可预测、可撤销以及错误是否容易解释。</p>
+</div>
+<div class="reading-block" id="p-6ab541aad69"><p>运行时扩展任务也需要处理玩家已经经历的部分。若生成器改写已打开的门、删除已取得的关键物品，可能使世界失去连续性。可以冻结已访问区域，保留尚未展开的节点，并把当前角色能力与完成记录作为条件。这样的适应需要状态管理，不能因为文法可以继续推导，就假定它天然尊重玩家历史。</p>
+</div>
+<h2 id="h-6c45e448e91" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">与其他方法的区别</span></h2>
+<div class="reading-block" id="p-ea7acd07a73"><p>图文法是一种结构表示与生成机制，程序化内容生成是更广的应用领域。随机游走、噪声、搜索或约束求解都能用于生成内容，不必使用图文法。反过来，图文法也可以用于程序分析或一般数据变换，而不限于游戏关卡。规则匹配、图改写与推导控制，构成了图文法的具体工作过程。</p>
+</div>
+<div class="reading-block" id="p-6632c298f85"><p>约束满足通常先规定变量、取值与必须成立的关系，再寻找合法赋值；图文法通过可执行规则逐步构造结构。文法可以把某些正确性直接保存在构造过程里，约束求解则适合明确检查多个全局条件。两者能够结合：文法生成候选，求解器安排物品或验证依赖；求解结果也可以反过来限制哪些规则允许应用。</p>
+</div>
+<div class="reading-block" id="p-10474c880a6"><p>图神经网络处理图上的数值表示与学习，图文法则根据显式规则改变图结构，两者不是同一方法。形状文法着重几何形状的替换，字符串文法着重线性符号序列；它们可以与图文法共同组成内容流程。名称中都出现“图”或“文法”，不表示输入、规则与保证性质完全相同。</p>
+</div>
+<div class="reading-block" id="p-a8cced0f915"><p>规则调试可以保留每次推导的前后图与匹配位置。生成失败时，设计者能够回到首次破坏性质的步骤，而不只面对最终庞杂的地图。局部规则各自看起来合理，也可能因为依赖关系交错而产生问题，因此检查规则组合与阶段边界同样重要。推导记录使这种因果关系更容易被讨论和修正。</p>
+</div>
+<div class="reading-block" id="p-76610cbff55"><p>图中的标签还应保持语义一致。同一个“钥匙”节点如果有时表示一次性物品，有时表示永久能力，锁门规则就可能在组合时发生错误。可以使用不同类型或明确属性表达差别，并让规则检查这些条件。符号只是模型的载体，清楚的含义与边界决定规则复用是否可靠。</p>
+</div>
+<h2 id="h-ca08b53a14a" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">评价、争论与局限</span></h2>
+<div class="reading-block" id="p-ab3ed3b1cf8"><p>评价需要分别观察有效性、多样性与设计价值。有效性可以包括可达、可完成、没有无用锁门等条件；多样性可以测量分支、依赖深度和路径结构，而不只数节点；设计价值还涉及节奏、理解负担与玩家选择。大量不同图若都呈现同一种重复体验，形式多样性便不足以证明内容丰富。</p>
+</div>
+<div class="reading-block" id="p-613ea60d335"><p>规则库也会固化创作者的预设。哪些挑战被当成标准模块，哪些关系可以被替换，决定生成器反复强调什么。把设计知识显式写成规则，便于检查和修改；同时也可能把少数成功结构变成机械配方。评价应观察规则组合能否产生有意义的差异，并允许人改变规则所编码的设计观念。</p>
+</div>
+<div class="reading-block" id="p-acdca0967c6"><p>图文法把关系结构从一次性手工作品转变为可推导、可追踪的设计对象。其价值在于表达结构规律、保持局部关系并支持人机协作，其局限来自规则交互、全局性质与实际空间之间的距离。清楚说明图的语义、改写条件与验证范围，才能让生成结果从形式上可成立，进一步成为游戏中可理解、可完成且值得体验的内容。</p>
+</div>
+<h2 id="h-1184d9947b1" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-chinese">参考文献</span></h2>
+<div class="reading-block" id="p-1ba421fbb79"><ol>
+<li>Detlef Plump，2010，Graph Programs，IWS 2010论文，39–44：<a href="https://eprints.whiterose.ac.uk/195072/1/Plump.IWS.10.pdf">作者机构开放稿</a>。</li>
+<li>Joris Dormans、Sander Bakkes，2011，Generating Missions and Spaces for Adaptable Play Experiences，IEEE Transactions on Computational Intelligence and AI in Games 3(3)，216–228，DOI:10.1109/TCIAIG.2011.2149523：<a href="https://pure.hva.nl/ws/files/149264/453867_Dormans_Bakkes_-_Generating_Missions_and_Spaces_for_Adaptable_Play_Experiences.pdf">作者机构保存本</a>。</li>
+</ol>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="301ce9640e1af7"></div></section></main></div></body></html>

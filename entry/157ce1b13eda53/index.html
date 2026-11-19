@@ -1,0 +1,122 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="技能库是把可再次调用的行动能力组织、保存和选择起来的系统。它不仅回答“过去做过什么”，还回答“在什么条件下，怎样再做一次，做到何处算结束”。在游戏智能体中，技能可以是移动、采集和制造的策略，也可以是能够调用游戏接口的程序。技能库将长期目标拆成可组合的行动单元，由此连接学习、规划、记忆与环境控制。"><title>技能库 · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" >档案卡片</a><a href="../../concepts/" aria-current="page">索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="157ce1b13eda53"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../concepts/?view=all">← 索引标签</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-aa5e73f73f6" data-toc="h-aa5e73f73f6">一、为什么需要保存技能</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-cb910f74f5e" data-toc="h-cb910f74f5e">二、技能、知识和经验如何区分</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-aa5fa4db536" data-toc="h-aa5fa4db536">三、行动的时间尺度</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-d96ac5bead2" data-toc="h-d96ac5bead2">四、技能可以用什么表示</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-33d741a62e2" data-toc="h-33d741a62e2">五、一个技能条目需要哪些信息</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-f5e86862b46" data-toc="h-f5e86862b46">六、从一次成功到可复用条目</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-668cda0b490" data-toc="h-668cda0b490">七、检索为什么不等于调用</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-84cadf9c3da" data-toc="h-84cadf9c3da">八、程序技能库的一个实现</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-80301edd78a" data-toc="h-80301edd78a">九、组合的条件与代价</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-509d8b0e72d" data-toc="h-509d8b0e72d">十、抽象层次与库的增长</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-29e70361d0f" data-toc="h-29e70361d0f">十一、维护、修订与遗忘</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-b3fe82ca016" data-toc="h-b3fe82ca016">十二、技能库与情景记忆的互补</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-9c9e82d5a02" data-toc="h-9c9e82d5a02">十三、游戏中的能力与角色塑造</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-9e2bf875376" data-toc="h-9e2bf875376">十四、怎样证明积累确实发生</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-2f25e563745" data-toc="h-2f25e563745">十五、库的来源与控制权</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-dc2a3e06f78" data-toc="h-dc2a3e06f78">十六、开放问题</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1cad116c34b" data-toc="h-1cad116c34b">十七、失败恢复也是技能的一部分</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-5a53c8d0662" data-toc="h-5a53c8d0662">十八、数量参数与目标含义</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-87c8ca57b02" data-toc="h-87c8ca57b02">十九、依赖关系怎样影响长期积累</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-9629df2c281" data-toc="h-9629df2c281">二十、环境接口贡献了多少能力</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-0a199ea1c35" data-toc="h-0a199ea1c35">二十一、探索新技能与复用旧技能</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-a2e5e029e7d" data-toc="h-a2e5e029e7d">二十二、技能库的可审查性</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1184d9947b1" data-toc="h-1184d9947b1">参考文献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header has-cover" id="entry-title"><figure class="entry-media kind-generated"><img src="../../assets/display/e7bad13045c6b52bcf9c118a.webp" alt="技能库 · 独立生成插图" width="1254" height="1254"></figure><div><a class="entry-kicker" href="../../concepts/">索引标签</a><p class="entry-original " lang="en">Skill library</p><h1>技能库</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>技能库是把可再次调用的行动能力组织、保存和选择起来的系统。它不仅回答“过去做过什么”，还回答“在什么条件下，怎样再做一次，做到何处算结束”。在游戏智能体中，技能可以是移动、采集和制造的策略，也可以是能够调用游戏接口的程序。技能库将长期目标拆成可组合的行动单元，由此连接学习、规划、记忆与环境控制。</p>
+</section><h2 id="h-aa5e73f73f6" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">一、为什么需要保存技能</span></h2>
+<div class="reading-block" id="p-271aefbf274"><p>设想一个沙盒智能体每次造工具都从按键级别重新摸索。即使它成功过，下一次仍需支付同样的探索成本；长期任务会被大量重复的低层控制淹没。技能库把若干行动及其适用条件封装起来，使上层推理能够直接处理“取得木材”“回到营地”这样的步骤。不过，能给一段动作命名，只说明已经形成一个可谈论的单位，尚未证明它可以稳定复用。</p>
+</div>
+<div class="reading-block" id="p-51f6a599117"><p>技能库的核心承诺是积累：一次任务的成果能够降低后来任务的成本。这个承诺需要经过跨情景检验。在同一地图、同一出生点上重放成功轨迹，与在新地图上识别材料、寻找路径并完成目标，是不同程度的复用。判断一个系统有没有积累能力，不能只数库中条目，还要检查条目在原条件之外的表现，以及调用它们是否比重新生成行动更可靠。</p>
+</div>
+<h2 id="h-cb910f74f5e" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">二、技能、知识和经验如何区分</span></h2>
+<div class="reading-block" id="p-969ab807abe"><p>“这座桥可以通行”是关于世界的陈述，“昨天经过桥时跌落”是一次经历，“沿桥中央行走并检测缺口”则接近行动技能。这三类内容可能共同影响行为，却承担不同作用。事实帮助判断当前状态，经历提供具体成败证据，技能提供状态变化的方法。把它们都放进同一个向量数据库，不会自动消除这些功能差别。</p>
+</div>
+<div class="reading-block" id="p-fcd9fe80909"><p>技能也不等于自然语言说明。说明可以省略执行细节，由模型或人类在现场补足；程序必须明确调用什么接口、如何处理失败。相反，程序的精确性也有边界：它可以正确执行一个不合时宜的目标。一个完整技能条目通常既需要可执行部分，也需要解释其用途、前提和限制的描述。两者应相互校验，而非把流畅说明当作程序正确的证据。</p>
+</div>
+<h2 id="h-aa5fa4db536" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">三、行动的时间尺度</span></h2>
+<div class="reading-block" id="p-f4d7e459f63"><p>技能能够持续多个基础时间步。强化学习中的选项框架用启动集合、内部策略和终止条件来刻画这种时间抽象：并非每个状态都适合启动某项技能，技能执行期间仍需根据观察调整，结束也不必等于固定步数。[1] 这一框架帮助说明，技能既不同于单个动作，也不同于一次完全展开的长期计划。</p>
+</div>
+<div class="reading-block" id="p-aa0a854b8c8"><p>例如，“通过走廊”可以在遇到障碍时绕行，在出口处终止。固定录制的前进十步没有这些反馈条件，只是一段动作宏。两者在简单场景里可能表现相同，环境一变便分出差别。选项的形式化定义并不要求每个程序技能都采用同一训练算法；它提供的是检查行为单元是否具备启动、控制与停止结构的概念工具。</p>
+</div>
+<h2 id="h-d96ac5bead2" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">四、技能可以用什么表示</span></h2>
+<div class="reading-block" id="p-7156e617bc3"><p>一种表示是参数化策略：输入观察，输出行动，能力保存在模型参数中。另一种是显式程序：通过条件、循环、函数和接口调用完成任务。还可以保存动作示范、自然语言操作规程或多模态片段。表示的选择决定检索之后还要做多少解释工作，也决定失败时能够追踪到什么层次。</p>
+</div>
+<div class="reading-block" id="p-05ea7f1299c"><p>程序便于检查变量、接口和分支，也容易与其他函数组合；它对环境接口和版本较敏感。参数化策略可以处理连续控制，却未必容易说明失败原因。示范保留行动细节，但需区分哪些动作必要、哪些只是偶然伴随。语言规程便于跨情景改写，却可能遗漏资源和时间条件。不存在脱离任务性质的最佳表示，同一库也可以采用混合形式。</p>
+</div>
+<h2 id="h-33d741a62e2" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">五、一个技能条目需要哪些信息</span></h2>
+<div class="reading-block" id="p-71677373125"><p>除了名称和实现，条目还应明确输入、输出、前置条件、预期效果与终止理由。例如“制作石镐”需要材料和工作台，完成后应能在物品栏核对产物；缺少材料、工作台不可达和接口报错应返回不同结果。这样，上层才能决定补充材料、换路径还是修复程序。只有“成功／失败”两个返回值，往往不足以支持有效恢复。</p>
+</div>
+<div class="reading-block" id="p-c5836dc945f"><p>资源消耗同样属于契约。一个会消耗最后一份食物的探索技能，在局部看来完成了侦察，却可能破坏后续生存任务。时间、耐久、稀缺物品、角色权限与世界中不可逆的变化都可能成为调用条件。契约不是对任何未来情形的保证，而是把已经验证的条件显式化，使调用者知道何时可以相信它，何时需要重新确认。</p>
+</div>
+<h2 id="h-f5e86862b46" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">六、从一次成功到可复用条目</span></h2>
+<div class="reading-block" id="p-65cf4d04e8c"><p>一次成功可以产生候选技能，但不应立刻抹去其偶然性。成功可能依赖初始位置、已有库存、其他角色的帮助，或者恰好没有出现敌人。抽取技能时，需要把这些背景条件与真正产生目标效果的行动区分开。否则，保存下来的只是带有隐含前提的成功故事。</p>
+</div>
+<div class="reading-block" id="p-4ba353d517b"><p>可采用逐步扩大测试范围的方法：先在相近条件下重放，随后改变位置、资源数量和障碍配置，再观察条目能否自行调整。失败可以促成参数化、增加前置检查，或把过大的技能拆成更小单元。这里的“泛化”应有明确范围；通过三种地形不能证明适用于所有世界。库中标注经过哪些条件验证，比笼统标记“已掌握”更有用。</p>
+</div>
+<h2 id="h-668cda0b490" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">七、检索为什么不等于调用</span></h2>
+<div class="reading-block" id="p-2f28b3a3c1b"><p>当库变大时，系统需要按任务寻找候选。自然语言嵌入可以把“取得燃料”与“采集木材”联系起来，但语义接近只说明描述相关，不说明技能此刻可用。材料不存在、工具等级不足、地点不可达或目标数量不符，都可能使一个相似技能无法启动。检索应当产生候选，再由条件检查决定是否调用。</p>
+</div>
+<div class="reading-block" id="p-7b3b788f1ba"><p>检索查询也会影响系统看到的能力。只用任务标题，容易忽略当前失败原因；加入位置、现有资源和执行反馈，可以缩小候选范围。另一方面，过长的查询可能混入无关经历，反而把检索引向错误情景。相关性、适用性与最终执行收益，共同呈现检索怎样支持行动。</p>
+</div>
+<h2 id="h-84cadf9c3da" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">八、程序技能库的一个实现</span></h2>
+<div class="reading-block" id="p-b2d6f73a9da"><p>Voyager在Minecraft中把技能保存为可执行程序，并使用自然语言描述的嵌入建立索引。面对新任务，系统检索相关技能供代码生成使用；论文的实现取五项。程序可以调用已有技能，验证成功之后再加入新条目。[2] 这一设计把语言模型生成代码、外部执行和长期积累连接起来，并没有通过每次任务都修改模型权重来保存新能力。</p>
+</div>
+<div class="reading-block" id="p-ee9ca8f5d40"><p>这种架构的关键在于区分四个对象：描述、实现、执行结果和任务判定。描述可以说“采集木材”，实现可能只处理某一种树；程序能够无报错运行，物品数量仍可能未达标。因而“已经检索到”“已经执行完”与“已经完成任务”是三种判断。程序技能库的可解释性来自这些环节能够分别检查，而非来自代码看起来完整。</p>
+</div>
+<h2 id="h-80301edd78a" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-chinese">九、组合的条件与代价</span></h2>
+<div class="reading-block" id="p-34217d523d0"><p>如果技能甲的结果满足技能乙的启动条件，二者才构成有意义的串联。例如先采集木材、再制作工具，需要检查木材种类、数量以及中途消耗。仅把两个函数按顺序写下，不会自动保证接口匹配。具有相同名称的资源，在不同模组或规则版本中也可能具有不同用途。</p>
+</div>
+<div class="reading-block" id="p-0f2ac20abea"><p>组合还会引入相互干扰。一个技能会改变角色位置，另一个却假定角色仍在工作台旁；一个为提高效率丢弃物品，另一个恰好需要它们。局部成功不推出整体成功，因为各条目的效果和副作用共同改变世界。研究组合能力时，可以记录技能调用图、状态变化和失败传播路径，找出错误发生在单项技能内部还是发生在接口之间。</p>
+</div>
+<h2 id="h-509d8b0e72d" data-heading><span class="anchor-alias" id="s-10"></span><span class="heading-chinese">十、抽象层次与库的增长</span></h2>
+<div class="reading-block" id="p-0bb876ab9c8"><p>过细的库会把规划重新压回低层：每个条目只做一个动作，上层仍需安排漫长序列。过粗的库则难以迁移，因为它把目标、路径和环境细节绑在一起。一个实用库需要在不同尺度间建立结构，使长期任务能够调用中层技能，中层技能再调用更稳定的基础能力。</p>
+</div>
+<div class="reading-block" id="p-14398e29f87"><p>库的增长也可能制造冗余。十个名称不同、只改变资源数量的函数，可能适合合并为一个带参数的技能；两个名称相同、适用地形不同的条目，则需要分开。抽象不是单纯压缩文件数，而是找到能够解释差别的参数。合并时必须重新验证：把两个成功实例概括成一条规则，可能引入原先没有测试的中间状态。</p>
+</div>
+<h2 id="h-29e70361d0f" data-heading><span class="anchor-alias" id="s-11"></span><span class="heading-chinese">十一、维护、修订与遗忘</span></h2>
+<div class="reading-block" id="p-6210d32c9e2"><p>技能会过时。游戏更新改变配方、接口升级改变函数签名、智能体获得更强工具，都可能使旧实现失去优势。技能库因此需要版本、依赖和失效记录。新条目失败时，应能追溯它依赖的旧技能，而不只是把失败再写进一个越来越长的日志。</p>
+</div>
+<div class="reading-block" id="p-37b167ac85f"><p>遗忘可以是维护机制。删除从未被调用、被更可靠条目覆盖或长期无法验证的技能，能够降低检索噪声。不过，使用频率低不等于没有价值：逃生技能可能很少启动，却在关键情形中不可替代。合理的保留策略应同时考虑成本、独特性、风险和可再学习程度。它也应保留删除理由，以便区分知识更新与偶然遗失。</p>
+</div>
+<h2 id="h-b3fe82ca016" data-heading><span class="anchor-alias" id="s-12"></span><span class="heading-chinese">十二、技能库与情景记忆的互补</span></h2>
+<div class="reading-block" id="p-7f36df39ae2"><p>情景记忆保留某次任务发生了什么，技能库则试图提取可以再次执行的结构。一次失败记录“工作台被移走”，可以帮助系统解释程序为何中断；它本身没有提供完整修复方法。反过来，一个成功程序通常不保留当时每一步观察，难以说明为什么某个判断最初被加入。</p>
+</div>
+<div class="reading-block" id="p-edf9539063f"><p>Reflexion把行动轨迹与反思摘要分开，使用后者影响下一次尝试。[3] 这类摘要可能促成技能修订，却不因此成为可执行技能。比较两种记忆机制，应检查写入的内容、检索依据和实际使用方式，而非只看模块是否被命名为“长期记忆”。一个统一数据库也可以同时保存不同类型条目，前提是系统仍能识别其证据地位与调用方式。</p>
+</div>
+<h2 id="h-9c9e82d5a02" data-heading><span class="anchor-alias" id="s-13"></span><span class="heading-chinese">十三、游戏中的能力与角色塑造</span></h2>
+<div class="reading-block" id="p-fc1208a978e"><p>技能库可以支持游戏角色成长，但机械能力增长与玩家感到角色成长不是同一件事。角色会更多动作，却可能总在错误时机使用；相反，一个技能数量有限、能记住共同经历并作出适当选择的伙伴，也可能显得鲜明。设计时需要把能力范围、选择原则与角色呈现分别考虑。</p>
+</div>
+<div class="reading-block" id="p-4572f1df12f"><p>还应区分智能体的控制权限与玩家的行动空间。一个能自动完成所有任务的伙伴可能提高效率，也可能抢走玩家判断和练习的机会。可以通过请求、协作分工、可撤销建议和能力边界来安排双方关系。这里讨论的是设计可能性，并不预设自动化越多体验越好。评价对象应包括玩家是否理解伙伴能做什么，以及能否影响其行动。</p>
+</div>
+<h2 id="h-9e2bf875376" data-heading><span class="anchor-alias" id="s-14"></span><span class="heading-chinese">十四、怎样证明积累确实发生</span></h2>
+<div class="reading-block" id="p-71a0f11253d"><p>库中技能总数是过程指标，不能独立证明学习。更有说服力的检查是：在相同交互和计算预算下，有库系统能否更快完成新任务；去掉检索或打乱条目后，性能是否下降；迁移到新世界时，哪些能力仍然有效。还要防止测试任务与库中任务仅有表面改名，从而把重复执行误报为开放迁移。</p>
+</div>
+<div class="reading-block" id="p-edc96f87176"><p>可以设置分层评估：单项技能的成功率、检索后候选的适用率、组合任务的完成率，以及长期运行中的维护成本。每项指标回答不同问题。对程序库，还可检查代码是否经过环境验证、是否依赖未记录的初始状态、是否把失败归因于正确模块。透明呈现失败分布，比只展示一条顺利的长任务轨迹更能支持研究结论。</p>
+</div>
+<h2 id="h-2f25e563745" data-heading><span class="anchor-alias" id="s-15"></span><span class="heading-chinese">十五、库的来源与控制权</span></h2>
+<div class="reading-block" id="p-eba66adc89d"><p>技能可以由研究者预写、从示范抽取、经试错生成，或由语言模型根据既有知识编写。这些来源会改变“自主获得能力”的含义。预训练模型知道游戏配方，与智能体在环境中首次发现配方，不是相同的学习过程。描述系统时，应说明哪些能力由控制接口提供，哪些由提示提供，哪些经过现场反馈形成。</p>
+</div>
+<div class="reading-block" id="p-2234b709874"><p>多人环境还涉及技能使用的社会条件。一个技术上能够自动采集资源的程序，未必符合服务器规则或团队分工；执行权限由服务器规则与协作约定共同规定。把权限和协作约定写进调用条件，可以让技能库服务于共同活动。由谁批准新技能、谁可以修订和停用它，也会决定自动化能力最终由谁支配。</p>
+</div>
+<h2 id="h-dc2a3e06f78" data-heading><span class="anchor-alias" id="s-16"></span><span class="heading-chinese">十六、开放问题</span></h2>
+<div class="reading-block" id="p-140dbcdf03f"><p>技能库的长期难题是如何在可靠性、可迁移性与发现新能力之间取得可检验的平衡。只保存严格验证的条目可能增长缓慢，轻易纳入每次成功又会累积脆弱程序。一个值得研究的方向是为技能保留不同成熟阶段，让试验性能力在受控条件下使用，并根据反复证据调整可信度。</p>
+</div>
+<div class="reading-block" id="p-73bec7d5491"><p>另一个问题是抽象如何从经验中产生。把成功代码存起来较容易，识别多个任务共享的行动结构较困难。真正有解释力的研究需要展示抽象改变了什么：减少了哪些重复，支持了哪种新组合，又在哪些条件下失败。技能库由此成为研究累积性智能的具体装置，其价值取决于可追踪的能力变化，而非库这个名称本身。</p>
+</div>
+<h2 id="h-1cad116c34b" data-heading><span class="anchor-alias" id="s-17"></span><span class="heading-chinese">十七、失败恢复也是技能的一部分</span></h2>
+<div class="reading-block" id="p-750da0110ad"><p>一个只在顺利环境中有效的程序，通常会把异常处理负担推给上层。寻找矿石途中遇到封闭道路，系统若只抛出“失败”，规划器便需要重新理解整个过程。更有用的返回信息包括已经完成哪些子目标、当前停在哪里、什么条件阻止继续，以及是否可以从中断点恢复。这让失败成为可利用的状态变化，而不是把任务历史全部清零。</p>
+</div>
+<div class="reading-block" id="p-2084f73ade4"><p>恢复还涉及重复执行的后果。再次运行“交付物品”可能重复扣除资源，再次运行“打开机关”可能把已经打开的门关上。一个技能是否能够安全重试，应当写在契约或控制逻辑中。通过检查当前目标状态再行动，可以减少重复副作用；对于不可逆行为，则需要让调用者知道已经发生的变化。技能的可靠性因此包含成功路径，也包含中断后的可解释状态。</p>
+</div>
+<h2 id="h-5a53c8d0662" data-heading><span class="anchor-alias" id="s-18"></span><span class="heading-chinese">十八、数量参数与目标含义</span></h2>
+<div class="reading-block" id="p-fbc3837faf2"><p>“采集十块石头”有两种常见解释：把库存补到十块，或者在现有库存之外新增十块。它们会导致不同程序。若智能体原来已有八块，前者只需再取两块，后者还需取十块。技能名称或参数没有明确说明时，组合任务很容易在这些细节上出错。目标的形式化应与评估器使用同一种数量语义。</p>
+</div>
+<div class="reading-block" id="p-f66a1f1fd91"><p>类似歧义也存在于“最近”“可用”“安全”等词语中。最近可以指直线距离或实际可达路径，可用工具可能需要耐久足够而非仅出现在库存。将这些解释压缩成一个简短函数名，会让调用看起来简洁，却隐藏判断成本。设计良好的技能接口会暴露对结果有实质影响的参数，并提供合理的默认值及其适用范围，而不是要求每次调用者重新猜测。</p>
+</div>
+<h2 id="h-87c8ca57b02" data-heading><span class="anchor-alias" id="s-19"></span><span class="heading-chinese">十九、依赖关系怎样影响长期积累</span></h2>
+<div class="reading-block" id="p-8495692a52a"><p>当高层技能调用低层技能，库就形成依赖网络。修复一个基础采集函数，可能同时改善许多制造任务；相反，改变其返回格式也可能使所有调用者失效。维护时因此需要追踪依赖、版本和替代关系。局部修改之后只测试新函数，无法说明整个库仍然可用。</p>
+</div>
+<div class="reading-block" id="p-7a476f2f7a1"><p>依赖网络还可以帮助发现能力瓶颈。许多长任务都在跨河时失败，问题可能集中在导航技能，而不是上层目标规划。若每次只修改长任务代码，库会积累大量绕过同一缺陷的补丁。把失败按共同依赖汇总，能够让改进更具累积性。与此同时，过度依赖一个通用技能也会扩大单点错误的影响，保留独立验证或替代路径具有实际意义。</p>
+</div>
+<h2 id="h-9629df2c281" data-heading><span class="anchor-alias" id="s-20"></span><span class="heading-chinese">二十、环境接口贡献了多少能力</span></h2>
+<div class="reading-block" id="p-49262c2d4a3"><p>技能的复杂程度与基础接口有关。接口若直接提供“寻找最近矿脉并到达”，库中的采矿程序就已经借用了大量感知和导航能力；若接口只提供画面与按键，同名技能需要解决更多问题。比较两个智能体时，必须把这部分能力算进去，否则容易把接口预先完成的工作归给语言模型或技能积累机制。</p>
+</div>
+<div class="reading-block" id="p-e85c9ba527f"><p>它可以隔离研究问题，让研究者集中考察任务分解、程序组合或长期记忆。但结论应对应这种抽象层次。一个能在结构化状态接口中稳定操作的系统，尚未证明能从原始视觉中识别全部对象。清楚列出观察、控制和验证接口，能够使技能库的贡献更容易复现和比较，也有助于确定下一步需要补足的能力。</p>
+</div>
+<h2 id="h-0a199ea1c35" data-heading><span class="anchor-alias" id="s-21"></span><span class="heading-chinese">二十一、探索新技能与复用旧技能</span></h2>
+<div class="reading-block" id="p-f3b8ba0459a"><p>现有技能会影响系统认为哪些目标可行。长期只调用熟悉的条目，可能让智能体在一个小范围内高效循环；不断追求新技能，则可能忽略既有能力本可解决的任务。探索与复用之间需要根据目标和预算安排，而不是把技能数量增长本身设为唯一目的。</p>
+</div>
+<div class="reading-block" id="p-e0a9274ff37"><p>可以观察新条目的边际价值：它是否扩展了可达状态，支持了以前无法完成的组合，或显著降低了某类任务的成本。如果新技能只是旧技能改名，库虽然增长，能力边界却没有变化。反过来，一个小修订若消除了长期瓶颈，可能比大量新增函数更重要。用能力覆盖和后续任务收益衡量增长，能够把技能库研究从文件积累转向真实的行动积累。</p>
+</div>
+<h2 id="h-a2e5e029e7d" data-heading><span class="anchor-alias" id="s-22"></span><span class="heading-chinese">二十二、技能库的可审查性</span></h2>
+<div class="reading-block" id="p-dc4fcbb5a84"><p>一条技能从何而来、经过哪些测试、何时失败过，应能与实现一起查看。仅保留最新代码，会让研究者无法判断某次表现变化源于技能修订、检索变化还是环境更新。保存版本及最小测试情景，可以让能力积累成为可复查的过程，也便于在新版本失效时恢复到已知条件下有效的实现。</p>
+</div>
+<div class="reading-block" id="p-5cc632394b1"><p>可审查性还包括让调用者理解选择。智能体为何选中这个技能，排除了哪些候选，是否检查了前提，能够说明行动控制发生在哪一层。解释可以选取与判断有关的计算记录，并将模型事后生成的理由与实际执行轨迹联系起来。较稳妥的证据是实际检索、条件检查、调用和环境变化的日志。它们使研究者能够定位问题，也使设计者有依据地调整库的结构。</p>
+</div>
+<div class="reading-block" id="p-a95615636a2"><p>技能库的开放程度还取决于能否引入新的行动接口。若所有条目只能重组固定基础函数，能力增长主要发生在组合层；若系统还能学习新的感知或控制方式，增长范围则更广。描述研究结果时，应明确这一边界，使“持续获得技能”对应到实际发生变化的能力层次。</p>
+</div>
+<div class="reading-block" id="p-f4dd74a78df"><p>这也要求把库的内容与环境提供的基础能力分别呈现，使后续读者能够重建技能增长的实际条件，并据此判断迁移结论。</p>
+</div>
+<h2 id="h-1184d9947b1" data-heading><span class="anchor-alias" id="s-23"></span><span class="heading-chinese">参考文献</span></h2>
+<div class="reading-block" id="p-c3ca45841d8"><ol>
+<li>Sutton, Richard S., Doina Precup, and Satinder Singh. 1999. “Between MDPs and semi-MDPs: A Framework for Temporal Abstraction in Reinforcement Learning.” <em>Artificial Intelligence</em> 112: 181–211。本文使用页181—183、186—187的时间抽象与选项定义。<a href="https://ics.uci.edu/~dechter/courses/ics-295/winter-2018/papers/Sutton-Precup-Singh-AIJ99.pdf">原论文</a>。</li>
+<li>Wang, Guanzhi, Yuqi Xie, Yunfan Jiang, Ajay Mandlekar, Chaowei Xiao, Yuke Zhu, Linxi Fan, and Anima Anandkumar. 2023/2024. “Voyager: An Open-Ended Embodied Agent with Large Language Models.” arXiv:2305.16291；2024年TMLR版本。本文重点第2.1—2.3节与附录A.2.3—A.2.4。<a href="../../entry/a35ee2f2799296/">Voyager：基于大语言模型的开放式具身智能体</a>；<a href="https://arxiv.org/abs/2305.16291">作者论文记录</a>。</li>
+<li>Shinn, Noah, Federico Cassano, Edward Berman, Ashwin Gopinath, Karthik Narasimhan, and Shunyu Yao. 2023. “Reflexion: Language Agents with Verbal Reinforcement Learning.” arXiv:2303.11366。本文使用第3节页3—5、第4.2—4.3节页6—8及第5节页9。<a href="../../entry/4338098d6bcc23/">Reflexion：基于语言强化学习的语言智能体</a>；<a href="https://arxiv.org/abs/2303.11366">作者论文记录</a>。</li>
+</ol>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="157ce1b13eda53"></div></section></main></div></body></html>

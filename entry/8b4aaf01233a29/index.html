@@ -1,0 +1,135 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="语言反馈是把行动或生成结果的评价、错误信息与改进建议用自然语言表达，并将其重新输入行动过程的机制。它可以来自环境、工具、评估器、人类或智能体自身。在游戏与语言智能体研究中，语言反馈使一次失败不只留下一个分数，还可能提供下一次尝试可用的具体信息。但反馈写得详细，并不等于判断正确；它是否改善行动，需要检查来源、依据、适用条件和实际效果。"><title>语言反馈 · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" >档案卡片</a><a href="../../concepts/" aria-current="page">索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="8b4aaf01233a29"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../concepts/?view=all">← 索引标签</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-72c40480343" data-toc="h-72c40480343">一、反馈包含哪些不同内容</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-6c47d86bbcb" data-toc="h-6c47d86bbcb">二、为什么使用语言</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-ac402dfa681" data-toc="h-ac402dfa681">三、从外部反馈到自我反馈</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-3d06c98de2d" data-toc="h-3d06c98de2d">四、语言反馈的闭环</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-d7d8aa4233d" data-toc="h-d7d8aa4233d">五、反馈的可操作性</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-2facea9f4b8" data-toc="h-2facea9f4b8">六、错误定位与信用分配</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-a0794498948" data-toc="h-a0794498948">七、Reflexion的三种角色</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-d8ef26e8cf5" data-toc="h-d8ef26e8cf5">八、不同任务需要不同评估器</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-866cb9bf6af" data-toc="h-866cb9bf6af">九、Voyager的三类执行反馈</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-336e4433b5d" data-toc="h-336e4433b5d">十、自我修订与自我验证</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-d6278b79375" data-toc="h-d6278b79375">十一、反馈可能错误地宣布成功</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-f79abc1c8d8" data-toc="h-f79abc1c8d8">十二、反馈过长与信息竞争</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-07f77c43109" data-toc="h-07f77c43109">十三、冲突反馈如何处理</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-c2233802956" data-toc="h-c2233802956">十四、反馈的语气与权威</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-ec7bbeb54c1" data-toc="h-ec7bbeb54c1">十五、反馈与奖励目标的关系</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-e73657a0ecc" data-toc="h-e73657a0ecc">十六、游戏中的提示与剧透</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-57b27b2fd6c" data-toc="h-57b27b2fd6c">十七、NPC对玩家行为的解释</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-e1a3c596e6e" data-toc="h-e1a3c596e6e">十八、怎样测量反馈的贡献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-f39ebf4b6a2" data-toc="h-f39ebf4b6a2">十九、从局部修复到可迁移教训</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-987bea941cf" data-toc="h-987bea941cf">二十、停止条件与无效循环</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-ead8f4dbe0d" data-toc="h-ead8f4dbe0d">二十一、反馈中的信息污染</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-5a6d4776373" data-toc="h-5a6d4776373">二十二、研究中的解释边界</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-adfaa49cb45" data-toc="h-adfaa49cb45">二十三、开放问题</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-7ff6ad40a72" data-toc="h-7ff6ad40a72">二十四、错误反馈下的稳健性</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-0323a81e654" data-toc="h-0323a81e654">二十五、反馈如何成为共享研究资料</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1184d9947b1" data-toc="h-1184d9947b1">参考文献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header has-cover" id="entry-title"><figure class="entry-media kind-generated"><img src="../../assets/display/21548f1830d3df962852ae1f.webp" alt="语言反馈 · 独立生成插图" width="1254" height="1254"></figure><div><a class="entry-kicker" href="../../concepts/">索引标签</a><p class="entry-original " lang="en">Verbal feedback</p><h1>语言反馈</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>语言反馈是把行动或生成结果的评价、错误信息与改进建议用自然语言表达，并将其重新输入行动过程的机制。它可以来自环境、工具、评估器、人类或智能体自身。在游戏与语言智能体研究中，语言反馈使一次失败不只留下一个分数，还可能提供下一次尝试可用的具体信息。但反馈写得详细，并不等于判断正确；它是否改善行动，需要检查来源、依据、适用条件和实际效果。</p>
+</section><h2 id="h-72c40480343" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">一、反馈包含哪些不同内容</span></h2>
+<div class="reading-block" id="p-c72214fdd37"><p>“门没有打开”是一项结果观察，“任务失败”是一项评价，“因为钥匙不匹配”是一项原因解释，“换铜钥匙再试”则是一项建议。它们可以出现在同一句反馈中，却具有不同的证据要求。系统可能准确观察到失败，却误判原因；也可能提出有效建议，却没有真正理解失败机制。</p>
+</div>
+<div class="reading-block" id="p-be3a53aa7c4"><p>把这些层次拆开，能够避免让流畅解释掩盖薄弱证据。在程序和游戏环境中，最好保留结果来自哪个接口，评价依据什么标准，原因是否经过检验，建议需要哪些条件。反馈由此成为可追踪的信息结构，而不是一段被整体接受的权威文字。自然语言的灵活性有价值，也使不同地位的内容更容易混在一起。</p>
+</div>
+<h2 id="h-6c47d86bbcb" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">二、为什么使用语言</span></h2>
+<div class="reading-block" id="p-e073ca297d5"><p>标量奖励便于比较结果，却通常不说明错误发生在哪里。语言可以表达局部问题、条件关系、操作建议和例外，例如“已经取得材料，但工具耐久不足，先修理再进入矿洞”。这样的反馈能够把一次失败转化为可执行的修订方向，减少智能体盲目重试的范围。</p>
+</div>
+<div class="reading-block" id="p-3ef2be52153"><p>不过，语言与分数不是只能二选一。分数可以提供稳定的结果标准，语言解释帮助定位和修复；程序检查可以确认语法，文字说明补充用户意图。不同反馈形式承担不同任务。研究应说明语言到底增加了什么信息，而不是把文字长度或拟人化表达本身视为比数值更高级的学习机制。</p>
+</div>
+<h2 id="h-ac402dfa681" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">三、从外部反馈到自我反馈</span></h2>
+<div class="reading-block" id="p-10ecb90d98d"><p>外部反馈可以来自游戏状态、编译器、测试或人类评审。自我反馈则由生成结果的模型或另一个模型提出批评。前者也未必天然正确：测试可能不完整，人类可能误解任务；后者也未必无效：模型有时能在第二次检查中发现先前遗漏。关键在于反馈如何得到约束与核验。</p>
+</div>
+<div class="reading-block" id="p-283f9bcf9d1"><p>若行动者和评估器共享同一种盲点，它们可能一致认可错误答案。换一个提示或增加一个“批评者”角色，并不能自动获得独立证据。可以通过环境测量、不同来源的测试、人工抽查或反例验证增强约束。模型之间的意见数量与证据独立性不是一回事，研究需要区分二者。</p>
+</div>
+<h2 id="h-3d06c98de2d" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">四、语言反馈的闭环</span></h2>
+<div class="reading-block" id="p-5e378fe69ed"><p>一个基本闭环包括行动、观察、评价、反馈解释、修订和再次行动。每一环都需要接口：评估器看到什么，反馈交给谁，修订能改变哪些部分，什么时候停止。若只生成批评而没有可修改的行动结构，反馈可能停留在评论层面；若不断修改而不重新验证，又无法知道修订是否有效。</p>
+</div>
+<div class="reading-block" id="p-158867e3be8"><p>闭环也可能产生新的错误。修复语法时改变了目标逻辑，补足资源时偏离了任务，或者为了满足评估器而绕过真实要求。因此，每轮修订都应保持原任务与当前状态的可见性，并检查新方案是否引入副作用。多轮过程并不天然优于一次生成，它的收益取决于每轮是否获得有用的新信息。</p>
+</div>
+<div class="reading-block" id="p-1ce1c8dac95"><p>闭环是否成立，取决于回应与被反馈对象的联系。ELIZA能够把用户刚说过的话变换成一个相关追问，维持对话；环境任务是否完成，仍需由相应的判定机制检查。SHRDLU把语言接到对象关系和行动过程上，回应因而可以与同一个积木世界中的状态相互核对。两者说明，反馈的自然程度、针对性和可验证性是不同维度：一句回应可能很贴切，却没有独立检查其所说事实的通路。<a href="https://web.stanford.edu/class/cs124/p36-weizenabaum.pdf">Weizenbaum，1966</a>；<a href="https://hci.stanford.edu/courses/cs047n/readings/winograd-understand.pdf">Winograd，1980，210—216页</a></p>
+</div>
+<h2 id="h-d7d8aa4233d" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">五、反馈的可操作性</span></h2>
+<div class="reading-block" id="p-4295cf9aace"><p>“做得更好”几乎没有提供行动方向，“注意安全”也可能过于抽象。有效反馈通常指出可定位的问题、相关证据和可尝试的改变。具体程度应匹配行动者的控制层：代码生成器需要知道接口或状态条件，低层控制器需要更直接的动作信息，玩家可能需要理解机制而非被告知完整答案。</p>
+</div>
+<div class="reading-block" id="p-d63fa134c15"><p>反馈的细节应服务于当前问题与行动。一次给出十个相互冲突的建议，可能增加推理负担；提前规定全部动作，则可能让学习者机械执行而不理解。可操作反馈应围绕当前最关键的阻碍组织，并说明建议的适用条件。对开放任务，还需要保留多种可行方案，避免把评估者的偏好包装成唯一正确路线。</p>
+</div>
+<h2 id="h-2facea9f4b8" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">六、错误定位与信用分配</span></h2>
+<div class="reading-block" id="p-b5231561f6f"><p>长任务失败后，最后一步不一定是根因。进入危险区域时缺少装备，问题可能发生在更早的准备阶段；制造失败可能源于采集了错误材料，而不是当前函数语法。语言反馈可以描述这些跨时间关系，但描述不等于已经完成因果识别。</p>
+</div>
+<div class="reading-block" id="p-b39e746c409"><p>有效定位需要对照行动轨迹与目标条件，区分最早的关键偏离、后续连锁影响和最终可见症状。可以提出若干原因假设，再通过改变一个条件的重试区分它们。若反馈直接把最近动作当作错误来源，系统可能反复修补末端表现，却保留真正的瓶颈。长时程反馈研究应特别检查这种归因偏差。</p>
+</div>
+<h2 id="h-a0794498948" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">七、Reflexion的三种角色</span></h2>
+<div class="reading-block" id="p-d6da5e3e45b"><p>Reflexion将行动者、评估器与自我反思模块区分。行动者产生轨迹，评估器给出任务相关判断，反思模块根据轨迹与结果形成文字，供下一次尝试使用。论文把短期轨迹与跨尝试保存的反思摘要分开，并在不同任务中设置有限的记忆容量。[1]</p>
+</div>
+<div class="reading-block" id="p-1bf39e7c462"><p>这种设计的重要之处是通过上下文和外部记忆影响后续行为，不要求每次反馈都直接更新模型权重。题名中的“语言强化学习”指这里通过语言反馈修正尝试的具体循环。系统在功能上利用反馈适应，但适应发生在什么部位，需要明确说明。</p>
+</div>
+<h2 id="h-d8ef26e8cf5" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">八、不同任务需要不同评估器</span></h2>
+<div class="reading-block" id="p-89f723d7408"><p>Reflexion在推理、决策和编程任务中采用不同评价方式，包括答案匹配、任务启发式与测试。[1] 这些方式提供的信息和错误类型并不相同。答案匹配可以判断输出是否与标准一致，却未必解释推理过程；测试能够暴露某些程序行为，却受测试覆盖范围限制。</p>
+</div>
+<div class="reading-block" id="p-96662d396b1"><p>不同任务的评估器采用各自的判定机制。更强的评估器本身可能带来改进，额外测试也可能贡献大量信息。需要分别比较有无语言反思、有无测试和有无轨迹记忆，才能确定语言解释的边际贡献。同名模块的具体职责由任务和系统结构决定。</p>
+</div>
+<h2 id="h-866cb9bf6af" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-chinese">九、Voyager的三类执行反馈</span></h2>
+<div class="reading-block" id="p-83da7b4d8ef"><p>Voyager把环境反馈、执行错误与自我验证结合起来。环境反馈描述程序推进中的状态，解释器错误提示程序执行问题，自我验证则检查任务是否满足。它们被用于下一轮代码修订，成功验证后才能进入后续任务与技能积累。[2]</p>
+</div>
+<div class="reading-block" id="p-86a1d59c088"><p>三类反馈的区分非常重要。程序没有抛错，只说明执行过程满足了某些技术条件；库存增加，也不说明达到了任务要求的数量；模型说“成功”，还需要与可观察状态对应。由多个环节提供反馈可以帮助定位，但若所有环节都依赖同一不完整状态，也可能共同漏掉问题。多源结构仍需检查每个来源实际看到了什么。</p>
+</div>
+<h2 id="h-336e4433b5d" data-heading><span class="anchor-alias" id="s-10"></span><span class="heading-chinese">十、自我修订与自我验证</span></h2>
+<div class="reading-block" id="p-de388e2b1f8"><p>Self-Refine提出由同一语言模型生成初稿、提供反馈并迭代修订的方式，其论文摘要明确把它与额外训练区分。[3] 这种架构说明，第二次面向批评的生成可以被组织为一种推理时程序。作者公开摘要概述了这一方法。</p>
+</div>
+<div class="reading-block" id="p-4aa8d777b07"><p>自我修订与自我验证应当分开。前者提出一个不同方案，后者判断方案是否满足要求。模型能够提出更丰富措辞，并不等于能够可靠判断事实或程序行为。对于可执行任务，外部运行结果可以提供约束；解释性与审美性任务，需要把评价标准同读者、专家和模型判断各自的作用联系起来。</p>
+</div>
+<h2 id="h-d6278b79375" data-heading><span class="anchor-alias" id="s-11"></span><span class="heading-chinese">十一、反馈可能错误地宣布成功</span></h2>
+<div class="reading-block" id="p-2372262d2ad"><p>测试通过而程序仍不符合任务，是一种假阳性；测试失败而程序其实符合任务，则是假阴性。二者会产生不同后果。假阳性使系统过早停止并把错误方案存入库，假阴性使正确方案被反复修改，甚至越改越差。评价器的误差分析，可以追踪这两种结果怎样进入反馈循环。</p>
+</div>
+<div class="reading-block" id="p-666b694ba24"><p>可以使用保留测试、独立检查和人工复核估计评价误差。特别是智能体自己生成测试时，测试可能与它自己的实现共享错误理解。增加测试数量有时有帮助，但若都覆盖同一简单情形，数量增加也难以修复结构性遗漏。评价应报告测试来源、覆盖条件和误判类型，而不只是报告通过率。</p>
+</div>
+<h2 id="h-f79abc1c8d8" data-heading><span class="anchor-alias" id="s-12"></span><span class="heading-chinese">十二、反馈过长与信息竞争</span></h2>
+<div class="reading-block" id="p-cb7972905bc"><p>长反馈可以提供细节，也可能把关键问题埋在大量评论中。语言模型的上下文有限，旧反馈还会与当前状态、任务要求和技能说明竞争。若每轮都保留全部文字，系统可能反复响应过时错误，或把已经修复的问题重新引入。</p>
+</div>
+<div class="reading-block" id="p-f4a61b75035"><p>可以把反馈组织为当前仍有效的问题、已处理的问题和待验证假设。压缩时应保留证据与条件，避免只留下笼统教训。记忆容量与摘要方式会影响长期效果，因此应作为实验设置公开。一个采用更大上下文的系统表现更好，不能自动说明它的反思质量更高；它也可能只是保留了更多任务信息。</p>
+</div>
+<h2 id="h-07f77c43109" data-heading><span class="anchor-alias" id="s-13"></span><span class="heading-chinese">十三、冲突反馈如何处理</span></h2>
+<div class="reading-block" id="p-eef21a73abb"><p>环境报告物品已取得，评估器却说任务失败，可能因为目标还要求放入指定容器；人类说路线正确，导航模块却判断不可达，可能因为地图状态未更新。冲突并不一定意味着某个来源完全失效，它也可能揭示不同模块使用了不同目标或时间点。</p>
+</div>
+<div class="reading-block" id="p-2323b3173ca"><p>处理冲突需要先对齐对象、时间与标准，再决定是否重测。系统可以保留多个假设，而不是立即用最后一条反馈覆盖前面全部信息。对于不可逆操作，应在冲突解除前限制行动；对于可轻易重试的动作，可以用小成本实验获得新证据。这是根据任务后果安排调查方式，并非所有反馈都需要同样复杂的流程。</p>
+</div>
+<h2 id="h-c2233802956" data-heading><span class="anchor-alias" id="s-14"></span><span class="heading-chinese">十四、反馈的语气与权威</span></h2>
+<div class="reading-block" id="p-da2308ce20e"><p>明确语气可以帮助执行，但语气强烈不等于证据充分。模型输出“显然是因为路径错误”，可能没有比较其他原因；带有礼貌缓冲的反馈，也可能准确指出一个关键问题。研究者应把表述风格与诊断质量分开评价，避免让语言自信成为可靠性的替代指标。</p>
+</div>
+<div class="reading-block" id="p-f4b1ddab8a2"><p>在人类参与的游戏或教学中，反馈还会影响关系与动机。责备人格与指出具体操作错误，具有不同效果。设计者可以让反馈围绕可改变的行为和可见条件，同时给玩家解释、拒绝或选择其他策略的空间。这里的标准来自互动目的：支持理解与控制，而不是让反馈系统赢得每一次争论。</p>
+</div>
+<h2 id="h-ec7bbeb54c1" data-heading><span class="anchor-alias" id="s-15"></span><span class="heading-chinese">十五、反馈与奖励目标的关系</span></h2>
+<div class="reading-block" id="p-84ca62976c4"><p>反馈有时解释如何提高既定分数，有时质疑分数是否反映真实目标。例如一个智能体通过重复简单任务获得高完成数，评估器可能建议继续重复，但研究目的也许是能力扩展。语言可以表达这种目标层面的修正，却也可能悄悄改变任务，使结果不可比较。</p>
+</div>
+<div class="reading-block" id="p-8bcd06b8d61"><p>应区分执行层修复与目标层调整。修复代码仍以原任务为准，改变成功条件则相当于修改研究或设计对象。两者都可能合理，但需要记录。若系统在失败后不断重写目标，最终“成功”可能只是标准变容易。透明保留初始目标、调整理由与新标准，有助于判断反馈究竟改善了能力还是改变了计分方式。</p>
+</div>
+<h2 id="h-e73657a0ecc" data-heading><span class="anchor-alias" id="s-16"></span><span class="heading-chinese">十六、游戏中的提示与剧透</span></h2>
+<div class="reading-block" id="p-65ea254ef3d"><p>面向玩家的语言反馈需要考虑信息释放。直接告诉谜题答案可以帮助过关，却可能消除推理过程；只说“再想想”又可能毫无帮助。分层提示可以先指出被忽略的机制，再逐步提供更具体的行动线索，使玩家决定需要多少支持。</p>
+</div>
+<div class="reading-block" id="p-7fba0c8ab60"><p>提示质量不能只以通过率评价。还可以观察玩家是否理解机制、能否在新谜题中迁移、是否感到拥有选择，以及是否知道提示来自何种规则。玩家主动选择完整解答，与系统未经请求不断接管行动，是不同互动安排。反馈系统的目标应与游戏所希望支持的活动一致。</p>
+</div>
+<h2 id="h-57b27b2fd6c" data-heading><span class="anchor-alias" id="s-17"></span><span class="heading-chinese">十七、NPC对玩家行为的解释</span></h2>
+<div class="reading-block" id="p-c37854b4c09"><p>角色可以对玩家行动作出语言回应，使后果更容易理解。角色对玩家的判断需要结合多次交互与具体情境；看到玩家攻击敌对对象，也不必直接推断其动机。反馈若把事件解释过度人格化，可能损害角色可信度，也压缩玩家重新解释和修复关系的空间。</p>
+</div>
+<div class="reading-block" id="p-e4d011e018a"><p>可以让角色根据自身视角表达有限判断，保留疑问和后续更新。例如角色可以指出自己观察到玩家离开，以及这造成了什么后果，再询问原因。这样的设计既允许冲突，也保留信息不完整的结构。角色反馈可以成为叙事的一部分，但底层系统仍应区分世界事实、角色信念与设计者评价。</p>
+</div>
+<h2 id="h-e1a3c596e6e" data-heading><span class="anchor-alias" id="s-18"></span><span class="heading-chinese">十八、怎样测量反馈的贡献</span></h2>
+<div class="reading-block" id="p-e233594a029"><p>最直接的对照是保持模型、预算和任务一致，比较没有反馈、只有结果、加入具体诊断及加入记忆的表现。还可以替换为无关反馈或错误反馈，观察系统是否有辨别能力。若任何较长文本都能带来相似收益，改进可能来自额外推理或计算，而非反馈内容本身。</p>
+</div>
+<div class="reading-block" id="p-3af5780f842"><p>过程指标也很重要：系统是否修复被指出的问题，是否引入新错误，是否重复同一失败，是否在成功后仍无谓修改。最终成功率无法独立解释这些差异。对于人类评价，应说明评审者看到了什么、依据什么标准比较，以及是否可能被更长、更自信的解释影响判断。</p>
+</div>
+<h2 id="h-f39ebf4b6a2" data-heading><span class="anchor-alias" id="s-19"></span><span class="heading-chinese">十九、从局部修复到可迁移教训</span></h2>
+<div class="reading-block" id="p-3e8225becc2"><p>一次反馈可以解决当前错误，却未必形成可复用知识。把“这次应使用铜钥匙”写成永久规则，可能在下一扇铁门前导致失败。迁移需要提炼更一般的检查，例如先辨别锁的类型，再选择匹配钥匙，同时保留对当前例外的记录。</p>
+</div>
+<div class="reading-block" id="p-145bde3b531"><p>这个抽象过程需要跨事件证据。系统可以把局部建议存为带条件的假设，在后续任务中检验，再逐步形成稳定技能。若反馈直接进入技能库，应经过可执行验证；若进入情景记忆，应保留它是观察还是解释。反馈、记忆与技能之间的边界清楚，才能避免错误教训在长期运行中被不断放大。</p>
+</div>
+<h2 id="h-987bea941cf" data-heading><span class="anchor-alias" id="s-20"></span><span class="heading-chinese">二十、停止条件与无效循环</span></h2>
+<div class="reading-block" id="p-4e82f566e39"><p>多轮反馈有时会在几个方案之间摆动：修复甲又破坏乙，随后为了乙改回甲。也可能在没有新证据的情况下不断换措辞，却不改变行为。设置轮数上限可以限制成本，但还需要识别何时应该请求新信息、换方法或承认当前机制无法完成。</p>
+</div>
+<div class="reading-block" id="p-5f64d4dc412"><p>停止判断可以结合目标验证、改进趋势与剩余不确定性。已经满足要求时，继续修订可能降低质量；尚未满足但每轮都有可验证进展时，固定过短预算又可能过早放弃。具体策略取决于任务成本和后果，研究应把这些设置公开，而非把无限修订当作自动可靠性的来源。</p>
+</div>
+<h2 id="h-ead8f4dbe0d" data-heading><span class="anchor-alias" id="s-21"></span><span class="heading-chinese">二十一、反馈中的信息污染</span></h2>
+<div class="reading-block" id="p-1512bfd751b"><p>工具返回的文字可能混有与任务无关的指令，角色对话也可能包含误导。智能体需要区分被观察的内容与控制自身行为的要求。例如游戏里一本书写着“丢弃所有物品”，这首先是世界内文本，不能仅因进入反馈通道就升级为系统必须执行的命令。</p>
+</div>
+<div class="reading-block" id="p-6e50d511f8b"><p>来源标记、接口结构和权限限制有助于维持这一区分。研究还可以设置误导性反馈，检查系统是否核对其与任务目标和环境证据的关系。语言反馈扩大了可表达信息，也扩大了错误信息进入控制过程的路径。可靠性要求系统判断何时使用、何时验证与何时忽略，而非对每段文字一律服从。</p>
+</div>
+<h2 id="h-5a6d4776373" data-heading><span class="anchor-alias" id="s-22"></span><span class="heading-chinese">二十二、研究中的解释边界</span></h2>
+<div class="reading-block" id="p-f86b812d9ad"><p>系统生成一段准确的事后说明，不一定表示行动时使用了同一推理。解释可能是后补叙述，尤其当研究者只在任务结束后询问“为什么”。要研究反馈的实际作用，需要保留反馈出现的时间、之后的修订和行动变化，并通过干预检验关系。</p>
+</div>
+<div class="reading-block" id="p-285779d5d42"><p>同样，反馈文本中出现“意识到错误”“吸取教训”等说法，只能首先作为系统输出描述。若要作心理层面的主张，需要额外理论和证据。功能性分析已经能够提出清楚的问题：错误是否被定位，行为是否被修正，教训是否在适当新情景中使用。无需借助未经证实的内在体验，也能严肃研究语言反馈的能力。</p>
+</div>
+<h2 id="h-adfaa49cb45" data-heading><span class="anchor-alias" id="s-23"></span><span class="heading-chinese">二十三、开放问题</span></h2>
+<div class="reading-block" id="p-9906c074a9c"><p>语言反馈的长处在于可以把结果、条件和建议连接起来，难点则是如何使这种表达受到可靠证据约束。未来研究需要更清楚地区分“反馈听起来有帮助”与“反馈导致可验证改进”，尤其在评价标准开放、因果关系复杂或执行代价较高的任务中。</p>
+</div>
+<div class="reading-block" id="p-0eb5e19da5f"><p>另一个问题是如何组织人、模型与工具的分工。工具擅长检查形式与可测状态，人类能够提供目的和语境判断，模型能够整合信息并提出候选修订；这些能力彼此互补，也可能相互放大错误。有效系统应使分工和证据流可见，让使用者知道一个建议从何而来、经过什么检验，以及仍适用于哪些条件。</p>
+</div>
+<h2 id="h-7ff6ad40a72" data-heading><span class="anchor-alias" id="s-24"></span><span class="heading-chinese">二十四、错误反馈下的稳健性</span></h2>
+<div class="reading-block" id="p-b6565c12e58"><p>可靠系统不能假设每条反馈都正确。可以故意提供过时状态、错误原因或相互矛盾的建议，检查智能体是否核对证据、提出澄清或通过小规模试验验证。若系统对正确反馈和错误反馈同样服从，常规测试中的高表现可能依赖评估器始终可靠，而非系统本身具有良好的判断能力。</p>
+</div>
+<div class="reading-block" id="p-d5d8a8e32e8"><p>稳健性也不等于一律拒绝反馈。过度怀疑会使系统忽略有用信息，增加验证成本。需要根据来源、历史可靠性、任务后果与当前证据决定信任程度。研究可以测量纠正错误反馈所需的代价，以及系统能否在获得反证后撤销旧判断。这比只测试理想条件下的修订更接近长期运行的实际要求。</p>
+</div>
+<h2 id="h-0323a81e654" data-heading><span class="anchor-alias" id="s-25"></span><span class="heading-chinese">二十五、反馈如何成为共享研究资料</span></h2>
+<div class="reading-block" id="p-75db0a4f4af"><p>一份可复查的反馈记录应保留原任务、行动结果、反馈原文、生成来源、后续改动和重新验证结果。若只展示修订后的答案，读者便无法判断反馈指出了什么，也无法区分一次幸运重采样与有针对性的修复。将这些环节连起来，可以使反馈研究从成功故事转向可分析的机制。</p>
+</div>
+<div class="reading-block" id="p-9c849241d15"><p>对公开实验，还应说明哪些反馈由研究者人工筛选，哪些由系统自动产生。人工挑选最有效批评可以证明某种信息有潜在价值，却不能证明自动反馈器能够稳定提供它。把这两类实验区分开，有助于准确定位瓶颈：究竟缺少的是发现错误、表达建议，还是把建议转化为可靠行动的能力。</p>
+</div>
+<h2 id="h-1184d9947b1" data-heading><span class="anchor-alias" id="s-26"></span><span class="heading-chinese">参考文献</span></h2>
+<div class="reading-block" id="p-9d318e41a54"><ol>
+<li>Shinn, Noah, Federico Cassano, Edward Berman, Ashwin Gopinath, Karthik Narasimhan, and Shunyu Yao. 2023. “Reflexion: Language Agents with Verbal Reinforcement Learning.” arXiv:2303.11366。第3节页3—5；任务评价与实验见第4.2—4.3节页6—8；限制见第5节页9。本文区分测试误判、反思与权重更新。<a href="../../entry/4338098d6bcc23/">Reflexion：基于语言强化学习的语言智能体</a>；<a href="https://arxiv.org/abs/2303.11366">原论文记录</a>。</li>
+<li>Wang, Guanzhi, Yuqi Xie, Yunfan Jiang, Ajay Mandlekar, Chaowei Xiao, Yuke Zhu, Linxi Fan, and Anima Anandkumar. 2023/2024. “Voyager: An Open-Ended Embodied Agent with Large Language Models.” arXiv:2305.16291；TMLR，2024。第2.3节的环境反馈、执行错误与自我验证；附录A.2.4的验证边界。<a href="../../entry/a35ee2f2799296/">Voyager：基于大语言模型的开放式具身智能体</a>；<a href="https://arxiv.org/abs/2305.16291">原论文记录</a>。</li>
+<li>Madaan, Aman, Niket Tandon, Prakhar Gupta, Skyler Hallinan, Luyu Gao, Sarah Wiegreffe, Uri Alon, Nouha Dziri, Shrimai Prabhumoye, Yiming Yang, Shashank Gupta, Bodhisattwa Prasad Majumder, Katherine Hermann, Sean Welleck, Amir Yazdanbakhsh, and Peter Clark. 2023. “Self-Refine: Iterative Refinement with Self-Feedback.” arXiv:2303.17651v2，2023年5月25日。本文仅据作者摘要说明生成—反馈—修订的架构及无需额外训练，不援引未精读的实验数字。<a href="https://arxiv.org/abs/2303.17651v2">作者论文摘要与版本记录</a>。</li>
+</ol>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="8b4aaf01233a29"></div></section></main></div></body></html>

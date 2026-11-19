@@ -1,0 +1,316 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="论文将游戏程序化内容生成中的表达范围分析扩展为一个五维分类框架，区分内容无关与语义、定量与定性、产物与过程、客观与主观、自动与人工。作者用既有研究说明各维度怎样组合，并讨论把这一方法用于生成式人工智能时，输入选择、语义度量与分析规模带来的挑战。研究属于理论性方法框架，结尾明确提出进一步系统综述与实际应用的方向。"><title>生成系统的刻画维度：表达范围分析方法的分类体系 · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" aria-current="page">文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" >档案卡片</a><a href="../../concepts/" >索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="5239546704792d"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../articles/?view=all">← 文章</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-ERA00001" data-toc="u-ERA00001">生成系统的刻画维度：表达范围分析方法的分类体系</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-ERA00010" data-toc="u-ERA00010">1. 引言</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-ERA00015" data-toc="u-ERA00015">2. 相关工作</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-ERA00022" data-toc="u-ERA00022">3. 问题空间</a></div></li><li class="toc-node depth-2"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-u-ERA00030" aria-label="展开或收起4. 框架"><span>▸</span></button><a href="#u-ERA00030" data-toc="u-ERA00030">4. 框架</a></div><ul id="tree-u-ERA00030" class="toc-children" hidden><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-ERA00033" data-toc="u-ERA00033">4.1. 定量与定性</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-ERA00036" data-toc="u-ERA00036">4.2. 产物与过程</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-ERA00040" data-toc="u-ERA00040">4.3. 客观与主观</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-ERA00042" data-toc="u-ERA00042">4.4. 内容无关与语义</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-ERA00045" data-toc="u-ERA00045">4.5. 自动与人工</a></div></li></ul></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-ERA00048" data-toc="u-ERA00048">5. 讨论</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-ERA00052" data-toc="u-ERA00052">6. 结论、局限与未来工作</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-ERA00056" data-toc="u-ERA00056">致谢</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-ERA00058" data-toc="u-ERA00058">参考文献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-47322ba90eb" data-toc="h-47322ba90eb">署名与许可</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header has-cover" id="entry-title"><figure class="entry-media kind-article"><img src="../../assets/display/1ee5490ca772b2574c449a9e.webp" alt="原论文题名、署名及机构片段" width="1600" height="320"></figure><div><a class="entry-kicker" href="../../articles/">文章</a><p class="entry-original " lang="en">Axes of Characterizing Generative Systems: A Taxonomy of Approaches to Expressive Range Analysis</p><h1>生成系统的刻画维度：表达范围分析方法的分类体系</h1><p class="citation">Josiah Boucher 约西亚·布歇 / Gillian Smith 吉莉安·史密斯 / Yunus Doğan Telliel 尤努斯·多安·泰利埃尔 · 2025 · 2026汉译</p></div></header><div class="reading-toolbar"><div class="language-switch" role="group" aria-label="阅读语言"><button data-language="both" aria-pressed="true">对照</button><button data-language="zh" aria-pressed="false">汉译</button><button data-language="original" aria-pressed="false">原文</button></div><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro textual-foreign" id="entry-intro" data-heading><h2>简介</h2><p>论文将游戏程序化内容生成中的表达范围分析扩展为一个五维分类框架，区分内容无关与语义、定量与定性、产物与过程、客观与主观、自动与人工。作者用既有研究说明各维度怎样组合，并讨论把这一方法用于生成式人工智能时，输入选择、语义度量与分析规模带来的挑战。研究属于理论性方法框架，结尾明确提出进一步系统综述与实际应用的方向。</p>
+<p>原文由Josiah Boucher, Gillian Smith, Yunus Doğan Telliel署名，载于<em>CEUR Workshop Proceedings</em>《CEUR工作坊论文集》第3926卷。原文依<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>许可使用；本页汉译与排版转换属于对原作的改编，原作者署名、版权及原许可保留。 所用正式卷发布于2025年2月21日，对应2024年11月19日举行的EXAG工作坊；会期、版权年与正式发布年分别记录。</p>
+</section><h2 id="u-ERA00001" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-original" lang="en">Axes of Characterizing Generative Systems: A Taxonomy of Approaches to Expressive Range Analysis
+
+</span><span class="heading-chinese">生成系统的刻画维度：表达范围分析方法的分类体系
+
+</span></h2>
+<div class="bilingual-pair" id="u-ERA00002"><div class="original" lang="en"><p>Josiah Boucher¹,*, Gillian Smith¹,† and Yunus Doğan Telliel¹,†</p>
+</div><div class="translation" lang="zh"><p>Josiah Boucher¹,*、Gillian Smith¹,†与Yunus Doğan Telliel¹,†</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00003"><div class="original" lang="en"><p>¹ Worcester Polytechnic Institute (WPI)), 100 Institute Road, Worcester MA, U.S.A.</p>
+</div><div class="translation" lang="zh"><p>¹伍斯特理工学院（WPI）），美国马萨诸塞州伍斯特市Institute Road 100号。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00004"><div class="original" lang="en"><p>[* Corresponding author.]</p>
+</div><div class="translation" lang="zh"><p>[* 通讯作者。]</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00004B"><div class="original" lang="en"><p>[† These authors contributed equally.]</p>
+</div><div class="translation" lang="zh"><p>[† 这些作者贡献相同。]</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00005"><div class="original" lang="en"><p>✉ <a href="mailto:jdboucher@wpi.edu">jdboucher@wpi.edu</a> (J. Boucher); <a href="mailto:gmsmith@wpi.edu">gmsmith@wpi.edu</a> (G. Smith); <a href="mailto:ydtelliel@wpi.edu">ydtelliel@wpi.edu</a> (Y. D. Telliel)</p>
+</div><div class="translation" lang="zh"><p>✉ <a href="mailto:jdboucher@wpi.edu">jdboucher@wpi.edu</a>（J. Boucher）；<a href="mailto:gmsmith@wpi.edu">gmsmith@wpi.edu</a>（G. Smith）；<a href="mailto:ydtelliel@wpi.edu">ydtelliel@wpi.edu</a>（Y. D. Telliel）</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00005B"><div class="original" lang="en"><p>ORCID: 0009-0002-6865-9031 (J. Boucher); 0000-0002-2765-7702 (G. Smith); 0000-0001-5651-7349 (Y. D. Telliel)</p>
+</div><div class="translation" lang="zh"><p>ORCID：0009-0002-6865-9031（J. Boucher）；0000-0002-2765-7702（G. Smith）；0000-0001-5651-7349（Y. D. Telliel）</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00006"><div class="original" lang="en"><p>11th Experimental Artificial Intelligence in Games Workshop, November 19, 2024, Lexington, Kentucky, USA.</p>
+</div><div class="translation" lang="zh"><p>第11届游戏实验性人工智能工作坊，2024年11月19日，美国肯塔基州列克星敦。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00006B"><div class="original" lang="en"><p>CEUR Workshop Proceedings, ceur-ws.org, ISSN 1613-0073.</p>
+</div><div class="translation" lang="zh"><p>CEUR工作坊论文集，ceur-ws.org，ISSN 1613-0073。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00007"><div class="original" lang="en"><p>© 2024 Copyright for this paper by its authors. Use permitted under Creative Commons License Attribution 4.0 International (CC BY 4.0).</p>
+</div><div class="translation" lang="zh"><p>© 2024 本文版权归作者所有。允许依照知识共享署名4.0国际许可协议（CC BY 4.0）使用。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00008"><div class="original" lang="en"><h2>Abstract</h2>
+<p>Seeking to leverage Expressive Range Analysis (ERA)- a method of characterizing generative systems- for analysis of generative AI (GAI) systems and their outputs, this paper categorizes the approaches that have been used for ERA. We present a taxonomy with five axes of characterization that may be applied to ERA methodologies: content agnostic vs semantic; quantitative vs qualitative; product vs process; objective vs subjective; and automated vs manual. While ERA has traditionally been limited to the domain of Procedural Content Generation (PCG) in video game development, we recognize parallels between PCG and GAI and hope to see an expansion of the application of ERA into the domain of GAI. Serving this goal, these axes provide metrics through which to categorize, compare, and explore approaches.</p>
+</div><div class="translation" lang="zh"><h2>摘要</h2>
+<p>本文希望将表达范围分析（Expressive Range Analysis，ERA）这一刻画生成系统的方法，用于分析生成式人工智能（GAI）系统及其输出，因此对既有ERA方法进行分类。我们提出一个包含五个刻画维度的分类体系，可用于ERA方法论：内容无关与语义、定量与定性、产物与过程、客观与主观，以及自动与人工。ERA传统上局限于电子游戏开发中的程序化内容生成（PCG）领域，但我们认识到PCG与GAI之间存在相似之处，希望ERA的应用能够扩展到GAI领域。为这一目标服务，这些维度提供了对方法进行分类、比较和探索的度量依据。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00009"><div class="original" lang="en"><p><strong>Keywords</strong></p>
+<p>Expressive Range Analysis, Procedural Content Generation, Generative AI, Evaluating Generative Systems, Taxonomy</p>
+</div><div class="translation" lang="zh"><p><strong>关键词</strong></p>
+<p>表达范围分析；程序化内容生成；生成式人工智能；生成系统评估；分类体系。</p>
+</div></div>
+<h2 id="u-ERA00010" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-original" lang="en">1. Introduction
+
+</span><span class="heading-chinese">1. 引言
+
+</span></h2>
+<div class="bilingual-pair" id="u-ERA00011"><div class="original" lang="en"><p>Expressive Range Analysis (ERA) is a method of characterizing the nature and shape of a generative model in terms of its outputs. What sorts of outputs is a generator capable of? What impact does changing inputs of a generator have on its outputs? How do biases manifest in the generative outputs, and how do the inputs influence these biases? ERA is well suited for answering these questions [1]. ERA comes from the domain of Procedural Content Generation (PCG) in video game development: the practice of leveraging algorithmic methods to design and produce artifacts for use in games across a variety of contexts, such as levels or maps [2].</p>
+</div><div class="translation" lang="zh"><p>表达范围分析（ERA）是一种依据生成模型的输出，刻画其性质与形态的方法。生成器能够产生哪些类型的输出？改变生成器的输入会怎样影响输出？偏向如何呈现在生成输出中，输入又如何影响这些偏向？ERA很适合回答这些问题[1]。ERA源于电子游戏开发中的程序化内容生成（PCG）领域：利用算法方法设计并产生用于游戏的制品，应用情境包括关卡、地图等[2]。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00012"><div class="original" lang="en"><p>We recognize common threads between PCG and generative AI (GAI) systems- defined here as the process of using generative technologies such as large language models to produce content, often using natural language prompts as human-provided input- including high-level functionality, motivations, use cases, and shortcomings of both domains (for details, see Section 2). Because of these similarities, we seek to expand and leverage ERA—which has not only proven useful for recognizing bias within, and categorizing generative outputs of PCG systems, but also resembles some existing approaches for GAI analysis [3]—for analysis of GAI system outputs, especially text-to-X, large language model (LLM)-based applications (such as the text-to-text Chat GPT [4], text-to-image Stable Diffusion [5], and text-to-speech ElevenLabs [6]).</p>
+</div><div class="translation" lang="zh"><p>我们认识到PCG与生成式人工智能（GAI）系统之间存在共同线索。这里将GAI界定为使用大语言模型等生成技术来产生内容的过程，通常以自然语言提示作为人类提供的输入。这些共同线索包括两个领域的高层功能、动机、使用情境与不足（详见第2节）。基于这些相似之处，我们希望扩展并利用ERA来分析GAI系统的输出，尤其是基于大语言模型（LLM）的“文本到X”应用，例如文本到文本的Chat GPT[4]、文本到图像的Stable Diffusion[5]，以及文本到语音的ElevenLabs[6]。ERA不仅已被证明有助于识别PCG系统的生成输出中的偏向并对这些输出分类，也与GAI分析的一些既有方法相似[3]。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00013"><div class="original" lang="en"><p>The application of ERA in the domain of GAI is not a one-to-one translation from how the method is used in PCG. Use of GAI tools commonly requires more complicated, varied, and linguistic inputs than PCG, which tends to operate from numerical randomization as a starting point for much of its generation. Because these inputs have a major impact on the outputs of GAI systems [7], selection of these inputs is an important consideration for applying ERA to GAI— e.g. some decision points for input selection could include whether to handcraft inputs or sample the latent space, and whether the inputs should be restricted in a way that targets a specific domain of outputs (i.e. a prompt to output a haiku would be very different from one that might produce a cooking recipe). Furthermore, ERA requires the application of metrics to large quantities of content outputted from the system in question. What metrics are used and how they are determined is a major component of ERA, often directly determining the value provided by the analysis. Because GAI outputs tend to occupy a broad domain of applications and mediums, unique challenges arise when considering these metrics, further complicating the application of ERA in this context.</p>
+</div><div class="translation" lang="zh"><p>把ERA用于GAI领域，不能直接照搬它在PCG中的使用方式。与PCG相比，GAI工具通常需要更复杂、更多样且具有语言性质的输入；PCG的大量生成则倾向于以数值随机化为起点。由于这些输入会显著影响GAI系统的输出[7]，输入选择便成为把ERA用于GAI时的重要考虑。例如，选择输入时的一些决策点包括：手工编写输入还是对潜在空间采样，以及是否限制输入，使其针对某个特定输出领域——要求输出俳句的提示，与可能生成食谱的提示会很不一样。此外，ERA需要对所分析系统产生的大量内容应用度量。使用什么度量、怎样确定这些度量，是ERA的重要部分，常常直接决定分析提供的价值。由于GAI输出往往涉及广泛的应用领域和媒介，考虑这些度量时会出现独特挑战，使ERA在这一情境中的应用进一步复杂化。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00014"><div class="original" lang="en"><p>Responding to 1) these parallels between PCG and GAI, and 2) the massive increase of scope presented by GAI, this paper presents a taxonomy for categorizing approaches to ERA. This taxonomy includes vocabulary to better distinguish examples from existing work in PCG, as well as a compass to guide further exploration of using this method in the rapidly expanding domain of GAI. The goal of this taxonomy is to push the boundaries of what ERA may be used for and how it may be applied.</p>
+</div><div class="translation" lang="zh"><p>针对上述两点——1）PCG与GAI之间的相似性，2）GAI带来的范围大幅扩展——本文提出一个对ERA方法进行分类的体系。它既提供词汇，以便更清楚地区分PCG既有研究中的实例，也提供方向，指导人们在迅速扩张的GAI领域进一步探索这种方法。该分类体系旨在拓展ERA可用于什么、以及可以怎样应用的边界。</p>
+</div></div>
+<h2 id="u-ERA00015" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-original" lang="en">2. Related Work
+
+</span><span class="heading-chinese">2. 相关工作
+
+</span></h2>
+<div class="bilingual-pair" id="u-ERA00016"><div class="original" lang="en"><p>This work operates in the intersection of procedural content generation and generative AI. Guzdial provides a valuable bridge between these domains with the lens of human-AI interactive generation [8]. While Guzdial uses this lens to frame PCG and GAI as essentially the same process, we view PCG as a broader term describing the process of content generation at its highest level, and GAI as a more descriptive term identifying a subset of generative practices that use specific technologies. Framing GAI as a subset of PCG—or using Guzdial’s lens of human-AI interactive generation [8]—broadens the scope of understanding for both domains and allows the application of evaluation methods of PCG for analysis of GAI systems.</p>
+</div><div class="translation" lang="zh"><p>本研究处于程序化内容生成与生成式人工智能的交叉地带。Guzdial以“人机交互生成”的视角，为两个领域搭起了有价值的桥梁[8]。Guzdial借此将PCG与GAI理解为本质上相同的过程；我们则把PCG视为一个更宽泛的术语，在最高层次描述内容生成过程，而把GAI视为一个更具体的术语，指采用特定技术的一部分生成实践。将GAI视作PCG的一个子集，或者采用Guzdial的人机交互生成视角[8]，能够拓宽对两个领域的理解，并使PCG的评估方法可以用于分析GAI系统。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00017"><div class="original" lang="en"><p>Particularly, we are interested in leveraging expressive range analysis for evaluation of GAI systems [1]. Withington et al. list expressive range analysis as one of 12 &quot;features&quot; used for comparison of PCG systems [9]. We consider ERA a promising method of GAI analysis compared to alternative PCG-evaluation practices due to its flexibility in applying a broad range of analysis metrics to its evaluated systems, particularly highlighting its strength of identifying bias and system tendencies- including as influenced by user input [1]. Withington et al. identifies weaknesses with current evaluation methods for PCG systems, suggesting they could be mitigated by diverse research frameworks and promoting the reuse of methodology where possible [9]. This paper seeks to answer this call by broadening the applicability of ERA.</p>
+</div><div class="translation" lang="zh"><p>具体而言，我们希望利用表达范围分析来评估GAI系统[1]。Withington等人把表达范围分析列为比较PCG系统所用的12项“特征”之一[9]。与其他PCG评估实践相比，我们认为ERA是一种有前景的GAI分析方法，因为它可以灵活地对被评估系统应用广泛的分析度量；尤其值得强调的是，它能够识别偏向和系统倾向，包括受用户输入影响的倾向[1]。Withington等人指出了当前PCG系统评估方法的不足，提出可以通过多样化研究框架，并在可能时复用方法来缓解这些不足[9]。本文通过拓宽ERA的适用性，回应这一呼吁。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00018"><div class="original" lang="en"><p>We seek to do so by presenting a taxonomic framework for categorizing approaches used for ERA, drawing from similar work in PCG such as Togelius et. al. [10] and Smith’s [2] taxonomies of PCG, as well as Withington et al. ’s modern taxonomy of available evaluation approaches [9].</p>
+</div><div class="translation" lang="zh"><p>为此，我们提出一个分类框架，对用于ERA的方法进行归类；参考对象包括Togelius等人[10]和Smith[2]对PCG的类似分类研究，以及Withington等人近期对现有评估方法的分类[9]。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00019"><div class="original" lang="en"><p>Further outlining the connection between GAI and PCG, we consider the motivations and use-cases for such systems. PCG and GAI are both used to automatically generate large amounts of content, and to increase variety of content [11, 12]. PCG is also used for assistive tools, helping with tasks such as level creation [13], and support tools have emerged to make these systems easier to understand [14]. LLM applications like ChatGPT [4] and Stable Diffusion [5] are promoted for their potential to reduce labor costs, enable new business models, and increase access to content creation– Cook claims all of these as common motivations for studying AI in games [15]. We also acknowledge the use of machine learning in PCG [16, 17] as a point that highlights the connection between PCG and GAI.</p>
+</div><div class="translation" lang="zh"><p>为了进一步说明GAI与PCG的联系，我们考察这些系统的动机和使用情境。PCG与GAI都用于自动生成大量内容，并增加内容的多样性[11,12]。PCG也用于辅助工具，帮助完成关卡创作等任务[13]；还有支持工具出现，帮助人们更容易理解这些系统[14]。ChatGPT[4]和Stable Diffusion[5]等LLM应用被宣传为能够降低劳动成本、支持新商业模式并扩大内容创作的可及性；Cook认为，这些都是研究游戏AI的常见动机[15]。我们也注意到PCG中机器学习的使用[16,17]，这进一步突出了PCG与GAI之间的联系。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00020"><div class="original" lang="en"><p>We also recognize parallel claims of GAI and PCG capabilities—and shortcomings thereof—that may provide useful points of interest for continuing this investigation. Developing a useful PCG generator often takes just as much, or more, effort than hand-crafted alternatives [18], despite the allure of rapid content production. Furthermore, the variety content generators are able to produce can be limited, as players are often capable of identifying patterns between generated content [19]. While Generative AI offers potential to expand the type of content that can be generated—such as more complex generative audio and music used to increase variety and interactivity of game music compared to non-generative methods [20], as well as the range of users that can make use of generators—we also view the drawbacks of PCG as rich sites of investigation in GAI. ERA has proven a useful method for identifying such weaknesses in the domain of PCG, and we hope to see its effectiveness applied to GAI as well.</p>
+</div><div class="translation" lang="zh"><p>我们也认识到，GAI与PCG的能力宣称及其不足存在相似之处，可以为继续这一研究提供值得关注的问题。尽管快速生产内容很有吸引力，开发一个有用的PCG生成器，常常需要与手工创作替代方案同样多、甚至更多的投入[18]。此外，内容生成器能产生的多样性可能有限，因为玩家通常能够识别生成内容之间的模式[19]。生成式人工智能有望扩展可生成的内容类型，例如，与非生成方法相比，更复杂的生成式音频和音乐可提高游戏音乐的多样性和交互性[20]，也有望扩大能够使用生成器的用户范围；与此同时，我们认为PCG的不足也是GAI中值得深入研究的地方。ERA已被证明有助于在PCG领域识别这类弱点，我们希望它也能有效用于GAI。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00021"><div class="original" lang="en"><p>GAI technologies have prompted significant concern—i.e. regarding its social and environmental impact, underlying politics of AI design, implementation, and advocacy [21]. Additional concerns include embedded systemic biases, risk of plagiarism and misinformation, and human and environmental costs [22]. Jiang et al. find that artists, in particular, identify harms to professional reputation, intellectual property, and financial risk [23]. Because of GAI’s recognized potential for harm, we value tools and methods for understanding and analyzing these systems and their outputs.</p>
+</div><div class="translation" lang="zh"><p>GAI技术已经引起重大关切，例如其社会与环境影响，以及AI设计、实施和倡导背后的政治问题[21]。其他关切包括嵌入其中的系统性偏见、剽窃与错误信息风险，以及人类和环境成本[22]。Jiang等人发现，艺术家尤其指出了对专业声誉、知识产权和财务方面的危害[23]。由于GAI的潜在危害已受到认识，我们重视能够帮助理解和分析这些系统及其输出的工具与方法。</p>
+</div></div>
+<h2 id="u-ERA00022" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-original" lang="en">3. The Problem Space
+
+</span><span class="heading-chinese">3. 问题空间
+
+</span></h2>
+<div class="bilingual-pair" id="u-ERA00023"><div class="original" lang="en"><p>Summarizing the process of Expressive Range Analysis, this form of inquiry operates in three steps [1]:</p>
+</div><div class="translation" lang="zh"><p>概括而言，表达范围分析这一探究方式分为三个步骤[1]：</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00024"><div class="original" lang="en"><p>• 1) Start with a set of images or similar data (i.e. levels, maps, etc.) produced by the generator being analyzed.</p>
+</div><div class="translation" lang="zh"><p>• 1）从被分析生成器产生的一组图像或类似数据（例如关卡、地图等）出发。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00025"><div class="original" lang="en"><p>• 2) Determine useful metrics for the goal of analysis (i.e. linearity or leniency of a level) and apply them to the data.</p>
+</div><div class="translation" lang="zh"><p>• 2）根据分析目标确定有用的度量（例如关卡的线性程度或宽容度），并将其应用于数据。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00026"><div class="original" lang="en"><p>• 3) Produce a visualization of the metered data space.</p>
+</div><div class="translation" lang="zh"><p>• 3）将经过度量的数据空间可视化。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00027"><div class="original" lang="en"><p>Two challenges arise when considering this method for GAI-generators as opposed to PCG-generators. First, producing a set of data to analyze tends to be more complicated. GAI text-to-X applications require linguistic input, leading to larger variance of the input space in terms of both quantity and meaning. Further complicating the issue, PCG tools are typically custom-made for specific use-cases [18], where GAI tools (such as ChatGPT [4] or Google’s Gemini [24]) are commonly presented as general-purpose—while random inputs could be provided in place of handcrafted ones or the latent space could be randomly sampled, these approaches would provide undesirable outputs, lacking the targeted focus of a particular use-case. The general-purpose nature of GAI systems adds noise to the output space when looking at these tools for specific use-cases, since outputs that don’t fit the specific use-case become irrelevant. Guzdial summarizes this aspect as GAI tool developers seeking to expand the possible valid outputs for a particular tool to include all possible valid outputs for every tool [8]. This noise presents additional challenges: how do you narrow the scope of the output to only match the relevant use-case? What prompts do you provide as an input to produce a suitable set of data to categorize the generator as a whole? Guzdial’s human-centered input alignment [8] may prove a useful attribute of consideration to respond to this challenge.</p>
+</div><div class="translation" lang="zh"><p>与PCG生成器相比，把这种方法用于GAI生成器时会出现两个挑战。首先，产生一组待分析数据通常更加复杂。GAI的文本到X应用需要语言输入，因此输入空间在数量和含义两个方面都具有更大的变化。问题还在于，PCG工具通常为特定使用情境定制[18]，而GAI工具，例如ChatGPT[4]或Google的Gemini[24]，通常被呈现为通用工具。虽然可以不用手工输入而提供随机输入，或对潜在空间进行随机采样，但这些方法会产生不理想的输出，缺少某个具体使用情境所需的针对性。面向特定使用情境考察GAI工具时，其通用性会给输出空间增加噪声，因为不适合该情境的输出就变得无关。Guzdial将这一点概括为：GAI工具开发者试图把某个工具可能具有的有效输出扩展为所有工具的一切可能有效输出[8]。这种噪声带来更多挑战：如何缩小输出范围，使其只匹配相关使用情境？应该输入哪些提示，才能得到合适的数据集，据以刻画整个生成器？Guzdial提出的“以人为中心的输入对齐”[8]，可能是回应这一挑战时值得考虑的有用属性。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00028"><div class="original" lang="en"><p>The second challenge that arises from considering ERA for use in analyzing GAI systems comes from the metrics of analysis. ERA can be used alongside any metrics, depending on what a generative system is being analyzed for. These metrics must be applied to large quantities of data, in some cases encompassing the entire generative output of a system [1]. Furthermore, many examples of ERA employ automatic processing of data, but not all data and research goals benefit from automatable metrics- which tend to be quantitative in nature. The challenge here is twofold: how do you determine semantically meaningful metrics for increasingly variable data? And, accounting for practical workload and feasibility, how do you apply these metrics to increasingly multitudinous data?</p>
+</div><div class="translation" lang="zh"><p>考虑将ERA用于GAI系统分析时，第二个挑战来自分析度量。ERA可以配合任何度量使用，具体取决于分析生成系统的目的。这些度量必须应用于大量数据；在某些情况下，数据甚至涵盖系统的全部生成输出[1]。此外，许多ERA实例采用自动化数据处理，但并非所有数据和研究目标都受益于可自动执行的度量——这类度量往往具有定量性质。这里的挑战有两方面：面对日益多变的数据，怎样确定在语义上有意义的度量？在考虑实际工作量与可行性的情况下，又怎样把这些度量应用于日益庞大的数据？</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00029"><div class="original" lang="en"><p>We treat producing an intended result as the motivation behind creating and using generators. While some generators offer promises of increased speed and efficiency, those claims are not always accurate [18]—despite this, generators are valued by many as useful tools. We recognize the purpose of ERA as evaluating the success of that motivation. Using ERA is akin to asking: has this this generator successfully captured what it was designed to capture? With this framing in mind, our motivation for this paper is to facilitate the answering of that question in a greater variety of contexts. The challenge in the case of GAI is, in short: how?</p>
+</div><div class="translation" lang="zh"><p>我们把产生预期结果视为创建和使用生成器的动机。虽然有些生成器承诺提高速度和效率，这些宣称并不总是准确[18]；即便如此，许多人仍重视生成器，认为它是有用工具。我们认为，ERA的目的在于评估这一动机是否得到实现。使用ERA相当于询问：这个生成器是否成功捕捉到它原本被设计来捕捉的东西？在这一框架下，本文的动机是帮助人们在更多种情境中回答这个问题。就GAI而言，挑战简言之是：怎样做到？</p>
+</div></div>
+<h2 id="u-ERA00030" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-original" lang="en">4. Framework
+
+</span><span class="heading-chinese">4. 框架
+
+</span></h2>
+<div class="bilingual-pair" id="u-ERA00031"><div class="original" lang="en"><p>Here, we present a taxonomy of ERA methods, seeking to provide language and framing to better address the challenges of applying ERA to a greater variety of contexts— especially GAI systems. We have defined five axes for characterizing ERA methodologies: quantitative vs qualitative, product vs process, objective vs subjective, content agnostic vs semantic, and automated vs manual.</p>
+</div><div class="translation" lang="zh"><p>这里，我们提出ERA方法的分类体系，提供相应语言与框架，以更好地应对把ERA用于更多情境——特别是GAI系统——的挑战。我们界定了五个刻画ERA方法论的维度：定量与定性、产物与过程、客观与主观、内容无关与语义，以及自动与人工。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00032"><div class="original" lang="en"><p>We considered three factors as a basis for defining these axes: the origin and definition of ERA, the adopted practice of this method, and its potential for further expansion and refinement. We considered the origin of ERA [1], identifying decision points in how the method may be applied. We also considered how ERA has been adopted in research endeavors and sought to challenge assumptions that have become commonplace. Finally, this taxonomy is also a result of our efforts to address challenges we faced in applying ERA to GAI. We hope to further refine these axes and their definitions in future work.</p>
+</div><div class="translation" lang="zh"><p>我们以三个因素作为界定这些维度的基础：ERA的起源与定义、这一方法已被采用的实践，以及进一步扩展和完善的潜力。我们考察ERA的起源[1]，识别应用这一方法时的决策点；也考察研究工作如何采用ERA，并试图质疑那些已经习以为常的假设。最后，这个分类体系也来自我们处理将ERA用于GAI时所遇挑战的尝试。我们希望在未来研究中进一步完善这些维度及其定义。</p>
+</div></div>
+<h3 id="u-ERA00033" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-original" lang="en">4.1. Quantitative vs Qualitative
+
+</span><span class="heading-chinese">4.1. 定量与定性
+
+</span></h3>
+<div class="bilingual-pair" id="u-ERA00034"><div class="original" lang="en"><p>The metrics that are applied to the generator-produced data may be quantitative, qualitative, or varying degrees of mixed-method. Many traditional ERA approaches utilize quantitative metrics, as this approach is often more suitable for automatically applying metrics to data and producing a descriptive visualization. Smith and Whitehead use two metrics for applying ERA to Launchpad- linearity and leniency [1]. Both of these metrics are quantitative, because they are described, measured, and depicted numerically. Interestingly, Kreminski et al. [25] identify determining quantitative metrics as an essential step of ERA, which is consistent with the examples of the method’s initial presentation [1]- it is therefore unsurprising that Qualitative metrics are relatively under-utilized in ERA. This taxonomy challenges this assumption—which is present across many ERA-focused research endeavors—instead suggesting an expansion of valid data collection efforts.</p>
+</div><div class="translation" lang="zh"><p>应用于生成器所产数据的度量，可以是定量的、定性的，或不同程度混合方法的。许多传统ERA方法使用定量度量，因为它通常更适合自动将度量应用于数据，并生成描述性可视化。Smith与Whitehead将ERA用于Launchpad时采用两个度量：线性程度与宽容度[1]。两者都是定量的，因为它们以数值描述、测量和呈现。值得注意的是，Kreminski等人[25]把确定定量度量视为ERA的必要步骤，这与该方法最初提出时的实例一致[1]；因此，定性度量在ERA中相对较少使用，并不令人意外。本分类体系质疑了这一存在于许多ERA研究中的假设，转而建议扩展有效数据收集工作的范围。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00035"><div class="original" lang="en"><p>While there is not a strong foundation of qualitative metrics applied to ERA in PCG, some hypothetical qualitative metrics could come from methods like user surveys or interviews, such as those found in play-testing efforts to evaluate elements of a game like challenge or engagement. These metrics could be visually represented with tools such as word clouds, affinity charts, or heat-maps that highlight the frequency of thematic elements within the data, for example.</p>
+</div><div class="translation" lang="zh"><p>尽管PCG领域在将定性度量用于ERA方面还没有扎实基础，某些假设性的定性度量可以来自用户调查或访谈等方法，例如游玩测试中用于评估挑战性、投入等游戏要素的方法。这些度量可以借助词云、亲和图，或突出数据中主题要素出现频率的热力图等工具进行可视化呈现。</p>
+</div></div>
+<h3 id="u-ERA00036" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-original" lang="en">4.2. Product vs Process
+
+</span><span class="heading-chinese">4.2. 产物与过程
+
+</span></h3>
+<div class="bilingual-pair" id="u-ERA00037"><div class="original" lang="en"><p>Because our goal is to evaluate if a generator is successful in capturing what it was designed to do, it is interesting to consider both the product of a generator and the process of producing that output. The product of a generator is its output- an image, the answer to a question, or a video game level are all examples of this. Analyzing the product is useful for identifying what a generator is capable of- in terms of quality, variety, etc.- and what sort of biases are present in the outputs. Smith and Whitehead [1] present a product-focused approach, as their linearity and leniency metrics consider only the levels produced by the generative system. Withington’s [26] approach is also product-focused, since this work considers the differences between outputs of a generator rather than considering the process of producing those outputs.</p>
+</div><div class="translation" lang="zh"><p>由于我们的目标是评估生成器是否成功捕捉到其设计所要求的东西，因此既考察生成器的产物，也考察产生输出的过程，很有意义。生成器的产物就是输出，图像、问题的答案或电子游戏关卡都是例子。分析产物有助于识别生成器在质量、多样性等方面能做到什么，以及输出中存在哪些偏向。Smith与Whitehead[1]采用以产物为中心的方法，因为其线性程度与宽容度度量只考察生成系统产生的关卡。Withington[26]的方法也以产物为中心，因为该研究考察生成器输出之间的差异，而不考察产生这些输出的过程。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00038"><div class="original" lang="en"><p>The process entails the experience of producing that output. Common narratives of generative systems sell them as faster and more efficient than manual alternatives. Looking at the process allows us to evaluate those claims, using metrics such as the time it takes to get a desirable output or how many iterations of prompts/generations it takes to produce such an output. Kreminski et al. [25] arguably present a process-focused approach, because their motivation for analysis seeks to evaluate the usability experience of a generative system. However, the metrics used are primarily focused on the product of the generator. A more process-centric example would include metrics that evaluate procedural aspects such as the time it takes to generate an output, or the number of generative attempts before a user finds a suitable option.</p>
+</div><div class="translation" lang="zh"><p>过程涉及产生输出的经历。有关生成系统的常见叙述，把它们宣传为比人工替代方案更快、更高效。考察过程，可以用获得理想输出所需时间，或产生这一输出需要多少轮提示与生成等度量，评估这些宣称。Kreminski等人[25]可以说提出了一种以过程为中心的方法，因为其分析动机是评估生成系统的可用性体验。然而，所用度量主要集中于生成器的产物。更以过程为中心的例子，会包括评估过程性方面的度量，例如生成一次输出需要的时间，或用户找到合适选项之前需要的生成尝试次数。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00039"><div class="original" lang="en"><p>Shaker et. al. [11] highlight generator reliability as one important piece of PCG evaluation. Looking at this aspect provides a mixed-method approach that tends to use product to reveal something about the process.</p>
+</div><div class="translation" lang="zh"><p>Shaker等人[11]强调，生成器可靠性是PCG评估的重要组成部分。考察这一方面，会提供一种混合方法，往往利用产物揭示过程的某些情况。</p>
+</div></div>
+<h3 id="u-ERA00040" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-original" lang="en">4.3. Objective vs Subjective
+
+</span><span class="heading-chinese">4.3. 客观与主观
+
+</span></h3>
+<div class="bilingual-pair" id="u-ERA00041"><div class="original" lang="en"><p>This axis is concerned with the nature of the analysis metric—is a given metric verifiable based on factual evidence, or does it vary with perspective, based in emotion or opinion? Smith and Whitehead’s two metrics for Launchpad again provide a useful example: Linearity, as described in their paper, is an objective metric that describes the factual &quot;profile&quot; of platforming levels (how well the geometry of the level fits a straight line) in the evaluated system [1]. Leniency, however, is identified as a subjective score based on an intuitive sense of how lenient components of a level are towards a player [1]. Subjective metrics are relatively underrepresented in PCG, but may prove useful for evaluating GAI systems– especially as they are applied in creative domains. We consider user experience analysis a useful point of reference for how subjective metrics may be used in data analysis and visualization [27, 28].</p>
+</div><div class="translation" lang="zh"><p>这一维度关注分析度量的性质：某一度量能否依据事实证据得到验证，还是会随视角变化，建立在情绪或意见之上？Smith与Whitehead用于Launchpad的两个度量，再次提供了有用例子。按照其论文的描述，线性程度是一项客观度量，用来描述所评估系统中平台跳跃关卡的事实性“轮廓”，即关卡几何形状与直线的拟合程度[1]。宽容度则被确定为主观得分，依据的是对关卡各组成部分对玩家有多宽容的直觉感受[1]。主观度量在PCG中相对较少，但可能有助于评估GAI系统，特别是创作领域中的应用。我们认为，用户体验分析可以为如何在数据分析与可视化中使用主观度量提供有用参照[27,28]。</p>
+</div></div>
+<h3 id="u-ERA00042" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-original" lang="en">4.4. Content Agnostic vs Semantic
+
+</span><span class="heading-chinese">4.4. 内容无关与语义
+
+</span></h3>
+<div class="bilingual-pair" id="u-ERA00043"><div class="original" lang="en"><p>This axis is concerned with the data itself and the value sought from analysis. Semantic approaches seek to find meaning within the context of the inputs and outputs of the generator. Smith and Whitehead [1] present a semantic approach, as their metrics are intended to allow comparison of the generated content. Lucas and Volz [29] provide another example of a semantic approach, as theirs is also intended to compare generated content.</p>
+</div><div class="translation" lang="zh"><p>这一维度关注数据本身，以及希望从分析中获得的价值。语义方法试图在生成器输入与输出的情境中寻找意义。Smith与Whitehead[1]采用语义方法，因为其度量旨在使生成内容能够相互比较。Lucas与Volz[29]提供了另一个语义方法的例子，其方法同样旨在比较生成内容。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00044"><div class="original" lang="en"><p>Content agnostic approaches seek to find meaning in the generator, regardless of its inputs or outputs- though the inputs and outputs may be useful for analysis. While Kreminski et al. [25] evaluate the product of the generator, their interests lie in the users of the generative system-answering questions such as how thoroughly they explore the generative range- rather than finding meaning from the generative output itself, making their approach content-agnostic. Withington’s exploration of quality-diversity algorithms [26] presents another content-agnostic example because the focus is not on the details of specific outputs, but rather measuring the differences between them.</p>
+</div><div class="translation" lang="zh"><p>内容无关方法试图在生成器中寻找意义，而不依赖其输入或输出，尽管输入和输出可能对分析有用。Kreminski等人[25]虽然评估生成器的产物，但其兴趣在于生成系统的用户，例如回答用户对生成范围探索得有多充分，而不是从生成输出本身寻找意义，因此其方法属于内容无关方法。Withington对质量—多样性算法的研究[26]是另一个内容无关的例子，因为重点并非特定输出的细节，而是测量输出之间的差异。</p>
+</div></div>
+<h3 id="u-ERA00045" data-heading><span class="anchor-alias" id="s-10"></span><span class="heading-original" lang="en">4.5. Automated vs Manual
+
+</span><span class="heading-chinese">4.5. 自动与人工
+
+</span></h3>
+<div class="bilingual-pair" id="u-ERA00046"><div class="original" lang="en"><p>This axis is concerned with the process of applying metrics to the data. Automated processes are typically conducted computationally, making them especially suitable for quantitative analysis metrics and often desirable for the promise of reduced processing time or effort. Smith and Whitehead [1], Kreminski et al. [25], and Kybartas et al. [30], among others, all present automated approaches for applying ERA metrics to their data.</p>
+</div><div class="translation" lang="zh"><p>这一维度关注把度量应用于数据的过程。自动过程通常由计算执行，因此尤其适合定量分析度量；人们也常因其有望减少处理时间或投入而希望采用。Smith与Whitehead[1]、Kreminski等人[25]、Kybartas等人[30]等，都提出了把ERA度量应用于其数据的自动化方法。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00047"><div class="original" lang="en"><p>Manual processes require human labor for applying analysis metrics to each piece of data—while this tends to be more time-consuming, it also allows closer scrutiny of elements that are difficult to capture without direct human intervention. Manual processes are often unsuitable for the large quantities of data that ERA typically processes, but methods such as crowd sourced photogrammetry—e.g. as used for identifying information about wildlife populations [31]—may hypothetically be leveraged to manually process such data. Human subject experiments, such as those commonly used in narrative generation projects [32], are another example of a manual approach.</p>
+</div><div class="translation" lang="zh"><p>人工过程要求人类劳动，将分析度量应用于每一项数据。虽然这往往更耗时，但它也使那些缺少人类直接介入便难以捕捉的要素，能够得到更仔细的审视。人工过程通常不适合ERA一般处理的大量数据，但众包摄影测量等方法，例如用于识别野生动物种群信息的方法[31]，在假设上也许能够被用来人工处理这些数据。叙事生成项目中常见的人类受试者实验[32]，则是人工方法的另一个例子。</p>
+</div></div>
+<h2 id="u-ERA00048" data-heading><span class="anchor-alias" id="s-11"></span><span class="heading-original" lang="en">5. Discussion
+
+</span><span class="heading-chinese">5. 讨论
+
+</span></h2>
+<div class="bilingual-pair" id="u-ERA00049"><div class="original" lang="en"><p>Framing GAI under the lens of PCG- or both as the same process, e.g. through the lens of human-AI interaction generation [8]- incorporates this new technology into an established domain of research that has ERA as a design-focused method for evaluation. In connecting GAI and PCG, though, we have identified a need for both an improved vocabulary for describing ERA and an expanded potential scope for ERA that challenges existing methods. Thus this taxonomy further expands the potential range of analytical applications for ERA, providing language to better describe and imagine its use-cases and identify its historical gaps. This expansion responds to existing weak-points in PCG evaluation—such as those identified by Withington et al. [9]—by increasing the diversity and re-usability of ERA as a framework for generative analysis.</p>
+</div><div class="translation" lang="zh"><p>从PCG的视角理解GAI，或把二者视为同一过程，例如采用人机交互生成的视角[8]，能够将这一新技术纳入一个已有研究领域，而该领域拥有作为设计导向评估方法的ERA。不过，在连接GAI与PCG时，我们发现：既需要改进描述ERA的词汇，也需要扩展ERA的潜在范围，挑战现有方法。因此，这一分类体系进一步扩展了ERA可能的分析应用，为描述和设想其使用情境、识别历史上的空缺提供语言。通过提高ERA作为生成分析框架的多样性与可复用性，这种扩展回应了PCG评估中已有的薄弱环节，例如Withington等人指出的问题[9]。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00050"><div class="original" lang="en"><p>Further, this taxonomy allows for better description of the flexibility and space occupied by broadly applicable aspects of evaluation, such as those presented in Guzdial’s human-AI interaction generation [8]. For example, Guzdial’s call for human-centered input alignment considers the relationship between valid system inputs and user-preferences regarding those inputs. Using the vocabulary from our taxonomy, this is a process-focused, content-agnostic, subjective approach, because meaning is found according to individual perceptions without concern for the generative output. Such a metric could be applied to data quantitatively or qualitatively, using either an automated or manual approach. Guzdial’s adaptability similarly considers the process of generation and user perceptions [8], and has similar axis placement to human-centered input alignment– though it is objective rather than subjective, since adaptability was a predetermined aspect of the generative process, rather than a variable expressed by human interpretation. Novelty, however, is an objective, product-focused metric because it is based in the observed possible generative outputs.</p>
+</div><div class="translation" lang="zh"><p>此外，这一分类体系能够更好地描述那些广泛适用的评估要素的灵活性及其所在位置，例如Guzdial在人机交互生成中提出的要素[8]。以Guzdial倡导的以人为中心的输入对齐为例，它考察有效系统输入与用户对这些输入的偏好之间的关系。使用本分类体系的词汇，这是一种以过程为中心、内容无关且主观的方法，因为它依据个人感知寻找意义，而不关注生成输出。这种度量可以定量或定性地应用于数据，也可以采用自动或人工方法。Guzdial的适应性同样考察生成过程与用户感知[8]，其维度位置与以人为中心的输入对齐相似；但它是客观而非主观的，因为适应性是生成过程中预先确定的方面，而不是由人类解释表达出来的变量。相比之下，新颖性是一项客观、以产物为中心的度量，因为它建立在可观察到的可能生成输出之上。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00051"><div class="original" lang="en"><p>It is our hope that using the vocabulary of this taxonomy can provide some clarity to the research community on how they are using ERA for evaluation, as well as identify potential new approaches for ERA.</p>
+</div><div class="translation" lang="zh"><p>我们希望，使用这一分类体系的词汇，能够帮助研究共同体更清楚地理解自己如何使用ERA进行评估，并识别ERA可能的新方法。</p>
+</div></div>
+<h2 id="u-ERA00052" data-heading><span class="anchor-alias" id="s-12"></span><span class="heading-original" lang="en">6. Conclusions, Limitations, &amp; Future Work
+
+</span><span class="heading-chinese">6. 结论、局限与未来工作
+
+</span></h2>
+<div class="bilingual-pair" id="u-ERA00053"><div class="original" lang="en"><p>This paper explores an avenue for exploring the intersection of PCG and GAI, using expressive range analysis as a common method for analyzing generative systems and their outputs. We present a taxonomic framework for categorizing existing and imagined ERA inquiries, hoping to allow more effective navigation of this space and leverage PCG tools for study of GAI technologies and systems.</p>
+</div><div class="translation" lang="zh"><p>本文探索了一条研究PCG与GAI交叉领域的路径，把表达范围分析作为分析生成系统及其输出的共同方法。我们提出一个分类框架，对既有和设想中的ERA研究进行归类，希望帮助人们更有效地把握这一空间，并利用PCG工具研究GAI技术与系统。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00054"><div class="original" lang="en"><p>This taxonomy opens interesting possibilities for future applications of ERA. What do qualitative applications of ERA look like? How would manually applying metrics to data compare to more commonly applied automated processes? These are relatively underexplored areas of ERA, and the possibility of applying this method to generative systems makes these questions more compelling.</p>
+</div><div class="translation" lang="zh"><p>这一分类体系为ERA的未来应用打开了有趣的可能性。ERA的定性应用会是什么样？与更常用的自动过程相比，人工把度量应用于数据会怎样？这些领域在ERA中相对缺少探索，而将这种方法用于生成系统的可能性，使这些问题更值得追问。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00055"><div class="original" lang="en"><p>The scope of this paper is limited to theory. This thread of research would benefit from a more complete, systematic review of ERA projects that places existing work on the axes of this taxonomy and further inform the chosen axes. As an extension of this research, we also see value in performing ERA on GAI tools using different combinations of axis placement—especially including qualitative and manual approaches.</p>
+</div><div class="translation" lang="zh"><p>本文范围限于理论。对ERA项目进行更完整、系统的综述，将既有研究放到该分类体系的各个维度上，并进一步为所选维度提供依据，会有益于这条研究路线。作为扩展，我们也认为，采用不同维度位置组合，对GAI工具开展ERA具有价值，尤其是纳入定性与人工方法。</p>
+</div></div>
+<h2 id="u-ERA00056" data-heading><span class="anchor-alias" id="s-13"></span><span class="heading-original" lang="en">Acknowledgments
+
+</span><span class="heading-chinese">致谢
+
+</span></h2>
+<div class="bilingual-pair" id="u-ERA00057"><div class="original" lang="en"><p>This material is based upon work partially supported by the National Science Foundation (NSF) under Grant No DGE-1922761. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the NSF.</p>
+</div><div class="translation" lang="zh"><p>本材料所依据的工作，部分获得美国国家科学基金会（NSF）DGE-1922761号资助。本文表达的任何意见、发现、结论或建议均属于作者，并不一定反映NSF的观点。</p>
+</div></div>
+<h2 id="u-ERA00058" data-heading><span class="anchor-alias" id="s-14"></span><span class="heading-original" lang="en">References
+
+</span><span class="heading-chinese">参考文献
+
+</span></h2>
+<div class="bilingual-pair" id="u-ERA00059"><div class="original" lang="en"><p>[1] G. Smith, J. Whitehead, Analyzing the expressive range of a level generator, in: Proceedings of the 2010 workshop on procedural content generation in games, 2010, pp. 1–7.</p>
+</div><div class="translation" lang="zh"><p>[1] G. Smith、J. Whitehead，分析关卡生成器的表达范围，载《2010年游戏程序化内容生成工作坊论文集》，2010年，第1—7页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00060"><div class="original" lang="en"><p>[2] G. Smith, Understanding procedural content generation: a design-centric analysis of the role of pcg in games, in: Proceedings of the SIGCHI Conference on Human Factors in Computing Systems, 2014, pp. 917–926.</p>
+</div><div class="translation" lang="zh"><p>[2] G. Smith，理解程序化内容生成：以设计为中心分析PCG在游戏中的作用，载《SIGCHI计算系统中的人因会议论文集》，2014年，第917—926页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00061"><div class="original" lang="en"><p>[3] N. Deckers, J. Peters, M. Potthast, Manipulating embeddings of stable diffusion prompts, arXiv preprint arXiv:2308.12059 (2023).</p>
+</div><div class="translation" lang="zh"><p>[3] N. Deckers、J. Peters、M. Potthast，操纵Stable Diffusion提示的嵌入，arXiv预印本，arXiv:2308.12059（2023）。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00062"><div class="original" lang="en"><p>[4] OpenAI, Chatgpt, <a href="https://chat.openai.com/">https://chat.openai.com/</a>, 2024.</p>
+</div><div class="translation" lang="zh"><p>[4] OpenAI，Chatgpt，<a href="https://chat.openai.com/，2024年。">https://chat.openai.com/，2024年。</a></p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00063"><div class="original" lang="en"><p>[5] S. AI, Stable diffusion, <a href="https://stability.ai/stable-image">https://stability.ai/stable-image</a>, 2024.</p>
+</div><div class="translation" lang="zh"><p>[5] S. AI，Stable diffusion，<a href="https://stability.ai/stable-image，2024年。">https://stability.ai/stable-image，2024年。</a></p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00064"><div class="original" lang="en"><p>[6] ElevenLabs, Elevenlabs, <a href="https://elevenlabs.io/">https://elevenlabs.io/</a>, 2024.</p>
+</div><div class="translation" lang="zh"><p>[6] ElevenLabs，Elevenlabs，<a href="https://elevenlabs.io/，2024年。">https://elevenlabs.io/，2024年。</a></p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00065"><div class="original" lang="en"><p>[7] P. Korzynski, G. Mazurek, P. Krzypkowska, A. Kurasinski, Artificial intelligence prompt engineering as a new digital competence: Analysis of generative ai technologies such as chatgpt, Entrepreneurial Business and Economics Review 11 (2023) 25–37.</p>
+</div><div class="translation" lang="zh"><p>[7] P. Korzynski、G. Mazurek、P. Krzypkowska、A. Kurasinski，作为新数字能力的人工智能提示工程：对ChatGPT等生成式AI技术的分析，《创业商业与经济学评论》11（2023），第25—37页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00066"><div class="original" lang="en"><p>[8] M. Guzdial, Human-AI interaction generation: A connective lens for generative AI and procedural content generation, in: Proceedings of the Thirty-Third International Joint Conference on Artificial Intelligence (IJCAI-24), 2024.</p>
+</div><div class="translation" lang="zh"><p>[8] M. Guzdial，人机交互生成：连接生成式人工智能与程序化内容生成的视角，载《第33届国际人工智能联合会议（IJCAI-24）论文集》，2024年。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00067"><div class="original" lang="en"><p>[9] O. Withington, M. Cook, L. Tokarchuk, On the evaluation of procedural level generation systems, in: Proceedings of the 19th International Conference on the Foundations of Digital Games, 2024, pp. 1–10.</p>
+</div><div class="translation" lang="zh"><p>[9] O. Withington、M. Cook、L. Tokarchuk，论程序化关卡生成系统的评估，载《第19届数字游戏基础国际会议论文集》，2024年，第1—10页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00068"><div class="original" lang="en"><p>[10] J. Togelius, G. N. Yannakakis, K. O. Stanley, C. Browne, Search-based procedural content generation: A taxonomy and survey, IEEE Transactions on Computational Intelligence and AI in Games 3 (2011) 172–186.</p>
+</div><div class="translation" lang="zh"><p>[10] J. Togelius、G. N. Yannakakis、K. O. Stanley、C. Browne，基于搜索的程序化内容生成：分类与综述，《IEEE游戏计算智能与人工智能汇刊》3（2011），第172—186页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00069"><div class="original" lang="en"><p>[11] N. Shaker, J. Togelius, M. J. Nelson, Procedural content generation in games (2016).</p>
+</div><div class="translation" lang="zh"><p>[11] N. Shaker、J. Togelius、M. J. Nelson，《游戏中的程序化内容生成》（2016）。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00070"><div class="original" lang="en"><p>[12] M. Hendrikx, S. Meijer, J. Van Der Velden, A. Iosup, Procedural content generation for games: A survey, ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM) 9 (2013) 1–22.</p>
+</div><div class="translation" lang="zh"><p>[12] M. Hendrikx、S. Meijer、J. Van Der Velden、A. Iosup，面向游戏的程序化内容生成：综述，《ACM多媒体计算、通信与应用汇刊》（TOMM）9（2013），第1—22页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00071"><div class="original" lang="en"><p>[13] A. Liapis, G. N. Yannakakis, J. Togelius, Sentient sketchbook: computer-assisted game level authoring (2013).</p>
+</div><div class="translation" lang="zh"><p>[13] A. Liapis、G. N. Yannakakis、J. Togelius，Sentient Sketchbook：计算机辅助游戏关卡创作（2013）。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00072"><div class="original" lang="en"><p>[14] M. Cook, J. Gow, G. Smith, S. Colton, Danesh: Interactive tools for understanding procedural content generators, IEEE Transactions on Games 14 (2021) 329–338.</p>
+</div><div class="translation" lang="zh"><p>[14] M. Cook、J. Gow、G. Smith、S. Colton，Danesh：理解程序化内容生成器的交互工具，《IEEE游戏汇刊》14（2021），第329—338页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00073"><div class="original" lang="en"><p>[15] M. Cook, Optimists at heart: Why do we research game ai?, in: 2022 IEEE Conference on Games (CoG), IEEE, 2022, pp. 560–567.</p>
+</div><div class="translation" lang="zh"><p>[15] M. Cook，内心的乐观主义者：我们为何研究游戏AI？载《2022年IEEE游戏会议（CoG）论文集》，IEEE，2022年，第560—567页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00074"><div class="original" lang="en"><p>[16] A. Summerville, Expanding expressive range: Evaluation methodologies for procedural content generation, in: Proceedings of the AAAI Conference on Artificial Intelligence and Interactive Digital Entertainment, volume 14, 2018, pp. 116–122.</p>
+</div><div class="translation" lang="zh"><p>[16] A. Summerville，扩展表达范围：程序化内容生成的评估方法论，载《AAAI人工智能与交互式数字娱乐会议论文集》，第14卷，2018年，第116—122页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00075"><div class="original" lang="en"><p>[17] A. Summerville, S. Snodgrass, M. Guzdial, C. Holmgård, A. K. Hoover, A. Isaksen, A. Nealen, J. Togelius, Procedural content generation via machine learning (pcgml), IEEE Transactions on Games 10 (2018) 257–270.</p>
+</div><div class="translation" lang="zh"><p>[17] A. Summerville、S. Snodgrass、M. Guzdial、C. Holmgård、A. K. Hoover、A. Isaksen、A. Nealen、J. Togelius，通过机器学习进行程序化内容生成（PCGML），《IEEE游戏汇刊》10（2018），第257—270页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00076"><div class="original" lang="en"><p>[18] T. Short, T. Adams, Procedural generation in game design, CRC Press, 2017.</p>
+</div><div class="translation" lang="zh"><p>[18] T. Short、T. Adams，《游戏设计中的程序化生成》，CRC出版社，2017年。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00077"><div class="original" lang="en"><p>[19] E. Short, Bowls of Oatmeal and Text Generation, <a href="https://emshort.blog/2016/09/21/bowls-of-oatmeal-and-text-generation/">https://emshort.blog/2016/09/21/bowls-of-oatmeal-and-text-generation/</a>, 2016.</p>
+</div><div class="translation" lang="zh"><p>[19] E. Short，一碗碗燕麦粥与文本生成，<a href="https://emshort.blog/2016/09/21/bowls-of-oatmeal-and-text-generation/，2016年。">https://emshort.blog/2016/09/21/bowls-of-oatmeal-and-text-generation/，2016年。</a></p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00078"><div class="original" lang="en"><p>[20] C. Plut, P. Pasquier, Generative music in video games: State of the art, challenges, and prospects, Entertainment Computing 33 (2020) 100337.</p>
+</div><div class="translation" lang="zh"><p>[20] C. Plut、P. Pasquier，电子游戏中的生成式音乐：研究现状、挑战与前景，《娱乐计算》33（2020），100337。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00079"><div class="original" lang="en"><p>[21] E. M. Bender, T. Gebru, A. McMillan-Major, S. Shmitchell, On the dangers of stochastic parrots: Can language models be too big?, in: Proceedings of the 2021 ACM conference on fairness, accountability, and transparency, Association for Computing Machinery, New York, NY, USA, 2021, pp. 610–623.</p>
+</div><div class="translation" lang="zh"><p>[21] E. M. Bender、T. Gebru、A. McMillan-Major、S. Shmitchell，论随机鹦鹉的危险：语言模型是否会过于庞大？载《2021年ACM公平、问责与透明会议论文集》，美国纽约：美国计算机协会，2021年，第610—623页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00080"><div class="original" lang="en"><p>[22] J. E. Fischer, Generative ai considered harmful, in: Proceedings of the 5th International Conference on Conversational User Interfaces, Association for Computing Machinery, New York, NY, USA, 2023.</p>
+</div><div class="translation" lang="zh"><p>[22] J. E. Fischer，生成式人工智能被认为有害，载《第5届对话式用户界面国际会议论文集》，美国纽约：美国计算机协会，2023年。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00081"><div class="original" lang="en"><p>[23] H. H. Jiang, L. Brown, J. Cheng, M. Khan, A. Gupta, D. Workman, A. Hanna, J. Flowers, T. Gebru, Ai art and its impact on artists, in: Proceedings of the 2023 AAAI/ACM Conference on AI, Ethics, and Society, Association for Computing Machinery, New York, NY, USA, 2023, pp. 363–374.</p>
+</div><div class="translation" lang="zh"><p>[23] H. H. Jiang、L. Brown、J. Cheng、M. Khan、A. Gupta、D. Workman、A. Hanna、J. Flowers、T. Gebru，AI艺术及其对艺术家的影响，载《2023年AAAI/ACM人工智能、伦理与社会会议论文集》，美国纽约：美国计算机协会，2023年，第363—374页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00082"><div class="original" lang="en"><p>[24] G. AI, Gemini, <a href="https://gemini.google.com/">https://gemini.google.com/</a>, 2024.</p>
+</div><div class="translation" lang="zh"><p>[24] G. AI，Gemini，<a href="https://gemini.google.com/，2024年。">https://gemini.google.com/，2024年。</a></p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00083"><div class="original" lang="en"><p>[25] M. Kreminski, I. Karth, M. Mateas, N. Wardrip-Fruin, Evaluating mixed-initiative creative interfaces via expressive range coverage analysis., in: IUI Workshops, 2022, pp. 34–45.</p>
+</div><div class="translation" lang="zh"><p>[25] M. Kreminski、I. Karth、M. Mateas、N. Wardrip-Fruin，通过表达范围覆盖分析评估混合主导的创作界面，载《IUI工作坊论文集》，2022年，第34—45页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00084"><div class="original" lang="en"><p>[26] O. Withington, Illuminating super mario bros: quality-diversity within platformer level generation, in: Proceedings of the 2020 Genetic and Evolutionary Computation Conference Companion, 2020, pp. 223–224.</p>
+</div><div class="translation" lang="zh"><p>[26] O. Withington，照亮《超级马里奥兄弟》：平台游戏关卡生成中的质量—多样性，载《2020年遗传与进化计算会议配套论文集》，2020年，第223—224页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00085"><div class="original" lang="en"><p>[27] A. Bangor, P. T. Kortum, J. T. Miller, An empirical evaluation of the system usability scale, Intl. Journal of Human–Computer Interaction 24 (2008) 574–594.</p>
+</div><div class="translation" lang="zh"><p>[27] A. Bangor、P. T. Kortum、J. T. Miller，系统可用性量表的实证评估，《国际人机交互期刊》24（2008），第574—594页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00086"><div class="original" lang="en"><p>[28] S. Djamasbi, Eye tracking and web experience, AIS Transactions on Human-Computer Interaction 6 (2014) 37–54.</p>
+</div><div class="translation" lang="zh"><p>[28] S. Djamasbi，眼动追踪与网络体验，《AIS人机交互汇刊》6（2014），第37—54页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00087"><div class="original" lang="en"><p>[29] S. M. Lucas, V. Volz, Tile pattern kl-divergence for analysing and evolving game levels, in: Proceedings of the Genetic and Evolutionary Computation Conference, 2019, pp. 170–178.</p>
+</div><div class="translation" lang="zh"><p>[29] S. M. Lucas、V. Volz，用于分析和演化游戏关卡的图块模式KL散度，载《遗传与进化计算会议论文集》，2019年，第170—178页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00088"><div class="original" lang="en"><p>[30] B. A. Kybartas, C. Verbrugge, J. Lessard, Tension space analysis for emergent narrative, IEEE Transactions on Games 13 (2020) 146–159.</p>
+</div><div class="translation" lang="zh"><p>[30] B. A. Kybartas、C. Verbrugge、J. Lessard，涌现叙事的张力空间分析，《IEEE游戏汇刊》13（2020），第146—159页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00089"><div class="original" lang="en"><p>[31] S. A. Wood, P. W. Robinson, D. P. Costa, R. S. Beltran, Accuracy and precision of citizen scientist animal counts from drone imagery, PloS one 16 (2021) e0244040.</p>
+</div><div class="translation" lang="zh"><p>[31] S. A. Wood、P. W. Robinson、D. P. Costa、R. S. Beltran，公民科学家依据无人机影像统计动物数量的准确度与精密度，《PloS one》16（2021），e0244040。</p>
+</div></div>
+<div class="bilingual-pair" id="u-ERA00090"><div class="original" lang="en"><p>[32] R. Sanghrajka, E. Lang, R. M. Young, Generating quest representations for narrative plans consisting of failed actions, in: Proceedings of the 16th International Conference on the Foundations of Digital Games, 2021, pp. 1–10.</p>
+</div><div class="translation" lang="zh"><p>[32] R. Sanghrajka、E. Lang、R. M. Young，为由失败行动构成的叙事计划生成任务表征，载《第16届数字游戏基础国际会议论文集》，2021年，第1—10页。</p>
+</div></div>
+<h2 id="h-47322ba90eb" data-heading><span class="anchor-alias" id="s-15"></span><span class="heading-chinese">署名与许可</span></h2>
+<div class="bilingual-pair" id="p-a6f2523b7c6"><div class="translation" lang="zh"><p>Josiah Boucher 约西亚·布歇、Gillian Smith 吉莉安·史密斯、Yunus Doğan Telliel 尤努斯·多安·泰利埃尔。原作采用 <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>。此处为转录、汉译及阅读排版。 <a href="https://ceur-ws.org/Vol-3926/paper9.pdf">查看原出版来源</a></p>
+</div></div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="5239546704792d"></div></section></main></div></body></html>

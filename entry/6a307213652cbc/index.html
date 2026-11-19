@@ -1,0 +1,71 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="Nick Walton 是 AI Dungeon 的最初创作者、Latitude 创办人及首席执行官。他把大语言模型的文本续写变成可反复进行的冒险活动：玩家提出行动，系统延续情境，双方共同塑造故事。其工作从2019年黑客松原型发展到面向玩家与创作者的线上平台，又延伸至具有持续世界状态的 Voyage。研究他的贡献，需要同时考察交互形式、上下文与记忆、创作者工具，以及生成服务的成本和治理。[1][2]"><title>Nick Walton · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" aria-current="page">档案卡片</a><a href="../../concepts/" >索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="6a307213652cbc"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../archives/?view=all">← 档案卡片</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-d828de26f54" data-toc="h-d828de26f54">技术背景与创业起点</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-05d4d68e2a2" data-toc="h-05d4d68e2a2">原程序所显示的设计</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-21c85a3b683" data-toc="h-21c85a3b683">从自由输入到共同创作</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-a3f29c93c6b" data-toc="h-a3f29c93c6b">记忆与上下文的工程</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-42aa7f57dc5" data-toc="h-42aa7f57dc5">创作者、脚本与平台化</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-e864d3b9530" data-toc="h-e864d3b9530">2021年的隐私与内容治理争论</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-9e250c7de1c" data-toc="h-9e250c7de1c">Voyage：持续世界与角色位置</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-5fe85115ba8" data-toc="h-5fe85115ba8">贡献及其评价方法</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-491043c8613" data-toc="h-491043c8613">参考文献与版本</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header has-cover" id="entry-title"><figure class="entry-media kind-portrait"><img src="../../assets/display/bd1cc31eaf1a0099c50953eb.webp" alt="Nick Walton本人／官方公开肖像" width="1095" height="1600"></figure><div><a class="entry-kicker" href="../../archives/">档案卡片</a><p class="entry-original " lang="en">Nick Walton</p><h1>尼克·沃尔顿</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>Nick Walton 是 AI Dungeon 的最初创作者、Latitude 创办人及首席执行官。他把大语言模型的文本续写变成可反复进行的冒险活动：玩家提出行动，系统延续情境，双方共同塑造故事。其工作从2019年黑客松原型发展到面向玩家与创作者的线上平台，又延伸至具有持续世界状态的 Voyage。研究他的贡献，需要同时考察交互形式、上下文与记忆、创作者工具，以及生成服务的成本和治理。[1][2]</p>
+</section><h2 id="h-d828de26f54" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">技术背景与创业起点</span></h2>
+<div class="reading-block" id="p-38c25dd13a1"><p>Latitude 的官方履历记载，Walton 获得杨百翰大学计算机科学学士学位，创办公司前曾在 Aurora Innovation 从事自动驾驶相关工作。他长期玩《Dungeons &amp; Dragons》，并在2019年的黑客松上把角色扮演兴趣与语言模型实验结合起来。[1]</p>
+</div>
+<div class="reading-block" id="p-24206822c7f"><p>AI Dungeon 的早期吸引力，是让玩家自行输入想做的事，再由模型立即构成后续叙述。与依赖有限指令及预写结果的传统文字冒险相比，这种形式能够接住许多作者没有逐项安排的输入。NVIDIA于2022年1月发布的原始播客介绍，也把它追溯到 Walton 的大学黑客松，并记录单人与多人轮流行动的使用方式。[2]</p>
+</div>
+<div class="reading-block" id="p-9dd2fb880ee"><p>从原型到服务，问题很快超出生成一句像样文字。团队需要部署模型、支付算力费用、保存故事、处理故障并向社区解释改变。公司后来的回顾把原型爆红、服务器费用及玩家自行重建访问方式视为转折。这些是公司的创业叙述；其意义在于显示，生成式游戏的实际作品包含运行服务和玩家社群，而不只有一个模型文件。[1]</p>
+</div>
+<h2 id="h-05d4d68e2a2" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">原程序所显示的设计</span></h2>
+<div class="reading-block" id="p-a3bc0cd4a42"><p>公开的 AIDungeon2 仓库保存了一个可核对的早期实现。README 把训练材料整理为包含起始情境与“行动—结果”的树，再转为带边界标记的线性文本，供 GPT-2 微调。模型因此学习的不只是幻想文学句子，还包括玩家输入之后应当出现怎样的叙述关系。文档也如实记载了当时本地运行和微调对GPU的要求，这些要求属于那个历史版本。[3]</p>
+</div>
+<div class="reading-block" id="p-fbb8a666bae"><p>主程序让用户选择预设角色或自定义开场，随后进入循环：读入行动、交给故事管理器、显示结果。程序同时提供回退、重新开始、保存、加载和打印记录等命令。它把“持续冒险”与“修改已经发生的文字”放在同一界面中；玩家既在扮演人物，也能从外部调整叙事。[4]</p>
+</div>
+<div class="reading-block" id="p-7a1ce3bb22e"><p>这种安排改变了失败的性质。一个不连贯回应不一定意味着整局结束，玩家可以回退，再试一次或重述行动。它也改变了作者身份：原设计者规定输入、输出和存储流程，场景作者给出初始约束，玩家在游玩中选择行动，模型补全其余文字。最后的故事由这些层次共同形成，难以归为一个固定作者事先完成的剧本。</p>
+</div>
+<h2 id="h-21c85a3b683" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">从自由输入到共同创作</span></h2>
+<div class="reading-block" id="p-1d7f064984d"><p>Walton 在原始访谈中强调的吸引力，是故事可以走向许多不同方向。AI Dungeon 把这一愿望实现为低门槛的语言行动：玩家不必先学习完整命令表，便能提出带有细节、语气甚至世界设定的要求。开场提示与多人模式又把同一种交互过程变成不同的社交活动。[2]</p>
+</div>
+<div class="reading-block" id="p-92ba39473f0"><p>不过，自由输入包含几种不同权力。玩家可以提出角色想做的事，可以补充世界事实，也可以修改模型刚写下的结果。它们分别类似扮演者、共同作者和编辑。若玩家总能改写不利结果，体验更接近协作小说；若规则把某些损失固定下来，体验则更接近有约束的角色扮演。Latitude 后来区分 AI Dungeon 与 Voyage 时，明确把这种差别放在产品定位的中心。[5]</p>
+</div>
+<div class="reading-block" id="p-a193b68685c"><p>因此，Walton 的贡献不宜被简化为“用AI写故事”。更具体的成果，是把文本生成嵌入一个可持续、可修订、可共享的操作循环，吸引玩家把模型当作参与叙事的对象。玩家的试验又不断暴露模型的实际边界：它会记错、顺从输入、改变人物或重置因果，这些问题推动了后续平台结构。</p>
+</div>
+<h2 id="h-a3f29c93c6b" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">记忆与上下文的工程</span></h2>
+<div class="reading-block" id="p-a2a234dfa86"><p>AI Dungeon 的官方帮助文档把记忆问题解释得很具体：每次生成只能接收有限上下文，早期段落可能被移出，玩家便感觉系统忘记了重要选择。平台将故事文本与 AI Instructions、Plot Essentials、Author’s Note、Story Cards 等信息组合，再发送给模型；自动摘要和 Memory Bank 则分别压缩历史及检索相关细节。[6]</p>
+</div>
+<div class="reading-block" id="p-579d8b26a52"><p>这些功能各有角色。需要持续生效的设定适合放进 Plot Essentials；只在某个主题出现时才相关的人物、地点或组织资料，可以由 Story Cards 触发。摘要保存较宽的情节轮廓，记忆库则寻找与当前行动相关的片段。它们都不是把全部历史永久塞入同一次生成，而是在有限容量中挑选最有用的信息。[6][7]</p>
+</div>
+<div class="reading-block" id="p-2126965b976"><p>上下文组装还涉及优先级和取舍。官方技术说明区分必须考虑的信息与动态历史，并说明容量不足时会裁切或省略哪些成分。这说明“模型有没有记住”也取决于平台实际给了它什么。若一个角色忘记承诺，可能是模型没有遵守输入，也可能是承诺从未进入本次输入；调试两者需要不同工具。[7]</p>
+</div>
+<h2 id="h-42aa7f57dc5" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">创作者、脚本与平台化</span></h2>
+<div class="reading-block" id="p-f8a02a4827d"><p>AI Dungeon 的创作逐渐超出写一段开场。创作者可以提供角色、背景和故事卡，利用脚本掷骰、追踪数值或改变运行方式。现行脚本文档还区分附属于场景的旧脚本与可独立保存、组合和分享的 Adventure Scripts。多个脚本的运行次序会影响结果，平台也需要处理冲突与错误。[8]</p>
+</div>
+<div class="reading-block" id="p-b33820d129a"><p>这里出现了一条比“完全自由生成”更复杂的道路。作者可以把某些规则写得严格，把某些描述留给模型；玩家则在这些层次共同形成的空间中行动。脚本、记忆与场景材料是作者施加意图的入口，生成模型提供变化，但作品仍需要决定什么可以改变、什么必须保持一致。</p>
+</div>
+<div class="reading-block" id="p-5d5598d54ad"><p>这种结构也改变公司的角色。Latitude 既是一个游戏的运营者，也是创作、发现和共享内容的平台提供者。服务质量因而包括创作者能否修改作品、玩家能否找到合适场景、旧内容是否还能使用，以及平台能否清楚说明模型和功能更新造成的行为差异。Walton 的创业工作应在这一整体中理解，而不把公司的所有技术实现归为个人独立完成。[1][8]</p>
+</div>
+<h2 id="h-e864d3b9530" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">2021年的隐私与内容治理争论</span></h2>
+<div class="reading-block" id="p-1dbd22ea340"><p>2021年9月30日，Walton 以CEO身份发布《Our Shift to the Walls Approach》。公告承认，未公开内容的审核让用户担心私密故事会被人读取，也承认模型自行产生受限内容后，由用户承担处罚会造成挫折。其提出的转向，是在系统生成环节设技术边界，停止对未公开单人内容实施相同的标记、停权与人工审核方式。[9]</p>
+</div>
+<div class="reading-block" id="p-f412b5142e8"><p>这一公告的重要性，在于把玩家、模型与服务提供者的责任区分开来。生成内容可能同时来自玩家输入与模型续写；只看最终文字，难以直接确定玩家原本的意图。私人单人游玩与公开传播给其他用户，也具有不同情境。Walton 的回应把这些区分纳入产品政策，而没有把所有生成都当成普通社交平台发帖处理。</p>
+</div>
+<div class="reading-block" id="p-c639080ebe3"><p>2021年的政策公告说明，故事在数据库中加密，模型处理前则须解密。这一安排揭示了存储与生成两个环节的差别，也成为当时隐私争论的一部分。[9]</p>
+</div>
+<h2 id="h-9e250c7de1c" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">Voyage：持续世界与角色位置</span></h2>
+<div class="reading-block" id="p-0cbe7148f0a"><p>Latitude 在2026年的公开介绍中，把 Voyage 描述为具有持续世界状态的AI角色扮演平台。4月的官方文章将叙述、机制和状态跟踪分开，并以 World Engine 维护人物、地点、物品、健康、金钱与关系。公司由此尝试使文本变化建立在可持续的世界结构之上，而不只依赖模型即时同意玩家的描述。[5]</p>
+</div>
+<div class="reading-block" id="p-923f2181cb7"><p>这种定位也重新界定玩家的权限。AI Dungeon 被描述为人与模型共同写故事，Voyage 则希望玩家主要作为世界中的角色行动，由系统承担主持者职责。花掉的钱和失败的后果应当继续存在。把可编辑叙事与角色约束区分开来，是一项设计选择；官方关于自主NPC和长期一致性的表述，仍属于产品方的功能说明与目标，不能代替独立的长局测试。[5]</p>
+</div>
+<div class="reading-block" id="p-d6f99ac30d1"><p>2026年8月18日，官方宣布 Voyage Studio 向具有 Voyage 访问权限的用户开放，提供直接编辑、可视化操作、JSON及代理辅助创作；手工修改与请求代理协助采用不同的使用量处理。9月10日的 Creator API 公告又把外部工具连接到同一批世界草稿，支持获取、验证、保存与发布等流程。这些工具通过创作权限与世界数据，组织了用户可修改的内容。[10][11]</p>
+</div>
+<h2 id="h-5fe85115ba8" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">贡献及其评价方法</span></h2>
+<div class="reading-block" id="p-4726320c5a3"><p>Walton 的工作推动了大语言模型进入消费级游戏交互，也把一个演示原型发展成长期运营的叙事与创作服务。其历史意义包括让非程序员以自然语言进行冒险、使模型输出成为可编辑的游玩材料，以及在实际运营中暴露记忆、成本、隐私和世界一致性的设计问题。[1][2]</p>
+</div>
+<div class="reading-block" id="p-2b5915a81a8"><p>评价这条路线，最有用的是分别观察表达与后果。玩家能否说出丰富行动，是一项能力；角色和物品是否保持状态，是另一项能力；玩家是否能理解失败并据此制定计划，又需要界面和规则支持。AI Dungeon 与 Voyage 的差异，使这些标准能够被放在具体产品上讨论。Walton 所代表的探索因此仍在变化：语言模型打开了输入空间，而可持续游戏还需要为变化建立可理解的结构。</p>
+</div>
+<h2 id="h-491043c8613" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-chinese">参考文献与版本</span></h2>
+<div class="reading-block" id="p-e6afab29d54"><ol>
+<li>Latitude，<a href="https://latitude.io/press">Press：公司介绍、Nick Walton履历与产品说明</a>，2026-11-17核；页面首屏为脚本壳。</li>
+<li>NVIDIA原始播客介绍，<a href="https://blogs.nvidia.com/blog/nick-walton-ai-podcast/">Nick Walton Uses AI to Generate Infinite Gaming Storylines，2022-01-05</a>，读正文与节目要点。</li>
+<li>Latitude，<a href="https://raw.githubusercontent.com/latitudegames/AIDungeon/master/README.md">AIDungeon2原仓库README</a>；<a href="https://github.com/latitudegames/AIDungeon">原仓库</a>。</li>
+<li>Latitude，<a href="https://raw.githubusercontent.com/latitudegames/AIDungeon/master/play.py">早期主程序play.py</a>，选读说明、角色开场、主要循环与回退、保存等命令；未运行模型或下载训练权重。</li>
+<li>Latitude，<a href="https://latitude.io/news/voyage-isnt-ai-dungeon-2.0">Voyage: This Isn’t AI Dungeon 2.0，2026-04-17</a>。</li>
+<li>AI Dungeon，<a href="https://help.aidungeon.com/faq/the-memory-system">What is the Memory System?</a>，选读机制概述、有限上下文、自动摘要与检索。</li>
+<li>AI Dungeon，<a href="https://help.aidungeon.com/faq/what-goes-into-the-context-sent-to-the-ai">What goes into the Context sent to the AI?</a>，读 Required／Dynamic 分配与组装顺序；参数属核对当日版本。</li>
+<li>AI Dungeon，<a href="https://help.aidungeon.com/faq/how-do-i-write-scripts-and-use-scripting">How do I use Scripting in AI Dungeon?</a>，选读脚本用途、分享、顺序和冲突处理，不宣称审阅941行全部技术示例。</li>
+<li>Nick Walton，<a href="https://latitude.io/news/the-walls-approach">Our Shift to the Walls Approach，2021-09-30</a>。</li>
+<li>Latitude，<a href="https://latitude.io/news/voyage-studio-is-open-to-every-creator">Voyage Studio Is Open to Every Creator，2026-08-18</a>，读公开正文中的开放范围、手工／代理编辑与旧编辑器状态。</li>
+<li>Latitude，<a href="https://latitude.io/news/voyage-creator-api">Voyage Creator API: Now Open to All，2026-09-10</a>，读公开正文的工作草稿、工具授权及验证、保存、发布流程；</li>
+<li>原作资料与版本入口：<a href="../../entry/ba3dbb6a5acac6/">AI Dungeon</a>。</li>
+</ol>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="6a307213652cbc"></div></section></main></div></body></html>

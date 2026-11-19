@@ -1,0 +1,111 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="Yuke Zhu 是机器人、计算机视觉与机器学习研究者，得克萨斯大学奥斯汀分校计算机科学副教授、Robot Perception and Learning（RPL）实验室主任，并在 NVIDIA Research 担任 Director 与 Distinguished Research Scientist，共同领导 Generalist Embodied Agent Research（GEAR）团队。他的研究目标是让机器人和具身智能体理解环境、作出决策，并在不同任务和现实条件中行动。本人当前主页。"><title>Yuke Zhu · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" aria-current="page">档案卡片</a><a href="../../concepts/" >索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="eee2f96de7f10a"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../archives/?view=all">← 档案卡片</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-f7b80635547" data-toc="h-f7b80635547">一、教育、任职与研究组织</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-bd628796283" data-toc="h-bd628796283">二、目标驱动视觉导航：策略随目标改变</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1f4b05ad91a" data-toc="h-1f4b05ad91a">三、视觉语义规划：物体、前提与效果</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-04468263c47" data-toc="h-04468263c47">四、RoboTurk 与示范：把人的操作转成可学数据</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-123c577b14f" data-toc="h-123c577b14f">五、robosuite 与 robomimic：实验怎样成为可复现资源</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-9d24da090b5" data-toc="h-9d24da090b5">六、LIBERO：把“知道什么”与“会做什么”同时迁移</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-df53691412a" data-toc="h-df53691412a">七、RoboCasa：环境多样性也是学习资源</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-5edc17a68a8" data-toc="h-5edc17a68a8">八、多模态提示、互联网知识与开放世界</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-0f2ee63bec4" data-toc="h-0f2ee63bec4">九、GR00T 与通用具身模型</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-8c09eb0253a" data-toc="h-8c09eb0253a">十、感知与行动之间的表示选择</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-89599cbc58e" data-toc="h-89599cbc58e">十一、终身学习中的前向迁移与遗忘</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-b31e50fc6e1" data-toc="h-b31e50fc6e1">十二、环境构建与现实证据的分工</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-94048157a75" data-toc="h-94048157a75">十三、贡献与争论</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-491043c8613" data-toc="h-491043c8613">参考文献与版本</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header " id="entry-title"><div><a class="entry-kicker" href="../../archives/">档案卡片</a><p class="entry-original " lang="en">Yuke Zhu</p><h1>朱玉可</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>Yuke Zhu 是机器人、计算机视觉与机器学习研究者，得克萨斯大学奥斯汀分校计算机科学副教授、Robot Perception and Learning（RPL）实验室主任，并在 NVIDIA Research 担任 Director 与 Distinguished Research Scientist，共同领导 Generalist Embodied Agent Research（GEAR）团队。他的研究目标是让机器人和具身智能体理解环境、作出决策，并在不同任务和现实条件中行动。<a href="https://yukezhu.me/">本人当前主页</a>。</p>
+<p>其工作从目标驱动视觉导航、视觉语义规划，扩展至机器人示范、模拟基础设施、终身学习和基础模型。他参与建立 robosuite、robomimic、LIBERO、RoboCasa 等开放资源，也参与 MineDojo、Voyager、VIMA 与 GR00T。理解这些贡献，需要同时看算法、环境和数据，而不能只用一篇开放世界论文概括。</p>
+</section><h2 id="h-f7b80635547" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">一、教育、任职与研究组织</span></h2>
+<div class="reading-block" id="p-932044a8af1"><p>本人履历记录了浙江大学与 Simon Fraser University 的双学位本科阶段、2013—2015年的斯坦福计算机科学硕士、2015—2019年的博士研究，以及2019—2020年的斯坦福研究经历。2020年进入得克萨斯大学奥斯汀分校，2025年由助理教授升任副教授。他的大学与工业职责，在不同阶段的任职与合作中发展。<a href="https://yukezhu.me/documents/yukez.pdf">本人履历</a>。</p>
+</div>
+<div class="reading-block" id="p-893a9b40cfc"><p>RPL 与 GEAR 的组织位置不同：前者是大学实验室，承担学生培养和学术研究；后者是工业研究团队，集中于通用具身智能。两处合作在数据、模拟、模型和机器人系统中交叉，但不是同一个机构。论文中的学生、实习生和合作成员也应按具体年份和项目辨认。</p>
+</div>
+<div class="reading-block" id="p-c92a74b6378"><p>这一研究组织方式使公开工具成为成果的重要部分。一个新模型需要环境来训练，需要统一接口比较，也需要他人能够重复的任务和数据。Zhu 的研究谱系包含了大量这样的共享条件，其学术影响不能只按某个模型参数量或演示视频衡量。<a href="https://ut-austin-rpl.github.io/research/">RPL 研究目录</a>。</p>
+</div>
+<h2 id="h-bd628796283" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">二、目标驱动视觉导航：策略随目标改变</span></h2>
+<div class="reading-block" id="p-1016b85bf33"><p>《Target-driven Visual Navigation in Indoor Scenes using Deep Reinforcement Learning》2016年公开、发表于 ICRA 2017。它让策略同时依赖当前视觉状态和目标，处理同一智能体面对新目标的泛化问题。论文也借助 AI2-THOR 的三维场景与物理交互，使大量训练试验可以在模拟中开展。<a href="https://arxiv.org/abs/1609.05143">原始论文</a>。</p>
+</div>
+<div class="reading-block" id="p-0d409068cfd"><p>这个变化具有基础意义。若每个目的地都对应一个独立策略，换目标便可能需要重新训练；目标条件化则试图共享“怎样根据所见行动”的知识。视觉目标还避免把导航完全建立在事先精确定位和地图上，迫使系统从图像判断当前位置与目标的关系。</p>
+</div>
+<div class="reading-block" id="p-47b74d1762e"><p>但目标图像、动作空间、场景构成和训练分布都界定了能力范围。论文中的模拟到现实实验包含少量微调，不宜改写成无需适配的普遍迁移。导航成功也不等于理解整个场景中的因果关系。它提供的是把感知、目标表示和控制联合学习的一条早期路径。</p>
+</div>
+<h2 id="h-1f4b05ad91a" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">三、视觉语义规划：物体、前提与效果</span></h2>
+<div class="reading-block" id="p-4ca3d778282"><p>2017年的《Visual Semantic Planning using Deep Successor Representations》进一步研究怎样从视觉观察预测一连串动作，使环境从初态转到目标状态。动作需要满足前置条件，并对物体产生效果；论文结合模仿学习、强化学习与 successor representations 研究跨任务泛化，Zhu 与 Daniel Gordon 在项目资料中标注同等贡献。<a href="https://arxiv.org/abs/1705.08080">原始论文</a>。</p>
+</div>
+<div class="reading-block" id="p-b0510965081"><p>这一问题超出“到达某处”。打开、取出、放置等操作之间有依赖；一个物体是否可操作，取决于当前状态和环境关系。预测未来状态特征的表示，为不同奖励或目标之间共享知识提供了途径。它将机器人学习中的语义，落实为能够改变行动可行性的条件。</p>
+</div>
+<div class="reading-block" id="p-97be33199f1"><p>从这类工作可以看出其长期研究主题：感知不能止于给图像命名，必须服务于决策；规划也不能脱离视觉和执行条件。对游戏角色而言，同样存在目标、前提和效果，但虚拟动作的确定性通常更强。现实机器人还必须处理视觉误差、接触与动作失败，不能只依赖符号计划的逻辑正确。</p>
+</div>
+<h2 id="h-04468263c47" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">四、RoboTurk 与示范：把人的操作转成可学数据</span></h2>
+<div class="reading-block" id="p-fc9849d0e9a"><p>2018年的 RoboTurk 由 Ajay Mandlekar 第一作者、Zhu 等人共同完成，用普及的移动设备支持远程六自由度遥操作，收集机器人学习所需示范。它的研究贡献包括采集界面、网络条件和数据对策略学习的影响，而不只是某种机械臂算法。<a href="https://proceedings.mlr.press/v87/mandlekar18a.html">RoboTurk 正式论文</a>。</p>
+</div>
+<div class="reading-block" id="p-2637769136b"><p>人类示范能够绕开部分探索和奖励设计困难，但采集过程本身影响学习内容。不同操作员、延迟、控制映射和任务说明，都可能造成轨迹差异。示范并不是天然整齐的监督标签，系统需要记录观察、动作与时间关系。</p>
+</div>
+<div class="reading-block" id="p-0e2eb5d79c2"><p>这使“数据基础设施”成为机器人方法的一部分。通过较低门槛的输入设备扩大参与，可以增加行为覆盖；仍需保证操作质量、来源与任务一致性。Zhu 参与的后续开放系统持续处理这些问题，把研究从实验室内少量精致演示推进到可共享、可比较的数据工作流。</p>
+</div>
+<h2 id="h-123c577b14f" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">五、robosuite 与 robomimic：实验怎样成为可复现资源</span></h2>
+<div class="reading-block" id="p-7a4ce81f066"><p>robosuite 是以 MuJoCo 为基础的模块化机器人模拟框架，Zhu 与 Josiah Wong、Ajay Mandlekar、Roberto Martín-Martín 列创始团队。它提供机器人、控制器、物体和任务等组件；当前官方页面记录的 v1.5 加入更广的身体形态、组合控制和渲染支持。2020年的论文与后续软件版本应分别引用。<a href="https://robosuite.ai/">robosuite 官方项目</a>。</p>
+</div>
+<div class="reading-block" id="p-9dcba7a511e"><p>其模块化设计有助于明确比较条件：换机器人、控制器或观察模式，可能改变同一学习方法的难度。重用环境组件可以降低实验成本，也容易让研究只集中于既定任务；因此，使用者需要同时报告接口版本和任务分布，而不是只说“在模拟器中成功”。</p>
+</div>
+<div class="reading-block" id="p-27930bc058e"><p>robomimic 与2021年的《What Matters in Learning from Offline Human Demonstrations for Robot Manipulation》相连，提供示范数据、离线学习算法与评价工具。研究发现算法设计、示范质量和停止条件都可能显著影响结论。训练损失低，不一定意味着部署成功率高；按照不同标准挑选检查点，也可能改变方法排名。<a href="https://arxiv.org/abs/2108.03298">原始论文</a>、<a href="https://robomimic.github.io/">官方框架</a>。</p>
+</div>
+<div class="reading-block" id="p-a5b6ff4bc33"><p>开放代码不会自动消除所有复现问题，但使差异能够被定位：究竟是数据版本、超参数、控制接口，还是模型结构导致变化。将这些条件公开，是他与合作者对研究共同体的重要贡献。</p>
+</div>
+<h2 id="h-9d24da090b5" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">六、LIBERO：把“知道什么”与“会做什么”同时迁移</span></h2>
+<div class="reading-block" id="p-67c063044a6"><p>LIBERO 于2023年提出，研究机器人终身学习。论文区别陈述性知识与程序性知识：识别物体和概念，与执行动作、组合行为并不完全相同。基准通过不同任务套件考察知识迁移、策略架构、任务顺序和预训练，Zhu 是团队作者之一。<a href="https://arxiv.org/abs/2306.03310">LIBERO 原始论文</a>。</p>
+</div>
+<div class="reading-block" id="p-ff37510c841"><p>终身学习的难点不仅是学新任务，也包括旧能力是否退化，以及任务次序怎样改变结果。一个模型学会辨认新容器，可能帮助理解新的指令；掌握一种操作程序，也可能在换物体后继续有用。基准需要把这些迁移来源拆开，才能解释“通用”来自什么。</p>
+</div>
+<div class="reading-block" id="p-926885497da"><p>论文中的若干结果对直觉形成挑战，例如特定设置下简单顺序微调的前向迁移表现，以及不同视觉编码器没有全面优势。这说明基准的意义不仅是产生排名，还在于暴露假设。LIBERO及其后续衍生评测各有相应的作者与维护团队；引用时需核对具体版本、作者和扰动范围。</p>
+</div>
+<h2 id="h-df53691412a" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">七、RoboCasa：环境多样性也是学习资源</span></h2>
+<div class="reading-block" id="p-15059326a08"><p>RoboCasa 发表于 RSS 2024，由 Soroush Nasiriany 等人与 Zhu 合作，面向家庭特别是厨房任务，组合场景、物体、可交互设施、人类示范和自动生成轨迹。生成式工具用于扩展视觉资产与任务，物理模拟则提供可执行和可评分的约束。<a href="https://arxiv.org/abs/2406.02523">2024原始论文</a>。</p>
+</div>
+<div class="reading-block" id="p-5200ba080fd"><p>其研究对象是环境、任务与数据的共同规模化。相同的拿放动作可以发生在不同柜体、物体和布局中；视觉多样性不足可能让策略依赖背景捷径，操作关系不足则会限制行为组合。生成一张逼真图像与生成一个可训练的场景不同，后者还要有几何、碰撞、关节和任务状态。</p>
+</div>
+<div class="reading-block" id="p-9334c429961"><p>2026年的 RoboCasa365 是独立后续论文，扩展至365项任务与2500个厨房环境，并面向多任务、基础模型和终身学习设置系统评价。后续版本在2024年原版基础上扩展了数据与任务规模。<a href="https://arxiv.org/abs/2603.04356">RoboCasa365 原始论文</a>。</p>
+</div>
+<div class="reading-block" id="p-f87adcc0240"><p>大规模模拟提供了更清楚的比较条件，却没有自动解决现实差距。现实物体摩擦、相机、遮挡和控制误差都可能不同。若要主张泛化，应区分新布局、新物体、新任务和新机器人；它们是不同层次的迁移，不能用一个“未见过”笼统代替。</p>
+</div>
+<h2 id="h-5edc17a68a8" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">八、多模态提示、互联网知识与开放世界</span></h2>
+<div class="reading-block" id="p-c16f55a6006"><p>VIMA 研究通过多模态提示指定机器人任务：图像、物体示例和语言能够共同描述目标。MineDojo 在 Minecraft 中组织环境与互联网知识，探索如何利用人类已有的游戏经验。它们分别强调任务表达和知识来源，Zhu 在合作中参与构建较广的具身学习路线。<a href="https://vimalabs.github.io/">VIMA 原作者项目</a>、<a href="https://minedojo.org/">MineDojo 原作者项目</a>。</p>
+</div>
+<div class="reading-block" id="p-0f793cde8a5"><p>Voyager 将大语言模型接入 Minecraft，结合自动课程、可执行技能库和迭代反馈。Zhu 为共同作者，谢雨齐等人按论文署名参与。技能程序使经验可以跨任务复用，但这一外部记忆过程与通过梯度训练策略不同。这些能力依赖游戏API与反馈所提供的行动和观察条件。<a href="https://arxiv.org/abs/2305.16291">Voyager 原始论文</a>。</p>
+</div>
+<div class="reading-block" id="p-d2f17c77ffd"><p>这些项目为游戏与机器人之间建立了技术交流空间。游戏提供丰富规则与便宜试错，机器人提出身体、接触和现实风险等更强约束。共同的挑战是把不同来源知识变成可执行的行动条件；不同的成功标准则必须保留。</p>
+</div>
+<h2 id="h-0f2ee63bec4" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-chinese">九、GR00T 与通用具身模型</span></h2>
+<div class="reading-block" id="p-fe824fdbfce"><p>2025年的 GR00T N1 以团队论文发表，作者按字母排序，Linxi Fan 与 Yuke Zhu 明确列项目负责人。模型采用视觉语言与动作生成耦合的双系统设计，结合真实机器人轨迹、人类视频与合成数据。它将语义理解与快速运动输出接在同一训练系统中。<a href="https://arxiv.org/abs/2503.14734">GR00T N1 原始论文</a>。</p>
+</div>
+<div class="reading-block" id="p-66db88d1f49"><p>“通用”在这里是研究方向和跨任务目标，不表示无需适配任何机器人。身体的自由度、感知和动作表示仍然重要；不同数据源也需要对齐。双系统架构用认知术语组织不同模块，其能力体现在具体训练与机器人任务中。</p>
+</div>
+<div class="reading-block" id="p-589275a0db5"><p>2026年的工作继续扩展人类数据、世界动作模型与全身操作，如 EgoScale、DreamZero 和 HumanoidMimicGen。各项目负责人、共同第一作者和普通共同作者不同，Zhu 的指导职责不能覆盖每个成员的具体贡献。大学实验室和工业团队共享的长期目标，是让新知识与既有行为能力更有效地结合，而非用一条演示宣告机器人问题完成。<a href="https://research.nvidia.com/labs/gear/egoscale/">EgoScale</a>、<a href="https://dreamzero0.github.io/">DreamZero</a>、<a href="https://humanoidmimicgen.github.io/">HumanoidMimicGen</a>。</p>
+</div>
+<h2 id="h-8c09eb0253a" data-heading><span class="anchor-alias" id="s-10"></span><span class="heading-chinese">十、感知与行动之间的表示选择</span></h2>
+<div class="reading-block" id="p-9c85772a884"><p>Zhu 的早期视觉导航和后来的机器人基础模型之间，持续存在目标表示的问题。一个目标可以用图像、语言、物体关系或示范表达；它们各自提供不同信息。目标图像描述可见结果，却可能遗漏不可见接触条件；语言灵活，却可能有歧义；示范提供动作细节，又受到演示者身体和场景限制。</p>
+</div>
+<div class="reading-block" id="p-7811fbea42a"><p>因此，模型需要学习哪些关系应保持，哪些细节应随场景改变。搬动杯子时，可以保持杯与目标区域的相对关系，而不是照搬某一组关节角；导航时，可以共享接近目标的视觉策略，而不是记住一个固定路线。这类条件化的思想，是从单任务策略走向可迁移行为的重要桥梁。</p>
+</div>
+<div class="reading-block" id="p-0bbec2d9f37"><p>跨身体的迁移又增加了一层变化。机器人之间的手指、关节、相机和控制速率存在差异，同一高层任务需要转换为适合各设备的动作表示。共同表示和形态专用适配器的分工，决定系统能够共享多少知识。评价必须固定“迁移”发生在哪一层，不能只因为两个机器人执行了类似动作便判断完整策略相同。</p>
+</div>
+<div class="reading-block" id="p-fc86364d69f"><p>RoboCasa、VIMA、GR00T 等项目可以从这一问题比较：环境提供变化条件，提示指定任务，基础模型尝试共享感知与行动知识。它们没有消除对控制器和任务接口的依赖，反而让这些接口如何组合变得更加重要。</p>
+</div>
+<h2 id="h-89599cbc58e" data-heading><span class="anchor-alias" id="s-11"></span><span class="heading-chinese">十一、终身学习中的前向迁移与遗忘</span></h2>
+<div class="reading-block" id="p-d79673cd0fe"><p>LIBERO 的问题不只是在一组任务上同时训练，而是把学习放进时间。新任务能否借助过去知识更快学会，属于前向迁移；后来学习是否削弱旧任务能力，则涉及遗忘。一个模型平均成绩提高，仍可能在某个旧技能上明显退化，因此要观察完整的任务序列与能力变化。</p>
+</div>
+<div class="reading-block" id="p-88a9ebd2848"><p>任务顺序也可能改变结论。先学辨认物体，再学操作该物体，与先学操作、后来换物体，不一定具有相同难度。若实验只选一种顺序，某种方法可能恰好得到有利条件。多种顺序和重复运行有助于分辨方法本身的效果与课程偶然性。</p>
+</div>
+<div class="reading-block" id="p-6c7df17db45"><p>预训练同样不保证正迁移。预训练特征可能适合分类，却遗漏操作所需的精细位置；大模型中的丰富知识，也可能需要新的动作层才能变成技能。LIBERO 的系统比较之所以重要，在于它允许这些直觉接受实验，而不是把“先训练更多”当作无条件答案。</p>
+</div>
+<h2 id="h-b31e50fc6e1" data-heading><span class="anchor-alias" id="s-12"></span><span class="heading-chinese">十二、环境构建与现实证据的分工</span></h2>
+<div class="reading-block" id="p-84861e2f3d3"><p>模拟中的视觉、动力学和任务定义分别影响学习。视觉变化有助于研究感知鲁棒性，物理参数变化帮助考察控制范围，任务组合则检验知识复用。三种变化同时增加时，若没有分层实验，失败就很难归因。可控环境的优势恰在于能够逐项改变，而不只追求一张更复杂的场景图。</p>
+</div>
+<div class="reading-block" id="p-02a1a5617f9"><p>现实实验负责检验其中哪些假设能够带出模拟。一个在有限真实任务上成功的策略，说明方法在这些条件下可用；要扩大结论，还需面对新物体、新背景、异常初态和重复运行。实验室任务与无人值守长期服务的差距，主要存在于这些频率低却决定可靠性的情况。</p>
+</div>
+<div class="reading-block" id="p-c112ec0de5f"><p>开放资源让第三方可以在同一环境上研究新的模型，也可能使共同体过度适应固定测试。持续增加环境多样性、保留未公开条件与分析失败原因，应当共同进行。Zhu 的成果既包括扩大训练能力，也包括提供这些检验条件；二者缺少任何一方，都难以支撑通用具身智能的主张。</p>
+</div>
+<h2 id="h-94048157a75" data-heading><span class="anchor-alias" id="s-13"></span><span class="heading-chinese">十三、贡献与争论</span></h2>
+<div class="reading-block" id="p-ec8e6370ce9"><p>Zhu 的研究把感知、行动与基础设施保持在同一问题框架里：导航需要目标表示，规划需要物体关系，模仿需要可靠数据，通用模型需要多样环境与评价。开放系统使这些问题可以被他人继续研究，也是其影响的重要来源。</p>
+</div>
+<div class="reading-block" id="p-df0fe76557e"><p>主要争论集中于通用性的证据。扩大训练集可能提高覆盖，也可能保留共同盲点；模拟中的多任务成功不必然代表现实鲁棒；语言指令遵循也不包含全部物理安全条件。更有说明力的证据，是明确拆分训练与测试，报告不同迁移层次、失败条件和计算成本，并在真实系统中核验关键假设。这些要求既适用于机器人，也适用于借助同类方法制作的游戏智能体与创作工具。</p>
+</div>
+<h2 id="h-491043c8613" data-heading><span class="anchor-alias" id="s-14"></span><span class="heading-chinese">参考文献与版本</span></h2>
+<div class="reading-block" id="p-c3468d8fdf4"><ol>
+<li><a href="https://yukezhu.me/">Yuke Zhu 本人主页</a>与<a href="https://yukezhu.me/documents/yukez.pdf">履历</a>，核验于2026年11月。</li>
+<li>Zhu et al. <a href="https://arxiv.org/abs/1609.05143">Target-driven Visual Navigation</a>，2016／ICRA 2017。</li>
+<li>Zhu et al. <a href="https://arxiv.org/abs/1705.08080">Visual Semantic Planning</a>，ICCV 2017。</li>
+<li>Mandlekar et al. <a href="https://proceedings.mlr.press/v87/mandlekar18a.html">RoboTurk</a>，CoRL 2018。</li>
+<li><a href="https://robosuite.ai/">robosuite</a>，2020论文与后续软件版本；<a href="https://robomimic.github.io/">robomimic</a>及<a href="https://arxiv.org/abs/2108.03298">2021研究论文</a>。</li>
+<li>Liu et al. <a href="https://arxiv.org/abs/2306.03310">LIBERO</a>，NeurIPS 2023。</li>
+<li>Nasiriany et al. <a href="https://arxiv.org/abs/2406.02523">RoboCasa</a>，RSS 2024；<a href="https://arxiv.org/abs/2603.04356">RoboCasa365</a>，ICLR 2026。</li>
+<li><a href="https://vimalabs.github.io/">VIMA</a>、<a href="https://minedojo.org/">MineDojo</a>、Wang et al. <a href="https://arxiv.org/abs/2305.16291">Voyager</a>，按各项目原始署名引用。</li>
+<li>NVIDIA. <a href="https://arxiv.org/abs/2503.14734">GR00T N1</a>，2025。</li>
+<li><a href="https://ut-austin-rpl.github.io/research/">RPL研究目录</a>；<a href="https://research.nvidia.com/labs/gear/egoscale/">EgoScale</a>、<a href="https://dreamzero0.github.io/">DreamZero</a>、<a href="https://humanoidmimicgen.github.io/">HumanoidMimicGen</a>，2026。</li>
+</ol>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="eee2f96de7f10a"></div></section></main></div></body></html>

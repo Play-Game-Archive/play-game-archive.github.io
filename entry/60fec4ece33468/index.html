@@ -1,0 +1,94 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="Noah Shinn 是研究程序生成与语言智能体的程序员、研究者及创业者，代表工作包括 Reflexion、OpenTau 类型预测、代码编辑评估和 τ-bench。他早期在 Northeastern University 的编程语言研究中工作，后成为 Sierra 早期成员；2026年9月的本人访谈以 Instinct 创始人身份讨论个人智能体。其工作的重要联系，是让系统使用执行证据发现错误，把经验保留到后续行动，并用可检查的任务评价这种改进。本人研究资料，2026年访谈节目资料"><title>Noah Shinn · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" aria-current="page">档案卡片</a><a href="../../concepts/" >索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="60fec4ece33468"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../archives/?view=all">← 档案卡片</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-b51a9dcb89e" data-toc="h-b51a9dcb89e">一、研究经历与资料时段</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-f9781ee50bd" data-toc="h-f9781ee50bd">二、Reflexion 的问题：让失败留下作用</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-4118613de1d" data-toc="h-4118613de1d">三、行动者、评价者与反思模块</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-d968c3923fc" data-toc="h-d968c3923fc">四、ALFWorld：计划、持有与实际状态</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-6afdf2099c8" data-toc="h-6afdf2099c8">五、编程实验与验证者的弱点</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-f383d72ecd3" data-toc="h-f383d72ecd3">六、短期轨迹与经验记忆</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-9e2f6d455ad" data-toc="h-9e2f6d455ad">七、OpenTau：类型预测与程序结构</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-bdb147cb587" data-toc="h-bdb147cb587">八、代码编辑与指令遵循</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-b9a58822ba4" data-toc="h-b9a58822ba4">九、τ-bench 与连续可靠性</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-df559d23df0" data-toc="h-df559d23df0">十、工具制作与系统工程</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-dff62786348" data-toc="h-dff62786348">十一、个人智能体与产品阶段</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-25651fea907" data-toc="h-25651fea907">十二、贡献与开放问题</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-0668e6aaec4" data-toc="h-0668e6aaec4">参考文献与原始资料</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header " id="entry-title"><div><a class="entry-kicker" href="../../archives/">档案卡片</a><p class="entry-original " lang="en">Noah Shinn</p><h1>诺亚·希恩</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>Noah Shinn 是研究程序生成与语言智能体的程序员、研究者及创业者，代表工作包括 Reflexion、OpenTau 类型预测、代码编辑评估和 τ-bench。他早期在 Northeastern University 的编程语言研究中工作，后成为 Sierra 早期成员；2026年9月的本人访谈以 Instinct 创始人身份讨论个人智能体。其工作的重要联系，是让系统使用执行证据发现错误，把经验保留到后续行动，并用可检查的任务评价这种改进。<a href="https://noahshinn.com/">本人研究资料</a>，<a href="https://podcasts.apple.com/af/podcast/noah-shinn-building-instinct-the-personal-agent/id1154105909?i=1000792019848">2026年访谈节目资料</a></p>
+</section><h2 id="h-b51a9dcb89e" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">一、研究经历与资料时段</span></h2>
+<div class="reading-block" id="p-bc49d18ed5f"><p>Shinn 的个人研究页记录了编程语言、计算光化学和航空电子等既往经历，其中代码生成与类型预测形成了后续论文的直接背景。该页最后更新于2025年8月，已将 Sierra 写为过去经历；因此，它适合确认研究轨迹，不能单独证明2026年的雇主或产品状态。</p>
+</div>
+<div class="reading-block" id="p-aa6545b91a0"><p>2026年9月28日，Colossus 的《Invest Like the Best》发布对他的访谈，节目说明将其介绍为 Instinct 创始人。这个较新的本人访谈与旧学术页补充了不同阶段的身份。访谈中的用户与商业数据由受访者陈述。</p>
+</div>
+<div class="reading-block" id="p-b683f692a80"><p>他的公开论文数量有限，但问题比较集中：程序在什么意义上正确，模型是否遵从修改指令，一次失败怎样改善下一次决策，以及智能体在多次运行中能否持续守住规则。这些问题分别涉及程序语言、机器学习和交互系统，不宜全部用“提示工程”概括。</p>
+</div>
+<h2 id="h-f9781ee50bd" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">二、Reflexion 的问题：让失败留下作用</span></h2>
+<div class="reading-block" id="p-3a147cb6c78"><p>2023年 Reflexion 以语言反馈组织代理的重复尝试。Shinn 在采用的 arXiv 2303.11366v4 中列第一位作者，题名页同时列 Federico Cassano、Edward Berman、Ashwin Gopinath、Karthik Narasimhan 和 Shunyu Yao。作者网站列表与其他出版版本保留了不同署名，引用可以据具体版本对应。<a href="https://arxiv.org/abs/2303.11366v4">v4原文</a></p>
+</div>
+<div class="reading-block" id="p-fe6576eb270"><p>方法所面对的困难，是代理在失败后可能重新犯同样的错误。只给下一轮更多采样机会，未必使先前经验发生作用；直接用梯度训练大型模型，又需要另一种数据和计算条件。Reflexion 转而把结果写成可加入后续上下文的文字经验，让行为在不更新基础模型权重时发生改变。</p>
+</div>
+<div class="reading-block" id="p-8a17c7bc4b9"><p>这一机制中的“学习”发生在系统使用的记忆里。代理保留对前次轨迹的解释，再根据这些解释选择后续动作。它与传统强化学习共享利用反馈改进策略的目标，但实现方式不同。verbal reinforcement指利用语言反馈组织下一次尝试的机制。</p>
+</div>
+<h2 id="h-4118613de1d" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">三、行动者、评价者与反思模块</span></h2>
+<div class="reading-block" id="p-ba0bd82ad02"><p>Reflexion 将行为生成、结果评价和反思分为不同角色。行动者产生推理和动作，评价者根据任务确定结果，自我反思模块分析轨迹与反馈，生成下一轮可用的建议。三者可以调用语言模型，也可以使用外部检查或启发式，因此不是三个天然可靠、相互独立的心智。</p>
+</div>
+<div class="reading-block" id="p-00cd206170e"><p>这种拆分使失败可以被定位。行动计划可能错误，动作也可能没有被环境接受；即使行为正确，评价机制仍可能判断失误。若将全部环节压成一个“模型反思一下”的提示，研究者就难以知道改进来自哪里，也难以检查失败是否被错误记录。</p>
+</div>
+<div class="reading-block" id="p-0341f1be74c"><p>在实际系统中，模块分工还影响责任。成功不应只由行动者自己声称，反思需要依据已经发生的轨迹；评价者若能够读取独立结果，经验就有更可靠的约束。不同模块共享同一模型时，仍可能共享相同偏差，角色名称不能代替独立证据。</p>
+</div>
+<h2 id="h-d968c3923fc" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">四、ALFWorld：计划、持有与实际状态</span></h2>
+<div class="reading-block" id="p-c66361e7154"><p>论文中的 ALFWorld 任务要求代理在文本环境中寻找、移动与处理物体。一个典型失败是系统以为已经拿到物品，实际却没有，于是后续多个动作都建立在错误状态上。反思将长轨迹压缩为针对性经验，帮助下一轮改变动作或搜索方式。</p>
+</div>
+<div class="reading-block" id="p-d98ca12cf46"><p>这个例子说明，行动语言与世界状态必须分别保存。“我将拿起锅”是一项计划，发出拿取命令是一次尝试，环境确认持有才是结果。代理若在上下文中混淆这三层，就可能语言上不断前进、实际一直停留在原地。错误诊断需要重新核对发生了什么，而不是只把计划写得更详细。</p>
+</div>
+<div class="reading-block" id="p-ff2884231bd"><p>论文还使用重复行动、相同反馈和轨迹过长等启发式帮助发现无效循环。它们是具体实验条件下的触发机制，不是所有环境都适用的故障定义：重复有时是合理操作，长时间搜索也可能必要。部署到新的游戏，必须依据该环境重新设计检查。</p>
+</div>
+<h2 id="h-6afdf2099c8" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">五、编程实验与验证者的弱点</span></h2>
+<div class="reading-block" id="p-c2a599a7715"><p>Reflexion 的编程部分将生成、执行、测试和改进结合。测试失败能够提供比简单“答案不对”更具体的线索，例如边界情况或顺序约束没有被满足；反思则尝试把这些错误转化为下一次生成可用的原则。</p>
+</div>
+<div class="reading-block" id="p-b1a918c0f63"><p>但模型自己写出的测试也可能有错。如果同一个模型误解了问题，它可能生成与错误实现相互支持的测试，使系统看起来通过了验证。程序能够运行、通过部分测试与满足完整规范，是不同层次的成功。论文讨论中对假阳性测试的关注，构成理解方法边界的重要部分。</p>
+</div>
+<div class="reading-block" id="p-8b3d68fcf5a"><p>因此，反思循环的价值依赖反馈质量。外部编译器、可信测试和可复现环境能够约束模型的自我说明；没有这些约束时，反思可能只是为旧错误补上一段新的理由。需要比较的是经执行证实的行为改进，而不只是反思文字是否有洞察感。</p>
+</div>
+<h2 id="h-f383d72ecd3" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">六、短期轨迹与经验记忆</span></h2>
+<div class="reading-block" id="p-686467c35f2"><p>Reflexion 将当前尝试的轨迹与跨尝试保留的经验区分开。前者提供细节，后者压缩可复用教训。原实验受上下文长度限制，只保留有限数量的反思，这使记忆选择本身成为系统设计的一部分。</p>
+</div>
+<div class="reading-block" id="p-a0796ac2bf8"><p>压缩既可能帮助也可能损害后续决策。简洁经验减少无关细节，却也可能丢失适用条件；一次偶然失败被概括成普遍规则，还会使代理放弃原本有效的动作。评价记忆不能只数保存了几条，应观察它怎样被使用，以及是否在新证据出现后得到修正。</p>
+</div>
+<div class="reading-block" id="p-61426fcb63b"><p>对于游戏角色，这种区别尤其重要。技术上保留更多信息不一定符合角色设定，角色也可能需要遗忘、误解或只记得对自己重要的事。Reflexion通过记忆规则组织经验；游戏人物的具体塑造，则进一步涉及其创作目标与表达。</p>
+</div>
+<h2 id="h-9e2f6d455ad" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">七、OpenTau：类型预测与程序结构</span></h2>
+<div class="reading-block" id="p-8df49595159"><p>Shinn 与 Cassano、Ming-Ho Yee、Arjun Guha、Steven Holtzen 合作的2023年论文提出 OpenTau，处理为程序补充类型的问题。方法结合程序分解、生成类型的搜索以及 fill-in-the-type 训练，使用类型检查等条件评价输出。<a href="https://arxiv.org/abs/2305.17145">原始论文</a></p>
+</div>
+<div class="reading-block" id="p-9ceca4c5c32"><p>类型注释不是一般自然语言标签，它与程序中的变量、调用和控制结构相互约束。某个位置看似合理的类型，可能使另一处操作不再合法；而过于宽泛的类型又可能让检查失去信息。系统需要同时考虑局部预测和整个程序的一致性。</p>
+</div>
+<div class="reading-block" id="p-b5177c84e14"><p>两种方法分别组织生成与验证，为比较这些环节提供了不同设计。OpenTau 的主要对象是类型空间与程序结构，Reflexion 主要组织跨尝试的语言经验。它们分别展示了语言模型怎样接近受形式条件约束的工作，而不只产生可读文本。</p>
+</div>
+<h2 id="h-bdb147cb587" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">八、代码编辑与指令遵循</span></h2>
+<div class="reading-block" id="p-6e6dac782c4"><p>《Can It Edit?》最初于2023年公开、发表于 COLM 2024，Shinn 为共同作者。研究将已有代码与修改指令作为输入，建立评估与训练资料，检查模型能否添加、删除、修复或改变实现，而不只从空白生成函数。<a href="https://arxiv.org/abs/2312.12450">论文记录</a></p>
+</div>
+<div class="reading-block" id="p-aa415908cff"><p>编辑任务具有两个同时成立的要求：完成指定变化，以及保持仍然有效的其余行为。一个模型可能写出功能近似的新程序，却没有遵循用户要求的局部修改；也可能只改动少量文字，但遗漏必要的连锁变化。因此，输出与原文相似程度、改动大小和功能正确性都不能单独代表成功。</p>
+</div>
+<div class="reading-block" id="p-6c913e54791"><p>这项研究使代码生成的评价更加贴近维护活动。真实软件与游戏工具通常已经存在，开发者需要在约束中继续修改。对 AI 创作工具，类似问题也出现在脚本、角色规则和关卡逻辑中：系统必须理解什么要变、什么仍需成立，再以适当验证确认。</p>
+</div>
+<h2 id="h-b9a58822ba4" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-chinese">九、τ-bench 与连续可靠性</span></h2>
+<div class="reading-block" id="p-4785c935d92"><p>τ-bench 于2024年公开，Shinn 与 Yao、Pedram Razavi、Narasimhan 合作，后来发表于 ICLR 2025。基准模拟用户与代理的动态对话，并让代理通过工具在领域规则下完成任务，以最终数据库状态等证据评价结果。<a href="https://arxiv.org/abs/2406.12045">论文</a></p>
+</div>
+<div class="reading-block" id="p-66e835d6b6a"><p>这将关注点从单次回答移向交互过程。用户可能逐步补充要求，工具可能返回需要继续处理的信息，代理还要判断哪些动作符合规则。它不只要“知道答案”，还要保持状态、选择工具并正确完成实际改变。</p>
+</div>
+<div class="reading-block" id="p-4bd12a1a8a2"><p>重复运行的一致性是另一关键。一个代理偶尔能够完成任务，不表示它可以可靠承担同样职责。论文通过多次试验检查稳定性；这种评价与只报告最佳演示不同，也提示研究者记录失败分布，而非把所有风险压成一个平均成功率。</p>
+</div>
+<h2 id="h-df559d23df0" data-heading><span class="anchor-alias" id="s-10"></span><span class="heading-chinese">十、工具制作与系统工程</span></h2>
+<div class="reading-block" id="p-d553eccc5ac"><p>Shinn 的本人页面还列有网页检索、Git搜索、命令行辅助和公共API网络等原型。这些工具说明其兴趣包含把模型接到真实工作流，但项目存在不等于它们都已经成为成熟产品；具体范围应以各代码库的说明与版本为准。</p>
+</div>
+<div class="reading-block" id="p-c4974fa4c8e"><p>工具层可以显著改变代理能力。一个检索器决定它能看见什么，一个命令界面决定什么动作容易执行，错误消息又决定它如何修正。研究若只记录基础模型名称，就会遗漏系统工程对结果的贡献。</p>
+</div>
+<div class="reading-block" id="p-113cd6e299f"><p>同时，可用接口不只是增加动作数量。命名、返回格式、权限和异常恢复都会影响代理能否保持正确状态。面向实际开发任务的清楚反馈，帮助系统定位失败并组织修订。模型、工具和验证共同构成可用系统。</p>
+</div>
+<h2 id="h-dff62786348" data-heading><span class="anchor-alias" id="s-11"></span><span class="heading-chinese">十一、个人智能体与产品阶段</span></h2>
+<div class="reading-block" id="p-72c5a250dc0"><p>2026年本人访谈将 Instinct 介绍为通过短信、电话和邮件等既有渠道使用的个人智能体，讨论了用户信任、计算成本、界面与商业模式。这里记录的是其较新的产品方向，不据节目摘要确认全部功能在所有条件下都已稳定实现。</p>
+</div>
+<div class="reading-block" id="p-f92817e7b72"><p>这一方向与早期研究具有联系：长期任务需要记忆，实际工具需要反馈，产品还需要持续可靠地执行用户意图。但学术基准覆盖的有限任务与开放日常生活不同。产品需要处理模糊请求、变化环境和用户纠正，不能由一次论文成绩直接推导质量。</p>
+</div>
+<div class="reading-block" id="p-1cc35b68d91"><p>对于游戏研究，个人智能体也提供了比较对象。服务代理通常应尽可能准确满足授权目标，角色代理则可能具有自己的知识、动机与戏剧功能。相同记忆与反思技术进入不同作品以后，需要重新确定成功标准和与人的关系。</p>
+</div>
+<h2 id="h-25651fea907" data-heading><span class="anchor-alias" id="s-12"></span><span class="heading-chinese">十二、贡献与开放问题</span></h2>
+<div class="reading-block" id="p-fa53388e186"><p>Shinn 的公开工作围绕一条具体链条展开：提出候选，执行或检查，解释失败，保留经验，再测试下一次行为。其价值在于使语言生成接近可核对的行动过程，也把验证器、记忆与界面提升为研究对象。</p>
+</div>
+<div class="reading-block" id="p-e94fe683888"><p>仍需继续解决的问题包括反思的错误归因、测试的可靠性、记忆的适用范围和长期运行成本。更多尝试可以提高成功概率，却可能掩盖单次能力不足；更长经验可以帮助规划，也可能积累过时判断。有效研究需要拆分这些来源并保留轨迹。</p>
+</div>
+<div class="reading-block" id="p-efd71e63f64"><p>因此，评价其成果应依据具体论文与版本，不用个人创业故事代替方法分析，也不把一种成功循环推广为所有智能的完整模型。游戏与AI创作可以借用这些机制，同时通过真实交互检验它们如何影响玩家的理解、信任和行动空间。</p>
+</div>
+<h2 id="h-0668e6aaec4" data-heading><span class="anchor-alias" id="s-13"></span><span class="heading-chinese">参考文献与原始资料</span></h2>
+<div class="reading-block" id="p-aa4cf2bf96c"><ul>
+<li>Shinn. <a href="https://noahshinn.com/">本人研究网站</a>，页面自标最后更新2025-08；2026现状另据本人访谈。</li>
+<li>Shinn等. <a href="https://arxiv.org/abs/2303.11366v4">Reflexion，arXiv v4</a>，2023-10-10。方法与实例核对用户提供全文；六人署名与其他记录分别处理。</li>
+<li>Cassano等. <a href="https://arxiv.org/abs/2305.17145">Type Prediction With Program Decomposition and Fill-in-the-Type Training</a>，2023；<a href="https://arxiv.org/abs/2312.12450">Can It Edit?</a>，2023/2024。</li>
+<li>Yao、Shinn等. <a href="https://arxiv.org/abs/2406.12045">τ-bench</a>，2024/2025。</li>
+<li>Colossus. <a href="https://podcasts.apple.com/af/podcast/noah-shinn-building-instinct-the-personal-agent/id1154105909?i=1000792019848">Noah Shinn—Building Instinct: The Personal Agent</a>，2026-09-28。使用节目方发布的访谈资料，不将产品自述当独立效果试验。</li>
+</ul>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="60fec4ece33468"></div></section></main></div></body></html>

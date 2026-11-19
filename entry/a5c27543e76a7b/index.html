@@ -1,0 +1,325 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="论文介绍一款女巫召唤游戏的原型：系统先给出答案关键词，再由本地大语言模型反向生成村民的不同问题；玩家用一次文字输入提出同时解决所有问题的物品。原型结合语言模型、相似度评估模型、扩散图像生成与Unity，以此探索人工智能原生游戏的机制设计。作者报告游戏创作马拉松中的初步反馈，并提出创造力、用户体验和本地／云端能耗比较的研究方法；系统性用户研究与能耗比较仍属于后续工作。"><title>一咒皆解：作为人工智能创造力与可持续设计研究工具的生成式人工智能游戏 · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" aria-current="page">文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" >档案卡片</a><a href="../../concepts/" >索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="a5c27543e76a7b"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../articles/?view=all">← 文章</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-OSF00001" data-toc="u-OSF00001">一咒皆解：作为人工智能创造力与可持续设计研究工具的生成式人工智能游戏</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-OSF00014" data-toc="u-OSF00014">1. 引言</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-OSF00016" data-toc="u-OSF00016">2. 相关工作</a></div></li><li class="toc-node depth-2"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-u-OSF00020" aria-label="展开或收起3. 游戏设计与机制"><span>▸</span></button><a href="#u-OSF00020" data-toc="u-OSF00020">3. 游戏设计与机制</a></div><ul id="tree-u-OSF00020" class="toc-children" hidden><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-OSF00022" data-toc="u-OSF00022">3.1. 玩法概述</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-OSF00026" data-toc="u-OSF00026">3.2. 问题与解决方案的生成</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-OSF00032" data-toc="u-OSF00032">3.3. 村民交互</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-OSF00034" data-toc="u-OSF00034">3.4. 美术元素</a></div></li></ul></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-OSF00036" data-toc="u-OSF00036">4. 技术工作流</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-OSF00045" data-toc="u-OSF00045">5. 人工智能整合</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-OSF00052" data-toc="u-OSF00052">6. 用户体验与反馈</a></div></li><li class="toc-node depth-2"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-u-OSF00054" aria-label="展开或收起7. 后续工作"><span>▸</span></button><a href="#u-OSF00054" data-toc="u-OSF00054">7. 后续工作</a></div><ul id="tree-u-OSF00054" class="toc-children" hidden><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-OSF00056" data-toc="u-OSF00056">7.1. 人工智能创造力</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-OSF00061" data-toc="u-OSF00061">7.2. 用户体验与满意度</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-OSF00064" data-toc="u-OSF00064">7.3. 本地人工智能模型与云端方案的能源效率</a></div></li></ul></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-OSF00067" data-toc="u-OSF00067">8. 结论</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-OSF00069" data-toc="u-OSF00069">参考文献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-47322ba90eb" data-toc="h-47322ba90eb">署名与许可</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header has-cover" id="entry-title"><figure class="entry-media kind-article"><img src="../../assets/display/55eeaa4bf0bc737cab6ed162.webp" alt="原论文图3：系统工作流程图，与作品卡的实机画面分开" width="1309" height="648"></figure><div><a class="entry-kicker" href="../../articles/">文章</a><p class="entry-original " lang="en">One Spell Fits All: A Generative AI Game as a Tool for Research in AI Creativity and Sustainable Design</p><h1>一咒皆解：作为人工智能创造力与可持续设计研究工具的生成式人工智能游戏</h1><p class="citation">Tom Tucek 汤姆·图切克 / Kseniia Harshina 克谢尼娅·哈尔希娜 / Georgia Samaritaki 乔治娅·萨马里塔基 / Dipika Rajesh 迪皮卡·拉杰什 · 2025 · 2026汉译</p></div></header><div class="reading-toolbar"><div class="language-switch" role="group" aria-label="阅读语言"><button data-language="both" aria-pressed="true">对照</button><button data-language="zh" aria-pressed="false">汉译</button><button data-language="original" aria-pressed="false">原文</button></div><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro textual-foreign" id="entry-intro" data-heading><h2>简介</h2><p>论文介绍一款女巫召唤游戏的原型：系统先给出答案关键词，再由本地大语言模型反向生成村民的不同问题；玩家用一次文字输入提出同时解决所有问题的物品。原型结合语言模型、相似度评估模型、扩散图像生成与Unity，以此探索人工智能原生游戏的机制设计。作者报告游戏创作马拉松中的初步反馈，并提出创造力、用户体验和本地／云端能耗比较的研究方法；系统性用户研究与能耗比较仍属于后续工作。</p>
+<p>原文由Tom Tucek, Kseniia Harshina, Georgia Samaritaki, Dipika Rajesh署名，载于<em>CEUR Workshop Proceedings</em>《CEUR工作坊论文集》第3926卷，对应2024年11月19日举行的EXAG工作坊；所用正式卷发布于2025年2月21日。原文依<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>许可使用，本页保留原作者署名、版权及许可，进行了全文转录、汉译与排版转换。原文来源：<a href="https://ceur-ws.org/Vol-3926/paper11.pdf">正式论文</a>。</p>
+</section><h2 id="u-OSF00001" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-original" lang="en">One Spell Fits All: A Generative AI Game as a Tool for Research in AI Creativity and Sustainable Design
+
+</span><span class="heading-chinese">一咒皆解：作为人工智能创造力与可持续设计研究工具的生成式人工智能游戏
+
+</span></h2>
+<div class="bilingual-pair" id="u-OSF00002"><div class="original" lang="en"><p>Tom Tucek¹,<em>,†, Kseniia Harshina¹,</em>,†, Georgia Samaritaki²,† and Dipika Rajesh³,†</p>
+</div><div class="translation" lang="zh"><p>Tom Tucek¹,<em>,†、Kseniia Harshina¹,</em>,†、Georgia Samaritaki²,† 与 Dipika Rajesh³,†</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00003"><div class="original" lang="en"><p>¹ University of Klagenfurt, Klagenfurt, 9020, Austria</p>
+</div><div class="translation" lang="zh"><p>¹ 克拉根福大学，奥地利克拉根福，9020</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00004"><div class="original" lang="en"><p>² University of Amsterdam</p>
+</div><div class="translation" lang="zh"><p>² 阿姆斯特丹大学</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00005"><div class="original" lang="en"><p>³ University of California, Santa Cruz</p>
+</div><div class="translation" lang="zh"><p>³ 加利福尼亚大学圣克鲁兹分校</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00006"><div class="original" lang="en"><p>✉ <a href="mailto:Tom.Tucek@aau.at">Tom.Tucek@aau.at</a> (T. Tucek); <a href="mailto:Kseniia.Harshina@aau.at">Kseniia.Harshina@aau.at</a> (K. Harshina); <a href="mailto:g.samaritaki@uva.nl">g.samaritaki@uva.nl</a> (G. Samaritaki); <a href="mailto:dirajesh@ucsc.edu">dirajesh@ucsc.edu</a> (D. Rajesh)</p>
+</div><div class="translation" lang="zh"><p>✉ <a href="mailto:Tom.Tucek@aau.at">Tom.Tucek@aau.at</a>（T. Tucek）；<a href="mailto:Kseniia.Harshina@aau.at">Kseniia.Harshina@aau.at</a>（K. Harshina）；<a href="mailto:g.samaritaki@uva.nl">g.samaritaki@uva.nl</a>（G. Samaritaki）；<a href="mailto:dirajesh@ucsc.edu">dirajesh@ucsc.edu</a>（D. Rajesh）</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00007"><div class="original" lang="en"><p><a href="https://github.com/YenR/OneSpellFitsAll">https://github.com/YenR/OneSpellFitsAll</a> (T. Tucek)</p>
+</div><div class="translation" lang="zh"><p><a href="https://github.com/YenR/OneSpellFitsAll（T">https://github.com/YenR/OneSpellFitsAll（T</a>. Tucek）</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00008"><div class="original" lang="en"><p>ORCID: 0009-0001-1277-1473 (T. Tucek); 0009-0001-4491-4619 (K. Harshina); 0009-0006-8467-2374 (G. Samaritaki); 0009-0007-53 57-5560 (D. Rajesh)</p>
+</div><div class="translation" lang="zh"><p>ORCID：0009-0001-1277-1473（T. Tucek）；0009-0001-4491-4619（K. Harshina）；0009-0006-8467-2374（G. Samaritaki）；0009-0007-53 57-5560（D. Rajesh）</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00009"><div class="original" lang="en"><p>11th Experimental Artificial Intelligence in Games Workshop, November 19, 2024, Lexington, Kentucky, USA.</p>
+</div><div class="translation" lang="zh"><p>第11届游戏实验人工智能工作坊，2024年11月19日，美国肯塔基州列克星敦。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00010"><div class="original" lang="en"><p>CEUR Workshop Proceedings, ceur-ws.org, ISSN 1613-0073.</p>
+</div><div class="translation" lang="zh"><p>CEUR 工作坊论文集，ceur-ws.org，ISSN 1613-0073。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00011"><div class="original" lang="en"><p>© 2024 Copyright for this paper by its authors. Use permitted under Creative Commons License Attribution 4.0 International (CC BY 4.0).</p>
+</div><div class="translation" lang="zh"><p>© 2024 本文版权归其作者所有。允许依照知识共享署名4.0国际许可协议（CC BY 4.0）使用。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00012"><div class="original" lang="en"><h2>Abstract</h2>
+<p>This paper presents &quot;One Spell Fits All&quot;, an AI-native game prototype where the player, playing as a witch, solves villagers’ problems using magical conjurations. We show how, beyond being a standalone game, &quot;One Spell Fits All&quot; could serve as a research platform to explore several key areas in AI-driven and AI-native game design. These areas include AI creativity, user experience in predominantly AI-generated content, and the energy efficiency of locally running versus cloud-based AI models. By leveraging smaller, locally running generative AI models, including LLMs and diffusion models for image generation, the game dynamically generates and evaluates content without the need for external APIs or internet access, offering a sustainable and responsive gameplay experience. This paper explores the application of LLMs in narrative video games, outlines a game prototype’s design and mechanics, and proposes future research opportunities that can be explored using the game as a platform.</p>
+</div><div class="translation" lang="zh"><h2>摘要</h2>
+<p>本文介绍《一咒皆解》（One Spell Fits All），这是一款人工智能原生游戏的原型：玩家扮演女巫，借助魔法召唤来解决村民的问题。我们说明，《一咒皆解》除了本身可以作为一款游戏，还可充当研究平台，用来探索人工智能驱动和人工智能原生游戏设计中的几个关键领域。这些领域包括人工智能创造力、内容主要由人工智能生成时的用户体验，以及在本地运行的人工智能模型与云端模型各自的能源效率。游戏采用规模较小、在本地运行的生成式人工智能模型，其中包括大语言模型和用于图像生成的扩散模型，能够动态生成和评估内容，无须外部API或互联网接入，提供可持续且响应及时的游玩体验。本文探讨大语言模型在叙事电子游戏中的应用，概述一款游戏原型的设计与机制，并提出可利用该游戏平台开展的后续研究机会。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00013"><div class="original" lang="en"><p><strong>Keywords</strong></p>
+<p>Generative AI, AI-driven Gameplay, Local AI Models, AI and Creativity, Player Experience, Procedural Content Generation</p>
+</div><div class="translation" lang="zh"><p><strong>关键词</strong></p>
+<p>生成式人工智能，人工智能驱动的玩法，本地人工智能模型，人工智能与创造力，玩家体验，程序化内容生成</p>
+</div></div>
+<h2 id="u-OSF00014" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-original" lang="en">1. Introduction
+
+</span><span class="heading-chinese">1. 引言
+
+</span></h2>
+<div class="bilingual-pair" id="u-OSF00015"><div class="original" lang="en"><p>In &quot;One Spell Fits All&quot; (OSFA), players take on the role of a witch, capable of conjuring an infinite variety of items using text-based input (see Figures 1 and 2). NPC-Villagers visit the witch with a wide range of problems, and the player is tasked with finding exactly one solution that solves all of their problems at once – using a single text input. The game uses locally running AI models to generate and evaluate game content, providing a sustainable alternative with lower latency compared to cloud-based AI services. Furthermore, we believe that this video game can serve as a research platform, as the game can provide an environment to investigate various aspects of generative AI, such as AI creativity, user experience for AI-generated content, and energy efficiency – all of which can be compared across different models or implementations. This paper discusses the game’s integration of generative AI tools and outlines the potential research directions that can be pursued using this platform.</p>
+</div><div class="translation" lang="zh"><p>在《一咒皆解》（OSFA）中，玩家扮演一位女巫，能够通过文字输入召唤出种类无穷的物品（见图1和图2）。NPC村民带着各式各样的问题拜访女巫，玩家的任务是找到恰好一个方案，用一次文字输入同时解决他们的所有问题。游戏采用在本地运行的人工智能模型来生成和评估游戏内容，相较于云端人工智能服务，提供了一种延迟更低的可持续替代方案。此外，我们认为这款电子游戏可以充当研究平台，因为它能够提供一种环境，用以考察生成式人工智能的各个方面，例如人工智能创造力、人工智能生成内容的用户体验，以及能源效率；这些方面均可在不同模型或实现方式之间进行比较。本文讨论游戏如何整合生成式人工智能工具，并概述可以利用这一平台开展的潜在研究方向。</p>
+</div></div>
+<h2 id="u-OSF00016" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-original" lang="en">2. Related Work
+
+</span><span class="heading-chinese">2. 相关工作
+
+</span></h2>
+<div class="bilingual-pair" id="u-OSF00017"><div class="original" lang="en"><p>Incorporating AI into interactive narratives has been a long-term objective in video game research [1]. This goal has seen significant advancements with the recent surge in generative AI tools, particularly large language models (LLMs). Furthermore, the use of LLMs in video games has been shown to increase the amount and the quality of possible player interactions [2, 3, 4, 5].</p>
+</div><div class="translation" lang="zh"><p>将人工智能纳入交互叙事一直是电子游戏研究的长期目标[1]。随着近年来生成式人工智能工具，尤其是大语言模型（LLM）的兴起，这一目标的实现取得了显著进展。此外，已有研究表明，在电子游戏中使用大语言模型，能够增加玩家可能进行的交互数量，并提高交互质量[2, 3, 4, 5]。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00018"><div class="original" lang="en"><p>Significant advances for generative AI integrated into games have been shown with examples like &quot;1001 Nights&quot; [6, 7], a game which explores dynamic content generation by creating images of weapons based on the stories told by the player. The authors of the game also argue for the use of the term ”AI-native” games, as opposed to AI-powered games, for video games that use generative models as an integral core feature. We adopt this term to describe OSFA.</p>
+</div><div class="translation" lang="zh"><p>将生成式人工智能整合进游戏的显著进展，已经由《1001 Nights》等实例展现出来[6, 7]。这款游戏根据玩家讲述的故事创建武器图像，以此探索动态内容生成。该游戏的作者还主张：对于把生成模型作为不可或缺的核心特征的电子游戏，应使用“人工智能原生”游戏这一术语，而非“人工智能赋能”游戏。我们采用这个术语来描述OSFA。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00019"><div class="original" lang="en"><p>The integration of AI in video games has been explored in literature, with foundational texts such as those by Yannakakis and Togelius [8] providing a comprehensive overview of how artificial intelligence can enhance game design through techniques like procedural content generation (PCG), player modelling, and dynamic difficulty adjustment. OSFA builds upon these concepts by applying local AI models to create a responsive and sustainable game environment. Elements of PCG [9] have formed the base of OSFA, to showcase how AI can autonomously create complex and engaging game content.</p>
+</div><div class="translation" lang="zh"><p>人工智能在电子游戏中的整合已经受到文献讨论。例如，Yannakakis与Togelius的基础性著作[8]全面概述了人工智能如何通过程序化内容生成（PCG）、玩家建模和动态难度调整等技术来改进游戏设计。OSFA以这些概念为基础，应用本地人工智能模型，创建响应及时且可持续的游戏环境。PCG的若干要素[9]构成了OSFA的基础，用来展示人工智能如何自主创建复杂而引人投入的游戏内容。</p>
+</div></div>
+<h2 id="u-OSF00020" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-original" lang="en">3. Game Design and Mechanics
+
+</span><span class="heading-chinese">3. 游戏设计与机制
+
+</span></h2>
+<div class="bilingual-pair" id="u-OSF00021"><div class="original" lang="en"><p>The core gameplay loop of OSFA revolves around the player’s text input. Taking on the role of a witch, players have to address the various needs of NPC-villagers by using magical conjurations. In each round, the system feeds a solution item from a list of predefined solutions to the LLM, which then reverse-engineers problems. These problems are then posed as requests from the villagers. Players have complete creative freedom regarding their input, which is funnelled into various models.</p>
+</div><div class="translation" lang="zh"><p>OSFA的核心玩法循环围绕玩家的文字输入展开。玩家扮演女巫，必须运用魔法召唤来回应NPC村民的各种需求。每轮中，系统从预先定义的解决方案列表中取出一个物品作为答案，交给大语言模型，再由模型反向构造问题。这些问题随后以村民请求的形式呈现出来。玩家在输入方面拥有完全的创作自由，这些输入会被送入各种模型。</p>
+</div></div>
+<h3 id="u-OSF00022" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-original" lang="en">3.1. Gameplay Overview
+
+</span><span class="heading-chinese">3.1. 玩法概述
+
+</span></h3>
+<div class="bilingual-pair" id="u-OSF00023"><div class="original" lang="en"><p>In OSFA, an increasing number of villagers visit the player’s hut, each with a specific problem that needs to be solved. The player must provide a solution through text input, to conjure an item that solves all of the present villagers’ problems at once. The game progresses in turns, with each turn representing a new challenge through a new set of villagers. The player’s success is measured by their ability to satisfy the villagers, which is reflected in the game’s scoring system. Figures 1 and 2 showcase the in-game environment where the witch summons items based on player input (top-right) and the villagers voicing their problems.</p>
+</div><div class="translation" lang="zh"><p>在OSFA中，来访玩家小屋的村民数量不断增加，每位村民都有一个需要解决的具体问题。玩家必须通过文字输入提供解决方案，召唤出一个物品，同时解决当前在场的所有村民的问题。游戏按回合推进，每个回合都由一组新村民带来新的挑战。玩家是否成功，取决于他们满足村民的能力，并通过游戏的计分系统体现出来。图1和图2展示了游戏内的环境：女巫依据玩家输入召唤物品（右上角），村民则说出各自的问题。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00024"><div class="original" lang="en"><p>Figure 1: Screenshot of OSFA, showing villagers and their problems. (The problems read: &quot;Catching many small fish for dinner&quot; and &quot;Collecting fallen apples from [a] large tree&quot;.)</p>
+</div><div class="translation" lang="zh"><p>图1：OSFA的截图，展示村民及其问题。（问题文字为：“捕捉许多小鱼做晚饭”和“收集从[一棵]大树上掉落的苹果”。）</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00024F"><div class="original" lang="en"><p><strong>Text in the original image (transcription)</strong></p>
+<p>basket; Go!; Your previous conjurations; Points: 0; Back to Main Menu; Catching many small fish for dinner; Collecting fallen apples from large tree</p>
+</div><div class="translation" lang="zh"><p><strong>图内文字汉译</strong></p>
+<p>篮子；开始！；你此前的召唤物；分数：0；返回主菜单；捕捉许多小鱼做晚饭；收集从大树上掉落的苹果</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00025"><div class="original" lang="en"><p>Figure 2: Screenshot of OSFA, showing the witch conjuring a chair and the villagers being satisfied with the solution. Note that this is not the solution to the problems in the previous screenshot.</p>
+</div><div class="translation" lang="zh"><p>图2：OSFA的截图，展示女巫召唤出一把椅子，以及村民对该方案感到满意的情形。请注意，这并不是上一张截图中那些问题的解决方案。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00025F"><div class="original" lang="en"><p><strong>Text in the original image (transcription)</strong></p>
+<p>What will you conjure up next?; Go!; Your previous conjurations; chair; Points: 2; Back to Main Menu; abra cadabra</p>
+</div><div class="translation" lang="zh"><p><strong>图内文字汉译</strong></p>
+<p>接下来你要召唤什么？；开始！；你此前的召唤物；椅子；分数：2；返回主菜单；阿布拉卡达布拉</p>
+</div></div>
+<h3 id="u-OSF00026" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-original" lang="en">3.2. Problem and Solution Generation
+
+</span><span class="heading-chinese">3.2. 问题与解决方案的生成
+
+</span></h3>
+<div class="bilingual-pair" id="u-OSF00027"><div class="original" lang="en"><p>One of the innovative aspects of OSFA is the use of AI to dynamically generate problems and evaluate solutions at run-time. The game currently employs the Mistral-7B-Instruct model, via the LLM for Unity library 1 to generate unique problems equal to the number of present villagers, based on a provided keyword. This ensures that the challenges presented to the player are varied, contextually relevant, and have at least one correct solution for all problems. Once the player provides a solution, the game tests for validity and then uses the all-MiniLM-L6-v2 2 transformer model to evaluate the solution based on a similarity score to the original keyword. Future iterations of the game will try the use of LLMs for evaluation of the solution as well. The game then generates a visual representation of the solution, using a custom diffusion model 3 and ComfyUI 4, which is then presented to the player and the villagers.</p>
+</div><div class="translation" lang="zh"><p>OSFA的一个创新之处，是利用人工智能在运行时动态生成问题并评估解决方案。游戏目前通过LLM for Unity库[1]使用Mistral-7B-Instruct模型，依据给定的关键词，生成与在场村民数量相同、各不相同的问题。这样可以确保呈现给玩家的挑战多样、符合语境，而且至少存在一个能够解决全部问题的正确方案。玩家给出方案后，游戏先检验其有效性，再使用all-MiniLM-L6-v2 Transformer模型[2]，依据该方案与原始关键词的相似度分数来评估它。游戏后续版本还会尝试使用大语言模型来评估解决方案。随后，游戏借助定制扩散模型[3]和ComfyUI[4]，生成解决方案的视觉表现，并呈现给玩家和村民。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00028"><div class="original" lang="en"><p>[1 <a href="https://github.com/undreamai/LLMUnity">https://github.com/undreamai/LLMUnity]</a></p>
+</div><div class="translation" lang="zh"><p>[1 <a href="https://github.com/undreamai/LLMUnity">https://github.com/undreamai/LLMUnity]</a></p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00029"><div class="original" lang="en"><p>[2 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2]</a></p>
+</div><div class="translation" lang="zh"><p>[2 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2]</a></p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00030"><div class="original" lang="en"><p>[3 <a href="https://huggingface.co/megaaziib/aziibpixelmix">https://huggingface.co/megaaziib/aziibpixelmix]</a></p>
+</div><div class="translation" lang="zh"><p>[3 <a href="https://huggingface.co/megaaziib/aziibpixelmix">https://huggingface.co/megaaziib/aziibpixelmix]</a></p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00031"><div class="original" lang="en"><p>[4 <a href="https://github.com/comfyanonymous/ComfyUI">https://github.com/comfyanonymous/ComfyUI]</a></p>
+</div><div class="translation" lang="zh"><p>[4 <a href="https://github.com/comfyanonymous/ComfyUI">https://github.com/comfyanonymous/ComfyUI]</a></p>
+</div></div>
+<h3 id="u-OSF00032" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-original" lang="en">3.3. Villager Interactions
+
+</span><span class="heading-chinese">3.3. 村民交互
+
+</span></h3>
+<div class="bilingual-pair" id="u-OSF00033"><div class="original" lang="en"><p>The interactions between the player and the NPC-villagers are central to the game’s narrative and mechanics. Villagers respond to the player’s solutions based on the AI’s evaluation, and their satisfaction is reflected in the game’s scoring system. The scoring system, in turn, affects how many villagers come back to the player. These interactions are designed to create a dynamic and responsive gameplay loop, in which the player must think creatively and strategically to meet all of the villagers’ needs.</p>
+</div><div class="translation" lang="zh"><p>玩家与NPC村民之间的交互，是游戏叙事与机制的核心。村民根据人工智能的评估对玩家的解决方案作出回应，他们的满意程度会体现在游戏的计分系统中。计分系统反过来影响有多少村民再次来找玩家。这些交互旨在构成一个动态且响应及时的玩法循环；玩家必须创造性地思考，并作出策略安排，才能满足所有村民的需求。</p>
+</div></div>
+<h3 id="u-OSF00034" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-original" lang="en">3.4. Artistic Elements
+
+</span><span class="heading-chinese">3.4. 美术元素
+
+</span></h3>
+<div class="bilingual-pair" id="u-OSF00035"><div class="original" lang="en"><p>OSFA features a distinct pixel art style that complements its AI-driven gameplay. The game’s art is a mix of free assets and AI-generated art, such as the sprite of the witch. The locally running model creates pixel art assets in real-time based on player input, which matches stylistically with the rest of the game. Furthermore, the background music and the theme song for the main menu have also been created using generative AI tools.</p>
+</div><div class="translation" lang="zh"><p>OSFA具有鲜明的像素美术风格，与其人工智能驱动的玩法相呼应。游戏美术混合使用免费素材和人工智能生成的美术，例如女巫的精灵图。运行于本地的模型依据玩家输入实时创建像素美术素材，其风格与游戏的其他部分相匹配。此外，背景音乐和主菜单的主题曲也由生成式人工智能工具创作。</p>
+</div></div>
+<h2 id="u-OSF00036" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-original" lang="en">4. Technical Workflow
+
+</span><span class="heading-chinese">4. 技术工作流
+
+</span></h2>
+<div class="bilingual-pair" id="u-OSF00037"><div class="original" lang="en"><p>Figure 3 illustrates the workflow of OSFA, where various AI components generate and evaluate game content dynamically in the game’s core loop.</p>
+</div><div class="translation" lang="zh"><p>图3展示了OSFA的工作流：在游戏的核心循环中，各个人工智能组件动态生成和评估游戏内容。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00038"><div class="original" lang="en"><p>The workflow is detailed as follows:</p>
+</div><div class="translation" lang="zh"><p>工作流详述如下：</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00039"><div class="original" lang="en"><ol>
+<li>Villagers enter the witch’s store, bringing their unique problems for the witch (the player) to solve.</li>
+</ol>
+</div><div class="translation" lang="zh"><ol>
+<li>村民进入女巫的商店，带来各自独特的问题，等待女巫（玩家）解决。</li>
+</ol>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00040"><div class="original" lang="en"><ol start="2">
+<li>The game uses an LLM to generate a problem for each villager. This AI model with custom instructions takes a sentence (in our case, a keyword) as input and produces problems, which are solvable by the keyword.</li>
+</ol>
+</div><div class="translation" lang="zh"><ol start="2">
+<li>游戏使用大语言模型为每位村民生成一个问题。这个带有定制指令的人工智能模型，以一句话（在我们的情况下是一个关键词）为输入，生成可以用该关键词解决的问题。</li>
+</ol>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00041"><div class="original" lang="en"><ol start="3">
+<li>Each turn, the player must address all of the villagers’ problems at once. The player inputs text – an item to be conjured by the witch to solve the problems.</li>
+</ol>
+</div><div class="translation" lang="zh"><ol start="3">
+<li>每个回合中，玩家必须一次性解决所有村民的问题。玩家输入文字，即一个将由女巫召唤出来解决问题的物品。</li>
+</ol>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00042"><div class="original" lang="en"><ol start="4">
+<li>The game then evaluates the player’s solution using the all-MiniLM-L6-v2 transformer model. This model checks the similarity between the player’s input and the original keyword to determine if the problem has been correctly addressed. Note that this step could also be given to the LLM instead, which would then be able to evaluate the solution on a per-villager basis.</li>
+</ol>
+</div><div class="translation" lang="zh"><ol start="4">
+<li>接着，游戏使用all-MiniLM-L6-v2 Transformer模型评估玩家的解决方案。该模型检查玩家输入与原始关键词的相似度，以判断问题是否得到正确处理。请注意，这一步也可以改由大语言模型完成，届时便能逐个村民地评估解决方案。</li>
+</ol>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00043"><div class="original" lang="en"><ol start="5">
+<li>The game generates an image representing the solution. This image visually depicts the outcome of the player’s input.</li>
+</ol>
+</div><div class="translation" lang="zh"><ol start="5">
+<li>游戏生成一幅表现解决方案的图像。这幅图像直观呈现玩家输入的结果。</li>
+</ol>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00044"><div class="original" lang="en"><ol start="6">
+<li>The game then calculates the player’s score based on the success of their solution. The villagers give visual feedback on whether the solution was considered successful or not, leave the store, and a new loop begins.</li>
+</ol>
+</div><div class="translation" lang="zh"><ol start="6">
+<li>随后，游戏根据解决方案的成功程度计算玩家分数。村民用视觉反馈表明该方案是否被视为成功，然后离开商店，新的循环开始。</li>
+</ol>
+</div></div>
+<h2 id="u-OSF00045" data-heading><span class="anchor-alias" id="s-10"></span><span class="heading-original" lang="en">5. AI Integration
+
+</span><span class="heading-chinese">5. 人工智能整合
+
+</span></h2>
+<div class="bilingual-pair" id="u-OSF00046"><div class="original" lang="en"><p>OSFA uses multiple AI models running locally and at the same time to create a dynamic gameplay experience. The integration of these models is central to the game’s ability to generate problems, evaluate solutions, and provide visual feedback. This section gives more details on how various AI components are implemented and interact within the game. Notably, the game’s architecture was designed with modularity in mind – which means that each model can be swapped out separately.</p>
+</div><div class="translation" lang="zh"><p>OSFA采用多个在本地同时运行的人工智能模型，创造动态的游玩体验。这些模型的整合，是游戏能够生成问题、评估解决方案和提供视觉反馈的关键。本节进一步说明各个人工智能组件如何在游戏中实现及相互作用。需要特别指出，游戏架构在设计时考虑了模块化，这意味着各个模型均可单独替换。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00047"><div class="original" lang="en"><p>The Mistral-7B-Instruct model, used as the LLM within the game, is responsible for generating the unique problems that each villager presents to the player. The model operates locally on the player’s computer, limiting energy consumption and eliminating the need for external API calls. The use of such a local implementation can also reduce the latency between player input and feedback, as well as improve data privacy concerns, as no data is sent to third parties.</p>
+</div><div class="translation" lang="zh"><p>游戏中的大语言模型Mistral-7B-Instruct，负责生成每位村民向玩家提出的独特问题。该模型在玩家电脑上本地运行，从而限制能源消耗，并免去外部API调用。由于不向第三方发送数据，这种本地实现还能够缩短玩家输入与反馈之间的延迟，并改善数据隐私方面的问题。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00048"><div class="original" lang="en"><p>Figure 3: Workflow diagram showing game loop for OSFA and the interaction between AI components and user input in the game.</p>
+</div><div class="translation" lang="zh"><p>图3：工作流程图，展示OSFA的游戏循环，以及游戏中人工智能组件与用户输入之间的交互。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00048F"><div class="original" lang="en"><p><strong>Text in the original image (transcription)</strong></p>
+<p>Generate n Problems; mistralai/Mistral-7B-Instruct-v0.2&#39;; Given a sentence generate one problem per villager; Villagers enter store; Player input (Witch); is valid; Generate villager response; mistralai/Mistral-7B-Instruct-v0.2&#39;; Generate response for invalid answer; Generate image from solution; ComfyUI; Pixel Art Fast Generator; Evaluate for each villager; sentence-transformers/all-MiniLM-L6-v2; transformer with similarity score; Collect score; Villagers leave; New Turn</p>
+</div><div class="translation" lang="zh"><p><strong>图内文字汉译</strong></p>
+<p>生成n个问题；mistralai/Mistral-7B-Instruct-v0.2&#39;；给定一句话，为每位村民生成一个问题；村民进入商店；玩家输入（女巫）；有效；生成村民回应；mistralai/Mistral-7B-Instruct-v0.2&#39;；为无效答案生成回应；根据解决方案生成图像；ComfyUI；像素美术快速生成器；逐个村民进行评估；sentence-transformers/all-MiniLM-L6-v2；带有相似度分数的Transformer；汇总分数；村民离开；新回合</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00049"><div class="original" lang="en"><p>To evaluate the player’s solutions, OSFA integrates the all-MiniLM-L6-v2 transformer model. After the player provides a solution to a villager’s problem, the model calculates a similarity score compared to a ’perfect’ solution, thus determining whether the player’s input sufficiently addresses the problem. Currently, all villagers’ problems are evaluated at once, but future implementations will aim to evaluate them on a case-by-case basis (e.g., by using an LLM instead of a transformer), thus allowing for partially correct answers as well.</p>
+</div><div class="translation" lang="zh"><p>为了评估玩家的解决方案，OSFA整合了all-MiniLM-L6-v2 Transformer模型。玩家为村民的问题提供方案后，模型计算该方案与一个“完美”方案相比的相似度分数，借此判断玩家输入是否充分解决了问题。目前，所有村民的问题会被同时评估；未来实现则将争取逐个案例进行评估（例如改用大语言模型，而非Transformer），从而也能接受部分正确的答案。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00050"><div class="original" lang="en"><p>Based on the player’s input, the conjured items are generated using a pixel-art diffusion model and a custom ComfyUI workflow. This tool is integrated into the game’s AI pipeline, allowing it to dynamically create pixel art assets based on the input in real time.</p>
+</div><div class="translation" lang="zh"><p>依据玩家输入，召唤出的物品由一个像素美术扩散模型和定制的ComfyUI工作流生成。该工具被整合进游戏的人工智能流水线，使游戏能够依据输入实时、动态地创建像素美术素材。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00051"><div class="original" lang="en"><p>The AI models in OSFA are implemented within a framework that supports real-time interaction and processing. The models run locally on the player’s machine and the game was made using the Unity Game Engine, using scripts, plugins, and libraries to control the AI models. By running the AI components locally, the game minimizes latency and increases security through the lack of network communication, although the player’s hardware specification can still cause delays.</p>
+</div><div class="translation" lang="zh"><p>OSFA的人工智能模型实现在一个支持实时交互与处理的框架中。模型在玩家机器上本地运行；游戏使用Unity游戏引擎制作，通过脚本、插件和库来控制人工智能模型。在本地运行人工智能组件，可以最大限度降低延迟，并因不进行网络通信而提升安全性，不过玩家的硬件配置仍然可能造成延迟。</p>
+</div></div>
+<h2 id="u-OSF00052" data-heading><span class="anchor-alias" id="s-11"></span><span class="heading-original" lang="en">6. User Experience and Feedback
+
+</span><span class="heading-chinese">6. 用户体验与反馈
+
+</span></h2>
+<div class="bilingual-pair" id="u-OSF00053"><div class="original" lang="en"><p>Initial testing indicates that players appreciate the dynamic problem-solving elements, though challenges such as model latency were encountered and mitigated through optimization techniques. The game was developed and showcased during a game jam event, where it won second place. More than ten people at a time engaged with the game, often collaborating to guess and influence the player’s decisions. This collective engagement fostered curiosity and a fun, cooperative atmosphere. Players found it challenging to discover the correct solutions but remained persistent, continually attempting new ideas. When the villagers left satisfied with a solution, it elicited cheers and a sense of accomplishment among the group. Participants particularly enjoyed the generated images, highlighting them as a standout feature. However, some areas of improvement were noted. There was ambiguity when players felt their solutions were appropriate but unacknowledged by the system. Enhancing the feedback mechanism to provide clearer guidance when solutions are rejected could significantly improve user experience.</p>
+</div><div class="translation" lang="zh"><p>初步测试表明，玩家欣赏动态解决问题的要素，不过也遇到了模型延迟等挑战，并通过优化技术加以缓解。游戏在一次游戏创作马拉松活动中开发并展示，获得了第二名。现场有十余人同时参与，常常合作猜测，并影响玩家的决策。这种集体参与激发了好奇心，形成了有趣、协作的氛围。玩家觉得找出正确方案颇具挑战，但依然坚持，不断尝试新的想法。当村民带着对方案的满意离去时，现场人群会发出欢呼，并产生一种成就感。参与者尤其喜欢生成的图像，将其视为突出的特色。不过，也发现了一些有待改进之处。当玩家认为自己的方案合适，而系统却不予认可时，就会产生含混不清的体验。若增强反馈机制，在方案被拒绝时提供更明确的指引，就能显著改善用户体验。</p>
+</div></div>
+<h2 id="u-OSF00054" data-heading><span class="anchor-alias" id="s-12"></span><span class="heading-original" lang="en">7. Future Work
+
+</span><span class="heading-chinese">7. 后续工作
+
+</span></h2>
+<div class="bilingual-pair" id="u-OSF00055"><div class="original" lang="en"><p>Future work will focus on evaluating and enhancing the AI-driven creativity within the game, assessing user experience and satisfaction through comprehensive playtesting, and analyzing the cost-benefit ratio of using local AI models compared to cloud-based solutions. We aim to ensure an engaging and satisfying player experience while at the same time promoting sustainable AI practices in game development.</p>
+</div><div class="translation" lang="zh"><p>后续工作将着重评估和增强游戏中由人工智能驱动的创造力，通过全面的游玩测试评估用户体验与满意度，并分析使用本地人工智能模型与云端方案相比的成本收益比。我们旨在确保游玩体验既吸引人又令人满意，同时推动游戏开发中的可持续人工智能实践。</p>
+</div></div>
+<h3 id="u-OSF00056" data-heading><span class="anchor-alias" id="s-13"></span><span class="heading-original" lang="en">7.1. AI Creativity
+
+</span><span class="heading-chinese">7.1. 人工智能创造力
+
+</span></h3>
+<div class="bilingual-pair" id="u-OSF00057"><div class="original" lang="en"><p>Creativity, especially in the context of generative AI, is a rich and interdisciplinary research field [10, 11, 12]. As OSFA uses an LLM to generate villagers’ wishes and requests based on specific keywords, we believe that it opens up new possibilities for exploring AI creativity. The ability of AI to generate novel and varied problems from similar inputs is understood to be a form of creativity, presenting several interesting research questions. The first step could be defining and quantifying AI creativity in the context of the game prototype. One approach could be to develop a creativity score to evaluate the LLM’s performance in generating unique and contextually appropriate problems. This score would be based on the similarity of problems generated by the AI across various playthroughs and different versions of the game.</p>
+</div><div class="translation" lang="zh"><p>创造力，尤其是生成式人工智能语境中的创造力，是一个丰富的跨学科研究领域[10, 11, 12]。由于OSFA使用大语言模型，依据特定关键词生成村民的愿望和请求，我们认为，它为探索人工智能创造力开辟了新的可能。人工智能能够从相似输入中生成新颖而多样的问题，这种能力被理解为创造力的一种形式，提出了几个有趣的研究问题。第一步可以是在这一游戏原型的语境中定义并量化人工智能创造力。一种做法是建立创造力分数，用于评估大语言模型生成独特且符合语境的问题的表现。这个分数将以人工智能在多次游玩和游戏不同版本中生成的问题之间的相似度为基础。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00058"><div class="original" lang="en"><p>To explore this, data on AI-generated problems needs to be collected across multiple sessions and then compared against several types of solutions: those manually crafted by human designers, those generated solely by the LLM, and a mix of human and AI-generated content. This comparison could reveal how closely AI outputs align with expected creative standards, as well as how AI can complement human creativity.</p>
+</div><div class="translation" lang="zh"><p>为探索这一点，需要收集多次游玩中人工智能生成的问题数据，再将其与几类方案比较：由人类设计者手工创作的方案、完全由大语言模型生成的方案，以及人类与人工智能共同生成的内容。这样的比较可以揭示，人工智能输出在多大程度上符合预期的创造力标准，以及人工智能如何补充人类创造力。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00059"><div class="original" lang="en"><p>In addition to a creativity score, other metrics can help to better understand and measure AI creativity. Novelty can assess how often the AI produces entirely new problems not seen in previous playthroughs. Diversity measures the range of different problem types generated in response to similar keywords within a single playthrough. Consistency can evaluate the AI’s ability to maintain high-quality, contextually relevant problems across different scenarios. Adaptability assesses how well the AI adjusts its problem generation to varying game contexts or player actions, ensuring that the problems remain appropriate and challenging.</p>
+</div><div class="translation" lang="zh"><p>除了创造力分数，其他指标也有助于更好地理解和衡量人工智能创造力。新颖性可以衡量人工智能生成此前游玩中从未出现的全新问题的频率。多样性衡量同一次游玩中，针对相似关键词所生成的不同问题类型的范围。一致性可以评估人工智能在不同情境下维持高质量、符合语境的问题的能力。适应性评估人工智能能否根据不同游戏情境或玩家行动，适当地调整问题生成，确保问题仍然合适且富有挑战。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00060"><div class="original" lang="en"><p>This leads to another question – how do different LLM models compare in terms of their creative outputs? By systematically comparing these metrics across various LLMs, we could gain insights into which models are better suited for generating creative content in games. This could also inform the future development of AI systems designed specifically for creative tasks. Developing these metrics and comparing different models should deepen our understanding of how AI can be used to generate novel and engaging content. This research could have broader implications for AI applications in creative industries, such as game design, storytelling, and digital art.</p>
+</div><div class="translation" lang="zh"><p>这又引出另一个问题：不同的大语言模型在创造性输出方面表现如何？通过系统比较不同大语言模型在这些指标上的表现，我们可以了解哪些模型更适合为游戏生成创造性内容。这也可以为专门面向创造性任务的未来人工智能系统开发提供信息。开发这些指标、比较不同模型，应能加深我们对于如何使用人工智能生成新颖且引人投入的内容的理解。这项研究可能对游戏设计、故事讲述、数字艺术等创意产业中的人工智能应用产生更广泛的影响。</p>
+</div></div>
+<h3 id="u-OSF00061" data-heading><span class="anchor-alias" id="s-14"></span><span class="heading-original" lang="en">7.2. User Experience and Satisfaction
+
+</span><span class="heading-chinese">7.2. 用户体验与满意度
+
+</span></h3>
+<div class="bilingual-pair" id="u-OSF00062"><div class="original" lang="en"><p>Understanding user experience (UX) and satisfaction can help in evaluating the success of OSFA, especially given its integration of AI-generated content. This section explores methods to assess how players interact with and perceive the game, particularly in the context of its AI elements. One approach to evaluating UX in OSFA is heuristic evaluation. By having experts review the game based on established usability principles, it’s possible to identify both strengths and potential issues within the game. Key considerations include ensuring that AI-generated content maintains consistency and adheres to the game’s internal rules.</p>
+</div><div class="translation" lang="zh"><p>理解用户体验（UX）与满意度，有助于评估OSFA是否成功，尤其考虑到它整合了人工智能生成的内容。本节探讨评估玩家如何与游戏交互、如何看待游戏的方法，特别关注其中的人工智能元素。评估OSFA用户体验的一种方法是启发式评估：让专家依据既有可用性原则审查游戏，就有可能识别游戏中的优点和潜在问题。关键考虑包括确保人工智能生成的内容保持一致，并遵循游戏的内部规则。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00063"><div class="original" lang="en"><p>Beyond heuristic evaluation, another important aspect is understanding how players’ awareness of AI-generated content influences their enjoyment. It is worth investigating whether players perceive the AI elements (referring to both the pre-generated content such as music and visuals, as well as dynamically generated content) as positive additions to the game or if knowing that most of the content is AI-generated affects their perception of the game’s creativity and quality. For instance, surveys or interviews could be conducted to explore whether this awareness impacts players’ overall satisfaction and engagement and how AI-driven design challenges their expectations. In summary, understanding user experience and satisfaction in a predominantly AI-generated game like OSFA can help answer other important research questions regarding players’ perceptions of AI content.</p>
+</div><div class="translation" lang="zh"><p>除了启发式评估，另一个重要方面，是理解玩家知晓内容由人工智能生成，会如何影响他们的乐趣。值得考察的是，玩家是否把人工智能元素——包括音乐与视觉素材等预先生成的内容，以及动态生成的内容——看作对游戏的积极补充；或者，知道大部分内容由人工智能生成，会不会影响他们对游戏创造力与质量的看法。例如，可以开展问卷调查或访谈，探究这种知情是否影响玩家的总体满意度与投入程度，以及人工智能驱动的设计如何挑战玩家的预期。总之，理解OSFA这类内容主要由人工智能生成的游戏中的用户体验与满意度，有助于回答有关玩家如何看待人工智能内容的其他重要研究问题。</p>
+</div></div>
+<h3 id="u-OSF00064" data-heading><span class="anchor-alias" id="s-15"></span><span class="heading-original" lang="en">7.3. Energy Efficiency of Local AI Models vs. Cloud-Based Solutions
+
+</span><span class="heading-chinese">7.3. 本地人工智能模型与云端方案的能源效率
+
+</span></h3>
+<div class="bilingual-pair" id="u-OSF00065"><div class="original" lang="en"><p>As AI-native games like OSFA continue to develop, an important question arises: How does the utilization of local AI models compare to cloud-based solutions in terms of energy efficiency? This question is particularly relevant for our game, which operates AI models locally. While it is generally accepted that running smaller LLMs locally would be faster and more power efficient than remote calls to larger cloud-based models (such as GPT-5), this claim still warrants further investigation, especially in terms of broader scalability and environmental impact. A more detailed comparative analysis could explore the trade-offs between local and cloud-based solutions, considering the quality of the generated content, latency, and also the total energy consumption involved. This includes power requirements for both local machines and cloud-based servers, as well as the energy costs of data transmission between clients and remote servers. The goal would be to determine which approach offers greater energy efficiency, considering factors such as scalability, environmental impact, and the trade-offs between performance, quality, latency, and energy use.</p>
+</div><div class="translation" lang="zh"><p>随着OSFA这样的人工智能原生游戏继续发展，一个重要问题随之出现：在能源效率方面，使用本地人工智能模型与采用云端方案相比如何？这个问题与我们的游戏尤其相关，因为游戏在本地运行人工智能模型。虽然人们普遍认为，在本地运行较小的大语言模型，会比远程调用较大的云端模型（例如GPT-5）速度更快、耗电更少，但这一主张仍需进一步研究，尤其要考察更广泛的可扩展性与环境影响。更详细的比较分析可以探索本地与云端方案之间的取舍，将生成内容的质量、延迟及涉及的总能源消耗纳入考虑。这包括本地机器和云端服务器的电力需求，以及客户端与远程服务器之间数据传输的能源成本。目标是判断哪一种方式具有更高的能源效率，同时考虑可扩展性、环境影响，以及性能、质量、延迟与能源使用之间的取舍等因素。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00066"><div class="original" lang="en"><p>Understanding these differences can have significant implications for game development. If local AI models prove to be more energy-efficient while guaranteeing sufficient quality of experience, they could become the preferred choice for sustainable game design. However, if their quality remains lacking, and cloud-based solutions offer better efficiency, this will influence how AI resources are deployed in future projects as well. Exploring the energy efficiency of AI models is important for many reasons – not only for improving game performance but also for advancing sustainability in the AI and video game industry. By comparing the energy use of local AI models with server-based and cloud-based solutions, this research could guide future developments in AI-driven game design, promoting more environmentally conscious practices.</p>
+</div><div class="translation" lang="zh"><p>理解这些差异，可能对游戏开发产生重大影响。如果事实证明，本地人工智能模型在保证足够体验质量的同时更节能，它们就可能成为可持续游戏设计的首选。但如果它们的质量仍然不足，而云端方案的效率更高，这同样会影响未来项目部署人工智能资源的方式。探索人工智能模型的能源效率，有诸多重要原因：既是为了改善游戏性能，也是为了推进人工智能与电子游戏产业的可持续性。通过比较本地人工智能模型与基于服务器、基于云端的方案的能源使用，这项研究可以为未来人工智能驱动的游戏设计提供指引，推动更具环境意识的实践。</p>
+</div></div>
+<h2 id="u-OSF00067" data-heading><span class="anchor-alias" id="s-16"></span><span class="heading-original" lang="en">8. Conclusion
+
+</span><span class="heading-chinese">8. 结论
+
+</span></h2>
+<div class="bilingual-pair" id="u-OSF00068"><div class="original" lang="en"><p>OSFA demonstrates the potential of locally-run AI models in game development, offering both an engaging gameplay experience and a versatile platform for research. By reducing reliance on cloud-based services, the game opens up new avenues for studying AI creativity, UX, and energy efficiency. This paper outlines the game’s design and mechanics, while also proposing several research directions that can be explored using the game as a platform, thus contributing to the broader discourse on AI in games and digital creativity.</p>
+</div><div class="translation" lang="zh"><p>OSFA展示了在本地运行的人工智能模型用于游戏开发的潜力，既提供了引人投入的游玩体验，也提供了用途广泛的研究平台。通过降低对云端服务的依赖，游戏为研究人工智能创造力、用户体验和能源效率开辟了新的途径。本文概述游戏的设计与机制，同时提出可利用这一游戏平台探索的若干研究方向，从而为围绕游戏人工智能和数字创造力的更广泛讨论作出贡献。</p>
+</div></div>
+<h2 id="u-OSF00069" data-heading><span class="anchor-alias" id="s-17"></span><span class="heading-original" lang="en">References
+
+</span><span class="heading-chinese">参考文献
+
+</span></h2>
+<div class="bilingual-pair" id="u-OSF00070"><div class="original" lang="en"><p>[1] M. O. Riedl, V. Bulitko, Interactive narrative: An intelligent systems approach, Ai Magazine 34 (2013) 67–67.</p>
+</div><div class="translation" lang="zh"><p>[1] M. O. Riedl、V. Bulitko，《交互叙事：一种智能系统方法》，Ai Magazine，第34卷（2013），67–67页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00071"><div class="original" lang="en"><p>[2] T. Ashby, B. K. Webb, G. Knapp, J. Searle, N. Fulda, Personalized quest and dialogue generation in role-playing games: A knowledge graph-and language model-based approach, in: Proceedings of the 2023 CHI Conference on Human Factors in Computing Systems, 2023, pp. 1–20.</p>
+</div><div class="translation" lang="zh"><p>[2] T. Ashby、B. K. Webb、G. Knapp、J. Searle、N. Fulda，《角色扮演游戏中的个性化任务与对话生成：一种基于知识图谱与语言模型的方法》，载《2023年CHI计算系统人因会议论文集》，2023，1–20页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00072"><div class="original" lang="en"><p>[3] S. Värtinen, P. Hämäläinen, C. Guckelsberger, Generating role-playing game quests with GPT language models, IEEE transactions on games (2022).</p>
+</div><div class="translation" lang="zh"><p>[3] S. Värtinen、P. Hämäläinen、C. Guckelsberger，《使用GPT语言模型生成角色扮演游戏任务》，IEEE transactions on games（2022）。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00073"><div class="original" lang="en"><p>[4] Y. Wang, Q. Zhou, D. Ledo, Storyverse: Towards co-authoring dynamic plot with LLM-based character simulation via narrative planning, arXiv preprint arXiv:2405.13042 (2024).</p>
+</div><div class="translation" lang="zh"><p>[4] Y. Wang、Q. Zhou、D. Ledo，《Storyverse：通过叙事规划与基于大语言模型的角色模拟，走向动态情节的共同创作》，arXiv预印本，arXiv:2405.13042（2024）。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00074"><div class="original" lang="en"><p>[5] Latitude, AI Dungeon, <a href="https://play.aidungeon.io/">https://play.aidungeon.io/</a>, 2019. Accessed: 2024-09-27.</p>
+</div><div class="translation" lang="zh"><p>[5] Latitude，《AI Dungeon》，<a href="https://play.aidungeon.io/，2019。访问日期：2024-09-27。">https://play.aidungeon.io/，2019。访问日期：2024-09-27。</a></p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00075"><div class="original" lang="en"><p>[6] Y. Sun, Z. Li, K. Fang, C. H. Lee, A. Asadipour, Language as reality: A co-creative storytelling game experience in 1001 nights using generative AI, Proceedings of the AAAI Conference on Artificial Intelligence and Interactive Digital Entertainment 19 (2023) 425–434. URL: <a href="https://ojs.aaai.org/index.php/AIIDE/article/view/27539">https://ojs.aaai.org/index.php/AIIDE/article/view/27539</a>. doi: 10.1609/aiide.v19i1.27539.</p>
+</div><div class="translation" lang="zh"><p>[6] Y. Sun、Z. Li、K. Fang、C. H. Lee、A. Asadipour，《语言作为现实：在1001 nights中运用生成式人工智能的共同创作式故事游戏体验》，《AAAI人工智能与交互式数字娱乐会议论文集》，第19卷（2023），425–434页。URL：<a href="https://ojs.aaai.org/index.php/AIIDE/article/view/27539。doi">https://ojs.aaai.org/index.php/AIIDE/article/view/27539。doi</a>: 10.1609/aiide.v19i1.27539。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00076"><div class="original" lang="en"><p>[7] Ada Eden, 1001 Nights AI: Discover generative stories, 2024. URL: <a href="https://www.1001nights.ai/">https://www.1001nights.ai/</a>, accessed: 2024-08-30.</p>
+</div><div class="translation" lang="zh"><p>[7] Ada Eden，《1001 Nights AI：发现生成式故事》，2024。URL：<a href="https://www.1001nights.ai/，访问日期：2024-08-30。">https://www.1001nights.ai/，访问日期：2024-08-30。</a></p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00077"><div class="original" lang="en"><p>[8] G. N. Yannakakis, J. Togelius, Artificial intelligence and games, Springer, 2018.</p>
+</div><div class="translation" lang="zh"><p>[8] G. N. Yannakakis、J. Togelius，《人工智能与游戏》，Springer，2018。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00078"><div class="original" lang="en"><p>[9] D. Gravina, A. Khalifa, A. Liapis, J. Togelius, G. N. Yannakakis, Procedural content generation through quality diversity, in: 2019 IEEE Conference on Games (CoG), IEEE, 2019, pp. 1–8.</p>
+</div><div class="translation" lang="zh"><p>[9] D. Gravina、A. Khalifa、A. Liapis、J. Togelius、G. N. Yannakakis，《通过质量多样性进行程序化内容生成》，载《2019年IEEE游戏会议（CoG）》，IEEE，2019，1–8页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00079"><div class="original" lang="en"><p>[10] J. Rowe, D. Partridge, Creativity: A survey of AI approaches, Artificial Intelligence Review 7 (1993) 43–70.</p>
+</div><div class="translation" lang="zh"><p>[10] J. Rowe、D. Partridge，《创造力：人工智能方法综述》，Artificial Intelligence Review，第7卷（1993），43–70页。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00080"><div class="original" lang="en"><p>[11] J. H. Roosa Wingström, R. Lundman, Redefining creativity in the era of AI? perspectives of computer scientists and new media artists, Creativity Research Journal 36 (2024) 177–193. doi: 10.1080/10400419.2022.2107850.</p>
+</div><div class="translation" lang="zh"><p>[11] J. H. Roosa Wingström、R. Lundman，《在人工智能时代重新界定创造力？计算机科学家与新媒体艺术家的观点》，Creativity Research Journal，第36卷（2024），177–193页。doi: 10.1080/10400419.2022.2107850。</p>
+</div></div>
+<div class="bilingual-pair" id="u-OSF00081"><div class="original" lang="en"><p>[12] L.-C. Lu, S.-J. Chen, T.-M. Pai, C.-H. Yu, H.-y. Lee, S.-H. Sun, LLM discussion: Enhancing the creativity of large language models via discussion framework and role-play, arXiv preprint arXiv:2405.06373 (2024).</p>
+</div><div class="translation" lang="zh"><p>[12] L.-C. Lu、S.-J. Chen、T.-M. Pai、C.-H. Yu、H.-y. Lee、S.-H. Sun，《大语言模型讨论：通过讨论框架与角色扮演增强大语言模型的创造力》，arXiv预印本，arXiv:2405.06373（2024）。</p>
+</div></div>
+<h2 id="h-47322ba90eb" data-heading><span class="anchor-alias" id="s-18"></span><span class="heading-chinese">署名与许可</span></h2>
+<div class="bilingual-pair" id="p-9550ee6f8b4"><div class="translation" lang="zh"><p>Tom Tucek 汤姆·图切克、Kseniia Harshina 克谢尼娅·哈尔希娜、Georgia Samaritaki 乔治娅·萨马里塔基、Dipika Rajesh 迪皮卡·拉杰什。原作采用 <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>。此处为转录、汉译及阅读排版。 <a href="https://ceur-ws.org/Vol-3926/paper11.pdf">查看原出版来源</a></p>
+</div></div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="a5c27543e76a7b"></div></section></main></div></body></html>

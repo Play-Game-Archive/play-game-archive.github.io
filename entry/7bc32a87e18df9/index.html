@@ -1,0 +1,85 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="强化学习研究行动者怎样通过与环境交互、依据行动后获得的奖励信号改进行为。它的目标通常是提高一段时间内的累积回报，而不只是选择立即奖励最高的一步。在游戏中，行动者可以是控制整个对局的代理，也可以是负责移动、资源分配或某项局部决策的组件。奖励是系统提供的评价信号，不应直接等同于玩家快乐、道德上的奖惩或人类学习的全部机制。"><title>强化学习 · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" >档案卡片</a><a href="../../concepts/" aria-current="page">索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="7bc32a87e18df9"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../concepts/?view=all">← 索引标签</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-62d8e353f4d" data-toc="h-62d8e353f4d">问题框架与历史线索</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-d8daeb2272e" data-toc="h-d8daeb2272e">状态、动作、奖励与回报</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-10a3b817005" data-toc="h-10a3b817005">一次Q学习更新如何发生</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-9440b141a67" data-toc="h-9440b141a67">价值方法、策略方法与行动者—评价者</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-6826155b81d" data-toc="h-6826155b81d">探索与延迟归因</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-0b587a4fb2a" data-toc="h-0b587a4fb2a">与规划、模仿和规则的关系</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-534f7fc9c25" data-toc="h-534f7fc9c25">游戏设计中的实际用途</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-ca08b53a14a" data-toc="h-ca08b53a14a">评价、争论与局限</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1184d9947b1" data-toc="h-1184d9947b1">参考文献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header has-cover" id="entry-title"><figure class="entry-media kind-generated"><img src="../../assets/display/e639e6ff45c1e5934166a87d.webp" alt="强化学习，独立概念意象" width="1254" height="1254"></figure><div><a class="entry-kicker" href="../../concepts/">索引标签</a><p class="entry-original " lang="en">Reinforcement Learning</p><h1>强化学习</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>强化学习研究行动者怎样通过与环境交互、依据行动后获得的奖励信号改进行为。它的目标通常是提高一段时间内的累积回报，而不只是选择立即奖励最高的一步。在游戏中，行动者可以是控制整个对局的代理，也可以是负责移动、资源分配或某项局部决策的组件。奖励是系统提供的评价信号，不应直接等同于玩家快乐、道德上的奖惩或人类学习的全部机制。</p>
+<p>这一学习设定的特点在于行动会改变后续经验。一个代理决定绕路拿钥匙，当下可能没有得分，却改变了它之后能进入的区域；决定立刻进攻，可能得到伤害奖励，也可能失去生存机会。学习者既要估计这些延迟后果，也要通过实际尝试获得信息。训练数据因此并非完全独立于当前策略：代理采取什么行动，决定它能看见哪些状态。</p>
+</section><h2 id="h-62d8e353f4d" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">问题框架与历史线索</span></h2>
+<div class="reading-block" id="p-eedc625e636"><p>萨顿与巴托把强化学习概括为通过试错学习如何行动，以最大化数值奖励。其历史联系包括动物学习、最优控制、动态规划和时序差分方法，不宜简化成某一款游戏或某一种神经网络的发明。游戏提供了规则明确、可重复运行和易于记录结果的实验环境，使延迟奖励、竞争和长期策略这些问题能够得到具体检验。 <a href="http://incompleteideas.net/book/RLbook2020.pdf">Sutton与Barto，2018，第1章</a></p>
+</div>
+<div class="reading-block" id="p-eadb4c6eea7"><p>沃特金斯提出的Q学习是其中一个有代表性的算法。沃特金斯与戴扬1992年的论文分析了离散状态与动作条件下的收敛性质，把通过交互观察到的局部经验与最优动作价值联系起来。这份结果需要满足访问覆盖、学习率等条件；它不是对所有现代深度强化学习系统的无条件保证。历史上的表格方法与后来使用函数近似的方法，应在同一问题框架中区分说明。 <a href="https://www.gatsby.ucl.ac.uk/~dayan/papers/cjch.pdf">Watkins与Dayan，1992</a></p>
+</div>
+<div class="reading-block" id="p-85ee17e5f37"><p>2013年的深度Q网络研究用卷积神经网络处理游戏像素输入，以经验回放等办法训练动作价值估计器。它的重要性在于连接感知表示与强化学习，而非取消奖励设计或环境规则。网络架构与主要设置跨游戏复用，仍然可以为不同游戏分别训练参数。比较研究结果时，必须看清游戏版本、观察形式、训练数据量和对手条件。 <a href="https://arxiv.org/abs/1312.5602">Mnih等，2013</a></p>
+</div>
+<h2 id="h-d8daeb2272e" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">状态、动作、奖励与回报</span></h2>
+<div class="reading-block" id="p-08a1326d041"><p>常见形式化工具是马尔可夫决策过程。一个状态概括预测下一步所需的相关信息，动作影响状态转移，环境同时提供奖励。马尔可夫性要求：给定当前状态与动作后，预测下一状态不再需要额外的过去历史。如果输入只有一张截图，速度或被遮挡物体的位置未必能从中确定，因此观察不一定就是完整状态。 <a href="http://incompleteideas.net/book/RLbook2020.pdf">Sutton与Barto，2018，第3章</a></p>
+</div>
+<div class="reading-block" id="p-9c422ee8c7f"><p>策略规定行动者在状态或已有信息下怎样选择动作，可以是确定规则，也可以是动作的概率分布。价值函数评估遵循某个策略之后的预期回报；动作价值函数进一步区分当前先采取哪个动作。一个数值高的动作，不一定马上产生高奖励，它也可能把代理带到未来更有利的位置。区分奖励和价值，是理解长期决策的基础。</p>
+</div>
+<div class="reading-block" id="p-ccc5cb1e65e"><p>折扣回报把未来奖励按距离加权。折扣因子接近一时，较远的后果仍占较大分量；接近零时，评价更关注眼前。回合制任务也可以在明确终止条件下使用不折扣的总回报。折扣并非单纯让代理“有耐心”的性格按钮，它还影响数值尺度、问题性质以及对持续任务的定义。</p>
+</div>
+<div class="reading-block" id="p-0c92c74f10d"><p><span class="source-math" data-tex="$$G_t=R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+\cdots.$$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>G</mi><mi>t</mi></msub><mo>=</mo><msub><mi>R</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>+</mo><mi>γ</mi><msub><mi>R</mi><mrow><mi>t</mi><mo>+</mo><mn>2</mn></mrow></msub><mo>+</mo><msup><mi>γ</mi><mn>2</mn></msup><msub><mi>R</mi><mrow><mi>t</mi><mo>+</mo><mn>3</mn></mrow></msub><mo>+</mo><mo>⋯</mo><mtext> </mtext><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">G_t=R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+\cdots.</annotation></semantics></math></span></span></p>
+</div>
+<div class="reading-block" id="p-c98530e308a"><p>例如，某教学关卡有两条路线：直接进攻立即得两分后结束；绕路的前两步各得零分，第三步得十分后结束。折扣因子为0.9时，第二条路线从当前时刻计算的回报为8.1，高于直接进攻的两分。这个简例假定路线结果确定且没有其他代价；加入死亡风险、时间惩罚或不完整观察后，合理选择可能改变。</p>
+</div>
+<h2 id="h-10a3b817005" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">一次Q学习更新如何发生</span></h2>
+<div class="reading-block" id="p-26c52478726"><p>Q学习保存或近似每个状态与动作的价值。观察到一次转移后，它把实际奖励与下一状态的最大估计价值相加，形成更新目标，再向这个目标移动一小步。这里的最大值代表后续采取当前估计最好的动作；产生这条经验的实际行为策略，则可以含有探索。因此，更新所评估的策略与收集经验的策略可以不同。</p>
+</div>
+<div class="reading-block" id="p-972d213b208"><p><span class="source-math" data-tex="$$Q(s,a)\leftarrow Q(s,a)+\alpha\left[r+\gamma\max_{a&#39;}Q(s&#39;,a&#39;)-Q(s,a)\right].$$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>Q</mi><mo stretchy="false">(</mo><mi>s</mi><mo separator="true">,</mo><mi>a</mi><mo stretchy="false">)</mo><mo>←</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>s</mi><mo separator="true">,</mo><mi>a</mi><mo stretchy="false">)</mo><mo>+</mo><mi>α</mi><mrow><mo fence="true">[</mo><mi>r</mi><mo>+</mo><mi>γ</mi><munder><mrow><mi>max</mi><mo>⁡</mo></mrow><msup><mi>a</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></munder><mi>Q</mi><mo stretchy="false">(</mo><msup><mi>s</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo separator="true">,</mo><msup><mi>a</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">)</mo><mo>−</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>s</mi><mo separator="true">,</mo><mi>a</mi><mo stretchy="false">)</mo><mo fence="true">]</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">Q(s,a)\leftarrow Q(s,a)+\alpha\left[r+\gamma\max_{a&#x27;}Q(s&#x27;,a&#x27;)-Q(s,a)\right].</annotation></semantics></math></span></span></p>
+</div>
+<div class="reading-block" id="p-b8f4d382e03"><p>假设当前某动作的估计值为2，执行后得到奖励1，下一状态的最高动作价值为4，折扣因子为0.9，学习率为0.5。更新目标就是4.6，旧估计与目标相差2.6，取其中一半后新估计变为3.3。这是为说明公式构造的计算例子，并非某款商业游戏的真实参数。若转移已经结束一局，通常应按终止状态处理，不再接上不存在的后续价值。</p>
+</div>
+<div class="reading-block" id="p-fb0678e2fbe"><p>这个更新使用已有估计来改进另一个估计，称为自举。它能够在尚未知道整局最终结果时逐步传播信息，但也会把估值误差带入后续计算。学习率控制每条新经验的影响，折扣控制后续价值的权重，两者承担不同作用。把学习率调高不等于让代理更重视远期目标；它可能只是让估计对最近经验更加敏感。</p>
+</div>
+<div class="reading-block" id="p-ec7edaf1ad0"><p>当状态数量较少时，可以逐项保存Q表。像素画面或连续位置形成的状态空间过大时，通常需要函数近似，把许多状态映射到共享参数。这样可以把经验推广到相似状态，也可能产生相互干扰：修正一个局面的估值，意外改变另一个局面。表格方法的证明不能直接移植到这种参数共享系统上。</p>
+</div>
+<h2 id="h-9440b141a67" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">价值方法、策略方法与行动者—评价者</span></h2>
+<div class="reading-block" id="p-364def09124"><p>Q学习先估计动作价值，再据此选择行动；策略梯度方法则直接参数化动作的选择概率，并朝提高预期回报的方向调整参数。策略的输出可以是一个概率分布，不必总把当前最高价值动作变成唯一选择。强化学习通过价值或策略等不同路线组织学习，各有相应的表示与适用条件。</p>
+</div>
+<div class="reading-block" id="p-2bb9eb80daa"><p>行动者—评价者方法把两种工作结合：行动者决定怎样选择，评价者估计回报，用评价信息帮助改进策略。评价者采用自举估计可以减少等待整局结果的需求，也会引入估计误差与偏差。方法名称说明模块分工，并不表示评价者是一个知道真正答案的外部裁判。<a href="http://incompleteideas.net/book/RLbook2020.pdf">Sutton与Barto，2018，第13.1、13.5节</a></p>
+</div>
+<h2 id="h-6826155b81d" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">探索与延迟归因</span></h2>
+<div class="reading-block" id="p-2219331f421"><p>只利用已有经验，会让代理停留在偶然发现的局部策略；只随机探索，又难以稳定完成任务。一个简单办法是在大部分时间选择当前最优动作，少量时间随机试验。这个办法直观，却可能无法探索需要连续多步配合的路线。探索不是把动作变得不可预测就足够，还要让代理获得有助于改变判断的信息。</p>
+</div>
+<div class="reading-block" id="p-e63fbaecfe6"><p>延迟归因指结果出现以后，怎样判断此前哪些决策值得改进。拿钥匙与最终开门之间可能隔着几十步，稀疏奖励使有效经验很难出现。时序差分、不同时间跨度的回报、经验重用和任务分解都可以改变信息传播方式。不同方法的适用条件与代价各不相同，增加中间奖励只是众多办法之一。</p>
+</div>
+<div class="reading-block" id="p-81459f28033"><p>奖励塑形能够引导学习，也可能改变任务。例如，若每次接近门都得分，代理可能在门边来回移动，超过真正通关所得。若只奖伤害、不罚失败，代理可能倾向鲁莽进攻。这些行为不必源于算法故障：学习者可能准确优化了设计者给出的数值目标。评价时需要同时检查奖励和真正希望实现的游戏行为。</p>
+</div>
+<div class="reading-block" id="p-3e55c82b31f"><p>在多人游戏中，环境会因为其他代理的学习而变化。过去有效的动作可能很快失效，对手分布也会影响评价。自我对弈能不断产生更强或更多样的对手，但并不自动覆盖人类的全部玩法。若只用单一版本自身作对手，策略可能学会互相适应的约定，面对不同风格时却表现脆弱。</p>
+</div>
+<div class="reading-block" id="p-391a5ff8d08"><p>表格Q学习的收敛分析要求每个相关状态与动作被充分访问，奖励有界，学习率满足相应的长期条件。若代理从不尝试某条路线，算法不能凭空知道它的收益；训练的实际进程决定了系统当时已经取得的能力。论文中的保证针对明确的数学设定，工程系统应逐项检查哪些假设仍然成立。 <a href="https://www.gatsby.ucl.ac.uk/~dayan/papers/cjch.pdf">Watkins与Dayan，1992</a></p>
+</div>
+<div class="reading-block" id="p-162c41c6644"><p>观察不完整时，代理可以使用若干历史画面、记忆状态或对隐藏情况的估计。这样做试图补足当前画面遗漏的信息，却也改变了学习问题的输入与复杂度。角色究竟知道什么，既影响算法表现，也影响玩家对公平性的判断；训练时使用额外内部信息，应与运行时实际可用的信息清楚区分。</p>
+</div>
+<h2 id="h-0b587a4fb2a" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">与规划、模仿和规则的关系</span></h2>
+<div class="reading-block" id="p-b404889a74f"><p>强化学习与规划的区别，主要在于改进行为所用信息从何而来。规划常假设已有可用的环境模型，并在模型中比较未来；强化学习关注从经验学习策略或价值。二者能够结合：经验可以训练模型，模型又可以生成模拟经验或支持搜索。所谓无模型方法，也不是没有任何假设，而是不必显式学习并使用完整的状态转移模型来选择动作。</p>
+</div>
+<div class="reading-block" id="p-c8d9ac1cce2"><p>模仿学习利用示范中的动作或轨迹，监督学习通常拥有输入对应的目标输出；强化学习的奖励经常只评价结果好坏，不直接给出每一步正确动作。实际系统可以先从示范起步，再通过奖励继续改进。组合时应明确哪一阶段使用何种信号，否则容易把人类提供的策略知识误记成完全从零探索获得。</p>
+</div>
+<div class="reading-block" id="p-d8298131fc2"><p>行为树和规则通常直接规定条件下的控制流程，强化学习则能够从多次经验中改变选择倾向。学习得到的策略可以成为行为树中的一个动作模块，手工逻辑也可以限制其可用动作。这样的问题不在于哪种方法在名称上更先进，而在于哪些行为需要稳定的作者控制，哪些部分值得交给数据和反馈调整。</p>
+</div>
+<h2 id="h-534f7fc9c25" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">游戏设计中的实际用途</span></h2>
+<div class="reading-block" id="p-9448d9d06f8"><p>强化学习可以训练对战代理、自动测试者或特定运动技能。测试代理追求发现卡关、穿越边界等问题时，其奖励与普通敌人不同；动画控制器可能追求到达目标与运动平稳，对话角色则涉及更难量化的叙事要求。相同算法名称下面，任务定义可能差别很大，不能只靠“使用强化学习”推断玩家将获得什么体验。</p>
+</div>
+<div class="reading-block" id="p-82ad573a2f9"><p>开发期间离线训练、发行后固定策略，是一种部署方式；运行期间继续更新则是另一种。前者便于重现和统一测试，后者可能适应玩家，却增加稳定性、可回退性与保存状态的问题。游戏里敌人换了一种战术，也可能只是规则切换，并不一定更新学习参数。说明自适应系统时，应交代适应发生的层次与时间范围。</p>
+</div>
+<div class="reading-block" id="p-e6a6ab7430a"><p>训练还需要承担交互成本。模拟器速度、失败回合比例、重置方式和并行资源会直接影响效率。某个算法在大量计算后获得高分，不等于它适合所有开发团队或目标设备。工程评价应区分训练开销与运行开销，也应计算设计奖励、诊断失败和维护环境版本所需的人工工作。</p>
+</div>
+<div class="reading-block" id="p-5391a8f159e"><p>安全限制可以在动作选择前排除某些行为，例如剧情角色不能攻击同伴，车辆不能驶入未开放赛道。这种限制与奖励惩罚不同：高惩罚仍允许算法在探索时尝试，明确禁止则移除相应动作。对于游戏必须维持的规则，应该说明使用哪一种机制，不宜只期待代理经过足够多次失败便学会遵守。</p>
+</div>
+<div class="reading-block" id="p-7733553d145"><p>还要区分任务内记忆与跨回合学习。循环网络可以记住本局曾经看到的钥匙位置，而参数在整局中保持不变；跨回合训练则改变之后遇到类似局面时的策略。前者帮助处理信息不完整，后者改变从经验总结的规律。角色表现出“记得”或“适应”，并不能单凭外观判定是哪种过程。</p>
+</div>
+<div class="reading-block" id="p-7ef9050420c"><p>奖励尺度也影响训练。把所有得分乘上一百，理论上可能保持某些最优策略的排序，但具体优化器的步长、梯度尺度与数值稳定性可能改变。对算法进行公平比较时，奖励预处理与终止规则都应记录，因为它们会改变学习者实际接收的问题。</p>
+</div>
+<h2 id="h-ca08b53a14a" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">评价、争论与局限</span></h2>
+<div class="reading-block" id="p-5e6c9f2a3d1"><p>可靠评价需要使用未参与训练的关卡、初始条件或对手，并记录足够多次运行的变化。只报告最好的一次成绩，容易把随机幸运误当成稳定能力。训练随机种子、观察权限、动作频率和环境版本也会影响比较。一个代理如果读取了人类玩家无法获得的内部状态，成绩仍可能有研究价值，但不能直接据此宣称它在相同条件下胜过人类。</p>
+</div>
+<div class="reading-block" id="p-14a0a7719c3"><p>游戏分数并不覆盖全部设计目标。过强且毫无破绽的敌人可能破坏节奏，熟练利用规则漏洞的策略也可能让角色显得不合情境。对于面向玩家的代理，可读性、反应延迟、容错与风格一致性都需要独立评价。奖励可以为其中一些目标提供近似，但不能代替对真实互动的观察和设计判断。</p>
+</div>
+<div class="reading-block" id="p-6f6f8ed4582"><p>强化学习的局限还包括分布变化、样本效率和目标误设。它能够在一个环境中学会有效行动，却未必知道何时自己的经验已经失效。地图规则改变、玩家采用新策略、感知输入遭到遮挡，都可能暴露脆弱性。保持失败回退、监测异常和限制高后果动作，是把学习方法接入稳定游戏系统的重要部分。</p>
+</div>
+<div class="reading-block" id="p-4a1363a4bd3"><p>强化学习提供的是一种让行动后果参与策略改进的机制。它把游戏中的选择、反馈和长期结果变成可计算的关系，也使“给什么奖励”成为实质性的设计问题。判断一个系统是否成功，需要同时考察它优化的数学目标、训练经验的覆盖范围，以及最终行为是否支持所期待的游戏关系。</p>
+</div>
+<h2 id="h-1184d9947b1" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-chinese">参考文献</span></h2>
+<div class="reading-block" id="p-a11c8527d1a"><ol>
+<li>Richard S. Sutton、Andrew G. Barto，2018，Reinforcement Learning: An Introduction，第二版；链接为2020年印本：<a href="http://incompleteideas.net/book/RLbook2020.pdf">作者开放版</a>。</li>
+<li>Christopher J. C. H. Watkins、Peter Dayan，1992，Q-learning，Machine Learning 8，279–292：<a href="https://www.gatsby.ucl.ac.uk/~dayan/papers/cjch.pdf">作者保存稿</a>。</li>
+<li>Volodymyr Mnih等，2013，Playing Atari with Deep Reinforcement Learning：<a href="https://arxiv.org/abs/1312.5602">作者预印本</a>。</li>
+</ol>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="7bc32a87e18df9"></div></section></main></div></body></html>

@@ -1,0 +1,92 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="启发式搜索是一类利用问题知识，引导候选状态或行动探索顺序的方法。它把“哪些方向更有希望”变成可计算的评价，用于将有限时间集中在可能产生可行或优质解的部分。它既包括有严格解质量条件的搜索，也包括为及时给出答案而接受近似的方法。"><title>启发式搜索 · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" >档案卡片</a><a href="../../concepts/" aria-current="page">索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="36da44de8f083e"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../concepts/?view=all">← 索引标签</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-a35d0907731" data-toc="h-a35d0907731">从穷举到有依据的取舍</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-0754f7b0858" data-toc="h-0754f7b0858">历史中的知识与一般方法</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-5cd0083761b" data-toc="h-5cd0083761b">评价函数与搜索策略</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-65a16b98c11" data-toc="h-65a16b98c11">一个能比较策略的小问题</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-4a6f6bb6f90" data-toc="h-4a6f6bb6f90">怎样设计有效启发信息</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-0090408150a" data-toc="h-0090408150a">前沿、界限与存储</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-67619290f29" data-toc="h-67619290f29">游戏创作中的不同用途</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-04da1a7c6fb" data-toc="h-04da1a7c6fb">何时计算更多知识</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-689406a5505" data-toc="h-689406a5505">评价、偏差与失效边界</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1184d9947b1" data-toc="h-1184d9947b1">参考文献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header has-cover" id="entry-title"><figure class="entry-media kind-generated"><img src="../../assets/display/3e75a9613f2c3796d44add68.webp" alt="启发式搜索，独立概念意象" width="1254" height="1254"></figure><div><a class="entry-kicker" href="../../concepts/">索引标签</a><p class="entry-original " lang="en">Heuristic Search</p><h1>启发式搜索</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>启发式搜索是一类利用问题知识，引导候选状态或行动探索顺序的方法。它把“哪些方向更有希望”变成可计算的评价，用于将有限时间集中在可能产生可行或优质解的部分。它既包括有严格解质量条件的搜索，也包括为及时给出答案而接受近似的方法。</p>
+<p>在游戏中，启发式搜索可服务于路线、解谜、对抗决策、动作规划和内容生成。A*是一种具体算法，寻路是一种任务，启发式搜索则处于方法总类层面。理解它的核心，是区分指导搜索的知识、控制探索的策略与判定答案优劣的目标。</p>
+</section><h2 id="h-a35d0907731" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">从穷举到有依据的取舍</span></h2>
+<div class="reading-block" id="p-de0a3bbe214"><p>游戏问题常有大量合法选择。单位可以向多个方向移动，解谜者可以推动不同箱子，对手可以尝试不同战术。即使每一步只有少数动作，动作序列也会随深度迅速增长。启发式搜索通过估计候选的前景，决定优先把计算花在哪里，使领域结构参与求解过程。</p>
+</div>
+<div class="reading-block" id="p-a311bb95195"><p>这里的启发信息可以是到目标的距离、尚未满足的条件数、局面安全程度或对动作结果的粗略预测。它应由当前可获得的信息算出。一个能精确返回最佳未来结果的函数当然很有指导力，但求它若已经等同解决原问题，就没有节约计算；真正的设计难题是用较便宜的信息形成有用方向。</p>
+</div>
+<div class="reading-block" id="p-ec08fa4ee27"><p>搜索仍需独立定义合法状态、动作、目标与代价。启发式只负责其中一部分选择，无法自动补上遗漏的规则。例如一个推箱子估计可以认为箱子离目标更近了，但若动作把箱子推进无法移出的角落，整个状态可能已经不可解。规则检查、死锁识别和前景估计应各有明确职责。</p>
+</div>
+<h2 id="h-0754f7b0858" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">历史中的知识与一般方法</span></h2>
+<div class="reading-block" id="p-8b60f63106e"><p>Newell、Shaw与Simon的通用问题求解程序报告，在1958年原稿、1959年修订中把启发式与问题求解联系起来，讨论手段—目的分析及规划。他们强调，把问题内容与求解技术分开，能够让一般机制应用到不同题材。这里的“启发”包含领域知识和控制办法，并非专指一个距离函数。<a href="https://bitsavers.trailing-edge.com/pdf/rand/ipl/P-1584_Report_On_A_General_Problem-Solving_Program_Feb59.pdf">Newell等，1959</a></p>
+</div>
+<div class="reading-block" id="p-e9ed03584af"><p>Shannon在1950年的计算机国际象棋论文中，讨论如何选择值得展开的变化、何时把局面视为稳定，以及怎样近似评价位置。它显示游戏研究很早就同时关注搜索树与判断知识：高速度允许更多尝试，领域结构则帮助避免把预算均匀耗在所有可能性上。<a href="https://gilkalai.wordpress.com/wp-content/uploads/2008/06/computerchess.pdf">Shannon，1950</a></p>
+</div>
+<div class="reading-block" id="p-2b7fbca526b"><p>1968年的A*论文进一步将一种启发估计纳入图搜索的数学条件，使“利用经验更快找到答案”与“证明返回最低代价解”能够在同一框架中讨论。此后的理论工作又细分解最优性和计算效率。启发式搜索由此形成一条重要传统：经验知识可以参与算法，而其保证需要逐项列出条件。</p>
+</div>
+<h2 id="h-5cd0083761b" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">评价函数与搜索策略</span></h2>
+<div class="reading-block" id="p-5f042fb27a0"><p>搜索前沿保存尚未继续展开的候选。无信息搜索可以按深度或累计代价选择，启发式方法则利用候选与目标之间的关系改变顺序。相同启发函数放进不同控制策略，会产生不同的完整性、存储需求和解质量；因此，评价函数的名字不足以说明整个算法的性质。</p>
+</div>
+<div class="reading-block" id="p-bb8906a4e7c"><p>贪心最佳优先搜索优先选择剩余代价估计最小的候选，容易迅速朝目标推进。它不直接考虑已经绕了多远，遇到障碍、错误估计或循环时可能付出很高代价。它的吸引力在于直接与轻量，但若任务要求最短路线，就需要额外条件或改用有相应保证的搜索策略。</p>
+</div>
+<div class="reading-block" id="p-41ac78674f6"><p>A*把已支付代价与剩余估计相加，以乐观的总路径代价排列前沿。启发式深度优先搜索则可用估计给后继排序，但主要沿当前分支继续，保留深度优先的存储特征。这些方法都使用知识，区别在于知识怎样改变控制流，以及何时愿意回头考察其他选择。<a href="https://artint.info/3e/html/ArtInt3e.Ch3.S6.html">Poole与Mackworth，2023</a></p>
+</div>
+<div class="reading-block" id="p-8fbbcb00f89"><p>启发分数还需要明确方向与单位。若数值越大代表越好，选择规则就不应按最小值处理；若估计以距离计、目标却以时间计，则二者结合前需要转换。许多看似复杂的智能失误，源于评价约定没有贯穿数据、队列和调试界面，而非缺少更先进的方法。</p>
+</div>
+<h2 id="h-65a16b98c11" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">一个能比较策略的小问题</span></h2>
+<div class="reading-block" id="p-98d0b479733"><p>构造教学图：起点到甲花二，到乙花一；甲直接到目标再花八；乙到丙花二，丙到目标花二。启发值设甲一、乙四、丙二、目标零。这里甲真实剩余为八，乙为四，所有估计都没有高估。两条完整路线代价分别为十与五。</p>
+</div>
+<div class="reading-block" id="p-f0579c5472c"><p>贪心方法先选估计一的甲，继而发现估计零的目标，于是可能立即返回代价十的路线。A*先比较甲总估价三与乙五，仍先看甲；但甲生成的目标总估价十，乙依然只有五，因此会转向乙，再经丙找到代价五。相同的保守估计，在不同策略下产生不同结果。</p>
+</div>
+<div class="reading-block" id="p-656996a3ef0"><p>这个例子说明，可采纳启发值本身并不保证任何使用它的方法都返回最优解。保证属于完整的算法及其条件，包含前沿排序、重复状态更新和终止时机。对设计者而言，可以先把“需要及时找到某条路”还是“必须找到最便宜的路”写清，再选择相应的控制策略。</p>
+</div>
+<div class="reading-block" id="p-6a1b7902a7f"><p>若希望角色表现出更强的目标感，可以给剩余估计更高权重；这通常会让搜索更愿意沿目标方向推进，也可能错过绕路之后更便宜的解。权重表达计算与解质量的取舍，应与时间预算一起记录。一个视觉上果断的对手，未必采用了最准确的最优决策。</p>
+</div>
+<h2 id="h-4a6f6bb6f90" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">怎样设计有效启发信息</span></h2>
+<div class="reading-block" id="p-1eb67187b57"><p>放松限制能给出有依据的估计。角色受墙体和道路约束时，允许穿墙得到的直线距离形成长度下界；解谜需要同时搬运多个对象时，暂时忽略部分交互限制，可以求出更简单的子问题。只要放松后的最优成本不高于原问题，它就能为保守搜索提供可解释的下界。</p>
+</div>
+<div class="reading-block" id="p-dd3b1af3c01"><p>放松必须保持正确方向。删除障碍会增加可选路线，通常降低最小代价；额外禁行道路会缩小可行集合，使成本可能升高，因此产生的值可能高于原问题的最优成本。同样，把传送动作从简化模型中删掉，可能把真实捷径漏掉，导致估计超过实际所需费用。</p>
+</div>
+<div class="reading-block" id="p-d3c8ee66deb"><p>多个下界取最大，能够保留其中较强的约束而不高估。若将两个估计直接相加，需要证明它们没有重复计算同一项成本。对收集多个物品的任务，“最远物品距离”与“所有物品距离之和”代表不同的结构假设；路线可以共享路段时，简单相加可能过高。</p>
+</div>
+<div class="reading-block" id="p-70b01a6c74e"><p>预先求解简化问题并保存结果，可形成查询表或模式数据库。运行时将当前状态映射到抽象状态，读取简化问题的精确代价。抽象越细，可能越有指导力，也越占存储；地图和规则改变时，旧表还可能失效。预处理只是把工作移到较早阶段，并没有让成本消失。</p>
+</div>
+<div class="reading-block" id="p-4c86afb2b68"><p>经验规则和学习模型也能产生启发评分，例如用已见局面预测未来价值。它们容易表达难以手写的关系，但平均预测准确并不等于逐状态满足下界条件。若算法依赖严格可采纳性，应使用能够保持该性质的构造或校验；若接受经验性近似，就用实际任务指标评价它。</p>
+</div>
+<h2 id="h-0090408150a" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">前沿、界限与存储</span></h2>
+<div class="reading-block" id="p-d9fa07cc4c1"><p>最佳优先方法通常保留较大的前沿，以便随时改选最有希望的候选。这提供了灵活性，也容易受到内存限制。深度优先方法保留当前路径及少量后继，空间较省，却可能在不理想分支耗费很久。对大型游戏状态，存储一个节点的资源和世界副本本身也可能十分昂贵。</p>
+</div>
+<div class="reading-block" id="p-569142aca16"><p>深度优先分支定界结合了当前最好解与乐观估计。找到一条代价十的完整解后，若另一候选已付出四、最低还需七，就知道它至少花十一，可以停止该分支。后来若找到代价八的解，界限继续收紧，更多候选会被排除，过程形成逐渐改进的答案序列。</p>
+</div>
+<div class="reading-block" id="p-b956166a844"><p>这个教学演算依赖剩余估计确实是下界。若把需要三的后续误估成七，原本总成本七的优解就可能被剪掉。启发信息在排序中出错，常只改变工作顺序；用于不可逆剪枝时出错，则可能直接丢失正确答案。它在控制流程中承担哪种角色，决定了需要怎样的保证。</p>
+</div>
+<div class="reading-block" id="p-80612f4fbdd"><p>重复状态也影响搜索量与可靠性。只要未来只取决于当前完整状态，某条较贵路径可以被到达同一状态的较便宜路径支配；若还存在不同的钥匙、体力或已触发事件，就需要分别保留。把状态压缩得过粗，可能把真正不同的未来误判为重复。</p>
+</div>
+<h2 id="h-67619290f29" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">游戏创作中的不同用途</span></h2>
+<div class="reading-block" id="p-607b5872c3c"><p>在路线规划中，几何与移动规则提供直观启发信息；在动作规划中，可以估计仍未满足的目标条件；在解谜中，可用对象到目标的简化匹配费用。相同的搜索骨架因此能服务不同游戏，但每种启发都依赖具体动作成本与约束，需要独立检验，无法只换一个变量名就搬用保证。</p>
+</div>
+<div class="reading-block" id="p-da114d0016e"><p>对抗游戏使用局面价值估计指导展开和截断，目标通常是争取更有利的结果，未必是最小化到终点的距离。棋类中偏好材料、机动性或安全的评价，会形成不同风格。把所有启发都称为“离目标还有多远”，会丢失这种价值判断与成本下界之间的重要差异。</p>
+</div>
+<div class="reading-block" id="p-f913c99b487"><p>程序化内容生成也能把候选地图视为搜索状态，以可达性、节奏和难度等指标引导修改。此时评分表述的是创作目标，合法性检查则保证地图满足约束。一个高分候选是否有趣，还需要玩家体验或设计审查支持；搜索对评分的优化能力，可能同时放大评分遗漏。</p>
+</div>
+<div class="reading-block" id="p-a54811d6122"><p>设计工具应允许查看候选为何得分、哪些规则导致排除，以及预算在哪里被耗尽。若某种启发奖励接近资源，生成器可能把全部资源挤在入口；若惩罚危险过重，战术角色可能拒绝参加任务。暴露特征和权重，有助于把智能行为还原为可讨论的创作选择。</p>
+</div>
+<h2 id="h-04da1a7c6fb" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">何时计算更多知识</span></h2>
+<div class="reading-block" id="p-bfc6933ae32"><p>启发函数可以分阶段求值。先用便宜下界排除明显无望的候选，只在若干候选接近时调用较昂贵分析，可以减少无效工作。但若不同阶段的数值承担不同含义，就需要重新维护队列和界限；不能在候选已经被错误剪去之后，再用更精确估计补救。</p>
+</div>
+<div class="reading-block" id="p-df3843052f8"><p>一个教学权衡是：函数甲每次求值一单位时间，需要扩展一百个节点；函数乙每次求值五单位，只需扩展三十个。若暂时忽略其他开销，甲耗一百，乙耗一百五十。更少节点在这里反而更慢；加入状态生成与内存成本后，结论又可能改变，因此评价应计算完整工作。</p>
+</div>
+<div class="reading-block" id="p-01c8b63c980"><p>启发信息还可能被多人共享，例如相同目标的预计算距离可供多个单位查询。共享提高复用率，也要求明确地图版本、角色能力与成本规则。一个仅适合步行单位的距离表，不能不加检查地交给能传送或飞行的主体，否则原来的下界与方向意义都可能改变。</p>
+</div>
+<h2 id="h-689406a5505" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-chinese">评价、偏差与失效边界</span></h2>
+<div class="reading-block" id="p-ed6f1928881"><p>启发式评价至少需要同时看成功率、解质量、计算时间和存储。只统计平均耗时，可能掩盖少量会卡住的困难局面；只统计扩展节点，又可能忽略昂贵的启发计算。地图类型、起终点、动作规则与预算应保持可比，才能判断改进来自何处。</p>
+</div>
+<div class="reading-block" id="p-037e3c52266"><p>测试应包含启发信息容易误导的情境，例如需要先远离目标的迷宫、必须暂时牺牲材料的对抗局面，以及先增加未完成条件才能解开的谜题。它们检查方法是否允许暂时变差，而不仅是沿直觉方向前进。代表性失败例子比一组顺利演示更能说明适用范围。</p>
+</div>
+<div class="reading-block" id="p-b8369ff1ebb"><p>知识偏差可能使程序系统性忽略某类解。设计者手工构造的评分，容易偏好自己熟悉的路线或玩法；学习模型则受到训练样本与标签目标影响。保存未采用候选及其评分，可以帮助发现这些模式，但从内部数值推导出的解释还需与实际控制过程一致。</p>
+</div>
+<div class="reading-block" id="p-b04ca5d7117"><p>动态世界使启发和缓存面临时效问题。道路阻断可能只增加真实代价，使旧距离仍是保守估计；新开通的高速捷径则可能让旧估计过高。更新策略应根据变化怎样影响下界来决定，而不是把所有世界变化一概视为需要重建或一概视为无关。</p>
+</div>
+<div class="reading-block" id="p-366b7982008"><p>算法完整性还取决于状态空间、循环处理和预算。无限分支、代价趋近零的无限序列或过早停止，都可能让搜索迟迟到不了存在的答案。实时游戏必然设置计算界限，因此系统应区分“没有解”和“当前预算内尚未找到解”，并给角色安排可理解的后续行动。</p>
+</div>
+<div class="reading-block" id="p-f124cc7c380"><p>启发式搜索的创作意义，在于让领域知识成为有限计算的分配规则。好的启发信息既便宜又抓住任务结构，好的搜索策略则明确自己允许怎样的近似。把知识、控制与评价分别记录，才能在提高效率时保留对答案质量和游戏表现的判断依据。</p>
+</div>
+<h2 id="h-1184d9947b1" data-heading><span class="anchor-alias" id="s-10"></span><span class="heading-chinese">参考文献</span></h2>
+<div class="reading-block" id="p-675a605b401"><ul>
+<li>Newell, A., Shaw, J. C., &amp; Simon, H. A. 1959修订. <a href="https://bitsavers.trailing-edge.com/pdf/rand/ipl/P-1584_Report_On_A_General_Problem-Solving_Program_Feb59.pdf">Report on a General Problem-Solving Program</a>. RAND P-1584；原稿1958-12-30，修订1959-02-09。</li>
+<li>Shannon, C. E. 1950. <a href="https://gilkalai.wordpress.com/wp-content/uploads/2008/06/computerchess.pdf">Programming a Computer for Playing Chess</a>. Philosophical Magazine, 41(314):256–275。</li>
+<li>Hart, P. E., Nilsson, N. J., &amp; Raphael, B. 1968. <a href="https://www.cs.auckland.ac.nz/courses/compsci709s2c/resources/Mike.d/astarNilsson.pdf">A Formal Basis for the Heuristic Determination of Minimum Cost Paths</a>. IEEE TSSC, 4(2):100–107。</li>
+<li>Poole, D. L., &amp; Mackworth, A. K. 2023. <a href="https://artint.info/3e/html/ArtInt3e.Ch3.S6.html">Artificial Intelligence: Foundations of Computational Agents, 3e, §3.6</a>。</li>
+<li>Dechter, R., &amp; Pearl, J. 1985. <a href="https://procaccia.info/courses/15780/readings/dechter_and_pearl.pdf">Generalized Best-First Search Strategies and the Optimality of A*</a>. JACM, 32(3):505–536。</li>
+</ul>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="36da44de8f083e"></div></section></main></div></body></html>

@@ -1,0 +1,77 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="蒙特卡洛树搜索是一类利用反复模拟来分配搜索资源、估计行动价值的方法。它从当前局面出发，在可能行动构成的树上选择值得继续分析的分支，把模拟或评价所得的结果向上回传，逐步积累判断依据。在游戏AI中，它常用于比较对局下一步，但也能处理其他具有顺序决策结构的问题。“蒙特卡洛”强调用采样估计价值，采样策略可以结合已有知识。"><title>蒙特卡洛树搜索 · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" >档案卡片</a><a href="../../concepts/" aria-current="page">索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="c7dbc70a33854f"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../concepts/?view=all">← 索引标签</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-46b435385c0" data-toc="h-46b435385c0">形成与基本问题</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-198355f3463" data-toc="h-198355f3463">搜索树与一次迭代</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-2e64b0569be" data-toc="h-2e64b0569be">UCT怎样分配尝试次数</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-85337781f36" data-toc="h-85337781f36">搜索中的探索与最终行动</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-51db35c0f67" data-toc="h-51db35c0f67">与其他搜索和学习方法的关系</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-612d7fae247" data-toc="h-612d7fae247">游戏设计与工程用途</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-ca08b53a14a" data-toc="h-ca08b53a14a">评价、争论与局限</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1184d9947b1" data-toc="h-1184d9947b1">参考文献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header has-cover" id="entry-title"><figure class="entry-media kind-generated"><img src="../../assets/display/bb9d3a92a176ab06bc5ddd56.webp" alt="蒙特卡洛树搜索，独立概念意象" width="1254" height="1254"></figure><div><a class="entry-kicker" href="../../concepts/">索引标签</a><p class="entry-original " lang="en">Monte Carlo Tree Search</p><h1>蒙特卡洛树搜索</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>蒙特卡洛树搜索是一类利用反复模拟来分配搜索资源、估计行动价值的方法。它从当前局面出发，在可能行动构成的树上选择值得继续分析的分支，把模拟或评价所得的结果向上回传，逐步积累判断依据。在游戏AI中，它常用于比较对局下一步，但也能处理其他具有顺序决策结构的问题。“蒙特卡洛”强调用采样估计价值，采样策略可以结合已有知识。</p>
+<p>这类方法的特点，是把搜索树的增长与价值估计结合起来。完整展开所有后续局面通常代价过高，固定深度又可能在不重要的分支上浪费计算。蒙特卡洛树搜索根据已有结果反复调整关注对象：既继续检查看起来有利的选择，也给尚未充分尝试的选择保留机会。它输出的是在给定模型、评价与预算下形成的决策依据，而不是有限时间内必然正确的证明。</p>
+</section><h2 id="h-46b435385c0" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">形成与基本问题</span></h2>
+<div class="reading-block" id="p-b523b0cb58a"><p>库隆2006年的论文研究选择性扩展与回传算子，介绍了围棋程序Crazy Stone中的相关方法；科奇什与塞派什瓦里同年的研究提出UCT，把多臂老虎机中的置信上界思想用于树搜索。这是理解现代方法的两个重要原始节点。两篇论文在选择规则与实现细节上各有设计，后来的方法又在此基础上继续发展。 <a href="https://www.remi-coulom.fr/CG2006/CG2006.pdf">Coulom，2006</a></p>
+</div>
+<div class="reading-block" id="p-ad42db4989d"><p>问题的背景是组合数量快速增长。假设每个局面平均有二十个行动，只展开五步就可能涉及数百万条行动序列。即使机器能够快速模拟，也必须决定把有限时间花在哪里。某些游戏的局面很难用简单公式直接评估，却能够较容易地模拟到结束；这使采样终局结果成为一个可用的信息来源，也促使搜索与统计估计结合。</p>
+</div>
+<div class="reading-block" id="p-16affa2731f"><p>库隆的论文特别指出，没有必要把每次模拟经过的全部局面永久保存。树可以主要记录靠近根部、被多次访问的位置，其他部分通过模拟获得结果。这个思想使内存增长与模拟长度不再完全绑定。实际系统何时扩展、扩展多少节点、怎样合并重复局面，仍然是具体实现需要解决的问题。</p>
+</div>
+<h2 id="h-198355f3463" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">搜索树与一次迭代</span></h2>
+<div class="reading-block" id="p-2dd33e49072"><p>树根表示当前决策位置，边表示可采取的行动，子节点表示行动后的局面。节点或边通常保存访问次数与累计结果，平均值用于估计该选择的表现。随机环境可能为同一个行动产生不同后果；多人游戏还要记录轮到谁行动。树只是内部推演结构，代理最终在真实游戏里通常只执行本轮选出的一个动作，然后根据新局面继续决策。</p>
+</div>
+<div class="reading-block" id="p-774b58cfcd4"><p>常见的一次迭代包括选择、扩展、模拟或评价、回传四个阶段。选择阶段从根沿已有树向下，依据某种规则挑选子分支；扩展阶段加入尚未充分表示的后续；评价阶段取得这一位置的估计结果；回传阶段更新经过路径上的统计量。这个四阶段描述是理解方法的通用框架，并不要求所有程序都采用相同的节点结构和扩展时机。</p>
+</div>
+<div class="reading-block" id="p-e8318d4b4af"><p>模拟可以继续执行到终局，再把胜负或得分作为结果，也可以在预算限制下提前停止，用评价函数估计剩余价值。前者依赖模拟策略能否提供有意义的样本，后者依赖评价函数的准确性。若模拟只会做愚蠢动作，某条在强对手面前危险的路线可能因为模拟对手不会惩罚而显得很好。更多样本未必能消除这种系统性偏差。</p>
+</div>
+<div class="reading-block" id="p-b5510f48434"><p>回传也必须对应正确的目标。在两人零和游戏中，一方的获胜通常意味着另一方失败，因此节点价值的视角要统一处理。若把双方节点都当成对根玩家无条件有利的最大化选择，相当于假设对手总会配合自己。多人、非零和与合作游戏需要相应的回报表示，不能简单把两人零和的取负规则套到所有情境。</p>
+</div>
+<h2 id="h-2e64b0569be" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">UCT怎样分配尝试次数</span></h2>
+<div class="reading-block" id="p-7f1a08bc220"><p>UCT把每个待选分支看成一个需要反复试验的选择。一个常见表达把经验平均值与探索奖励相加：平均表现好的分支值得继续研究，访问较少的分支也会得到额外吸引力。父节点访问次数越多，而某个子分支仍然很少被看见时，探索项就会相对增大。未访问分支通常先特别处理，避免公式中除以零。 <a href="https://aima.eecs.berkeley.edu/~russell/classes/cs294/s11/readings/Kocsis%2BSzepesvari%3A2006.pdf">Kocsis与Szepesvári，2006</a></p>
+</div>
+<div class="reading-block" id="p-5dfcd3d5b7f"><p><span class="source-math" data-tex="$$a=\arg\max_i\left(\bar X_i+c\sqrt{\frac{\ln N}{n_i}}\right).$$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>a</mi><mo>=</mo><mi>arg</mi><mo>⁡</mo><munder><mrow><mi>max</mi><mo>⁡</mo></mrow><mi>i</mi></munder><mrow><mo fence="true">(</mo><msub><mover accent="true"><mi>X</mi><mo>ˉ</mo></mover><mi>i</mi></msub><mo>+</mo><mi>c</mi><msqrt><mfrac><mrow><mi>ln</mi><mo>⁡</mo><mi>N</mi></mrow><msub><mi>n</mi><mi>i</mi></msub></mfrac></msqrt><mo fence="true">)</mo></mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">a=\arg\max_i\left(\bar X_i+c\sqrt{\frac{\ln N}{n_i}}\right).</annotation></semantics></math></span></span></p>
+</div>
+<div class="reading-block" id="p-90cb07950c0"><p>其中，父节点访问次数为N，分支访问次数为n，经验平均回报为X，常数c控制探索项的尺度。这是常见的演示形式；原始UCT论文对非平稳子树估计与偏置项作了专门分析，实际程序也可能改变常数或使用不同变体。回报从零到一改成零到一百后，若不调整探索尺度，搜索行为就会明显改变。</p>
+</div>
+<div class="reading-block" id="p-65c7ad989c2"><p>例如，父节点已经访问一百次。行动甲访问二十五次、胜十五次，平均值为0.6；行动乙访问四次、胜三次，平均值为0.75。取探索常数1.4，甲的总选择分数约为1.201，乙约为2.252。于是本次选择乙，主要是为了弥补它的信息不足。这个较高分数不等于乙已经被证明更强，也不是它真实获胜概率超过了一。</p>
+</div>
+<div class="reading-block" id="p-0f47e71bc3d"><p>若这次模拟乙失败，乙的记录变为五次中胜三次，平均值降为0.6，访问数增加又会降低其探索奖励。随着迭代继续，统计量与搜索分配会共同变化。这里的胜率只是当前采样过程下的估计，还会受到后续行动选择、对手模型和随机性影响。用一个很小样本的高均值直接下结论，正是探索项试图纠正的问题之一。</p>
+</div>
+<h2 id="h-85337781f36" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">搜索中的探索与最终行动</span></h2>
+<div class="reading-block" id="p-f100b852194"><p>搜索阶段的选择规则与最终落子规则承担不同任务。搜索时选择某条分支，可以是为了了解它；真正执行动作时，则需要依据累计证据作决定。程序可以选根部访问最多的分支，也可以按经验价值或其他准则决定。若直接把含有探索奖励的最高分当作最终行动，就可能在时间结束时选择一个仍然主要因未知而得到高分的动作。</p>
+</div>
+<div class="reading-block" id="p-17163351c97"><p>这种探索发生在内部模拟中，与代理在真实环境中为了学习而冒险并不完全相同。只要模型准确且计算预算允许，搜索可以在不付出真实生命或资源的情况下检验多种选择。强化学习则关注如何从经验改进策略或价值，经验可能来自真实交互，也可能来自模型。两者可以结合，但“模拟很多次”本身不等于已经训练了跨局面复用的策略。</p>
+</div>
+<div class="reading-block" id="p-ac8305902e6"><p>UCT论文在有限时域或满足相应条件的折扣决策问题中，分析了随着采样增加的性质。这类渐近结论说明预算不断增加时的方向，不能直接承诺游戏中几毫秒内必然找出最佳动作。树的深度、分支数、回报差距和危险分支出现概率，都会影响实际需要的样本数量。有限预算下的性能必须另外检验。 <a href="https://aima.eecs.berkeley.edu/~russell/classes/cs294/s11/readings/Kocsis%2BSzepesvari%3A2006.pdf">Kocsis与Szepesvári，2006</a></p>
+</div>
+<div class="reading-block" id="p-b3187282d69"><p>执行真实动作之后，程序可以保留与新局面一致的那部分搜索树，复用已经积累的统计，而不必每次全部重建。复用的前提是局面身份、规则和信息仍然对应；若模型或隐藏状态假设已经变化，旧统计可能带来误导。缓存通过明确的更新和失效条件，使过去估计与当前局面保持对应。</p>
+</div>
+<div class="reading-block" id="p-d7c863e510b"><p>随机环境还需要区分代理选择与环境产生的结果。行动“开宝箱”可以由代理决定，宝箱实际出现什么却由转移概率决定，不能让搜索像挑选行动一样专挑最好的随机结果。模拟器应按模型采样或正确聚合这些后果。否则搜索估值乐观的原因，是错误控制了环境随机性，而不是真正发现更好的策略。</p>
+</div>
+<div class="reading-block" id="p-db943e50ae4"><p>扩展策略也可以限制一次加入的行动数量，在预算增长时再逐步开放更多候选。这适合候选很多的情境，却会把行动排序的偏好带入结果。评价此类变体时，需要说明未展开行动如何获得机会，避免将被筛掉的选择误认为搜索已经证明无用。</p>
+</div>
+<h2 id="h-51db35c0f67" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">与其他搜索和学习方法的关系</span></h2>
+<div class="reading-block" id="p-6d3628e385c"><p>极小化极大搜索把对手的最优应对明确放进递归关系，常与剪枝、局面评价和固定深度结合；蒙特卡洛树搜索主要依据采样结果分配扩展。两者都能加入领域知识，也都可能使用启发式估值。具体游戏的信息结构与预算，决定了不同搜索方法的使用方式。</p>
+</div>
+<div class="reading-block" id="p-bdd0d0ad787"><p>宽度优先或固定深度展开提供较均匀的结构覆盖，而蒙特卡洛树搜索有意形成不均匀树。其优势在于能把更多计算投入当前看来有希望或尚不确定的部分，代价是可能对罕见但致命的后果认识不足。某一动作如果大部分随机续局都获胜，却存在对手容易找到的唯一反击，平均采样可能高估它。对抗性决策尤其需要关注这种陷阱。</p>
+</div>
+<div class="reading-block" id="p-daeeaa64747"><p>神经网络可以给出候选动作的先验偏好，或估计叶节点价值，从而减少无效模拟。这样的系统仍然需要说明网络如何训练、搜索怎样使用输出，以及模型错误如何传播。网络指导后的搜索并不等于原始UCT公式；不同选择公式对先验、访问次数和探索的组合方式可能明显不同。分析混合系统时，需要分别说明各个算法组件的作用。</p>
+</div>
+<h2 id="h-612d7fae247" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">游戏设计与工程用途</span></h2>
+<div class="reading-block" id="p-6665f8c8052"><p>对于规则明确、状态可复制且能够快速前推的游戏，蒙特卡洛树搜索提供了相对通用的决策框架。棋盘、卡牌或回合策略可以把规则引擎直接用于内部模拟。实时游戏若物理计算昂贵、行动持续时间不同，建立可用的快速模型就更困难。搜索算法的通用性并不消除游戏模型与行动表示的开发成本。</p>
+</div>
+<div class="reading-block" id="p-7159f3243ef"><p>行动粒度会显著改变结果。把每帧按键都作为一步，树可能过深；把“移动到掩体并射击”当成复合动作，又会把执行细节交给其他系统。复合动作能够降低分支复杂度，但也限制搜索能发现的策略。为玩家设计敌人时，哪些行动允许中断、角色能预见多远，同样是玩法和表现的一部分。</p>
+</div>
+<div class="reading-block" id="p-8e9159eca6f"><p>方法具有随时可中断的实用潜力：完成若干迭代后，就可以依据已有统计给出行动，更多时间通常带来更多证据。但这不保证每多一次迭代表现都单调提高。线程调度、随机样本与新发现的分支都可能改变选择。部署时应规定最少有效迭代、时间上限、内存上限以及没有可信结果时的回退动作。</p>
+</div>
+<div class="reading-block" id="p-eeb93ba6576"><p>隐藏信息也是重要边界。若搜索直接读取对手手牌，代理实际上获得了额外信息；若只猜测一种隐藏状态，又可能把这一猜测误当事实。根据已知信息采样多种可能局面可以形成一种处理方式，但如何保持跨信息集的一致决策，需要额外方法。普通完全信息树搜索的公式，不能独自解决部分可观察游戏的全部问题。</p>
+</div>
+<div class="reading-block" id="p-a9bc9a52f9d"><p>重复局面还会使“树”的实现变得更复杂。不同动作顺序可能抵达同一状态，程序可以利用置换表共享部分信息，但需要处理统计属于状态还是属于进入状态的边。若游戏存在循环，未经限制的模拟还可能不断重复。明确终止条件、深度截断和局面身份，是把抽象搜索框架变成可靠程序的重要工作。</p>
+</div>
+<div class="reading-block" id="p-b00249b1265"><p>模拟结果的数值尺度也应说明。二元胜负适合某些对局，分数差、通关时间或生存时长适合另一些目标。把不同任务的结果混成同一平均值，可能造成无意义的排序；奖励尺度改变还会影响探索常数的相对作用。搜索得到的高值始终是对某个指定评价量的高值，不能自动代表角色表现更自然。</p>
+</div>
+<div class="reading-block" id="p-5c3e7dfce31"><p>如果模型很慢，少量高质量模拟也许比大量粗糙模拟更合适；如果评价器系统性偏向某类局面，则增加搜索可能不断放大这一偏向。预算、模型保真度与评价误差需要共同考察，不能只以搜索树节点数判断系统投入了多少有用推理。</p>
+</div>
+<h2 id="h-ca08b53a14a" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">评价、争论与局限</span></h2>
+<div class="reading-block" id="p-334ceb8dab8"><p>评价应在相同时间或计算预算下比较，并报告对手、初始局面、随机种子及足够多局的变化。只比较模拟次数可能不公平，因为不同程序每次模拟的成本不同。使用复杂评价器的系统即使模拟较少，也可能拥有更多先验知识。胜率之外，还应观察行动延迟、错误类型和不同难度设置是否稳定。</p>
+</div>
+<div class="reading-block" id="p-41b75e6f165"><p>高胜率也不自动意味着更好的游戏体验。搜索可能反复选择最安全却单调的路线，或者利用玩家难以理解的细小优势。设计者可以通过动作集合、评价目标和预算塑造风格，但这些改变需要与强度评价分别记录。故意限制信息或反应速度，有时比单纯减少随机模拟次数更能产生可理解的难度变化。</p>
+</div>
+<div class="reading-block" id="p-327ccc2d7c0"><p>蒙特卡洛树搜索把“不可能看完所有未来”转化为“怎样值得多看几次”的问题。它的能力来自模型、采样策略、统计估计与预算分配的共同作用。清楚交代这些条件，才能理解它何时适合解决游戏决策，何时需要更精确的对抗分析、信息建模，或由其他行为系统承担控制。</p>
+</div>
+<h2 id="h-1184d9947b1" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">参考文献</span></h2>
+<div class="reading-block" id="p-0d0f784a335"><ol>
+<li>Rémi Coulom，2006，Efficient Selectivity and Backup Operators in Monte-Carlo Tree Search：<a href="https://www.remi-coulom.fr/CG2006/CG2006.pdf">作者论文</a>。</li>
+<li>Levente Kocsis、Csaba Szepesvári，2006，Bandit Based Monte-Carlo Planning，ECML，282–293：<a href="https://aima.eecs.berkeley.edu/~russell/classes/cs294/s11/readings/Kocsis%2BSzepesvari%3A2006.pdf">论文原文保存本</a>。</li>
+</ol>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="c7dbc70a33854f"></div></section></main></div></body></html>

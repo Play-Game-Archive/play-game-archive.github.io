@@ -1,0 +1,93 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="群体转向指多个自主主体依据附近同伴和环境信息，持续调整速度与方向，形成聚集、同行、避让等集体运动的方法。经典例子是Reynolds的boids模型，以局部行为生成类似鸟群、鱼群和兽群的整体形态。它属于运动与行为协调技术，不同于描述玩家社交体验的共享涉入概念。"><title>群体转向 · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" >档案卡片</a><a href="../../concepts/" aria-current="page">索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="260114f2486309"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../concepts/?view=all">← 索引标签</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1dae82c5ace" data-toc="h-1dae82c5ace">从个体规则产生整体形态</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-08145da679a" data-toc="h-08145da679a">原作者模型与后续转向表述</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-25866c7966a" data-toc="h-25866c7966a">邻居如何被选出来</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-73e9f88d7c7" data-toc="h-73e9f88d7c7">三类局部行为</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-60d159c44ca" data-toc="h-60d159c44ca">一个可逐步计算的成员更新</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-d98c22deda3" data-toc="h-d98c22deda3">转向建议怎样变成身体运动</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-11f33aa492d" data-toc="h-11f33aa492d">组合、优先级与障碍</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-9d90679e60a" data-toc="h-9d90679e60a">游戏创作与性能</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-9b7b11aa969" data-toc="h-9b7b11aa969">实际开发中的分层协作</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-46c62bd5138" data-toc="h-46c62bd5138">评价与失效边界</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1184d9947b1" data-toc="h-1184d9947b1">参考文献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header has-cover" id="entry-title"><figure class="entry-media kind-generated"><img src="../../assets/display/a59f8940192061ed8bec98bf.webp" alt="群体转向，独立概念意象" width="1254" height="1254"></figure><div><a class="entry-kicker" href="../../concepts/">索引标签</a><p class="entry-original " lang="en">Group Steering and Flocking</p><h1>群体转向</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>群体转向指多个自主主体依据附近同伴和环境信息，持续调整速度与方向，形成聚集、同行、避让等集体运动的方法。经典例子是Reynolds的boids模型，以局部行为生成类似鸟群、鱼群和兽群的整体形态。它属于运动与行为协调技术，不同于描述玩家社交体验的共享涉入概念。</p>
+<p>常用规则包括分离、对齐和聚合，也可结合目标追逐、障碍回避与队列控制。群体形态来自这些局部规则的持续交互，而非必须由中央控制器逐个编排轨迹。局部规则简洁，并不自动保证无碰撞、可达或符合特定编队目标。</p>
+</section><h2 id="h-1dae82c5ace" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">从个体规则产生整体形态</span></h2>
+<div class="reading-block" id="p-1b136087575"><p>在动画或游戏中，为上百个主体逐一编写移动路线十分繁琐，环境变化后也难以统一修改。群体转向将问题改为描述一个成员如何回应附近同伴，再复制这个成员模型。每个主体独立更新，许多简单响应共同形成不断变化的整体运动，这使大规模场景能够保持局部差异。</p>
+</div>
+<div class="reading-block" id="p-970143c5241"><p>自主成员通常保存位置、速度、方向和若干运动上限，并能查询一定范围内的邻居。它不必知道全体成员的位置，也不必为群体计算唯一中心。局部交互允许群体在障碍处分开，再在合适条件下重新接近；如果强制所有成员永远朝全局中心移动，就会产生另一类更集中的运动。</p>
+</div>
+<div class="reading-block" id="p-3f66708692a"><p>“涌现”在这里指整体图样由局部交互产生。该模型解释局部规则如何形成群体运动。创作者仍然决定感知范围、行为权重、速度限制和世界规则。整体运动看似有生命，来源是这些设计条件与持续更新的结合。</p>
+</div>
+<h2 id="h-08145da679a" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">原作者模型与后续转向表述</span></h2>
+<div class="reading-block" id="p-aa94c6e24b2"><p>Reynolds在1987年SIGGRAPH论文中提出分布式行为模型，将模拟成员作为具有局部感知和运动能力的独立行动者。论文以避免邻近碰撞、匹配速度和接近邻居中心概括群聚规则，并讨论如何调和它们的加速度请求。它面向可信动画，结合了行为与简化运动模拟。<a href="https://www.macs.hw.ac.uk/~dwcorne/Teaching/Craig%20Reynolds%20Flocks%2C%20Herds%2C%20and%20Schools%20A%20Distributed%20Behavioral%20Model.htm">Reynolds，1987</a></p>
+</div>
+<div class="reading-block" id="p-e3700cac29e"><p>1999年的转向论文进一步使用分离、聚合和对齐等明确的行为组件，放进“行动选择—转向—运动执行”的三层结构。高层决定逃跑、追逐或巡游，中层把意图转换为转向建议，底层负责跑步、飞行或车辆运动。这一分层使同样的转向逻辑可以连接不同身体。<a href="https://www.red3d.com/cwr/steer/gdc99/">Reynolds，1999</a></p>
+</div>
+<div class="reading-block" id="p-970d1187208"><p>两篇论文的术语、邻域形式和组合方式并非逐字相同。1987年实现强调局部敏感度和优先加速度分配，1999年给出更通用的行为库与多种混合策略。讨论经典boids时，应区分历史原件与后来的常见简化实现，避免把任何三条向量公式都称为原论文的唯一代码。</p>
+</div>
+<h2 id="h-25866c7966a" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">邻居如何被选出来</span></h2>
+<div class="reading-block" id="p-835cf8ca51a"><p>邻域可以用距离、视野角度或最多考虑的成员数定义。近处成员通常对避让更重要，前方成员也可能比后方更影响高速运动。不同规则还可使用不同范围：分离只处理很近的主体，对齐与聚合看得更远。邻域设计决定信息怎样在群体中传播。</p>
+</div>
+<div class="reading-block" id="p-882636f8503"><p>视野过滤是一种行为建模选择。全向邻域容易实现，也适合某些抽象主体；前向视野则使成员更重视即将进入的空间。过滤不等同于真正渲染视觉图像，原作者也将局部感知视为对可获得信息的简化。若需要遮挡，还须额外判断墙体或同伴是否阻隔感知。</p>
+</div>
+<div class="reading-block" id="p-1591b9a32e3"><p>邻域变化会引入不连续性。一个同伴刚越过半径，贡献突然消失，可能造成速度跳变。距离衰减、平滑权重或稳定的邻居选择可以改善表现，但也改变群体响应。设计者需要观察聚集、转弯和分裂过程，而不能只在平稳直行时调整参数。</p>
+</div>
+<div class="reading-block" id="p-cf10e81efab"><p>空邻域应有明确默认行为。没有邻居时，对齐与聚合可以返回零，让主体继续原运动、追逐目标或游荡。若错误地把空集合平均位置当成世界原点，所有孤立成员就会神秘地朝同一点移动。这类细节会明显改变群体形态，却很容易被简洁公式省略。</p>
+</div>
+<h2 id="h-73e9f88d7c7" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">三类局部行为</span></h2>
+<div class="reading-block" id="p-3deea36e545"><p>分离使主体远离太近的邻居。常见构造把从邻居指向自己的位移向量按距离衰减后相加，让近处成员产生更大影响。Reynolds的1999年说明给出归一方向再乘距离倒数的做法，同时强调这种衰减只是有效设置，并非唯一自然法则。零距离重叠需要单独处理。</p>
+</div>
+<div class="reading-block" id="p-7e9b10fd39a"><p>对齐尝试接近邻居的平均速度或平均朝向。若采用平均速度减当前速度，结果同时包含速度和方向修正。一个已经与邻居同速同行的成员，对齐建议应接近零。只把平均速度直接当作加速度，会在已经匹配后仍不断加速，改变原本希望表达的协调关系。</p>
+</div>
+<div class="reading-block" id="p-88b36b50fd7"><p>聚合让主体接近局部邻居的位置中心。可以直接用平均位置减当前位置，也可把平均位置作为接近行为的目标，再生成期望速度。两种写法的尺度与远距离响应不同。所谓中心是当前邻域的中心，群体边缘成员因邻居偏在一侧，通常会感到更明显的向内趋势。</p>
+</div>
+<div class="reading-block" id="p-b3fe283ced5"><p>三条规则承担相互牵制的任务：聚合防止松散分离，分离防止过度拥挤，对齐减少无谓的相对运动。不同权重会产生疏密、柔软程度和响应速度的差异。把所有权重调高，可能只增加急促运动；行为之间的比例、范围和身体上限需要一起考察。</p>
+</div>
+<h2 id="h-60d159c44ca" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">一个可逐步计算的成员更新</span></h2>
+<div class="reading-block" id="p-1d1b0744ed8"><p>构造二维教学例子：主体在原点，当前速度向右一；两个邻居分别位于主体右上方和右下方，即坐标一、一与一、负一。它们的速度分别为向右一和向上一。假定二者都在邻域内，采用简化的位移聚合、速度差对齐和位移除距离平方的分离。</p>
+</div>
+<div class="reading-block" id="p-495eb6c39b4"><p>两个邻居的平均位置为一、零，所以聚合向量为向右一。平均速度为二分之一、二分之一，减去主体当前的一、零，得到对齐向量负二分之一、二分之一。每个邻居的距离平方都是二，两个分离贡献相加得到负一、零，即整体向左。</p>
+</div>
+<div class="reading-block" id="p-a7a87acfbbb"><p>给分离权重二，对齐和聚合各权重一，总建议为负一点五、零点五。取质量一、时间步长零点一、最大力与最大速度均为二，这次向量没有超过上限。先更新速度，得到零点八五、零点零五；再用新速度推进位置，得到零点零八五、零点零零五。</p>
+</div>
+<div class="reading-block" id="p-7ea11b39d4f"><p>这个有限演算展示三个规则怎样在同一个成员上合成，并未模拟整群长期轨迹。邻居下一步也会移动，邻域可能变化，因此群体形态需要持续更新才能出现。离散顺序、时间步长和上限都属于实现的一部分，应随参数一起记录，才能准确复算。</p>
+</div>
+<h2 id="h-d98c22deda3" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">转向建议怎样变成身体运动</span></h2>
+<div class="reading-block" id="p-5c663e1568d"><p>常见模型将合成向量限制到最大力，再除质量得到加速度，按步长更新速度，最后限制最大速度并推进位置。这里的力可以是控制量，未必对应严格物理。若省略步长或把速度与每帧位移混用，群体就会随帧率变化，甚至在不同设备上表现出不同密度和稳定性。</p>
+</div>
+<div class="reading-block" id="p-fbaf427b142"><p>成员的转向能力也需要匹配身体。飞行粒子可以快速改变方向，车辆则有转弯半径，步行角色还受动画和脚步约束。将相同速度向量直接交给所有身体，容易产生横滑或急转。中层转向需要通过底层运动控制实现，无法以一个理想向量取消身体限制。</p>
+</div>
+<div class="reading-block" id="p-247a29b53e7"><p>更新顺序会影响结果。如果先更新第一个成员，再让第二个成员读取其新位置，而其他邻居仍处于旧状态，编号便可能形成系统性偏差。同步读取旧状态、批量写入新状态，可以让一个时间步的感知更一致；采用异步更新也应把它作为明确选择，并检查其可见影响。</p>
+</div>
+<div class="reading-block" id="p-fd89a22482b"><p>朝向通常可从速度推得，但接近零速时方向不稳定。若每步都把身体瞬间对准新速度，微小数值扰动也会导致抽动。保留上一朝向、限制旋转速度和设置合理阈值，可以改善视觉表现。动画平滑应与避障要求协调，过度平滑可能让身体来不及转向。</p>
+</div>
+<h2 id="h-11f33aa492d" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">组合、优先级与障碍</span></h2>
+<div class="reading-block" id="p-0b83c55f9be"><p>最直接的组合是把所有行为按权重相加。它便于调节，也可能使建议相消，例如朝目标前进与躲避障碍方向相反，最后只剩很小向量。原作者两篇论文都讨论了这种冲突，强调在紧急情况中需要及时作出确定选择，而不只是平均所有要求。</p>
+</div>
+<div class="reading-block" id="p-eb0e64ada2b"><p>优先级组合可以先满足障碍回避，再分配剩余能力给分离、对齐与聚合。1987年模型讨论优先加速度分配：高优先请求先占用有限预算，较低优先行为在必要时暂时得不到满足。它表达了一项设计判断，即保持群形可以让位于避免撞上墙体。</p>
+</div>
+<div class="reading-block" id="p-a813182fb1a"><p>分离只根据邻近距离反应，通常不能保证高速主体不发生碰撞。相向移动的两个主体在进入分离半径之前，可能已经来不及停下。预测最近接近时刻、选择允许的速度或使用物理约束，可以补充不同程度的保证；这些技术与简单boids规则承担的任务不同。</p>
+</div>
+<div class="reading-block" id="p-67fd7763293"><p>群体还需要全局方向。局部成员只跟随附近同伴，可能聚在死胡同或绕圈。路线、流场、领航者或阶段目标可以提供宏观引导，再由局部转向维持群体运动。领航跟随是一种可选组织方式，经典局部群聚并不要求始终有一名固定领导者。</p>
+</div>
+<h2 id="h-9d90679e60a" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">游戏创作与性能</span></h2>
+<div class="reading-block" id="p-a76c3d64cad"><p>群体转向适合鸟群、鱼群、背景行人或具有集体运动特征的敌群。设计者可以用邻域和权重产生不同生物风格，也可用目标与障碍安排分裂、包围和汇合。群体是否具有战术智能，取决于更高层目标和规则；自然移动的外观本身并不提供协同作战计划。</p>
+</div>
+<div class="reading-block" id="p-724f1e99e81"><p>固定编队需要成员占据指定相对位置，群聚则允许局部自由变化。让一群士兵既紧守阵形又不断聚向局部中心，可能导致两套控制争抢。可以把编队槽位作为目标，局部避让只作修正，或允许战斗时解散编队。不同模式之间的切换应由行为层清楚管理。</p>
+</div>
+<div class="reading-block" id="p-1d9e3dd327a"><p>朴素实现让每个成员检查所有其他成员，每步工作量随成员数平方增长。Reynolds的1987年论文明确讨论这种限制。空间网格、分区或邻居缓存可以减少候选比较，再做精确距离判断；成员密集挤在同一区域时，近邻查询仍可能产生大量候选。</p>
+</div>
+<div class="reading-block" id="p-893249daa00"><p>为节约性能而降低远处成员更新频率，可能适合背景群体，但会改变响应与碰撞风险。视觉细节层级、模拟频率和感知范围可以分开调整。玩家附近、即将发生交互的主体需要更及时反馈，远景主体则可使用较粗表示；切换时应避免突然改变速度或群形。</p>
+</div>
+<h2 id="h-9b7b11aa969" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-chinese">实际开发中的分层协作</span></h2>
+<div class="reading-block" id="p-8b70b47928a"><p>Emerson对《Supreme Commander 2》的流场导航描述，展示了共享方向与单位运动结合的生产实践。系统在粗层搜索门户路线，在局部读取方向场，并允许物理推动和沿墙滑动。它说明大规模运动依赖导航架构与执行层共同配合，不能只复制三条群聚公式。<a href="https://www.gameaipro.com/GameAIPro/GameAIPro_Chapter23_Crowd_Pathfinding_and_Steering_Using_Flow_Field_Tiles.pdf">Emerson，2013</a></p>
+</div>
+<div class="reading-block" id="p-3c66003c048"><p>群体运动与玩家共同游戏体验也属于不同分析层次。共享涉入关注玩家如何与他人共同参与和理解活动，群体转向关注虚拟主体如何根据局部信息更新运动。群体转向与共享涉入可以在协作驱赶兽群等活动中相遇，分别描述运动协调与共同经验。</p>
+</div>
+<div class="reading-block" id="p-8dd43d87997"><p>势场法可以为障碍或目标产生向量，影响力地图可以帮助选择安全目标，导航网格可以给出可行走廊。群体转向读取这些信息后，还要处理邻居相对运动。将各方法的输入输出写清，可以避免多个模块都试图控制同一位置，导致难以解释的相消或抖动。</p>
+</div>
+<h2 id="h-46c62bd5138" data-heading><span class="anchor-alias" id="s-10"></span><span class="heading-chinese">评价与失效边界</span></h2>
+<div class="reading-block" id="p-1a76f3d1608"><p>评价群体应同时观察碰撞、密度、速度连续性、目标到达率、分裂汇合与性能。只有最终平均速度一致，并不足以代表运动可信；群体可能以不自然方式压缩、穿过障碍或突然同步转身。轨迹、邻域和各行为分量的可视化，有助于把这些问题与具体规则联系起来。</p>
+</div>
+<div class="reading-block" id="p-aff96acd837"><p>典型困难包括对称迎面运动、狭窄出口、密集初始重叠、极端速度差和移动障碍。调大分离权重可能缓解拥挤，也可能把群体推散；增强聚合又可能加重出口堵塞。参数没有脱离场景的普遍最优值，评价应覆盖游戏真正需要的交互条件。</p>
+</div>
+<div class="reading-block" id="p-bd86659473f"><p>与真实动物相似的观感，不等于对动物行为机制的科学验证。原作者研究把自然群体作为启发，模型包含有意简化的感知与运动。用于游戏时，可信度、可控性与运行成本往往是主要目标；若将模型用于生物学推断，则需要额外的观测、参数与验证标准。</p>
+</div>
+<div class="reading-block" id="p-497db4bac6e"><p>群体转向让创作者以局部关系塑造整体运动。它的力量来自简单规则能够持续互动，控制难点也来自这种互动会产生超出单条规则直觉的结果。保持邻域、行为组合和身体执行可查看，才能在保留生动变化的同时，让群体服务于具体的空间与玩法设计。</p>
+</div>
+<h2 id="h-1184d9947b1" data-heading><span class="anchor-alias" id="s-11"></span><span class="heading-chinese">参考文献</span></h2>
+<div class="reading-block" id="p-cb09b525ae8"><ul>
+<li>Reynolds, C. W. 1987. <a href="https://www.macs.hw.ac.uk/~dwcorne/Teaching/Craig%20Reynolds%20Flocks%2C%20Herds%2C%20and%20Schools%20A%20Distributed%20Behavioral%20Model.htm">Flocks, Herds, and Schools: A Distributed Behavioral Model</a>. Computer Graphics, 21(4):25–34。原论文HTML保存稿。</li>
+<li>Reynolds, C. W. 1999. <a href="https://www.red3d.com/cwr/steer/gdc99/">Steering Behaviors for Autonomous Characters</a>。作者保存的GDC论文。</li>
+<li>Emerson, E. 2013. <a href="https://www.gameaipro.com/GameAIPro/GameAIPro_Chapter23_Crowd_Pathfinding_and_Steering_Using_Flow_Field_Tiles.pdf">Crowd Pathfinding and Steering Using Flow Field Tiles</a>. Game AI Pro, 第23章:307–316。</li>
+</ul>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="260114f2486309"></div></section></main></div></body></html>

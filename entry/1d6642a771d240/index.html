@@ -1,0 +1,87 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="Edward Berman，也使用 Eddie Berman 署名，是研究几何机器学习、科学计算与模型不确定性的研究者。其公开工作涵盖等变函数的置信度校准、动力学模型中的平滑性、天文成像点扩散函数、Julia 科学计算，以及代码编辑和语言智能体。Northeastern 的 Geometric Learning Lab 将其列为本科阶段校友，并在2026年资料中记为 Harvard 博士生及 NSF GRFP Fellow；Harvard 几何机器学习组也列有其成员记录。原研究组名录，Harvard研究组"><title>Edward Berman · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" aria-current="page">档案卡片</a><a href="../../concepts/" >索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="1d6642a771d240"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../archives/?view=all">← 档案卡片</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-0a727518ca5" data-toc="h-0a727518ca5">一、研究位置与共同署名</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-efff0112e0c" data-toc="h-efff0112e0c">二、等变性：让模型尊重变换</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-6fc1772467b" data-toc="h-6fc1772467b">三、准确率与置信度校准</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-99da6dfcceb" data-toc="h-99da6dfcceb">四、不确定性的不同来源</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-4cbe4444302" data-toc="h-4cbe4444302">五、动力学模型中的平滑性</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-7c472c171ab" data-toc="h-7c472c171ab">六、从静态识别到长期预测</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1826f46d29d" data-toc="h-1826f46d29d">七、ShOpt.jl 与天文观测</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-571540755f1" data-toc="h-571540755f1">八、模型保真度与计算效率</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-6a2d016c979" data-toc="h-6a2d016c979">九、Julia 与科学机器学习生态</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-296dd0bce2c" data-toc="h-296dd0bce2c">十、语言模型合作：编辑与反思</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-9b7aa4003a1" data-toc="h-9b7aa4003a1">十一、研究意义与资料范围</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-0668e6aaec4" data-toc="h-0668e6aaec4">参考文献与原始资料</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header " id="entry-title"><div><a class="entry-kicker" href="../../archives/">档案卡片</a><p class="entry-original " lang="en">Edward Berman</p><h1>爱德华·伯曼</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>Edward Berman，也使用 Eddie Berman 署名，是研究几何机器学习、科学计算与模型不确定性的研究者。其公开工作涵盖等变函数的置信度校准、动力学模型中的平滑性、天文成像点扩散函数、Julia 科学计算，以及代码编辑和语言智能体。Northeastern 的 Geometric Learning Lab 将其列为本科阶段校友，并在2026年资料中记为 Harvard 博士生及 NSF GRFP Fellow；Harvard 几何机器学习组也列有其成员记录。<a href="https://www.robinwalters.com/lab.html">原研究组名录</a>，<a href="https://weber.seas.harvard.edu/people/">Harvard研究组</a></p>
+<p>理解其研究，关键是把“结构”与“证据”相联系：对称性能够限制模型，却需要符合实际数据；动力学模型需要适当改变空间中的平滑性；观测图像又必须结合仪器响应才能解释。语言代理的试错反馈属于其合作谱系中的一部分，不足以代替这些主要问题。</p>
+</section><h2 id="h-0a727518ca5" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">一、研究位置与共同署名</span></h2>
+<div class="reading-block" id="p-53145965ea2"><p>Berman 的个人网站把几何学习、宇宙学及 Harvard—Smithsonian 天体物理研究环境联系起来，其论文页列出的近期主题包括动力学、不确定性和计算成像。不同页面的更新时点并不一致，因此机构历程应结合研究组当前名录，而不从较旧的个人首页推断固定任职。<a href="https://ebrmn.space/publications.html">个人论文目录</a></p>
+</div>
+<div class="reading-block" id="p-e7d79bcfabc"><p>其工作多由跨领域团队完成：几何学习论文与 Robin Walters、Jacob Ginesin、Marco Pacini 等合作，成像论文与 Jacqueline McCleary 及 COSMOS-Web 研究团队合作。Berman在作者表中署名首位，与合作者共同完成这项研究。</p>
+</div>
+<div class="reading-block" id="p-66136f84029"><p>这些合作并非一套统一模型在不同领域的简单应用。天文仪器、图上的物理过程与语言模型各有不同数据和误差。人物研究应说明问题如何变化，并在能够找到原始证据时讨论联系，避免用抽象“跨学科”遮蔽具体方法。</p>
+</div>
+<h2 id="h-efff0112e0c" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">二、等变性：让模型尊重变换</span></h2>
+<div class="reading-block" id="p-ccec8aa52cf"><p>等变性要求输入发生某类变换时，输出按相应规则变化。例如旋转物体以后，预测的方向也应相应旋转；某些分类结果则应保持不变，这称为不变性。把这种结构放入模型，可以减少重新学习每种等价情形的负担。</p>
+</div>
+<div class="reading-block" id="p-e36a5633f26"><p>但结构假定必须符合任务。若旋转会改变照明、边界或标签含义，强制完全相同的行为可能错误；现实数据也可能只近似满足对称。等变结构的作用取决于所设对称性与任务条件的匹配。</p>
+</div>
+<div class="reading-block" id="p-c8a7a8d8a1a"><p>Berman 与合作者在《On Uncertainty Calibration for Equivariant Functions》中，将这一问题进一步联系到模型如何表达自己的不确定性。论文2025年公开，2026年形成 TMLR 发表版本，题名与日期应按所用稿件区分。<a href="https://arxiv.org/abs/2510.21691">原始论文</a></p>
+</div>
+<h2 id="h-6fc1772467b" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">三、准确率与置信度校准</span></h2>
+<div class="reading-block" id="p-e83769a28b0"><p>预测正确率与置信度是否可信，是两项不同性质。一个模型可以在多数样本上正确，却对少数错误过度确信；另一个模型可能没有最佳准确率，却更能识别自己不确定的情形。校准研究关注预测信心与实际误差之间的对应。</p>
+</div>
+<div class="reading-block" id="p-9a252b46d7a"><p>等变网络可以共享变换相关的知识，但这种共享是否使信心更可靠，需要另行证明。该论文从理论上研究不同等变条件下的校准误差界，并通过真实及模拟资料考察对称不匹配、群结构和不同不确定性来源。<a href="https://github.com/EdwardBerman/EquiUQ">作者代码</a></p>
+</div>
+<div class="reading-block" id="p-380aab4d853"><p>这一研究的意义在于把结构与风险陈述连起来。模型不只要输出答案，还要让使用者知道答案在何种条件下值得依赖；对称性如果与真实任务错位，模型可能把错误推广到整类变换情形。检查精度之外的信心，有助于发现这种系统性问题。</p>
+</div>
+<h2 id="h-99da6dfcceb" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">四、不确定性的不同来源</span></h2>
+<div class="reading-block" id="p-eb5e684fb05"><p>数据本身的噪声与模型知识不足并不相同。前者可能来自观测限制或随机过程，后者可能因样本不足、模型选择或分布变化而出现。研究常将它们称为 aleatoric 与 epistemic uncertainty，但在实际任务中需要说明如何估计和区分。</p>
+</div>
+<div class="reading-block" id="p-92ee1189d6f"><p>如果一个变换只改变了模型不熟悉的外观，增加训练覆盖可能有帮助；若传感器已经丢失必要信息，仅增加同类样本未必消除不确定性。把二者混成一个信心数值，会使人难以判断应该继续收集数据、改变模型还是承认观测边界。</p>
+</div>
+<div class="reading-block" id="p-e45f07b7ebc"><p>对于游戏代理，这类研究能够启发置信度测试，但不能从数学结果直接推出某个角色已经可靠。物体识别、动作预测和语言判断具有不同结构，必须确认所用对称假设与评价条件。论文提供的是研究关系，而不是通用安全证书。</p>
+</div>
+<h2 id="h-4cbe4444302" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">五、动力学模型中的平滑性</span></h2>
+<div class="reading-block" id="p-5cb116f8588"><p>《Smoothness Errors in Dynamics Models and How to Avoid Them》由 Berman、Luisa Li、Jung Yeon Park 与 Walters 共同完成，2026年发表于 ICML。论文研究图和网格模型中的平滑作用，指出阻止过度平滑的某些结构，也可能对本来就会变平滑的物理过程施加过强约束。<a href="https://arxiv.org/abs/2602.05352">论文</a></p>
+</div>
+<div class="reading-block" id="p-8532703445e"><p>图神经网络中的过度平滑通常被视为问题，因为节点表示逐渐相似以后，重要差别可能消失。但热扩散等物理过程本身就会使局部差异随时间减少。模型既需要保留有用结构，也需要允许目标系统的真实变化，不能用一个不变原则解决全部任务。</p>
+</div>
+<div class="reading-block" id="p-b10507902a6"><p>该研究提出 relaxed unitary convolutions，在保持结构与允许自然平滑之间作调整，并将相关方法扩展到网格。实验涉及热、波等偏微分方程及天气预测。这里讨论的是论文所列条件下的建模效果，不将其概括为所有动力学系统的统一解法。</p>
+</div>
+<h2 id="h-7c472c171ab" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">六、从静态识别到长期预测</span></h2>
+<div class="reading-block" id="p-d44b59f62bd"><p>动力学模型的错误不仅表现为某一时刻预测偏差，还可能在多次滚动预测中积累。模型若过早抹去细节，会失去后续演化所需的信息；若不允许应当发生的耗散，又可能持续保留物理上不再存在的结构。</p>
+</div>
+<div class="reading-block" id="p-ff319f95a12"><p>因此，评价需要观察时间尺度、空间分辨率和守恒或耗散特性。一步预测准确，不保证长期轨迹正确；漂亮的动画也可能隐藏错误物理。研究者应将数值指标与系统结构相互核对，并说明测试是否改变了初始条件或几何形状。</p>
+</div>
+<div class="reading-block" id="p-6b47b111489"><p>这一问题与游戏中的世界模型有可比较之处：代理根据模型规划时，微小预测误差可能改变后续选择。但科学模拟的目标通常是物理逼近，游戏世界还可能具有故意设计的非现实规则。采用相关方法前，应确定要学习的是哪一种环境规律。</p>
+</div>
+<h2 id="h-1826f46d29d" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">七、ShOpt.jl 与天文观测</span></h2>
+<div class="reading-block" id="p-f7d96599cb2"><p>Berman 与 McCleary 开发 ShOpt.jl，用 Julia 对 JWST NIRCam 等成像资料的点扩散函数进行经验建模。相关软件论文于2024年发表于 Journal of Open Source Software，正式记录同时公开代码、审查与软件存档。<a href="https://joss.theoj.org/papers/10.21105/joss.06144">JOSS论文记录</a></p>
+</div>
+<div class="reading-block" id="p-8bc50fc4967"><p>点扩散函数描述理想点源经光学系统后形成的图像。观测中的天体形状不只由天体自身决定，也受到仪器响应影响；若要比较细微形态，就需要理解并估计这种响应。它是科学解释的基础条件，而非事后修饰图片的滤镜。</p>
+</div>
+<div class="reading-block" id="p-3f36ad122da"><p>软件贡献因此需要同时考虑数值方法与使用条件。可复现安装、资料输入、诊断与文档决定其他研究者能否把方法用于自己的图像；软件论文的公开审查又为这些环节提供独立记录。工具可运行与所有科学结论正确仍然不同，需要各自验证。</p>
+</div>
+<h2 id="h-571540755f1" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">八、模型保真度与计算效率</span></h2>
+<div class="reading-block" id="p-42824951870"><p>2024年另一篇成像论文将 ShOpt 与 PSFEx、PIFF 比较，使用真实及模拟 COSMOS-Web 图像，考察拟合保真度、诊断统计与处理效率。它与简短软件论文承担不同功能：一项介绍工具，一项检验具体成像任务中的表现。<a href="https://arxiv.org/abs/2401.11625">原始研究</a></p>
+</div>
+<div class="reading-block" id="p-d86659f3ec3"><p>成像模型可能在某个总体误差上看似接近，却在局部形状或空间变化中保留系统偏差。因此，诊断需要对应科学问题，而不能只用一幅观感平滑的拟合图作判断。真实资料与模拟资料又各有价值：前者保留复杂仪器条件，后者提供可控制的已知关系。</p>
+</div>
+<div class="reading-block" id="p-ca5bb5c1456"><p>效率同样有条件。较快计算能够支持大图像和多次比较，但应同时保留模型复杂度、资料规模与硬件条件。研究成果应在所报告范围中评价，不用一次运行时间推断所有未来资料的成本，也不以速度替代精度。</p>
+</div>
+<h2 id="h-6a2d016c979" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-chinese">九、Julia 与科学机器学习生态</span></h2>
+<div class="reading-block" id="p-cda9732ca69"><p>Berman 与 Ginesin 的《The State of Julia for Scientific Machine Learning》于2024年在 NeurIPS 的 Machine Learning and the Physical Sciences 工作坊发表，讨论 Julia 的语言与生态条件。它是一项观点和生态评估工作，不是 NeurIPS 主会算法论文。<a href="https://arxiv.org/abs/2410.10908">原文记录</a></p>
+</div>
+<div class="reading-block" id="p-9bab8080928"><p>科学软件的采用不仅取决于理论运行速度，也取决于自动微分、数值库、依赖稳定性、文档与社区经验。使用者需要在现有工作流中取得可靠结果，语言设计上的优点只有通过这些条件才能转化为实际便利。</p>
+</div>
+<div class="reading-block" id="p-838b6b958bb"><p>这项讨论与 ShOpt 的制作构成不同证据：一个实际工具显示可以如何使用语言，一篇观点文则讨论更广泛的采用障碍。两者可以互相支持，但不能以某个工具成功证明语言适合所有任务，也不能以生态困难否认所有具体研究价值。</p>
+</div>
+<h2 id="h-296dd0bce2c" data-heading><span class="anchor-alias" id="s-10"></span><span class="heading-chinese">十、语言模型合作：编辑与反思</span></h2>
+<div class="reading-block" id="p-05027b28adb"><p>Berman 还参与《Can It Edit?》代码编辑研究，并在 Reflexion 的2023年 arXiv v4 中列第三位作者、单位为 Northeastern。后者的六人署名版本需要与作者网站或会议版的其他名单分别引用，不能擅自补齐或合并。<a href="https://arxiv.org/abs/2312.12450">代码编辑论文</a>，<a href="https://arxiv.org/abs/2303.11366v4">Reflexion v4</a></p>
+</div>
+<div class="reading-block" id="p-779d9c52342"><p>这些合作关注修改指令、执行反馈与跨尝试经验，和几何论文所处理的置信度有不同对象。语言反思是一项系统机制，不是数学上的校准；模型说“我不确定”也不自动等于其概率估计已经可靠。并置研究需要先保留这种差别。</p>
+</div>
+<div class="reading-block" id="p-83f999f7304"><p>它们共同提示一种评价习惯：模型应依据外部证据接受检查。代码要看执行和测试，成像要看仪器与资料，动力学要看时间演化，置信度要看实际误差。把证据与所宣称的能力对应，是理解其跨领域工作更稳妥的方式。</p>
+</div>
+<h2 id="h-9b7aa4003a1" data-heading><span class="anchor-alias" id="s-11"></span><span class="heading-chinese">十一、研究意义与资料范围</span></h2>
+<div class="reading-block" id="p-b1ad52dd928"><p>Berman 的公开研究显示，机器学习中的结构约束既能帮助泛化，也可能因与目标不匹配而产生新的错误。对称、平滑与置信度都不能被当作无条件优点；它们需要在具体任务和数据中获得定义。</p>
+</div>
+<div class="reading-block" id="p-aec7791fa76"><p>其人物资料仍以公开学术记录为主，不据有限履历补造完整生平。相关论文的理论主张、软件贡献与实例实验也分别保留。游戏与AI4PG研究可以借此建立更精确的模型测试，但应在自己的环境重新检查结构假设、反馈与实际体验，而不把跨领域联系当成已验证的应用。</p>
+</div>
+<h2 id="h-0668e6aaec4" data-heading><span class="anchor-alias" id="s-12"></span><span class="heading-chinese">参考文献与原始资料</span></h2>
+<div class="reading-block" id="p-07b6faa2fae"><ul>
+<li>Berman. <a href="https://ebrmn.space/publications.html">个人论文目录</a>；<a href="https://www.robinwalters.com/lab.html">Northeastern研究组</a>；<a href="https://weber.seas.harvard.edu/people/">Harvard研究组</a>。</li>
+<li>Berman等. <a href="https://arxiv.org/abs/2510.21691">On Uncertainty Calibration for Equivariant Functions</a>，2025预印本、TMLR 2026；<a href="https://github.com/EdwardBerman/EquiUQ">公开代码</a>。</li>
+<li>Berman等. <a href="https://arxiv.org/abs/2602.05352">Smoothness Errors in Dynamics Models and How to Avoid Them</a>，ICML 2026。</li>
+<li>Berman、McCleary. <a href="https://joss.theoj.org/papers/10.21105/joss.06144">ShOpt.jl</a>，JOSS 2024；Berman等. <a href="https://arxiv.org/abs/2401.11625">PSF Benchmarking Study</a>，2024。</li>
+<li>Berman、Ginesin. <a href="https://arxiv.org/abs/2410.10908">The State of Julia for Scientific Machine Learning</a>，2024工作坊。</li>
+<li>Cassano等. <a href="https://arxiv.org/abs/2312.12450">Can It Edit?</a>；Shinn等. <a href="https://arxiv.org/abs/2303.11366v4">Reflexion v4</a>，后者方法核对用户提供原文。</li>
+</ul>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="1d6642a771d240"></div></section></main></div></body></html>

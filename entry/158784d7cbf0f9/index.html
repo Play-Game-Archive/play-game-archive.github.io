@@ -1,0 +1,90 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="Volodymyr Mnih是机器学习研究者，以深度Q网络DQN、异步强化学习和视觉注意模型著称。他在多伦多大学随Geoffrey Hinton完成博士研究，随后参与DeepMind的游戏学习研究。其工作把神经网络从识别图像的工具扩展为根据感知、行动与奖励持续调整行为的系统，成为深度强化学习发展的重要组成部分。[1][2][3]"><title>Volodymyr Mnih · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" aria-current="page">档案卡片</a><a href="../../concepts/" >索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="158784d7cbf0f9"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../archives/?view=all">← 档案卡片</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-entry-intro" aria-label="展开或收起简介"><span>▸</span></button><a href="#entry-intro" data-toc="entry-intro">简介</a></div><ul id="tree-entry-intro" class="toc-children" hidden><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-8e1500a6d92" data-toc="h-8e1500a6d92">研究训练与问题的转变</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-a7253cb9b30" data-toc="h-a7253cb9b30">游戏如何成为学习环境</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-cf28068ec21" data-toc="h-cf28068ec21">DQN怎样连接视觉与行动价值</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-96ab7454451" data-toc="h-96ab7454451">学习目标为什么会不断移动</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-be65d8febc8" data-toc="h-be65d8febc8">奖励、探索与评价</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-5e62d5d8ea9" data-toc="h-5e62d5d8ea9">从回放经验到并行交互</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-f80375f57e8" data-toc="h-f80375f57e8">A3C中的行动者与评论者</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-9f5b3acc3a8" data-toc="h-9f5b3acc3a8">视觉注意：选择看哪里</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-dbde0619a86" data-toc="h-dbde0619a86">影响与尚未解决的问题</a></div></li></ul></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1184d9947b1" data-toc="h-1184d9947b1">参考文献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header has-cover" id="entry-title"><figure class="entry-media kind-portrait"><img src="../../assets/media/archive-20261117-b12-mnih.jpg" alt="Volodymyr Mnih，原机构或本人页面实拍肖像" width="200" height="267"></figure><div><a class="entry-kicker" href="../../archives/">档案卡片</a><p class="entry-original " lang="en">Volodymyr Mnih</p><h1>沃洛季米尔·姆尼赫</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>Volodymyr Mnih是机器学习研究者，以深度Q网络DQN、异步强化学习和视觉注意模型著称。他在多伦多大学随Geoffrey Hinton完成博士研究，随后参与DeepMind的游戏学习研究。其工作把神经网络从识别图像的工具扩展为根据感知、行动与奖励持续调整行为的系统，成为深度强化学习发展的重要组成部分。[1][2][3]</p>
+<p>Mnih领衔的2013年Atari论文、2015年Nature论文与2016年异步方法论文，分别展示了直接从像素学习、改善训练稳定性，以及利用并行交互扩大学习能力的不同环节。这些系统没有预先获得每一步的正确答案，却仍依赖明确的行动接口、奖励信号、训练资源与评价条件。其意义与限制都需要从这些具体条件理解。[2][3][4]</p>
+</section><h3 id="h-8e1500a6d92" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">研究训练与问题的转变</span></h3>
+<div class="reading-block" id="p-1757d172b5c"><p>Mnih先在阿尔伯塔大学完成计算科学硕士研究，导师为Csaba Szepesvári，后在多伦多大学随Hinton研究机器学习。其2013年博士论文题为Machine Learning for Aerial Image Labeling，关注航空图像标注。他早期发表的工作还涉及带噪声资料、结构化输出和图像生成，形成了处理高维视觉资料的研究基础。[1]</p>
+</div>
+<div class="reading-block" id="p-a8cd0fee70f"><p>这些问题与后来的游戏研究并不相同。图像标注主要需要根据输入作出判断，游戏智能体还必须选择行动，而行动又会改变之后看到的资料。学习过程因而成为一个反馈循环：系统以当前能力探索环境，同时又使用自己造成的经验更新能力。资料分布不再是完全固定的外部条件。[2][3]</p>
+</div>
+<div class="reading-block" id="p-6e219640ab6"><p>2013年的Playing Atari with Deep Reinforcement Learning由Mnih领衔，与Koray Kavukcuoglu、David Silver、Alex Graves等人共同署名。2015年Nature论文扩展了系统与实验，Mnih、Kavukcuoglu和Silver列为同等贡献作者。不同作者在合作中推进了深度强化学习的结构、方法与实验。[2][3]</p>
+</div>
+<div class="reading-block" id="p-8b8a66a8d75"><p>在DeepMind研究阶段，他把训练背景中的视觉表示问题与行动学习联系起来。早期DQN、后续Nature系统、视觉注意及异步学习各自处理不同困难，共同推进了从视觉表示到交互控制的研究路线。这些方法随任务和实验条件持续发展为不同版本。[1][2][3][4][5]</p>
+</div>
+<h3 id="h-a7253cb9b30" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">游戏如何成为学习环境</span></h3>
+<div class="reading-block" id="p-9266e3ab5a1"><p>Atari 2600通过Arcade Learning Environment提供一组不同规则的游戏。智能体接收画面、奖励、终止信号和可用动作，并不断与模拟器交互。游戏在这里具有两个角色：它们是需要完成的任务，也提供了可以重复运行、比较算法和控制观察条件的实验环境。[2][3]</p>
+</div>
+<div class="reading-block" id="p-47e9ff1f662"><p>从像素学习的困难首先在于表示。一个画面包含大量数值，但只有一部分关系与行动后果有关；对象的速度、危险和机会还需要通过连续观察辨认。若每个游戏都依赖人工编写特征，就难以判断学习方法究竟有多通用。DQN尝试让网络根据奖励学习与控制有关的视觉表示。[2]</p>
+</div>
+<div class="reading-block" id="p-f8b623d40d0"><p>同一架构能够用于多个游戏，也有明确含义：研究者重复使用网络形式与学习规则，为不同游戏分别训练智能体。研究在各个游戏上分别训练网络，并评价其学习表现。跨任务适用性与即时迁移属于不同问题。[2][3]</p>
+</div>
+<div class="reading-block" id="p-1541d4ea907"><p>游戏得分使结果可以量化，却也规定了系统优化什么。算法没有因为画面包含人物，就自动关心故事、风格或公平；它学习的是在给定界面中增加未来奖励的办法。将游戏用于研究智能，需要同时说明这个目标与人类游玩经验之间的距离。[2][3]</p>
+</div>
+<h3 id="h-cf28068ec21" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">DQN怎样连接视觉与行动价值</span></h3>
+<div class="reading-block" id="p-de7987175f7"><p>DQN将卷积神经网络与Q学习结合。网络根据当前状态表示，为每个可行动作输出一个价值估计，表示采取该动作并继续行动时可能取得的折扣累计奖励。选择动作因此不只是预测眼前能否得分，而要把较后的后果也纳入当前判断。[2][3]</p>
+</div>
+<div class="reading-block" id="p-751ba74f660"><p>卷积层从画面中逐渐学习有用特征，后续层把它们转换为各动作的价值。与先独立训练视觉识别器、再把识别结果交给控制规则不同，这种端到端组织让奖励直接影响哪些视觉区别值得保留。表示与控制在同一优化过程中形成联系。[2][3]</p>
+</div>
+<div class="reading-block" id="p-a494d79ac7d"><p>一个画面通常不足以确定运动方向。系统于是组合最近若干帧，让位置变化成为输入的一部分。2015年方法还处理了Atari硬件产生的闪烁，将画面转为亮度信息并缩放，以减少存储和计算。所谓直接从像素学习，仍包含明确的预处理与接口设计，并非把所有传感问题都交给网络自行解决。[3]</p>
+</div>
+<div class="reading-block" id="p-d893270cae2"><p>网络一次计算全部可用动作的价值，避免为每个动作重新运行完整前向过程。这种结构适合Atari有限、离散的动作集合，但不能未经改变就处理任意连续控制。动作怎样表示，始终会影响模型的计算成本与可应用范围。[3]</p>
+</div>
+<h3 id="h-96ab7454451" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">学习目标为什么会不断移动</span></h3>
+<div class="reading-block" id="p-3beeff1ed65"><p>强化学习中的训练目标，常由当前估计和后续奖励共同构成。网络刚更新一次，既可能改变下一步行为，也可能改变用来评价其他状态的目标。高相关的连续经验、变化的数据分布与相互依赖的估计，会使学习振荡甚至发散。DQN的贡献不只在网络更深，也在于让这个反馈过程能够稳定运行。[2][3]</p>
+</div>
+<div class="reading-block" id="p-380da95707d"><p>经验回放将经历过的状态、动作、奖励和下一状态保存在记忆中，训练时随机抽取小批样本。这样可以多次利用旧经验，并降低相邻画面的强烈相关性。它还把训练分布混合于过去多种行为，减少系统一时偏向某种行动后，只能继续看到相似资料的自我强化。[2][3]</p>
+</div>
+<div class="reading-block" id="p-c3dab98cd94"><p>2015年系统又使用分离的目标网络。计算更新目标时使用一组暂时固定的参数，经过一定步数后再同步，使预测网络不必每次都追赶同时移动的目标。这是一种稳定优化的工程安排，不是关于真实世界状态永远不变的假设。[3]</p>
+</div>
+<div class="reading-block" id="p-27552a178e4"><p>经验回放也有适用条件。旧经验由过去策略产生，所以算法需要能够从与当前行为不同的资料中学习；若环境规则本身改变，保留的资料还可能过时。稳定性来自一组相互配合的设计，而不是一个可以脱离任务无限复用的存储技巧。[2][3]</p>
+</div>
+<h3 id="h-be65d8febc8" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">奖励、探索与评价</span></h3>
+<div class="reading-block" id="p-6011eea736d"><p>为了让多个游戏共享学习设置，早期DQN在训练时把正奖励压为一、负奖励压为负一。这样可以限制数值尺度，却也会丢失不同奖励大小的区别。算法解决的优化问题因而受训练奖励的转换影响；对原始游戏成绩的评价与训练内部目标需要分别说明。[2]</p>
+</div>
+<div class="reading-block" id="p-0eb5c04327e"><p>动作选择也保留随机探索机会。若系统永远只采取当前认为最好的动作，错误的初始判断可能阻止它发现更好的路线；但过多随机动作又会破坏已经学会的行为。探索与利用的安排，决定了学习资料如何产生，也影响同一方法在不同游戏中的表现。[2][3]</p>
+</div>
+<div class="reading-block" id="p-0370a427e12"><p>2013年论文报告七款游戏，2015年Nature论文则比较四十九款，后者在四十三款中超过所比较的既有强化学习方法。人类基准由受控条件下的专业测试者产生，论文将达到人类归一化分数百分之七十五以上作为一项重要判断尺度。它并未报告每款游戏都已超过最强人类。[2][3]</p>
+</div>
+<div class="reading-block" id="p-a82a431ef55"><p>“人类水平”描述了具体实验中的比较结果。训练量、初始状态、评估时长、随机策略、人类测试条件与各游戏的得分尺度，都参与形成这一结果；总体汇总与逐项表现共同呈现了系统的能力分布。[3]</p>
+</div>
+<h3 id="h-5e62d5d8ea9" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">从回放经验到并行交互</span></h3>
+<div class="reading-block" id="p-72ed21ec812"><p>2016年的Asynchronous Methods for Deep Reinforcement Learning提出另一条稳定学习的路线：在一台多核机器上，让多个行动者各自与环境交互，共同更新参数。不同线程经历不同情境，减少连续训练资料的相关性，从而让多种在线学习方法能够与深度网络结合。[4]</p>
+</div>
+<div class="reading-block" id="p-37cb1ba0958"><p>论文比较一步Q学习、Sarsa、多步Q学习与异步优势行动者—评论者A3C。它的意义在于展示并行交互不仅加速收集资料，也会改变训练的统计性质。不同探索策略使行动者分布于环境的不同部分，让共享网络接触更丰富的经验。[4]</p>
+</div>
+<div class="reading-block" id="p-af8b99624b8"><p>这与DQN的经验回放形成可比较的选择。DQN从旧经验库随机采样，异步框架则依靠多个实时行动者提供相对分散的资料。后者不需要同样的回放机制，也为需要贴近当前策略的学习方法提供了条件。两者分别组织了经验的时间与来源。[4]</p>
+</div>
+<div class="reading-block" id="p-4a6c4ae44ce"><p>并行化仍需要计算资源与同步安排。不同线程产生的更新可能基于稍早的参数，训练结果也受线程数量、更新间隔和探索方式影响。速度比较采用了论文所列的硬件与实验配置。[4]</p>
+</div>
+<h3 id="h-f80375f57e8" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">A3C中的行动者与评论者</span></h3>
+<div class="reading-block" id="p-58f861e91d3"><p>A3C同时学习策略与状态价值。行动者给出当前情境下各动作的概率，评论者估计这个情境通常能取得怎样的回报；实际结果相对于该估计的优势，用来调节动作概率。它关心的是某次行动是否比预期更好，而不只奖励一切发生在高分局面中的动作。[4]</p>
+</div>
+<div class="reading-block" id="p-3668d0a7866"><p>多步回报把若干后续奖励较快传回此前状态，有助于缩短信号逐步传播的距离。网络还可以共享部分表示，再分别输出动作概率和价值。这样既利用共同视觉信息，也保留两类输出在学习中的不同职责。[4]</p>
+</div>
+<div class="reading-block" id="p-8914f9dd453"><p>论文加入策略熵项，抑制过早收敛到单一确定动作，从而帮助继续探索。这个安排再次说明，“自主学习”也由研究者选择的目标构成：除游戏得分，优化还包含鼓励探索和稳定训练的条件。算法并非在没有任何设计判断的状态下自由发展。[4]</p>
+</div>
+<div class="reading-block" id="p-a290d1914b3"><p>实验扩展到赛车、连续动作物理控制和随机三维迷宫。不同任务要求不同输出与记忆能力，研究者据此考察框架是否能跨越离散按键环境。成功扩大了深度强化学习的应用范围，同时保留模拟器、奖励设置和训练任务带来的限制。[4]</p>
+</div>
+<h3 id="h-9f5b3acc3a8" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">视觉注意：选择看哪里</span></h3>
+<div class="reading-block" id="p-806e84ad8e5"><p>Mnih与Nicolas Heess、Graves和Kavukcuoglu合作的2014年视觉注意研究，把感知本身也变成决策问题。系统不必在每一步以相同精度处理整幅图像，而可以逐次选择观察位置，累积局部信息，再完成分类或控制。计算投入因而成为可以学习的选择。[5]</p>
+</div>
+<div class="reading-block" id="p-394750444ee"><p>模型结合多分辨率局部观察与循环状态，保存先前看到的信息。下一处观察由既有状态和任务需要共同决定，这与只在固定位置扫描不同。论文使用反向传播训练网络部分，并用强化学习处理选择位置所带来的不可微环节，把感知与行动的研究进一步联系起来。[5]</p>
+</div>
+<div class="reading-block" id="p-3aad38bd0fa"><p>这种注意不同于直接从图像生成一张解释性热图。观察位置会影响系统实际取得什么信息，因此既能节约计算，也可能错过尚未注意到的内容。模型需要在局部细节和更广覆盖之间安排取舍；它的表现取决于任务是否允许通过有限观察收集充分证据。[5]</p>
+</div>
+<div class="reading-block" id="p-f57fe006d33"><p>视觉注意研究使其事业呈现更完整的尺度。DQN关注如何把观察转成动作价值，A3C关注多个行动者怎样产生学习经验，注意模型则关注哪些观察值得取得。这些问题共同围绕有限计算条件下，感知、资料和行为怎样构成可改进的循环。[2][4][5]</p>
+</div>
+<h3 id="h-dbde0619a86" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-chinese">影响与尚未解决的问题</span></h3>
+<div class="reading-block" id="p-5126e8fd0ae"><p>Mnih的代表论文推动了把深度网络用于交互控制的研究实践。其影响包含算法结构，也包含把复杂方法放进共同游戏基准、比较消融结果和保留实现细节的工作。研究者因此可以追问改进来自网络表示、回放、目标稳定还是并行经验，而不只观看一段成功录像。[2][3][4]</p>
+</div>
+<div class="reading-block" id="p-dc3d8be84b5"><p>但在熟悉模拟器中经过大量训练取得高分，与快速适应真实世界仍有距离。长程稀疏奖励、信息不完整和变化环境，都可能使看似简单的探索困难持续存在。游戏任务提供了清楚的研究入口，却不能消除现实目标不明确、试错昂贵及经验难以复制的问题。[3][4]</p>
+</div>
+<div class="reading-block" id="p-68320bf7e97"><p>还需区分强化学习玩家与为人设计的游戏角色。前者通常追求既定回报，后者还需要适当的挑战、表达与合作关系；最有效获胜策略未必最适合玩家体验。Mnih的系统提供了学习行动的重要方法，具体作品怎样使用这些能力，仍属于需要额外设计和评价的工作。[2][3]</p>
+</div>
+<div class="reading-block" id="p-689dfd691fc"><p>从图像标注到视觉控制，再到并行学习，Mnih的核心贡献是把表示学习与经验反馈建立为可运行的整体。其研究使“从经验学习”不再只是抽象口号，而成为可以检查资料来源、更新目标、训练稳定性与实验条件的技术问题。对这些条件的准确说明，也是理解其历史地位的必要部分。[1][2][3][4][5]</p>
+</div>
+<h2 id="h-1184d9947b1" data-heading><span class="anchor-alias" id="s-10"></span><span class="heading-chinese">参考文献</span></h2>
+<div class="reading-block" id="p-ca05b9dcd74"><p>[1] Mnih, Volodymyr. 个人学术主页，含教育背景、研究身份与博士论文目录。<a href="https://www.cs.toronto.edu/~vmnih/">本人主页</a>。
+[2] Mnih, Volodymyr, et al. Playing Atari with Deep Reinforcement Learning，2013。<a href="https://arxiv.org/abs/1312.5602">作者论文</a>。
+[3] Mnih, Volodymyr, et al. Human-level control through deep reinforcement learning，Nature 518，2015，pp.529–533。<a href="https://doi.org/10.1038/nature14236">原论文</a>。
+[4] Mnih, Volodymyr, et al. Asynchronous Methods for Deep Reinforcement Learning，ICML 2016，pp.1928–1937。<a href="https://arxiv.org/abs/1602.01783">作者论文</a>。
+[5] Mnih, Volodymyr, Nicolas Heess, Alex Graves, Koray Kavukcuoglu. Recurrent Models of Visual Attention，NeurIPS 2014。<a href="https://arxiv.org/abs/1406.6247">作者论文</a>。</p>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="158784d7cbf0f9"></div></section></main></div></body></html>

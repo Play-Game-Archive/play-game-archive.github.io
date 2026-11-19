@@ -1,0 +1,169 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="ELIZA是Joseph Weizenbaum在MIT开发的自然语言交互程序，1966年发表于《Communications of the ACM》的论文使其广为人知，现存原始程序打印稿则已标为1965年。它读取用户输入的句子，按照脚本中的关键词、分解与重组规则作出回应。最著名的DOCTOR脚本模仿一种反问、复述和追问的谈话方式，让用户感觉对方正在留意自己说过的话。"><title>ELIZA · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" aria-current="page">作品</a><a href="../../archives/" >档案卡片</a><a href="../../concepts/" >索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="2c957da1fc703f"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../works/?view=all">← 作品</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-h-1589e7254e8" aria-label="展开或收起程序、脚本与谈话角色"><span>▸</span></button><a href="#h-1589e7254e8" data-toc="h-1589e7254e8">程序、脚本与谈话角色</a></div><ul id="tree-h-1589e7254e8" class="toc-children" hidden><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-35c8b5d0cfe" data-toc="h-35c8b5d0cfe">为什么不能把ELIZA等同于一个心理医生</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-316bd307832" data-toc="h-316bd307832">一次输入怎样变成一次回应</a></div></li></ul></li><li class="toc-node depth-2"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-h-2df87ab2829" aria-label="展开或收起关键词之外的文字操作"><span>▸</span></button><a href="#h-2df87ab2829" data-toc="h-2df87ab2829">关键词之外的文字操作</a></div><ul id="tree-h-2df87ab2829" class="toc-children" hidden><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-b533507f779" data-toc="h-b533507f779">分解与重组如何产生针对性</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-d74a03f9df1" data-toc="h-d74a03f9df1">人称替换与说话位置</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-418f796c2fa" data-toc="h-418f796c2fa">排序、等价类与回应变化</a></div></li></ul></li><li class="toc-node depth-2"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-h-156658d1e2e" aria-label="展开或收起记忆、停顿与继续谈话"><span>▸</span></button><a href="#h-156658d1e2e" data-toc="h-156658d1e2e">记忆、停顿与继续谈话</a></div><ul id="tree-h-156658d1e2e" class="toc-children" hidden><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-d6f8eabfefe" data-toc="h-d6f8eabfefe">MEMORY真正保存了什么</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-623ea26ebc6" data-toc="h-623ea26ebc6">没有关键词时，系统怎样维持交互</a></div></li></ul></li><li class="toc-node depth-2"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-h-803945c13a8" aria-label="展开或收起编辑脚本也是一种交互"><span>▸</span></button><a href="#h-803945c13a8" data-toc="h-803945c13a8">编辑脚本也是一种交互</a></div><ul id="tree-h-803945c13a8" class="toc-children" hidden><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-af550b4c5a0" data-toc="h-af550b4c5a0">“教师”怎样改变角色</a></div></li></ul></li><li class="toc-node depth-2"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-h-485347cfb3d" aria-label="展开或收起历史版本与保存"><span>▸</span></button><a href="#h-485347cfb3d" data-toc="h-485347cfb3d">历史版本与保存</a></div><ul id="tree-h-485347cfb3d" class="toc-children" hidden><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-9a2a2fcca87" data-toc="h-9a2a2fcca87">1965打印稿、1966论文与后来的“ELIZA”</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-d2ca0d9cfe1" data-toc="h-d2ca0d9cfe1">开放代码与作品权利</a></div></li></ul></li><li class="toc-node depth-2"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-h-b928aa5634f" aria-label="展开或收起可信感、理解与互动作品"><span>▸</span></button><a href="#h-b928aa5634f" data-toc="h-b928aa5634f">可信感、理解与互动作品</a></div><ul id="tree-h-b928aa5634f" class="toc-children" hidden><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-4f47df5a917" data-toc="h-4f47df5a917">作者自己提出的检验</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-304147a7bb4" data-toc="h-304147a7bb4">从认真倾诉到故意试探</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-bb9e0453452" data-toc="h-bb9e0453452">一种可以逐回合分析的作品</a></div></li></ul></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-d3c631d8626" data-toc="h-d3c631d8626">访问链接与参考资料</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header " id="entry-title"><div><a class="entry-kicker" href="../../works/">作品</a><h1>ELIZA</h1><p class="citation">Joseph Weizenbaum 约瑟夫·魏岑鲍姆 · 1966</p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>ELIZA是Joseph Weizenbaum在MIT开发的自然语言交互程序，1966年发表于《Communications of the ACM》的论文使其广为人知，现存原始程序打印稿则已标为1965年。它读取用户输入的句子，按照脚本中的关键词、分解与重组规则作出回应。最著名的DOCTOR脚本模仿一种反问、复述和追问的谈话方式，让用户感觉对方正在留意自己说过的话。</p>
+<p>ELIZA不是以胜负为目标的传统游戏，却是一件重要的互动程序作品。使用者可以认真交谈，也可以试探、逗弄或寻找系统的破绽；脚本作者则可以改变对话角色的语言习惯。它把程序规则、角色设定和人类对回应的解释放进同一个交互过程，也为此后的聊天角色、文字冒险及语言驱动游戏留下了持续的问题。</p>
+<p></p>
+<p>MIT保存的1965年ELIZA／DOCTOR原始打印稿局部，可见开场语、条件规则与MEMORY结构。程序档案采用MIT软件许可；纸张、打印字形和原有标记均照实保留。</p>
+<h1>程序、脚本与谈话角色</h1>
+<h2>为什么不能把ELIZA等同于一个心理医生</h2>
+<p>ELIZA的程序与某个具体脚本是分开的。程序提供读取、匹配、变换及编辑的机制，脚本规定哪些词值得关注、怎样拆分句子、输出什么话。DOCTOR是这套机制最知名的角色表现，但改变脚本就可以改变谈话范围和风格。1966年论文已经提到英语之外的德语、威尔士语脚本，说明作者把可改写性当作系统的一部分。</p>
+<p>这一分离具有创作意义。同一套处理机制可以承载不同的语气与话题，作者无需为每个角色重写整个程序；另一方面，角色能说什么仍取决于具体脚本怎样覆盖输入。只改一段欢迎词并不会获得一套新的世界知识。角色的个性既来自表面措辞，也来自它始终会抓住什么、回避什么以及何时换话题。</p>
+<p>DOCTOR的设定尤其适合这一机制。它经常把用户的表达返回给用户，要求继续说明，而不必主动提供大量外部事实。对话者可以把不直接回答解释为一种谈话策略，甚至认为看似无关的追问藏着深意。这种可信感部分来自角色框架，也部分来自用户愿意为每句话补充的解释。</p>
+<h2>一次输入怎样变成一次回应</h2>
+<p>原系统在MIT的分时计算环境中运行，用户通过远程打字机终端与计算机轮流交换文字。输入不是语音识别，也没有虚拟人物表情；纸面或终端上的下一句话几乎承担全部反馈。轮流等待使程序有机会逐条处理输入，也使回应的出现本身具有对话的节奏。</p>
+<p>系统首先扫描输入，寻找脚本认识的关键词，并记录相关处理入口。关键词可以有不同优先级，较重要的词会影响首先尝试哪一组规则。标点还会帮助截取当前处理的句段。因此，一段很长的输入可能只有某一部分真正参与生成回应，余下的文字并不必然被程序综合理解。</p>
+<p>这个机制解释了两种看似相反的经验。用户可能写出很复杂的经历，程序仍给出切合其中一处的追问；用户也可能只改一个词，就使回应转向另一条规则。交互的连续感来自局部变换足够贴近当前说法，而非所有输入已经进入一个完整的人物与事件模型。</p>
+<h1>关键词之外的文字操作</h1>
+<h2>分解与重组如何产生针对性</h2>
+<p>关键词不是简单地对应一句固定回答。它可以引出若干分解模式，匹配句中不同长度的词组，再把其中某些部分放进输出模板。例如，一条模式可以保留用户描述某种感受的部分，再把它接到一个追问之后。回应看起来针对这个人的表达，因为它确实重新使用了此人的文字。</p>
+<p>分解规则中的数字可以表示固定长度或任意长度的词段，重组规则则指出要取回哪个部分。这种设计使脚本作者既能写很具体的规则，也能写较宽泛的兜底规则。程序按安排尝试匹配，一条规则不合适时，还可以转向下一条或另一个关键词。</p>
+<p>这种针对性仍然可以与误解并存。程序能够成功复制一个词组，却未必知道其中的人物、时间和因果关系。若一句话含有讽刺、嵌套引语或否定，匹配到的片段可能被放进不合适的模板。分析ELIZA时，应该分别记录规则有没有命中、文字有没有正确变换，以及回应是否保持了用户原意。</p>
+<h2>人称替换与说话位置</h2>
+<p>把用户的“我”换成回应中的“你”，是DOCTOR建立对话感的重要操作。它还需要处理相应代词及某些语法形式，让复制回来的片段看起来是由另一个人对用户说出的。程序并非只把输入原样回显，而是调整了说话位置。</p>
+<p>这个细节对互动角色的设计很有启发。相同的字串，作为系统通知出现，与作为一个角色对“你”的回应出现，会形成不同关系。ELIZA的变换让输入成为对方接住并再次提出的内容，用户由此更容易继续补充，谈话也能在较少的程序状态下延续。</p>
+<p>人称替换也暴露其范围。自然语言中的指称依赖说话人、引语和上下文，机械替换不可能在所有句式中保持正确。一次失误可能引发笑声、使用户修正说法，或者立即打断原先的可信感。ELIZA因而同时提供了角色形成的最小手段，以及检验这种手段何时失效的场合。</p>
+<h2>排序、等价类与回应变化</h2>
+<p>脚本中的关键词排序包含作者对谈话的判断。表示概括、相似、家庭或计算机的词，可以拥有不同权重；排序决定程序从一段话中挑出哪个方向回应。它是一种可见的注意机制，也使角色能够在多个话题之间表现出相对稳定的偏向。</p>
+<p>若几个词可以共用处理规则，脚本可以把它们指向同一个规则集，或把它们归入共同标签。这样，某些不同表述能够获得相近处理，而不必把全部规则逐字复制。这些词类由作者作为脚本数据写入。</p>
+<p>重组规则还可以轮流使用。用户反复输入相似句型时，回应未必立刻重复上一句，而会在该规则的若干写法中循环。变化能够延缓模式暴露，并让角色更像持续交谈的对象。不同措辞可以由同一处理路径生成，脚本结构与表面回应之间因此形成了可分析的关系。</p>
+<h1>记忆、停顿与继续谈话</h1>
+<h2>MEMORY真正保存了什么</h2>
+<p>1966年论文的MEMORY机制会在特定条件下，把输入的一种变换结果存起来，等到后来适合的时候取出使用。用户可能突然发现程序重新提到较早的话题，因而觉得它记住了此前经历。这个回指效果确实由程序状态支持，并非每一轮都完全从零开始。</p>
+<p>被保存的是少量等待输出的变换文本。它可能保留一段与家庭有关的话，却不会自动据此推导所有家庭关系，更不会保证后来每次使用都与最新信息一致。记忆效果与知识表示之间需要分别讨论。</p>
+<p>这也是ELIZA对后来的互动叙事留下的一项具体问题：什么时候让角色重新提及玩家说过的内容，可以使一次交流看起来成为共同经历？若回提准确，它能建立连续性；若只在不相干的时刻复用旧话，它也可能显得机械。一个很小的状态机制，已经能够改变用户对关系的感受。</p>
+<h2>没有关键词时，系统怎样维持交互</h2>
+<p>输入没有可用关键词，或相关规则全部失败时，脚本可以退回一般性的回应，例如让对方继续说。这样的句子不必包含具体信息，却能把轮次交还用户。配合记忆中暂存的文本，系统往往能避免直接暴露“没有找到答案”的空白。</p>
+<p>维持轮次是ELIZA成功的重要条件。一个交互系统不需要每一轮都提出新事实，才能让人愿意继续；它可以通过停顿、请求说明和重新提出旧内容维持参与。对话作为一种行动结构，有时比单句的信息量更能说明使用者为什么留下来。</p>
+<p>然而，继续交谈与完成理解是不同的评价目标。用户可能为了配合系统而不断换说法，也可能因为回应有趣而接受它偏离原意。若只统计交流轮数，就容易把修补误解的劳动一并算成成功。分析应追踪用户为什么继续，以及每一次继续是否接近其原本想做的事情。</p>
+<h1>编辑脚本也是一种交互</h1>
+<h2>“教师”怎样改变角色</h2>
+<p>Weizenbaum不仅提供一个封闭演示，也安排了进入编辑状态、修改脚本并恢复谈话的流程。作者建议从较小脚本开始，在实际使用中逐步扩展。所谓教会ELIZA新的说法，主要指人类观察问题、编辑规则并再次检验，而非程序自动把任意一句用户输入变成永久新知识。</p>
+<p>这使ELIZA具有一种双层创作结构。第一层是与角色交谈，第二层是站到脚本作者的位置，决定角色将怎样接话。对话中发现的漏洞可以成为编辑的动机，编辑后的角色又会引出新的使用方式。程序的可解释性允许作者把一次意外回应追溯到某个关键词或变换规则。</p>
+<p>这种方式也把写作与编程连接起来。创作者需要考虑语气、角色和可能的话题，还要理解输入怎样被拆分、规则先后怎样影响结果。多写几句漂亮台词不一定能扩大可交互范围，适当的匹配结构却可能让同一段文字在更多处境中成立。</p>
+<h1>历史版本与保存</h1>
+<h2>1965打印稿、1966论文与后来的“ELIZA”</h2>
+<p>原始ELIZA使用MAD与SLIP相关机制，运行于当时的IBM分时计算环境。把它一概称为最初用Lisp写成的程序，会混淆后来流传的移植。ELIZA之名很快被用于多种Lisp、BASIC及其他语言的实现，许多版本采用类似的医生角色，却在关键词、规则次序、记忆及输出细节上不同。</p>
+<p>1965年打印稿与1966年论文附录也应作为有联系的历史材料分别读取。它们能够互相帮助解释程序，不必预设每一个拼写、参数和规则都完全相同。1966年经典论文公开介绍了这一程序；它不抹去1965已有代码的事实，也不制造一个未经原始记录支持的商业“首发日”。</p>
+<p>近年的ELIZAGEN保存工作在MIT档案中找到原始打印稿，并对原代码、辅助例程与脚本进行转录和复原。复原者明确记载，一些缺失函数需要补写，运行环境采用模拟的IBM机器与恢复的CTSS。这样的工作使原程序重新可研究，也需要把原始材料、转录、补写和现代运行条件逐层记录。</p>
+<h2>开放代码与作品权利</h2>
+<p>MIT当前档案为原始代码及相关文档附有MIT软件许可，要求保留版权和许可文字。1966年期刊论文、后来的第三方移植和展示网页则可能具有各自权利条件。使用一份开放代码，不会自动使所有名为ELIZA的版本及全部研究文章获得同样许可。</p>
+<p>这种区分直接影响作品保存。保存原始字节可以核对转录，保存脚本可以复查一次回应，保存环境说明则有助于理解现代重演的差别。一个能在浏览器里运行的现代版本，适合体验基本机制，但若研究的是1965或1966某一具体交互，仍需确认它采用的脚本与处理顺序。</p>
+<h1>可信感、理解与互动作品</h1>
+<h2>作者自己提出的检验</h2>
+<p>Weizenbaum在1966年已经追问，人们为何愿意相信机器理解自己，以及怎样系统研究这种可信感。他同时指出，能够持续谈话并不足以证明理解；更严格的问题涉及能否从输入中选择信息、形成联系并得出适当结论。这些后续能力在论文中属于扩展方向，不能倒写成原程序已经完成的系统。</p>
+<p>ELIZA的力量因此不只在于让人暂时受骗。规则被解释以后，使用者仍可能觉得回应有趣，愿意把它当作某种角色继续互动。知道其机制与受到其影响可以同时发生。作品分析需要认真处理这种经验，而不是把使用者简单分成“相信机器”和“看穿机器”两类。</p>
+<h2>从认真倾诉到故意试探</h2>
+<p>ELIZA没有给用户规定一种唯一的态度。认真输入个人经历时，它可以形成一种倾听的表面；连续重复相同句式时，循环的模板和优先级便逐渐显露；故意把无关词放在一起时，回应又可能成为荒诞的语言游戏。不同体验使用同一套程序，变化来自用户怎样提出材料、怎样看待输出。</p>
+<p>这种参与方式使“暴露机制”不必成为作品的终点。用户理解了关键词规则以后，可以反过来预测下一次回应，再比较预测与实际结果。程序既是一个谈话对象，也是可以被探索的规则系统。惊喜有时来自拟人化，有时来自终于发现某条隐藏的处理路径，两者都属于实际互动可以研究的内容。</p>
+<p>从创作角度看，DOCTOR角色给技术限制提供了一个能被接受的语境，而反复提问又为用户留下了补充的空间。系统借用了社会上已有的谈话形式，使有限程序也能被解释成一次相遇。这种依赖既有交往习惯的设计，后来会以不同方式进入游戏中的终端、顾问和角色对话。</p>
+<h2>一种可以逐回合分析的作品</h2>
+<p>研究一次ELIZA交互，可以先保留完整输入与输出，再标出可能触发的关键词、分解模式、人称替换、重组及记忆调用。随后观察用户是否接受了话题，是否主动修补句子，或是否开始故意试探。这条路径让程序操作与用户解释能够互相检验。</p>
+<p>与<a href="../../entry/ab86a086dba8d9/">SHRDLU</a>把语言连接到可操作积木世界的表示相比，ELIZA主要依靠谈话形式组织回应；与<a href="../../entry/8f1cf54b900a0f/">Event[0]</a>把计算机角色嵌入飞船、谜题和情绪状态相比，它显示了极少界面与状态也能形成关系的条件。后来的作品扩展了行动范围，ELIZA留下的问题仍然清楚：一句回应如何被看成对“我”的回应，以及这种解释实际由谁完成。</p>
+<h1>访问链接与参考资料</h1>
+<ol>
+<li>Joseph Weizenbaum，〈ELIZA—A Computer Program for the Study of Natural Language Communication Between Man and Machine〉，Communications of the ACM 9(1)，1966，36–45页。<a href="https://web.stanford.edu/class/cs124/p36-weizenabaum.pdf">原论文保存扫描</a>，<a href="https://doi.org/10.1145/365153.365168">DOI</a>。程序、脚本、MEMORY、编辑和作者讨论以此为依据。</li>
+<li>MIT，Joseph Weizenbaum档案，Computer conversations, 1965。<a href="https://dome.mit.edu/entities/archivalmaterial/10076e5d-bf7f-4bda-80a1-e1622a356715">原始打印稿及MIT许可</a>。主图呈现DOCTOR脚本的一部分。</li>
+<li>Jeff Shrager及ELIZAGEN保存团队，<a href="https://elizagen.org/original-eliza.html">Original ELIZA</a>、<a href="https://elizagen.org/blog/eliza-reanimated.html">ELIZA Reanimated</a>。原代码发现、版本谱系与复原工作的第一手记录。</li>
+<li><a href="https://elizagen.org/try-eliza.html">ELIZAGEN的体验与版本说明</a>。现代运行与移植应结合具体实现说明判断，不替代原档案。</li>
+</ol>
+</section><div class="reading-block" id="p-af5038d892c"><p>ELIZA不是以胜负为目标的传统游戏，却是一件重要的互动程序作品。使用者可以认真交谈，也可以试探、逗弄或寻找系统的破绽；脚本作者则可以改变对话角色的语言习惯。它把程序规则、角色设定和人类对回应的解释放进同一个交互过程，也为此后的聊天角色、文字冒险及语言驱动游戏留下了持续的问题。</p>
+</div>
+<div class="reading-block" id="p-4d131f5c249"><p>MIT保存的1965年ELIZA／DOCTOR原始打印稿局部，可见开场语、条件规则与MEMORY结构。程序档案采用MIT软件许可；纸张、打印字形和原有标记均照实保留。</p>
+</div>
+<h2 id="h-1589e7254e8" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">程序、脚本与谈话角色</span></h2>
+<h3 id="h-35c8b5d0cfe" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">为什么不能把ELIZA等同于一个心理医生</span></h3>
+<div class="reading-block" id="p-a36b6b392af"><p>ELIZA的程序与某个具体脚本是分开的。程序提供读取、匹配、变换及编辑的机制，脚本规定哪些词值得关注、怎样拆分句子、输出什么话。DOCTOR是这套机制最知名的角色表现，但改变脚本就可以改变谈话范围和风格。1966年论文已经提到英语之外的德语、威尔士语脚本，说明作者把可改写性当作系统的一部分。</p>
+</div>
+<div class="reading-block" id="p-29300d803ff"><p>这一分离具有创作意义。同一套处理机制可以承载不同的语气与话题，作者无需为每个角色重写整个程序；另一方面，角色能说什么仍取决于具体脚本怎样覆盖输入。只改一段欢迎词并不会获得一套新的世界知识。角色的个性既来自表面措辞，也来自它始终会抓住什么、回避什么以及何时换话题。</p>
+</div>
+<div class="reading-block" id="p-25cdff9d43d"><p>DOCTOR的设定尤其适合这一机制。它经常把用户的表达返回给用户，要求继续说明，而不必主动提供大量外部事实。对话者可以把不直接回答解释为一种谈话策略，甚至认为看似无关的追问藏着深意。这种可信感部分来自角色框架，也部分来自用户愿意为每句话补充的解释。</p>
+</div>
+<h3 id="h-316bd307832" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">一次输入怎样变成一次回应</span></h3>
+<div class="reading-block" id="p-d6684dd490f"><p>原系统在MIT的分时计算环境中运行，用户通过远程打字机终端与计算机轮流交换文字。输入不是语音识别，也没有虚拟人物表情；纸面或终端上的下一句话几乎承担全部反馈。轮流等待使程序有机会逐条处理输入，也使回应的出现本身具有对话的节奏。</p>
+</div>
+<div class="reading-block" id="p-f998f6190d3"><p>系统首先扫描输入，寻找脚本认识的关键词，并记录相关处理入口。关键词可以有不同优先级，较重要的词会影响首先尝试哪一组规则。标点还会帮助截取当前处理的句段。因此，一段很长的输入可能只有某一部分真正参与生成回应，余下的文字并不必然被程序综合理解。</p>
+</div>
+<div class="reading-block" id="p-1a14e51a2df"><p>这个机制解释了两种看似相反的经验。用户可能写出很复杂的经历，程序仍给出切合其中一处的追问；用户也可能只改一个词，就使回应转向另一条规则。交互的连续感来自局部变换足够贴近当前说法，而非所有输入已经进入一个完整的人物与事件模型。</p>
+</div>
+<h2 id="h-2df87ab2829" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">关键词之外的文字操作</span></h2>
+<h3 id="h-b533507f779" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">分解与重组如何产生针对性</span></h3>
+<div class="reading-block" id="p-60f39d92b90"><p>关键词不是简单地对应一句固定回答。它可以引出若干分解模式，匹配句中不同长度的词组，再把其中某些部分放进输出模板。例如，一条模式可以保留用户描述某种感受的部分，再把它接到一个追问之后。回应看起来针对这个人的表达，因为它确实重新使用了此人的文字。</p>
+</div>
+<div class="reading-block" id="p-af258829c44"><p>分解规则中的数字可以表示固定长度或任意长度的词段，重组规则则指出要取回哪个部分。这种设计使脚本作者既能写很具体的规则，也能写较宽泛的兜底规则。程序按安排尝试匹配，一条规则不合适时，还可以转向下一条或另一个关键词。</p>
+</div>
+<div class="reading-block" id="p-46625c065eb"><p>这种针对性仍然可以与误解并存。程序能够成功复制一个词组，却未必知道其中的人物、时间和因果关系。若一句话含有讽刺、嵌套引语或否定，匹配到的片段可能被放进不合适的模板。分析ELIZA时，应该分别记录规则有没有命中、文字有没有正确变换，以及回应是否保持了用户原意。</p>
+</div>
+<h3 id="h-d74a03f9df1" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">人称替换与说话位置</span></h3>
+<div class="reading-block" id="p-c676789f496"><p>把用户的“我”换成回应中的“你”，是DOCTOR建立对话感的重要操作。它还需要处理相应代词及某些语法形式，让复制回来的片段看起来是由另一个人对用户说出的。程序并非只把输入原样回显，而是调整了说话位置。</p>
+</div>
+<div class="reading-block" id="p-7515ae1e28e"><p>这个细节对互动角色的设计很有启发。相同的字串，作为系统通知出现，与作为一个角色对“你”的回应出现，会形成不同关系。ELIZA的变换让输入成为对方接住并再次提出的内容，用户由此更容易继续补充，谈话也能在较少的程序状态下延续。</p>
+</div>
+<div class="reading-block" id="p-456d2af6285"><p>人称替换也暴露其范围。自然语言中的指称依赖说话人、引语和上下文，机械替换不可能在所有句式中保持正确。一次失误可能引发笑声、使用户修正说法，或者立即打断原先的可信感。ELIZA因而同时提供了角色形成的最小手段，以及检验这种手段何时失效的场合。</p>
+</div>
+<h3 id="h-418f796c2fa" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">排序、等价类与回应变化</span></h3>
+<div class="reading-block" id="p-c04a70be525"><p>脚本中的关键词排序包含作者对谈话的判断。表示概括、相似、家庭或计算机的词，可以拥有不同权重；排序决定程序从一段话中挑出哪个方向回应。它是一种可见的注意机制，也使角色能够在多个话题之间表现出相对稳定的偏向。</p>
+</div>
+<div class="reading-block" id="p-c718bb2f230"><p>若几个词可以共用处理规则，脚本可以把它们指向同一个规则集，或把它们归入共同标签。这样，某些不同表述能够获得相近处理，而不必把全部规则逐字复制。这些词类由作者作为脚本数据写入。</p>
+</div>
+<div class="reading-block" id="p-68cb46eb32c"><p>重组规则还可以轮流使用。用户反复输入相似句型时，回应未必立刻重复上一句，而会在该规则的若干写法中循环。变化能够延缓模式暴露，并让角色更像持续交谈的对象。不同措辞可以由同一处理路径生成，脚本结构与表面回应之间因此形成了可分析的关系。</p>
+</div>
+<h2 id="h-156658d1e2e" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">记忆、停顿与继续谈话</span></h2>
+<h3 id="h-d6f8eabfefe" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-chinese">MEMORY真正保存了什么</span></h3>
+<div class="reading-block" id="p-f9e35e84cc8"><p>1966年论文的MEMORY机制会在特定条件下，把输入的一种变换结果存起来，等到后来适合的时候取出使用。用户可能突然发现程序重新提到较早的话题，因而觉得它记住了此前经历。这个回指效果确实由程序状态支持，并非每一轮都完全从零开始。</p>
+</div>
+<div class="reading-block" id="p-a99dff5e286"><p>被保存的是少量等待输出的变换文本。它可能保留一段与家庭有关的话，却不会自动据此推导所有家庭关系，更不会保证后来每次使用都与最新信息一致。记忆效果与知识表示之间需要分别讨论。</p>
+</div>
+<div class="reading-block" id="p-41b368b0afe"><p>这也是ELIZA对后来的互动叙事留下的一项具体问题：什么时候让角色重新提及玩家说过的内容，可以使一次交流看起来成为共同经历？若回提准确，它能建立连续性；若只在不相干的时刻复用旧话，它也可能显得机械。一个很小的状态机制，已经能够改变用户对关系的感受。</p>
+</div>
+<h3 id="h-623ea26ebc6" data-heading><span class="anchor-alias" id="s-10"></span><span class="heading-chinese">没有关键词时，系统怎样维持交互</span></h3>
+<div class="reading-block" id="p-1fe34e3041c"><p>输入没有可用关键词，或相关规则全部失败时，脚本可以退回一般性的回应，例如让对方继续说。这样的句子不必包含具体信息，却能把轮次交还用户。配合记忆中暂存的文本，系统往往能避免直接暴露“没有找到答案”的空白。</p>
+</div>
+<div class="reading-block" id="p-5b2749c5b57"><p>维持轮次是ELIZA成功的重要条件。一个交互系统不需要每一轮都提出新事实，才能让人愿意继续；它可以通过停顿、请求说明和重新提出旧内容维持参与。对话作为一种行动结构，有时比单句的信息量更能说明使用者为什么留下来。</p>
+</div>
+<div class="reading-block" id="p-ce254fb65d1"><p>然而，继续交谈与完成理解是不同的评价目标。用户可能为了配合系统而不断换说法，也可能因为回应有趣而接受它偏离原意。若只统计交流轮数，就容易把修补误解的劳动一并算成成功。分析应追踪用户为什么继续，以及每一次继续是否接近其原本想做的事情。</p>
+</div>
+<h2 id="h-803945c13a8" data-heading><span class="anchor-alias" id="s-11"></span><span class="heading-chinese">编辑脚本也是一种交互</span></h2>
+<h3 id="h-af550b4c5a0" data-heading><span class="anchor-alias" id="s-12"></span><span class="heading-chinese">“教师”怎样改变角色</span></h3>
+<div class="reading-block" id="p-e133cd6e95e"><p>Weizenbaum不仅提供一个封闭演示，也安排了进入编辑状态、修改脚本并恢复谈话的流程。作者建议从较小脚本开始，在实际使用中逐步扩展。所谓教会ELIZA新的说法，主要指人类观察问题、编辑规则并再次检验，而非程序自动把任意一句用户输入变成永久新知识。</p>
+</div>
+<div class="reading-block" id="p-029c4036d06"><p>这使ELIZA具有一种双层创作结构。第一层是与角色交谈，第二层是站到脚本作者的位置，决定角色将怎样接话。对话中发现的漏洞可以成为编辑的动机，编辑后的角色又会引出新的使用方式。程序的可解释性允许作者把一次意外回应追溯到某个关键词或变换规则。</p>
+</div>
+<div class="reading-block" id="p-9d244efe435"><p>这种方式也把写作与编程连接起来。创作者需要考虑语气、角色和可能的话题，还要理解输入怎样被拆分、规则先后怎样影响结果。多写几句漂亮台词不一定能扩大可交互范围，适当的匹配结构却可能让同一段文字在更多处境中成立。</p>
+</div>
+<h2 id="h-485347cfb3d" data-heading><span class="anchor-alias" id="s-13"></span><span class="heading-chinese">历史版本与保存</span></h2>
+<h3 id="h-9a2a2fcca87" data-heading><span class="anchor-alias" id="s-14"></span><span class="heading-chinese">1965打印稿、1966论文与后来的“ELIZA”</span></h3>
+<div class="reading-block" id="p-7e46940fdba"><p>原始ELIZA使用MAD与SLIP相关机制，运行于当时的IBM分时计算环境。把它一概称为最初用Lisp写成的程序，会混淆后来流传的移植。ELIZA之名很快被用于多种Lisp、BASIC及其他语言的实现，许多版本采用类似的医生角色，却在关键词、规则次序、记忆及输出细节上不同。</p>
+</div>
+<div class="reading-block" id="p-864d53b5ef3"><p>1965年打印稿与1966年论文附录也应作为有联系的历史材料分别读取。它们能够互相帮助解释程序，不必预设每一个拼写、参数和规则都完全相同。1966年经典论文公开介绍了这一程序；它不抹去1965已有代码的事实，也不制造一个未经原始记录支持的商业“首发日”。</p>
+</div>
+<div class="reading-block" id="p-380ae1f27d5"><p>近年的ELIZAGEN保存工作在MIT档案中找到原始打印稿，并对原代码、辅助例程与脚本进行转录和复原。复原者明确记载，一些缺失函数需要补写，运行环境采用模拟的IBM机器与恢复的CTSS。这样的工作使原程序重新可研究，也需要把原始材料、转录、补写和现代运行条件逐层记录。</p>
+</div>
+<h3 id="h-d2ca0d9cfe1" data-heading><span class="anchor-alias" id="s-15"></span><span class="heading-chinese">开放代码与作品权利</span></h3>
+<div class="reading-block" id="p-3ab958b8723"><p>MIT当前档案为原始代码及相关文档附有MIT软件许可，要求保留版权和许可文字。1966年期刊论文、后来的第三方移植和展示网页则可能具有各自权利条件。使用一份开放代码，不会自动使所有名为ELIZA的版本及全部研究文章获得同样许可。</p>
+</div>
+<div class="reading-block" id="p-c8b4d72114a"><p>这种区分直接影响作品保存。保存原始字节可以核对转录，保存脚本可以复查一次回应，保存环境说明则有助于理解现代重演的差别。一个能在浏览器里运行的现代版本，适合体验基本机制，但若研究的是1965或1966某一具体交互，仍需确认它采用的脚本与处理顺序。</p>
+</div>
+<h2 id="h-b928aa5634f" data-heading><span class="anchor-alias" id="s-16"></span><span class="heading-chinese">可信感、理解与互动作品</span></h2>
+<h3 id="h-4f47df5a917" data-heading><span class="anchor-alias" id="s-17"></span><span class="heading-chinese">作者自己提出的检验</span></h3>
+<div class="reading-block" id="p-32e6bdca4ec"><p>Weizenbaum在1966年已经追问，人们为何愿意相信机器理解自己，以及怎样系统研究这种可信感。他同时指出，能够持续谈话并不足以证明理解；更严格的问题涉及能否从输入中选择信息、形成联系并得出适当结论。这些后续能力在论文中属于扩展方向，不能倒写成原程序已经完成的系统。</p>
+</div>
+<div class="reading-block" id="p-4a88fc785d2"><p>ELIZA的力量因此不只在于让人暂时受骗。规则被解释以后，使用者仍可能觉得回应有趣，愿意把它当作某种角色继续互动。知道其机制与受到其影响可以同时发生。作品分析需要认真处理这种经验，而不是把使用者简单分成“相信机器”和“看穿机器”两类。</p>
+</div>
+<h3 id="h-304147a7bb4" data-heading><span class="anchor-alias" id="s-18"></span><span class="heading-chinese">从认真倾诉到故意试探</span></h3>
+<div class="reading-block" id="p-18998e5ab35"><p>ELIZA没有给用户规定一种唯一的态度。认真输入个人经历时，它可以形成一种倾听的表面；连续重复相同句式时，循环的模板和优先级便逐渐显露；故意把无关词放在一起时，回应又可能成为荒诞的语言游戏。不同体验使用同一套程序，变化来自用户怎样提出材料、怎样看待输出。</p>
+</div>
+<div class="reading-block" id="p-6f50d401865"><p>这种参与方式使“暴露机制”不必成为作品的终点。用户理解了关键词规则以后，可以反过来预测下一次回应，再比较预测与实际结果。程序既是一个谈话对象，也是可以被探索的规则系统。惊喜有时来自拟人化，有时来自终于发现某条隐藏的处理路径，两者都属于实际互动可以研究的内容。</p>
+</div>
+<div class="reading-block" id="p-9f33ceabe53"><p>从创作角度看，DOCTOR角色给技术限制提供了一个能被接受的语境，而反复提问又为用户留下了补充的空间。系统借用了社会上已有的谈话形式，使有限程序也能被解释成一次相遇。这种依赖既有交往习惯的设计，后来会以不同方式进入游戏中的终端、顾问和角色对话。</p>
+</div>
+<h3 id="h-bb9e0453452" data-heading><span class="anchor-alias" id="s-19"></span><span class="heading-chinese">一种可以逐回合分析的作品</span></h3>
+<div class="reading-block" id="p-3db1b4fddfa"><p>研究一次ELIZA交互，可以先保留完整输入与输出，再标出可能触发的关键词、分解模式、人称替换、重组及记忆调用。随后观察用户是否接受了话题，是否主动修补句子，或是否开始故意试探。这条路径让程序操作与用户解释能够互相检验。</p>
+</div>
+<div class="reading-block" id="p-8c0f00559cc"><p>与<a href="../../entry/ab86a086dba8d9/">SHRDLU</a>把语言连接到可操作积木世界的表示相比，ELIZA主要依靠谈话形式组织回应；与<a href="../../entry/8f1cf54b900a0f/">Event[0]</a>把计算机角色嵌入飞船、谜题和情绪状态相比，它显示了极少界面与状态也能形成关系的条件。后来的作品扩展了行动范围，ELIZA留下的问题仍然清楚：一句回应如何被看成对“我”的回应，以及这种解释实际由谁完成。</p>
+</div>
+<h2 id="h-d3c631d8626" data-heading><span class="anchor-alias" id="s-20"></span><span class="heading-chinese">访问链接与参考资料</span></h2>
+<div class="reading-block" id="p-5cb39f1c235"><ol>
+<li>Joseph Weizenbaum，〈ELIZA—A Computer Program for the Study of Natural Language Communication Between Man and Machine〉，Communications of the ACM 9(1)，1966，36–45页。<a href="https://web.stanford.edu/class/cs124/p36-weizenabaum.pdf">原论文保存扫描</a>，<a href="https://doi.org/10.1145/365153.365168">DOI</a>。程序、脚本、MEMORY、编辑和作者讨论以此为依据。</li>
+<li>MIT，Joseph Weizenbaum档案，Computer conversations, 1965。<a href="https://dome.mit.edu/entities/archivalmaterial/10076e5d-bf7f-4bda-80a1-e1622a356715">原始打印稿及MIT许可</a>。主图呈现DOCTOR脚本的一部分。</li>
+<li>Jeff Shrager及ELIZAGEN保存团队，<a href="https://elizagen.org/original-eliza.html">Original ELIZA</a>、<a href="https://elizagen.org/blog/eliza-reanimated.html">ELIZA Reanimated</a>。原代码发现、版本谱系与复原工作的第一手记录。</li>
+<li><a href="https://elizagen.org/try-eliza.html">ELIZAGEN的体验与版本说明</a>。现代运行与移植应结合具体实现说明判断，不替代原档案。</li>
+</ol>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="2c957da1fc703f"></div></section></main></div></body></html>

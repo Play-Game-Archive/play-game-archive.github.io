@@ -1,0 +1,80 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="部分可观测性指行动者不能从当前获得的信息中，可靠确定与决策有关的完整环境状态。战争迷雾遮住敌军，扑克隐藏对手手牌，潜行角色只能看见视野内的玩家，都属于这种情况。环境内部可能有确定的真实状态，行动者却只能根据有限观察、过去经验与模型保留若干可能解释。它首先是一种信息条件，而不是某个专门算法的名称。"><title>部分可观测性 · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" >档案卡片</a><a href="../../concepts/" aria-current="page">索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="a494529fd848d0"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../concepts/?view=all">← 索引标签</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-3b3298f6ae9" data-toc="h-3b3298f6ae9">观察为何不能直接替代状态</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-5757c25adf3" data-toc="h-5757c25adf3">从反应规则到信念状态</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-71bf896f004" data-toc="h-71bf896f004">行动与观察怎样更新估计</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1a57c2ac420" data-toc="h-1a57c2ac420">信息本身怎样具有行动价值</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-edf07b0d39b" data-toc="h-edf07b0d39b">求解与近似方法</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-e90f9d78c53" data-toc="h-e90f9d78c53">游戏设计中的用途与边界</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-393a1144519" data-toc="h-393a1144519">与贝叶斯推断和强化学习的关系</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-9225f5db98a" data-toc="h-9225f5db98a">评价、局限与争论</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1184d9947b1" data-toc="h-1184d9947b1">参考文献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header has-cover" id="entry-title"><figure class="entry-media kind-generated"><img src="../../assets/display/4cb9d2496b9c720cb859562e.webp" alt="部分可观测性，独立概念意象" width="1254" height="1254"></figure><div><a class="entry-kicker" href="../../concepts/">索引标签</a><p class="entry-original " lang="en">Partial Observability</p><h1>部分可观测性</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>部分可观测性指行动者不能从当前获得的信息中，可靠确定与决策有关的完整环境状态。战争迷雾遮住敌军，扑克隐藏对手手牌，潜行角色只能看见视野内的玩家，都属于这种情况。环境内部可能有确定的真实状态，行动者却只能根据有限观察、过去经验与模型保留若干可能解释。它首先是一种信息条件，而不是某个专门算法的名称。</p>
+<p>部分可观测性不等于环境随机，也不等于规则未知。一个完全确定的迷宫，只要不同房间看起来相同，仍然可能让角色不知道身在何处；一个掷骰游戏即使每次结果不可预测，也可能让所有人清楚看见当前局面。游戏设计需要分别说明世界怎样变化、谁能够观察什么，以及系统如何在尚未确定时继续行动。</p>
+</section><h2 id="h-3b3298f6ae9" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">观察为何不能直接替代状态</span></h2>
+<div class="reading-block" id="p-3210f4772f8"><p>完整状态概括预测后续变化所需的信息，观察则是行动者实际收到的输入。相同截图可以对应不同速度、隐藏物体或任务进度，因此从观察直接选择动作，有时会把本应区分的情境合并。例如两条外观相同的走廊，一条刚从左侧进入，另一条刚从右侧进入；正确出口可能取决于这段历史，而当前画面无法独自说明。</p>
+</div>
+<div class="reading-block" id="p-9e54bb1ff4d"><p>观察还可能带有噪声。脚步声可能来自敌人，也可能来自同伴；传感器可能漏报，地图标记可能过期。没有观察到目标，并不总能推出目标不存在，需要看观察范围与漏检概率。把未知当成否定，会让角色过早停止搜索；把旧位置当成当前真值，又会制造不合理的追踪能力。</p>
+</div>
+<div class="reading-block" id="p-3d929194546"><p>不同角色的信息也可能不同。小队成员可以共享部分报告，但通信延迟、视线和职责使知识不必完全相同。角色从引擎全局状态中获得的信息，应由其感知与知识规则规定。把环境真值、角色观察与角色记忆分开，既有利于算法建模，也有利于解释玩家所感受到的公平性。</p>
+</div>
+<div class="reading-block" id="p-af000ef9cd7"><p>在博弈论语境中，不完全信息、非完美信息和部分可观测等术语具有各自约定，不能只凭中文相近就无条件互换。讨论具体游戏时，更清楚的办法是列出隐藏了什么：手牌、行动历史、角色类型、地图或规则。信息结构决定可用策略，也决定一项所谓强大AI是否实际上获得了额外权限。</p>
+</div>
+<h2 id="h-5757c25adf3" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">从反应规则到信念状态</span></h2>
+<div class="reading-block" id="p-a5a0b92cdbf"><p>最简单的应对是只根据最新观察行动，但这可能在外观相同的位置反复走回原路。保存少量历史能够改善表现，例如记住刚经过的路口、最后看见敌人的位置或最近听见声音的方向。记忆的作用是区分观察相同而历史不同的情境，并不要求系统一定使用自然语言叙述或拟人的心理模型。</p>
+</div>
+<div class="reading-block" id="p-b3563ba12ce"><p>更系统的做法是维护信念状态，即对可能真实状态的概率分布。它可以表示“敌人在左侧的概率为八成”，也可以同时保留位置、持有物品等多种可能。信念不是另一份真实世界，而是依照当前信息形成的估计。正确归一化只说明数值形式合格，模型、先验或传感器描述错误仍会导致估计失真。</p>
+</div>
+<div class="reading-block" id="p-e10eae99b2c"><p>Kaelbling、Littman与Cassandra在1998年的论文中，用部分可观测马尔可夫决策过程系统组织了这一问题。模型把状态转移、观察概率、行动与奖励放在一起，并将控制分为状态估计和策略两个部分。信念在模型正确等条件下概括相关历史，使后续决策可以依据这一分布进行，而不必机械保存所有过去事件。<a href="https://people.csail.mit.edu/lpk/papers/aij98-pomdp.pdf">Kaelbling等，1998，第3节</a></p>
+</div>
+<div class="reading-block" id="p-4db5cb287de"><p>只保存最可能状态，是另一种近似。若左边有百分之五十一、右边有百分之四十九，直接认定左边与左边有百分之九十九时的把握完全不同。分布保留这种差别，使角色能够考虑谨慎等待、继续观察或选择稳妥路线。概率估计的用途因而不限于选出一个最像真的答案，还包括知道自己尚不能确定什么。</p>
+</div>
+<h2 id="h-71bf896f004" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">行动与观察怎样更新估计</span></h2>
+<div class="reading-block" id="p-f3a59946b3b"><p>信念更新通常分两步。先根据上一次行动与转移模型，预测下一状态的可能分布；再根据新观察的似然，重新加权并归一化。移动可能让角色到达邻近房间，也可能因为受阻而留在原地；随后看到的地标帮助判断究竟发生了什么。漏掉预测步骤，等于假定行动没有改变世界；漏掉观察步骤，则放弃了新信息。</p>
+</div>
+<div class="reading-block" id="p-8f3e8f3ff66"><p><span class="source-math" data-tex="$$b&#39;(s&#39;)=\eta\,O(o\mid s&#39;,a)\sum_sT(s&#39;\mid s,a)b(s).$$"><span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>b</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">(</mo><msup><mi>s</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo stretchy="false">)</mo><mo>=</mo><mi>η</mi><mtext> </mtext><mi>O</mi><mo stretchy="false">(</mo><mi>o</mi><mo>∣</mo><msup><mi>s</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo separator="true">,</mo><mi>a</mi><mo stretchy="false">)</mo><munder><mo>∑</mo><mi>s</mi></munder><mi>T</mi><mo stretchy="false">(</mo><msup><mi>s</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>∣</mo><mi>s</mi><mo separator="true">,</mo><mi>a</mi><mo stretchy="false">)</mo><mi>b</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">b&#x27;(s&#x27;)=\eta\,O(o\mid s&#x27;,a)\sum_sT(s&#x27;\mid s,a)b(s).</annotation></semantics></math></span></span></p>
+</div>
+<div class="reading-block" id="p-e22aa4d5965"><p>构造一个只有甲、乙两个位置的教学模型，初始相信自己在甲的概率为0.6、在乙为0.4。执行一次移动后，从甲留在甲的概率为0.7，从乙进入甲的概率为0.2。因此预测在甲的概率是0.6乘0.7加0.4乘0.2，恰好为0.5；在乙的预测也为0.5。这些数字是说明更新流程的假设，不是某款游戏的实测数据。</p>
+</div>
+<div class="reading-block" id="p-71040c94726"><p>接着观察到一种更符合甲位置的声音，模型规定它在甲出现的概率为0.8，在乙出现的概率为0.2。两个未归一化权重分别是0.4和0.1，总和0.5，更新后甲为0.8、乙为0.2。声音没有改变角色真实位置，它改变的是角色对位置的判断。把物理转移与信息更新区分开，才能避免将推断误写成世界直接发生变化。</p>
+</div>
+<div class="reading-block" id="p-94b58878362"><p>同一声音的重复报告属于相关证据，计算时需要处理它们的依赖关系。连续观察之间是否独立，需要由模型说明。同样，某种观察在全部候选状态下的概率都为零，意味着当前模型无法解释它，归一化也无法进行。系统应处理模型失配或遗漏状态，而不能凭空把除零结果解释成百分之百确定。</p>
+</div>
+<h2 id="h-1a57c2ac420" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">信息本身怎样具有行动价值</span></h2>
+<div class="reading-block" id="p-71d76c2090d"><p>部分可观测环境中，行动不仅改变位置或资源，也能改变未来知道什么。打开门、登上高处、等待声音或派出侦察单位，可能暂时没有直接得分，却提高后续选择的质量。信息价值依赖任务：如果无论真实状态如何都应做同一件事，增加信息可能没有实际收益；如果不同情况要求相反行动，观察便可能十分重要。</p>
+</div>
+<div class="reading-block" id="p-72738803e3b"><p>设钥匙等概率藏在两扇门后，选对得十分，选错扣十分，直接选择的期望结果为零。另有一次花一分的侦察，八成时候指向正确门。侦察后选择所指方向，期望结果为零点八乘十，加零点二乘负十，再减一，得到五分。这个例子把侦察成本与决策改善放在同一尺度比较，说明“先观察再行动”何时值得。</p>
+</div>
+<div class="reading-block" id="p-9f2fa3411ea"><p>信息也可能太贵、太迟或无法改变结果。若侦察期间敌人已经转移，旧报告的价值会降低；若玩家即将结束一局，长期探索收益可能来不及实现。可靠控制需要把观察的代价、延迟和世界变化一起建模。把角色设成遇到未知就无限搜索，并不等于真正重视信息，而可能只是缺少结束条件。</p>
+</div>
+<div class="reading-block" id="p-5971fc6b09b"><p>有些系统保留可能状态集合，却不为每个候选指定概率。这能够表达尚未排除的解释，并支持某些保守行动，但不能直接比较哪个解释更可信。概率分布增加了这种比较能力，也增加了先验与观察模型的要求。两种表示的选择，应根据后续决定需要什么信息，而不是把拥有概率数值本身当成更高级的保证。</p>
+</div>
+<div class="reading-block" id="p-79b890e0651"><p>动作失败本身也能成为观察。角色尝试通过门而受阻，可能得知门锁着、通道被占用或当前能力不足；具体解释仍需其他信息区分。若控制系统只把失败当作一个需要重试的执行信号，就可能反复做同一动作。让失败反馈进入知识更新，有助于把行动与观察真正连接起来。</p>
+</div>
+<h2 id="h-edf07b0d39b" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">求解与近似方法</span></h2>
+<div class="reading-block" id="p-81a286e87bd"><p>精确POMDP求解要在信念空间中比较行动的长期后果。即使真实状态只有有限个，可能信念分布仍可形成连续空间；行动与观察历史也会随深度迅速增长。形式模型的精确求解还受实时计算预算约束。工程上需要选择适合任务的信息抽象与近似办法。</p>
+</div>
+<div class="reading-block" id="p-b082517d769"><p>粒子方法用许多可能状态的样本近似分布，避免显式列出全部状态。样本足够覆盖重要可能性时，可以高效进行预测与筛选；样本过少或罕见事件未被保留时，也可能丢失关键解释。模拟器与采样规则仍然编码了世界变化及观察概率。</p>
+</div>
+<div class="reading-block" id="p-3d07da7c49e"><p>Silver与Veness在2010年的POMCP研究中，把信念采样与蒙特卡洛树搜索结合，使用能够产生下一状态、观察与奖励的黑箱模拟器进行在线规划。论文包含战舰与部分可观察吃豆人等研究环境，后者不应被当作原版街机的内部实现。其结果依赖模型、搜索预算与信念质量，不能从算法名称直接推广到任意开放世界。<a href="https://papers.nips.cc/paper/2010/file/edfbe1afcf9246bb0d40eb4d8027d90f-Paper.pdf">Silver与Veness，2010</a></p>
+</div>
+<div class="reading-block" id="p-a7d7fa06168"><p>规则式记忆、有限状态控制器、历史窗口和循环网络，则提供了不同复杂度的近似。一个潜行守卫只记录最后已知位置和搜索阶段，可能已经足以支持目标体验。采用更复杂分布以前，应确认额外信息确实能够改善行为。求解理论给出分析语言，实际游戏仍需衡量作者控制、性能与可测试性。</p>
+</div>
+<h2 id="h-e90f9d78c53" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">游戏设计中的用途与边界</span></h2>
+<div class="reading-block" id="p-b5b9d1ab119"><p>部分可观测性能够形成探索、欺骗、伏击与悬念。玩家根据线索判断敌人，敌人也根据可见行动追踪玩家，信息的不对称成为玩法的一部分。若AI在失去视线后仍精确跟随，可能破坏这种关系；若立刻忘记一切，又会让逃脱过于机械。合理的记忆、推断与搜索终止机制共同塑造追逐体验。</p>
+</div>
+<div class="reading-block" id="p-883fdb4a8a9"><p>隐藏信息也需要有可学习的线索。声音传播、遮挡规则和搜索表现若完全不可理解，玩家很难判断失败原因。设计者可以通过角色查看地点、呼叫同伴或沿最后位置搜索，显示其掌握了什么。这样的表现不必公开全部概率，却应与真实信息来源相符，使玩家能形成大致可靠的模型。</p>
+</div>
+<div class="reading-block" id="p-4aea890140c"><p>系统还要区分未知、过期与已排除的信息。刚刚检查过的空房间，与从未检查过的房间不同；十分钟前的目标报告，也不同于当前直接目视。给记忆附上时间和来源，可以使推断更有针对性。简单地让所有旧信息按同一速度衰减，虽然方便，却未必符合门锁、尸体和移动敌人等不同对象的变化规律。</p>
+</div>
+<div class="reading-block" id="p-f105f177496"><p>共享小队信息可以增强协作，但需要明确传播方式。若一个守卫看到玩家后，所有远处敌人瞬间获得准确位置，这既改变难度，也改变世界的可信关系。允许通信、听见警报或查看公共地图，是不同的信息机制。相同的追击动作，可以因为信息来自不同渠道而具有不同的公平性解释。</p>
+</div>
+<h2 id="h-393a1144519" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">与贝叶斯推断和强化学习的关系</span></h2>
+<div class="reading-block" id="p-471506e0d05"><p>贝叶斯推断提供依据证据更新概率的一般规则，部分可观测性则描述信息条件。POMDP进一步把这种条件与顺序行动、转移和奖励结合。一个系统可以进行贝叶斯分类而完全不需要规划，也可以用非概率的规则记忆处理部分观察。因此，三个概念相关，却不能互相当作别名。</p>
+</div>
+<div class="reading-block" id="p-5a2b3471461"><p>强化学习可以在部分可观测环境中学习策略，但只把最新画面当作完整状态，并不能消除信息缺失。增加历史或记忆结构，改变的是策略可用的依据；训练更久也未必能够区分输入本来完全相同的情况。评价学习系统时，需要说明观察接口、记忆长度和训练信息，避免把额外权限造成的优势记成算法能力。</p>
+</div>
+<div class="reading-block" id="p-ddb103aa07f"><p>蒙特卡洛树搜索若直接从真实隐藏状态开始模拟，可能无意中提供全知信息。面对多个可能状态，策略还应保持信息一致：在相同行动历史与观察下，不能因为模拟器私下抽到了不同手牌，就让真实决策使用这些不可见差别。隐藏状态采样只是起点，正确处理决策所知范围仍然十分重要。</p>
+</div>
+<h2 id="h-9225f5db98a" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">评价、局限与争论</span></h2>
+<div class="reading-block" id="p-b4657e66d2c"><p>评价应同时检查估计与行为。概率预测可以观察校准与误差，策略可以观察任务结果、观察成本和失败类型；二者并不总是同步改进。估计更准确，但信息来得太晚，可能不能提高成功率；某个保守策略即使估计粗糙，也可能在特定代价结构下表现良好。应根据系统承担的任务选择指标。</p>
+</div>
+<div class="reading-block" id="p-07595d27b95"><p>测试需要改变遮挡、噪声、目标路线与事件顺序，并确认代理没有读取禁止使用的真值。对开发者而言，全局状态很适合调试和训练辅助，但应与角色决策输入隔离。研究比较也应说明不同系统是否拥有相同信息，否则胜率差异可能主要来自观察条件，而非推断与规划质量。</p>
+</div>
+<div class="reading-block" id="p-55e9fb69aad"><p>部分可观测性把“不知道”变成明确的系统条件。它要求设计者说明未知的对象、可获得的证据和行动的后果，也提供了研究记忆、信息价值与可信角色的共同语言。有效的游戏AI既需要在不确定中继续行动，也需要通过规则与表现，让玩家理解其知识从何而来、何时可能出错，以及怎样利用这些边界展开游戏。</p>
+</div>
+<h2 id="h-1184d9947b1" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-chinese">参考文献</span></h2>
+<div class="reading-block" id="p-547e38beeea"><ol>
+<li>Leslie Pack Kaelbling、Michael L. Littman、Anthony R. Cassandra，1998，Planning and Acting in Partially Observable Stochastic Domains，Artificial Intelligence 101，99–134：<a href="https://people.csail.mit.edu/lpk/papers/aij98-pomdp.pdf">作者保存稿</a>。</li>
+<li>David Silver、Joel Veness，2010，Monte-Carlo Planning in Large POMDPs，NeurIPS：<a href="https://papers.nips.cc/paper/2010/file/edfbe1afcf9246bb0d40eb4d8027d90f-Paper.pdf">原论文</a>。</li>
+</ol>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="a494529fd848d0"></div></section></main></div></body></html>

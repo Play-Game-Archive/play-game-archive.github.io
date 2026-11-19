@@ -1,0 +1,319 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="本文报告将一个小型人工神经网络移植到任天堂娱乐系统（NES）的实验。作者先在现代台式计算机上训练数字图像分类器，再把预训练权重和6502汇编程序装入32 KB程序ROM范围，通过手柄绘图界面在实体NES上执行分类。文章讨论输入图像二值化与裁剪、400—16—10网络结构、浮点运算和卡带存储预算，并将用于游戏AI的强化学习模型列为后续工作。"><title>任天堂人工神经网络系统 · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" aria-current="page">文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" >档案卡片</a><a href="../../concepts/" >索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="0dc908befe718b"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../articles/?view=all">← 文章</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-NN0008" data-toc="u-NN0008">摘要</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-NN0010" data-toc="u-NN0010">关键词</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-NN0012" data-toc="u-NN0012">1. 引言</a></div></li><li class="toc-node depth-2"><div class="toc-row"><button class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="tree-u-NN0018" aria-label="展开或收起2. 材料与方法"><span>▸</span></button><a href="#u-NN0018" data-toc="u-NN0018">2. 材料与方法</a></div><ul id="tree-u-NN0018" class="toc-children" hidden><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-NN0019" data-toc="u-NN0019">2.1. 数据集</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-NN0022" data-toc="u-NN0022">2.2. 数据准备</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-NN0027" data-toc="u-NN0027">2.3. 神经网络</a></div></li><li class="toc-node depth-3"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-NN0032" data-toc="u-NN0032">2.4. 硬件与工具</a></div></li></ul></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-NN0036" data-toc="u-NN0036">3. 实验与讨论</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-NN0047" data-toc="u-NN0047">4. 结论</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-NN0050" data-toc="u-NN0050">生成式AI声明</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#u-NN0052" data-toc="u-NN0052">参考文献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-47322ba90eb" data-toc="h-47322ba90eb">署名与许可</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header has-cover" id="entry-title"><figure class="entry-media kind-article-figure"><img src="../../assets/display/a551ceb38063fa78eaa7427e.webp" alt="论文图5：Everdrive N8 Pro卡带与原1985 NES，原作者照片" width="1368" height="590"></figure><div><a class="entry-kicker" href="../../articles/">文章</a><p class="entry-original " lang="en">The Nintendo Artificial Neural Network System</p><h1>任天堂人工神经网络系统</h1><p class="citation">Carmine Guida 卡尔米内·圭达 / Lauren Demaio 劳伦·德马约 · 2025 · 2026汉译</p></div></header><div class="reading-toolbar"><div class="language-switch" role="group" aria-label="阅读语言"><button data-language="both" aria-pressed="true">对照</button><button data-language="zh" aria-pressed="false">汉译</button><button data-language="original" aria-pressed="false">原文</button></div><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro textual-foreign" id="entry-intro" data-heading><h2>简介</h2><p>本文报告将一个小型人工神经网络移植到任天堂娱乐系统（NES）的实验。作者先在现代台式计算机上训练数字图像分类器，再把预训练权重和6502汇编程序装入32 KB程序ROM范围，通过手柄绘图界面在实体NES上执行分类。文章讨论输入图像二值化与裁剪、400—16—10网络结构、浮点运算和卡带存储预算，并将用于游戏AI的强化学习模型列为后续工作。</p>
+<p>原文刊于<em>CEUR Workshop Proceedings</em>《CEUR工作坊论文集》第4090卷，作者为Carmine Guida与Lauren Demaio。依<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>许可，保留原作者署名、版权与许可，进行全文转录、汉译及排版转换。<a href="https://ceur-ws.org/Vol-4090/short7.pdf">正式论文</a>。</p>
+</section><div class="bilingual-pair" id="u-NN0001"><div class="original" lang="en"><h2>The Nintendo Artificial Neural Network System⋆</h2>
+</div><div class="translation" lang="zh"><h2>任天堂人工神经网络系统⋆</h2>
+</div></div>
+<div class="bilingual-pair" id="u-NN0002"><div class="original" lang="en"><p>Carmine Guida<sup>1</sup>, Lauren Demaio<sup>1</sup></p>
+</div><div class="translation" lang="zh"><p>Carmine Guida<sup>1</sup>、Lauren Demaio<sup>1</sup></p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0003"><div class="original" lang="en"><p><sup>1</sup> Pace University, One Pace Plaza, New York, NY 10038</p>
+</div><div class="translation" lang="zh"><p><sup>1</sup> 佩斯大学，纽约One Pace Plaza，NY 10038。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0004"><div class="original" lang="en"><p>[⋆ Joint AIIDE Workshop on Experimental Artificial Intelligence in Games and Intelligent Narrative Technologies, November 10-11, 2025, Edmonton, Canada.]</p>
+</div><div class="translation" lang="zh"><p>[⋆ AIIDE游戏实验人工智能与智能叙事技术联合工作坊，2025年11月10—11日，加拿大埃德蒙顿。]</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0005"><div class="original" lang="en"><p>[1 <a href="mailto:cguida@pace.edu">cguida@pace.edu</a> (C. Guida); <a href="mailto:ldemaio@pace.edu">ldemaio@pace.edu</a> (L. DeMaio)]</p>
+</div><div class="translation" lang="zh"><p>[1 <a href="mailto:cguida@pace.edu">cguida@pace.edu</a>（C. Guida）；<a href="mailto:ldemaio@pace.edu">ldemaio@pace.edu</a>（L. DeMaio）]</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0006"><div class="original" lang="en"><p>© 2025 Copyright for this paper by its authors. Use permitted under Creative Commons License Attribution 4.0 International (CC BY 4.0).</p>
+</div><div class="translation" lang="zh"><p>© 2025，本文版权归作者所有。许可依照知识共享署名4.0国际许可协议（CC BY 4.0）使用。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0007"><div class="original" lang="en"><p>CEUR Workshop Proceedings
+ceur-ws.org
+ISSN 1613-0073
+published 2025-11-12</p>
+</div><div class="translation" lang="zh"><p>CEUR工作坊论文集
+ceur-ws.org
+ISSN 1613-0073
+发布于2025年11月12日</p>
+</div></div>
+<h2 id="u-NN0008" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-original" lang="en">Abstract
+
+</span><span class="heading-chinese">摘要
+</span></h2>
+<div class="bilingual-pair" id="u-NN0009"><div class="original" lang="en"><p>Artificial Neural Networks (ANN) are used in a variety of machine learning tasks such as image classification and pattern recognition. Training ANN models on large datasets can be time consuming and require specialized hardware and processing power. Often, the training is performed on powerful systems, and the resultant final trained network can be utilized on small computers and mobile devices to perform tasks instantly. The Nintendo Entertainment System (NES) was released in 1985 and featured a 1.79 MHz CPU and 2 KB of RAM. The original program code for games for the NES fit within 32 KB of ROM on cartridges. In this work, we create an ANN and train it using the EMNIST hand-drawn digit dataset on a desktop computer. This ANN is then ported to the NES utilizing assembly language. The program code and pretrained weights are stored to a game cartridge fitting within the bounds of 32 KB. Additionally, a user interface is provided for drawing and loading test samples and executing the ANN classification of hand drawn digits on a physical NES device from 40 years ago.</p>
+</div><div class="translation" lang="zh"><p>人工神经网络（ANN）用于图像分类、模式识别等多种机器学习任务。在大型数据集上训练ANN模型可能耗时较长，并需要专门的硬件和处理能力。训练通常在性能强大的系统上进行，而最终训练好的网络可以用于小型计算机和移动设备，即时执行任务。任天堂娱乐系统（NES）于1985年发布，配有1.79 MHz的CPU和2 KB的RAM。NES游戏最初的程序代码可容纳在卡带32 KB的ROM之内。在本项工作中，我们创建了一个ANN，使用EMNIST手绘数字数据集在台式计算机上对其进行训练，随后用汇编语言将这个ANN移植到NES。程序代码和预训练权重存放在一张游戏卡带中，总容量不超出32 KB。此外，我们提供了一个用户界面，用于绘制和加载测试样本，并在一台40年前的实体NES设备上运行ANN，对手绘数字进行分类。</p>
+</div></div>
+<h2 id="u-NN0010" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-original" lang="en">Keywords
+
+</span><span class="heading-chinese">关键词
+</span></h2>
+<div class="bilingual-pair" id="u-NN0011"><div class="original" lang="en"><p>artificial neural network, machine learning, image processing, retro hardware</p>
+</div><div class="translation" lang="zh"><p>人工神经网络，机器学习，图像处理，复古硬件</p>
+</div></div>
+<h2 id="u-NN0012" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-original" lang="en">1. Introduction
+
+</span><span class="heading-chinese">1. 引言
+</span></h2>
+<div class="bilingual-pair" id="u-NN0013"><div class="original" lang="en"><p>Artificial Neural Networks (ANN) are a part of Machine Learning (ML) and are used for several different kinds of tasks such as classification and segmentation [1] as well as prediction [2]. The applications of ANN are numerous and are often used to solve problems in a wide range of fields including science, finance, engineering, agriculture, education, and energy [3].</p>
+</div><div class="translation" lang="zh"><p>人工神经网络（ANN）属于机器学习（ML），可用于分类和分割[1]、预测[2]等多种不同任务。ANN的应用很多，经常用于解决科学、金融、工程、农业、教育和能源等众多领域的问题[3]。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0014"><div class="original" lang="en"><p>A simple architecture for an ANN may involve three layers known as the input, hidden, and output layers [4], though more advanced ANNs like those in Deep Learning (DL) will have several different layers [5]. These layers contain nodes with connections from previous layers, a bias and weights. Data will feed forward through the network producing an output. The learning process involves updating these weights. One of the most common algorithms for this is known as backpropagation [6].</p>
+</div><div class="translation" lang="zh"><p>ANN的一种简单架构可以包含输入层、隐藏层和输出层这三层[4]，而深度学习（DL）中的ANN等更先进的网络会有多种不同的层[5]。这些层包含节点，节点具有来自前一层的连接、一个偏置和若干权重。数据沿网络前向传递，产生输出。学习过程涉及更新这些权重。其中一种最常用的算法称为反向传播[6]。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0015"><div class="original" lang="en"><p>ANNs typically use the IEEE-754 single or double-precision floating-point format [7]. To perform the math required, devices must have a floating-point unit (FPU) along with the usual CPU. Originally used for 2D and 3D graphics acceleration for games, Graphics Processing Units (GPU) are now commonly used for machine learning [8]. In 2015 Google introduced the Tensor Processing Unit (TPU) to increase performance for neural networks and use less power than GPUs [9].</p>
+</div><div class="translation" lang="zh"><p>ANN通常使用IEEE-754单精度或双精度浮点格式[7]。为了执行所需的数学运算，设备除了通常的CPU之外，还必须具有浮点运算单元（FPU）。图形处理器（GPU）最初用于游戏的二维和三维图形加速，如今也常用于机器学习[8]。2015年，谷歌推出张量处理单元（TPU），以提高神经网络的性能，并使其功耗低于GPU[9]。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0016"><div class="original" lang="en"><p>The Nintendo Entertainment System (NES) was originally released in North America in 1985 [10]. The NES featured a Ricoh 2A03 chip that was based on the 8-bit 6502 processor operating at 1.79 MHz [11]. The NES also had only 2 KB of RAM available. The program (game) code is stored within ROM chips on the game cartridges. The original Super Mario Bros. fit within an original restriction of 32 KB of program ROM space [12] before the later creation of memory mapper chips.</p>
+</div><div class="translation" lang="zh"><p>任天堂娱乐系统（NES）最初于1985年在北美发布[10]。NES配备Ricoh 2A03芯片，该芯片基于8位6502处理器，工作频率为1.79 MHz[11]。NES可用的RAM也只有2 KB。程序（游戏）代码存储在游戏卡带的ROM芯片中。在后来出现内存映射芯片之前，最初的《Super Mario Bros.》被容纳在最初32 KB程序ROM空间的限制之内[12]。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0017"><div class="original" lang="en"><p>In this experimental work, we demonstrate that an ANN is capable of running even with severe hardware constraints. We created a simple ANN in the C programming language and trained it on a dataset of small images on a modern computer. The program code for the ANN is ported to 6502 assembly language and includes the pretrained weights from the ANN model. By reducing dimensionality of the images and using a small number of hidden nodes we were able to fit within the 32 KB limit. The program code is placed onto a specialized game cartridge and loaded into the physical NES hardware. We also developed a user interface (UI) which allows the user to draw images as well as load sample dataset images using the NES gamepad. Pressing START executes the ANN and displays its classification of the image.</p>
+</div><div class="translation" lang="zh"><p>在这项实验性工作中，我们展示了ANN即使在严格的硬件限制下也能够运行。我们使用C语言创建了一个简单的ANN，并在现代计算机上用一个小图像数据集进行训练。ANN的程序代码被移植到6502汇编语言，并包含ANN模型的预训练权重。通过降低图像维度并使用少量隐藏节点，我们使其容纳在32 KB的限制之内。程序代码被写入一张专用游戏卡带，并加载到实体NES硬件中。我们还开发了一个用户界面（UI），让用户可以使用NES手柄绘制图像，也可以加载数据集中的样本图像。按下START键即可运行ANN，并显示它对图像的分类结果。</p>
+</div></div>
+<h2 id="u-NN0018" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-original" lang="en">2. Materials and Methods
+
+</span><span class="heading-chinese">2. 材料与方法
+</span></h2>
+<h3 id="u-NN0019" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-original" lang="en">2.1. Dataset
+
+</span><span class="heading-chinese">2.1. 数据集
+</span></h3>
+<div class="bilingual-pair" id="u-NN0020"><div class="original" lang="en"><p>The MNIST dataset [13] consists of hand drawn digit (0 – 9) images and is often referred to as the “hello world” of neural networks and deep learning [14]. The dimensions of the images are 28x28 and contain grayscale values ranging from 0 - 255. Examples of the dataset images can be seen in Figure 1. The training set contains 60,000 images with the testing set having 10,000. These sets are balanced with 6,000 of each digit in the training set and 1,000 of each digit in the testing set. Given we are pretraining the neural network on a modern computer, we opted to use the larger EMNIST dataset [15] which is an extension of MNIST containing four times the number of images of MNIST. This dataset has 240,000 images in the training set and 40,000 in the testing set. These sets are also balanced.</p>
+</div><div class="translation" lang="zh"><p>MNIST数据集[13]由手绘数字（0—9）的图像组成，常被称为神经网络和深度学习的“hello world”[14]。图像尺寸为28x28，灰度值范围为0—255。图1展示了数据集图像的例子。训练集包含60,000幅图像，测试集包含10,000幅。两个集合中的类别均衡，训练集中每个数字各有6,000幅图像，测试集中每个数字各有1,000幅。由于我们在现代计算机上预训练神经网络，因此选择使用规模更大的EMNIST数据集[15]；它是MNIST的扩展，图像数量为MNIST的四倍。这个数据集的训练集有240,000幅图像，测试集有40,000幅，两个集合中的类别也都均衡。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0021"><div class="original" lang="en"><p>Figure 1: Example digit images.</p>
+</div><div class="translation" lang="zh"><p>图1：数字图像示例。</p>
+</div></div>
+<h3 id="u-NN0022" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-original" lang="en">2.2. Preparing the Data
+
+</span><span class="heading-chinese">2.2. 数据准备
+</span></h3>
+<div class="bilingual-pair" id="u-NN0023"><div class="original" lang="en"><p>We took multiple steps to reduce the dimensionality of the images to work within memory constraints. First, we changed pixel values from a range of 0 - 255 to be just binary values of 0 or 1. Any pixel value less than 128 was changed to 0 with 128 or greater becoming a 1. Figure 2 shows an image with grayscale values and then changed to binary values. Reducing the values to bits allowed for 8 pixels to be packed into a single byte. This reduced storage requirements by almost ⅛ for our input weight data and loadable test samples.</p>
+</div><div class="translation" lang="zh"><p>为了在内存限制内工作，我们采取了多个步骤来降低图像维度。首先，将像素值从0—255的范围改为仅有0或1的二值。任何小于128的像素值都改为0，而大于或等于128的值改为1。图2展示了一幅灰度图像及其转换为二值后的图像。将数值缩减为比特之后，便可以把8个像素打包到一个字节中。对于我们的输入权重数据和可加载测试样本，这使存储需求减少了近⅛。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0024"><div class="original" lang="en"><p>Figure 2: Left: Original 256 grayscale image. Right: 1-bit binary image.</p>
+</div><div class="translation" lang="zh"><p>图2：左：原始的256级灰度图像。右：1位二值图像。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0025"><div class="original" lang="en"><p>Our goal was to reduce the image resolution to 20×20 with minimal scaling required. Given that the images in the dataset are centered, columns of pixels on the left and right, as well as rows on the top and bottom of the image, can be discarded as they contain no information about the digit. This can be seen in Figure 3. We discarded rows and columns with 2 or fewer pixels of a value of 1.</p>
+</div><div class="translation" lang="zh"><p>我们的目标是将图像分辨率降低到20×20，并尽可能减少所需的缩放。由于数据集中的图像居中，图像左右两侧的像素列以及上下两侧的像素行不包含关于数字的信息，因此可以丢弃。图3展示了这一点。我们丢弃了那些值为1的像素数量不超过2个的行和列。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0026"><div class="original" lang="en"><p>Figure 3: Pixel grid indicating candidate rows/columns to be removed.</p>
+</div><div class="translation" lang="zh"><p>图3：标示候选待删除行／列的像素网格。</p>
+</div></div>
+<h3 id="u-NN0027" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-original" lang="en">2.3. Neural Network
+
+</span><span class="heading-chinese">2.3. 神经网络
+</span></h3>
+<div class="bilingual-pair" id="u-NN0028"><div class="original" lang="en"><p>Figure 4 shows the configuration of our ANN. The input layer contains the pixel information of the current image. With our input images having dimensions 20×20, there will be 400 input nodes. As in most neural networks, every input node is connected to every hidden node [16]. Our model uses 16 hidden nodes. Here, we introduce an optimization. Given our pixel input values are either 0 or 1, and these values are multiplied by the weights, input values of 0 can simply be skipped. Additionally, with an input value of 1, we can skip the multiplication and just add the weight to the node’s total. Every hidden node connects to every output node. There are 10 output nodes, one for each digit (0 – 9). All of our nodes also have a bias. Originally, the Sigmoid activation function [17] was popular for neural networks however we opted to use the Leaky ReLU function [18] as it provided better performance.</p>
+</div><div class="translation" lang="zh"><p>图4展示了我们ANN的配置。输入层包含当前图像的像素信息。由于输入图像的尺寸为20×20，输入节点将有400个。与大多数神经网络一样，每个输入节点都连接到每个隐藏节点[16]。我们的模型使用16个隐藏节点。在这里，我们引入了一项优化。像素输入值只有0或1，而这些值要与权重相乘，因此可以直接跳过输入值为0的情况。此外，当输入值为1时，可以跳过乘法，直接将权重加到节点的总和中。每个隐藏节点都连接到每个输出节点。输出节点共有10个，分别对应每个数字（0—9）。我们所有的节点也都有一个偏置。Sigmoid激活函数[17]最初曾广泛用于神经网络，不过我们选择使用Leaky ReLU函数[18]，因为它提供了更好的性能。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0029"><div class="original" lang="en"><p>Figure 4: Diagram of our ANN.</p>
+</div><div class="translation" lang="zh"><p>图4：我们的ANN示意图。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0030"><div class="original" lang="en"><p>Input 1; Input 2; Input 400
+Hidden 1; Hidden 16
+Output 1; Output 10</p>
+</div><div class="translation" lang="zh"><p>输入1；输入2；输入400
+隐藏1；隐藏16
+输出1；输出10</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0031"><div class="original" lang="en"><p>With 20×20 input nodes each connected to 16 hidden nodes at 4-bytes per floating-point weight, this would use (20×20×16×4) 25,600 bytes of space. Additionally, the 16 hidden nodes connected to the 10 output nodes is (16×10×4) 640 bytes. Each of the 16 hidden nodes and 10 nodes have a bias input for (16×4 + 10×4) 104 bytes. The stored pretrained weights occupy 26,344 of our total 32,768 program ROM space leaving 6,424 bytes for our code that runs the user interface and executes the ANN to perform the classification.</p>
+</div><div class="translation" lang="zh"><p>20×20个输入节点各自连接到16个隐藏节点，每个浮点权重占4字节，这将使用（20×20×16×4）25,600字节的空间。此外，16个隐藏节点与10个输出节点相连，占用（16×10×4）640字节。16个隐藏节点和10个节点各自都有一个偏置输入，共占（16×4＋10×4）104字节。存储的预训练权重占总计32,768字节程序ROM空间中的26,344字节，余下6,424字节留给运行用户界面、执行ANN分类的代码。</p>
+</div></div>
+<h3 id="u-NN0032" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-original" lang="en">2.4. Hardware and Tools
+
+</span><span class="heading-chinese">2.4. 硬件与工具
+</span></h3>
+<div class="bilingual-pair" id="u-NN0033"><div class="original" lang="en"><p>While modern machine learning research is typically developed in the Python programming language using libraries such as PyTorch, Keras, and TensorFlow [19], our ANN is coded from scratch in the C programming language without any of these types of libraries. This allowed for a more direct port to the 6502 assembly language required for developing for the NES. After training, the weights were exported to a format that could be included by a 6502 assembly compiler. Given the NES is an 8-bit processor with no floating point support, in order to port our neural network, we used a floating point library developed by Roy Rankin and Steve Wozniak [20]. To run our program on a physical NES device, we loaded our program onto an SD card and placed it into a Krikzz Everdrive N8 Pro cartridge which can be seen in the left of Figure 5. This cartridge was then placed into an original NES from 1985 seen on the right in Figure 5.</p>
+</div><div class="translation" lang="zh"><p>现代机器学习研究通常用Python语言，借助PyTorch、Keras和TensorFlow等库开展[19]；而我们的ANN使用C语言从零编写，没有使用任何这类库。这使它更便于直接移植到开发NES程序所需的6502汇编语言。训练完成后，权重被导出为一种可由6502汇编编译器纳入程序的格式。由于NES使用的是不支持浮点运算的8位处理器，为了移植神经网络，我们采用了Roy Rankin和Steve Wozniak开发的浮点运算库[20]。为了在实体NES设备上运行程序，我们将程序载入一张SD卡，再将其放入Krikzz Everdrive N8 Pro卡带中，如图5左侧所示。随后，将该卡带插入一台1985年的原版NES，如图5右侧所示。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0034"><div class="original" lang="en"><p>Figure 5: Left: Everdrive N8 Pro cartridge. Right: Original 1985 NES.</p>
+</div><div class="translation" lang="zh"><p>图5：左：Everdrive N8 Pro卡带。右：1985年的原版NES。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0035"><div class="original" lang="en"><p>EVERDRIVE; N8 PRO; Krikzz; <a href="http://www.krikzz.com">www.krikzz.com</a>
+Nintendo ENTERTAINMENT SYSTEM
+SELECT; START; B; A; POWER; RESET</p>
+</div><div class="translation" lang="zh"><p>EVERDRIVE；N8 PRO；Krikzz；<a href="http://www.krikzz.com">www.krikzz.com</a>
+Nintendo ENTERTAINMENT SYSTEM：任天堂娱乐系统
+SELECT：选择；START：开始；B；A；POWER：电源；RESET：复位</p>
+</div></div>
+<h2 id="u-NN0036" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-original" lang="en">3. Experiments and Discussion
+
+</span><span class="heading-chinese">3. 实验与讨论
+</span></h2>
+<div class="bilingual-pair" id="u-NN0037"><div class="original" lang="en"><p>We trained our ANN on the EMNIST dataset on a desktop computer. We used a learning rate of 0.01, an alpha value of 0.01 for LeakyReLU and 5 epochs. The training completed in 21 seconds. Our simple ANN achieved a 93.11% accuracy on the EMNIST test set. This number could be higher with a larger neural network however for this experiment we needed to stay within the 32 KB limit. The pretrained weights along with our program code for the UI and executing the ANN were loaded onto the cartridge and NES seen in Figure 5. Our program begins with a basic startup/menu screen seen in the left of Figure 6. Pressing START enters the main drawing screen seen on the right in Figure 6.</p>
+</div><div class="translation" lang="zh"><p>我们在台式计算机上用EMNIST数据集训练ANN。学习率设为0.01，LeakyReLU的alpha值设为0.01，共训练5轮。训练耗时21秒。这个简单的ANN在EMNIST测试集上取得了93.11%的准确率。若使用更大的神经网络，这个数字还可以更高，但本次实验需要保持在32 KB的限制以内。预训练权重连同用户界面以及执行ANN的程序代码，被载入图5所示的卡带和NES。程序首先显示一个基本的启动／菜单界面，如图6左侧所示。按下START键后，便进入主绘图界面，如图6右侧所示。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0038"><div class="original" lang="en"><p>Figure 6: Left: Startup screen. Right: Main drawing screen.</p>
+</div><div class="translation" lang="zh"><p>图6：左：启动界面。右：主绘图界面。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0039"><div class="original" lang="en"><p>NANNS
+NINTENDO ARTIFICIAL NEURAL NETWORK SYSTEM
+PRESS START
+B: PEN DOWN/UP
+A: DRAW/ERASE
+SELECT: LOAD TEST
+START: RUN ANN
+RESULT ?
+AQUOS; SHARP</p>
+</div><div class="translation" lang="zh"><p>NANNS〔系统缩写字样〕
+任天堂人工神经网络系统
+按START键
+B：落笔／抬笔
+A：绘制／擦除
+SELECT：加载测试图像
+START：运行ANN
+结果：？
+AQUOS；SHARP〔显示器品牌〕</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0040"><div class="original" lang="en"><p>The drawing screen provides a 20×20 pixel grid along with instructions. Using the D-PAD will move the cursor around the grid. Pressing the B button will toggle the pen (cursor) being down (drawing) or up (movement only). Pressing the A button will toggle drawing or erasing mode.</p>
+</div><div class="translation" lang="zh"><p>绘图界面提供一个20×20像素的网格和相应说明。使用方向键（D-PAD）可在网格上移动光标。按B键可切换笔（光标）的落下状态（绘图）和抬起状态（仅移动）。按A键则可切换绘制模式和擦除模式。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0041"><div class="original" lang="en"><p>Along with drawing, the user can press the SELECT button to load 10 images of digits (0 – 9) from the EMNIST test set. Pressing the START button will execute the ANN and show the classification result in under 3 seconds. Figure 7 shows various test images that were loaded and the results after running the ANN.</p>
+</div><div class="translation" lang="zh"><p>除了绘图之外，用户还可以按SELECT键，加载EMNIST测试集中0—9这10个数字的图像。按START键就会运行ANN，并在不到3秒的时间内显示分类结果。图7展示了加载的不同测试图像，以及运行ANN之后的结果。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0042"><div class="original" lang="en"><p>Figure 7: Loaded testing samples from the EMNIST dataset and result from the ANN on the NES.</p>
+</div><div class="translation" lang="zh"><p>图7：从EMNIST数据集加载的测试样本，以及NES上ANN给出的结果。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0043"><div class="original" lang="en"><p>B: PEN DOWN/UP
+A: DRAW/ERASE
+SELECT: LOAD TEST
+START: RUN ANN
+RESULT 4</p>
+<p>B: PEN DOWN/UP
+A: DRAW/ERASE
+SELECT: LOAD TEST
+START: RUN ANN
+RESULT 7</p>
+<p>B: PEN DOWN/UP
+A: DRAW/ERASE
+SELECT: LOAD TEST
+START: RUN ANN
+RESULT 9</p>
+</div><div class="translation" lang="zh"><p>B：落笔／抬笔
+A：绘制／擦除
+SELECT：加载测试图像
+START：运行ANN
+结果4</p>
+<p>B：落笔／抬笔
+A：绘制／擦除
+SELECT：加载测试图像
+START：运行ANN
+结果7</p>
+<p>B：落笔／抬笔
+A：绘制／擦除
+SELECT：加载测试图像
+START：运行ANN
+结果9</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0044"><div class="original" lang="en"><p>Even though the ANN was trained on hand drawn style digits, our on-device ANN is also capable of recognizing simpler pixel art style images. Figure 8 shows example digits drawn by ourselves which the ANN was able to classify.</p>
+</div><div class="translation" lang="zh"><p>尽管ANN是用手绘风格的数字训练的，我们在设备上运行的ANN也能够识别更简单的像素画风格图像。图8展示了我们自行绘制、并被ANN成功分类的数字示例。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0045"><div class="original" lang="en"><p>Figure 8: Simple pixel images drawn using our UI and the result from the ANN.</p>
+</div><div class="translation" lang="zh"><p>图8：使用我们的UI绘制的简单像素图像，以及ANN给出的结果。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0046"><div class="original" lang="en"><p>B: PEN DOWN/UP
+A: DRAW/ERASE
+SELECT: LOAD TEST
+START: RUN ANN
+RESULT 0</p>
+<p>B: PEN DOWN/UP
+A: DRAW/ERASE
+SELECT: LOAD TEST
+START: RUN ANN
+RESULT 1</p>
+<p>B: PEN DOWN/UP
+A: DRAW/ERASE
+SELECT: LOAD TEST
+START: RUN ANN
+RESULT 4</p>
+</div><div class="translation" lang="zh"><p>B：落笔／抬笔
+A：绘制／擦除
+SELECT：加载测试图像
+START：运行ANN
+结果0</p>
+<p>B：落笔／抬笔
+A：绘制／擦除
+SELECT：加载测试图像
+START：运行ANN
+结果1</p>
+<p>B：落笔／抬笔
+A：绘制／擦除
+SELECT：加载测试图像
+START：运行ANN
+结果4</p>
+</div></div>
+<h2 id="u-NN0047" data-heading><span class="anchor-alias" id="s-10"></span><span class="heading-original" lang="en">4. Conclusion
+
+</span><span class="heading-chinese">4. 结论
+</span></h2>
+<div class="bilingual-pair" id="u-NN0048"><div class="original" lang="en"><p>In this experimental work, we created a basic ANN image classifier which was trained on a modern computer and then exported the weights from the various layers. We greatly reduced the dimensionality of the input images and used a small set of hidden nodes in order to fit within a 32 KB limit. The ANN was ported to assembly language and using the UI, a user can draw or load testing images and execute the ANN. This demonstrates the 1985 NES is capable of using a basic ANN with pretrained weights to successfully classify digit images.</p>
+</div><div class="translation" lang="zh"><p>在这项实验性工作中，我们创建了一个基础的ANN图像分类器，在现代计算机上对其进行训练，随后导出各层的权重。为了容纳在32 KB的限制之内，我们大幅降低了输入图像的维度，并使用了少量隐藏节点。ANN被移植到汇编语言；用户可通过UI绘制或加载测试图像，并运行ANN。这表明，1985年的NES能够利用具有预训练权重的基础ANN，成功对数字图像进行分类。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0049"><div class="original" lang="en"><p>Future work includes using memory mapper (bank swapping) chips to enable more ROM and therefore larger models to be stored. Additional future work includes building a Reinforcement Learning model that could be used for game AI on the NES.</p>
+</div><div class="translation" lang="zh"><p>未来的工作包括使用内存映射（存储体切换）芯片，提供更多ROM空间，从而存储更大的模型。其他未来工作还包括构建一种可用于NES游戏AI的强化学习模型。</p>
+</div></div>
+<h2 id="u-NN0050" data-heading><span class="anchor-alias" id="s-11"></span><span class="heading-original" lang="en">Declaration on Generative AI
+
+</span><span class="heading-chinese">生成式AI声明
+</span></h2>
+<div class="bilingual-pair" id="u-NN0051"><div class="original" lang="en"><p>The author(s) have not employed any Generative AI tools.</p>
+</div><div class="translation" lang="zh"><p>作者未使用任何生成式AI工具。</p>
+</div></div>
+<h2 id="u-NN0052" data-heading><span class="anchor-alias" id="s-12"></span><span class="heading-original" lang="en">References
+
+</span><span class="heading-chinese">参考文献
+</span></h2>
+<div class="bilingual-pair" id="u-NN0053"><div class="original" lang="en"><p>[1] Reddick, W. E., Glass, J. O., Cook, E. N., Elkin, T. D., &amp; Deaton, R. J. (1997). Automated segmentation and classification of multispectral magnetic resonance images of brain using artificial neural networks. IEEE Transactions on medical imaging, 16(6), 911-918.</p>
+</div><div class="translation" lang="zh"><p>[1] Reddick, W. E., Glass, J. O., Cook, E. N., Elkin, T. D., &amp; Deaton, R. J.（1997）。利用人工神经网络对脑部多光谱磁共振图像进行自动分割与分类。《IEEE医学影像汇刊》，16(6)，911-918。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0054"><div class="original" lang="en"><p>[2] Grossi, E., &amp; Buscema, M. (2007). Introduction to artificial neural networks. European journal of gastroenterology &amp; hepatology, 19(12), 1046-1054.</p>
+</div><div class="translation" lang="zh"><p>[2] Grossi, E., &amp; Buscema, M.（2007）。人工神经网络导论。《欧洲胃肠病学与肝病学杂志》，19(12)，1046-1054。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0055"><div class="original" lang="en"><p>[3] Abiodun, O. I., Jantan, A., Omolara, A. E., Dada, K. V., Mohamed, N. A., &amp; Arshad, H. (2018). State-of-the-art in artificial neural network applications: A survey. Heliyon, 4(11).</p>
+</div><div class="translation" lang="zh"><p>[3] Abiodun, O. I., Jantan, A., Omolara, A. E., Dada, K. V., Mohamed, N. A., &amp; Arshad, H.（2018）。人工神经网络应用的最新进展：综述。Heliyon，4(11)。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0056"><div class="original" lang="en"><p>[4] Abraham, A. (2005). Artificial neural networks. Handbook of measuring system design.</p>
+</div><div class="translation" lang="zh"><p>[4] Abraham, A.（2005）。人工神经网络。《测量系统设计手册》。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0057"><div class="original" lang="en"><p>[5] LeCun, Y., Bengio, Y., &amp; Hinton, G. (2015). Deep learning. nature, 521(7553), 436-444.</p>
+</div><div class="translation" lang="zh"><p>[5] LeCun, Y., Bengio, Y., &amp; Hinton, G.（2015）。深度学习。《自然》，521(7553)，436-444。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0058"><div class="original" lang="en"><p>[6] Rojas, R., &amp; Rojas, R. (1996). The backpropagation algorithm. Neural networks: a systematic introduction, 149-182.</p>
+</div><div class="translation" lang="zh"><p>[6] Rojas, R., &amp; Rojas, R.（1996）。反向传播算法。《神经网络：系统导论》，149-182。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0059"><div class="original" lang="en"><p>[7] Popescu, V., Nassar, M., Wang, X., Tumer, E., &amp; Webb, T. (2018, June). Flexpoint: Predictive numerics for deep learning. In 2018 IEEE 25th Symposium on Computer Arithmetic (ARITH) (pp. 1-4). IEEE.</p>
+</div><div class="translation" lang="zh"><p>[7] Popescu, V., Nassar, M., Wang, X., Tumer, E., &amp; Webb, T.（2018年6月）。Flexpoint：用于深度学习的预测性数值计算。载《2018年第25届IEEE计算机算术研讨会（ARITH）》（1-4页）。IEEE。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0060"><div class="original" lang="en"><p>[8] Aamodt, T. M., Fung, W. W. L., Rogers, T. G., &amp; Martonosi, M. (2018). General-purpose graphics processor architectures. Morgan &amp; Claypool Publishers.</p>
+</div><div class="translation" lang="zh"><p>[8] Aamodt, T. M., Fung, W. W. L., Rogers, T. G., &amp; Martonosi, M.（2018）。《通用图形处理器架构》。Morgan &amp; Claypool Publishers。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0061"><div class="original" lang="en"><p>[9] Jouppi, N. P., Young, C., Patil, N., Patterson, D., Agrawal, G., Bajwa, R., ... &amp; Yoon, D. H. (2017, June). In-datacenter performance analysis of a tensor processing unit. In Proceedings of the 44th annual international symposium on computer architecture (pp. 1-12).</p>
+</div><div class="translation" lang="zh"><p>[9] Jouppi, N. P., Young, C., Patil, N., Patterson, D., Agrawal, G., Bajwa, R., ... &amp; Yoon, D. H.（2017年6月）。张量处理单元在数据中心中的性能分析。载《第44届国际计算机体系结构年度研讨会论文集》（1-12页）。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0062"><div class="original" lang="en"><p>[10] Kohler, C. (2010). Oct. 18, 1985: Nintendo Entertainment System launches. <a href="https://www.wired.com/2010/10/1018nintendo-nes-launches">https://www.wired.com/2010/10/1018nintendo-nes-launches</a></p>
+</div><div class="translation" lang="zh"><p>[10] Kohler, C.（2010）。1985年10月18日：任天堂娱乐系统上市。<a href="https://www.wired.com/2010/10/1018nintendo-nes-launches">https://www.wired.com/2010/10/1018nintendo-nes-launches</a></p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0063"><div class="original" lang="en"><p>[11] Diskin, P. (2004). Nintendo Entertainment System Documentation. Tokyo: Nin-tendo.</p>
+</div><div class="translation" lang="zh"><p>[11] Diskin, P.（2004）。《任天堂娱乐系统文档》。东京：Nin-tendo。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0064"><div class="original" lang="en"><p>[12] Cook, K. M. (2023). 8-Bit Affordances: Jun Chikuma’s Soundtrack to Faxanadu. Music Theory Online, 29(3).</p>
+</div><div class="translation" lang="zh"><p>[12] Cook, K. M.（2023）。8位可供性：Jun Chikuma为《Faxanadu》创作的配乐。《在线音乐理论》，29(3)。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0065"><div class="original" lang="en"><p>[13] LeCun, Y., Bottou, L., Bengio, Y., &amp; Haffner, P. (1998). Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86(11), 2278-2324.</p>
+</div><div class="translation" lang="zh"><p>[13] LeCun, Y., Bottou, L., Bengio, Y., &amp; Haffner, P.（1998）。应用于文档识别的基于梯度的学习。《IEEE学报》，86(11)，2278-2324。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0066"><div class="original" lang="en"><p>[14] Teh, V., Loong, J. C. Y., Wai, E. D. H., Yang, L. J., Cheng, C. J., &amp; bin Abdul Salam, Z. A. (2024). Enhancing neural network models for mnist digit recognition. Journal of Applied Technology and Innovation (e-ISSN: 2600-7304), 8(1), 15.</p>
+</div><div class="translation" lang="zh"><p>[14] Teh, V., Loong, J. C. Y., Wai, E. D. H., Yang, L. J., Cheng, C. J., &amp; bin Abdul Salam, Z. A.（2024）。增强用于mnist数字识别的神经网络模型。《应用技术与创新杂志》（电子ISSN：2600-7304），8(1)，15。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0067"><div class="original" lang="en"><p>[15] Cohen, G., Afshar, S., Tapson, J., &amp; Van Schaik, A. (2017, May). EMNIST: Extending MNIST to handwritten letters. In 2017 international joint conference on neural networks (IJCNN) (pp. 2921-2926). IEEE.</p>
+</div><div class="translation" lang="zh"><p>[15] Cohen, G., Afshar, S., Tapson, J., &amp; Van Schaik, A.（2017年5月）。EMNIST：将MNIST扩展到手写字母。载《2017年国际神经网络联合会议（IJCNN）》（2921-2926页）。IEEE。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0068"><div class="original" lang="en"><p>[16] Maind, S. B., &amp; Wankar, P. (2014). Research paper on basic of artificial neural network. International Journal on Recent and Innovation Trends in Computing and Communication, 2(1), 96-100.</p>
+</div><div class="translation" lang="zh"><p>[16] Maind, S. B., &amp; Wankar, P.（2014）。关于人工神经网络基础的研究论文。《国际计算与通信最新创新趋势杂志》，2(1)，96-100。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0069"><div class="original" lang="en"><p>[17] Basterretxea, K., Tarela, J. M., &amp; del Campo, I. (2004). Approximation of sigmoid function and the derivative for hardware implementation of artificial neurons. IEE Proceedings-Circuits, Devices and Systems, 151(1), 18-24.</p>
+</div><div class="translation" lang="zh"><p>[17] Basterretxea, K., Tarela, J. M., &amp; del Campo, I.（2004）。为人工神经元的硬件实现而对sigmoid函数及其导数进行近似。《IEE学报：电路、器件与系统》，151(1)，18-24。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0070"><div class="original" lang="en"><p>[18] Maas, A. L., Hannun, A. Y., &amp; Ng, A. Y. (2013, June). Rectifier nonlinearities improve neural network acoustic models. In Proc. icml (Vol. 30, No. 1, p. 3).</p>
+</div><div class="translation" lang="zh"><p>[18] Maas, A. L., Hannun, A. Y., &amp; Ng, A. Y.（2013年6月）。整流非线性改善神经网络声学模型。载《icml会议论文集》（第30卷，第1号，第3页）。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0071"><div class="original" lang="en"><p>[19] Kim, S., Wimmer, H., &amp; Kim, J. (2022, May). Analysis of deep learning libraries: Keras, pytorch, and MXnet. In 2022 IEEE/ACIS 20th International Conference on Software Engineering Research, Management and Applications (SERA) (pp. 54-62). IEEE.</p>
+</div><div class="translation" lang="zh"><p>[19] Kim, S., Wimmer, H., &amp; Kim, J.（2022年5月）。深度学习库分析：Keras、pytorch和MXnet。载《2022年IEEE/ACIS第20届软件工程研究、管理与应用国际会议（SERA）》（54-62页）。IEEE。</p>
+</div></div>
+<div class="bilingual-pair" id="u-NN0072"><div class="original" lang="en"><p>[20] Rankin, R., &amp; Wozniak, S. (1976, August 1). Floating point routines for the 6502. Dr. Dobb’s Journal of Computer Calisthenics &amp; Orthodontia, 11(7), 17. <a href="https://doi.org/10.1016/0165-6074(83)90086-8">https://doi.org/10.1016/0165-6074(83)90086-8</a></p>
+</div><div class="translation" lang="zh"><p>[20] Rankin, R., &amp; Wozniak, S.（1976年8月1日）。6502的浮点运算例程。《Dr. Dobb的计算机健身与正畸杂志》，11(7)，17。<a href="https://doi.org/10.1016/0165-6074(83)90086-8">https://doi.org/10.1016/0165-6074(83)90086-8</a></p>
+</div></div>
+<h2 id="h-47322ba90eb" data-heading><span class="anchor-alias" id="s-13"></span><span class="heading-chinese">署名与许可</span></h2>
+<div class="bilingual-pair" id="p-f5b7bdf6ac3"><div class="translation" lang="zh"><p>Carmine Guida 卡尔米内·圭达、Lauren Demaio 劳伦·德马约。原作采用 <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>。此处为转录、汉译及阅读排版。 <a href="https://ceur-ws.org/Vol-4090/short7.pdf">查看原出版来源</a></p>
+</div></div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="0dc908befe718b"></div></section></main></div></body></html>

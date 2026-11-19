@@ -1,0 +1,93 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="../../"><meta name="archive-notes" content="github"><meta name="description" content="极小化极大搜索是一种在对抗性游戏树中选择行动的方法，英文通常写作minimax。它从一个固定参与者的利益出发，在己方节点取较大值、在对方节点取较小值，逐层回传可能结局的价值，由此选择能够保障最好结果的当前行动。中文也有“极大极小搜索”等译法。"><title>极小化极大搜索 · 玩/游戏资料馆</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="../../assets/brand-en.svg" as="image"><link rel="stylesheet" href="../../assets/style.css"><script src="../../assets/catalog.js" defer></script><script src="../../assets/app.js" defer></script><script src="../../assets/graph.js" defer></script><script src="../../assets/account.js" defer></script><script src="../../assets/browser-export.js" defer></script><script src="../../assets/notes.js" defer></script><script src="../../assets/export.js" defer></script></head><body class="reader-body"><header class="site-header"><a class="wordmark" href="../../" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="../../assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="../../search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="../../articles/" >文章</a><a href="../../books/" >书目</a><a href="../../works/" >作品</a><a href="../../archives/" >档案卡片</a><a href="../../concepts/" aria-current="page">索引标签</a><a href="../../courses/" >参考资料</a></nav></header><div class="reading-shell" data-entry="60e41461357d7b"><aside class="reading-toc" aria-label="阅读目录"><div class="toc-top"><a class="back-link" href="../../concepts/?view=all">← 索引标签</a><button class="mobile-toc-button" aria-expanded="false">目录 ▾</button></div><div class="reading-progress"><span>阅读进度</span><output id="progress-percent">0%</output><div class="progress-track"><span id="progress-bar"></span></div></div><nav class="toc-list"><ul class="toc-tree"><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#entry-intro" data-toc="entry-intro">简介</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-6dec8872ec2" data-toc="h-6dec8872ec2">把对手的选择写进问题</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-c301b2e4819" data-toc="h-c301b2e4819">历史中的两种“最优”</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-80461a8df07" data-toc="h-80461a8df07">递归回传怎样工作</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-66a43a22033" data-toc="h-66a43a22033">一棵可复算的决策树</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-09bee7782ad" data-toc="h-09bee7782ad">评价函数与视野效应</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-be0fecad34e" data-toc="h-be0fecad34e">剪枝、重用与其他方法</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-c98f555ee13" data-toc="h-c98f555ee13">游戏设计中的对手与体验</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-d923b684a20" data-toc="h-d923b684a20">行动时序与数值可信度</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-a5171284cf4" data-toc="h-a5171284cf4">模型边界与评价</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#h-1184d9947b1" data-toc="h-1184d9947b1">参考文献</a></div></li><li class="toc-node depth-2"><div class="toc-row"><span class="toc-leaf"></span><a href="#related" data-toc="related">关系图谱</a></div></li></ul></nav></aside><main class="reading-main"><header class="entry-header has-cover" id="entry-title"><figure class="entry-media kind-generated"><img src="../../assets/display/836aca4fec4d3022995728a1.webp" alt="极小化极大搜索，独立概念意象" width="1254" height="1254"></figure><div><a class="entry-kicker" href="../../concepts/">索引标签</a><p class="entry-original " lang="en">Minimax Search</p><h1>极小化极大搜索</h1><p class="citation"></p></div></header><div class="reading-toolbar"><span></span><div class="reader-actions"><button data-open-notes>高亮与批注</button><button data-export>导出</button><button data-font="minus" aria-label="缩小字号">A−</button><button data-font="plus" aria-label="放大字号">A+</button></div></div><article class="reading-body" id="reading-body"><section class="entry-summary editorial-intro" id="entry-intro" data-heading><h2>简介</h2><p>极小化极大搜索是一种在对抗性游戏树中选择行动的方法，英文通常写作minimax。它从一个固定参与者的利益出发，在己方节点取较大值、在对方节点取较小值，逐层回传可能结局的价值，由此选择能够保障最好结果的当前行动。中文也有“极大极小搜索”等译法。</p>
+<p>它的典型模型是双方轮流行动、信息公开、利益对立的有限确定性游戏。实际游戏程序通常只搜索有限深度，再以评价函数估计尚未结束的局面。搜索规则的精确性与评价函数的可信度，需要分别理解。</p>
+</section><h2 id="h-6dec8872ec2" data-heading><span class="anchor-alias" id="s-1"></span><span class="heading-chinese">把对手的选择写进问题</span></h2>
+<div class="reading-block" id="p-01a07d337b6"><p>单人寻路可以把后继看成自己将来能够选择的机会；对抗游戏中，轮到对手的后继由对手决定。若将所有未来分支都按己方最大利益选择，就会把敌人的配合当成既定事实。极小化极大搜索通过交替的最大与最小运算，把这种控制权的转移明确表示出来。</p>
+</div>
+<div class="reading-block" id="p-a50f8da125a"><p>先固定一名参与者为最大化方，所有分数始终从他的立场解释。正值可以代表获胜或优势，负值代表失败或劣势。对手作为最小化方，选择使这个分数更低的行动。这种共用价值尺度适合零和或可转成严格对立利益的模型；双方各有不同目标时，需要更丰富的收益表示。</p>
+</div>
+<div class="reading-block" id="p-f911e73b90d"><p>搜索节点应记录足够确定后续规则的状态。棋盘上的棋子位置之外，还可能包括轮到谁走、易位资格、特殊吃子条件与重复局面信息。两个画面相同的局面，若合法动作不同，就不能作为同一搜索状态。Shannon在1950年讨论计算机国际象棋时，已经详细列出这种表示要求。<a href="https://gilkalai.wordpress.com/wp-content/uploads/2008/06/computerchess.pdf">Shannon，1950</a></p>
+</div>
+<h2 id="h-c301b2e4819" data-heading><span class="anchor-alias" id="s-2"></span><span class="heading-chinese">历史中的两种“最优”</span></h2>
+<div class="reading-block" id="p-ebb70e497b2"><p>博弈论中的极小极大思想为保守对抗决策提供了背景，而程序中的minimax通常特指顺序游戏树的递归回传。它逐个处理先后发生的选择，与同时行动、混合策略的矩阵博弈求解有不同的数据结构和前提。共用术语的历史联系，并不会使两类计算任务自动成为同一个算法。</p>
+</div>
+<div class="reading-block" id="p-c407d441368"><p>Shannon的1950年论文系统描述了从终局反推、有限深度搜索、局面评价与选择性延伸。他把全部变化算到固定层数的方案称为A型策略，又讨论只展开值得研究的变化并在较稳定局面评价的B型策略。这些讨论使搜索深度与领域知识之间的关系成为计算机游戏研究的核心问题。</p>
+</div>
+<div class="reading-block" id="p-75f09327f01"><p>Knuth与Moore在1974年技术报告中，用有限合法后继、终止价值以及双方最优选择定义游戏树值，并比较固定立场的minimax与轮流取负的negamax形式。他们同时指出，保障最坏结果的保守策略，未必最善于利用现实中会犯错的对手。这项区分直接影响游戏对手的设计目标。<a href="https://ftpmirror.your.org/pub/misc/bitsavers/pdf/stanford/Stanford_CS_TR_Collection_2025-12-12/PDF/1974/CS-TR-74-441.pdf">Knuth与Moore，1974</a></p>
+</div>
+<h2 id="h-80461a8df07" data-heading><span class="anchor-alias" id="s-3"></span><span class="heading-chinese">递归回传怎样工作</span></h2>
+<div class="reading-block" id="p-34bc4772c19"><p>终局节点直接返回按规则确定的收益。非终局若轮到最大化方，就取各合法后继值中的最大值；轮到最小化方，就取最小值。这样从叶子向根回传，根节点的数值表示在模型内双方都作最佳回应时，最大化方能够保障的结果，根上对应的行动就是当前选择。</p>
+</div>
+<div class="reading-block" id="p-b4624f4fa6a"><p>$$
+V(s)=\begin{cases}U(s),&amp;s\text{为终局};\\max_{a\in A(s)}V(T(s,a)),&amp;s\text{由MAX行动};\\min_{a\in A(s)}V(T(s,a)),&amp;s\text{由MIN行动}.\end{cases}
+$$</p>
+</div>
+<div class="reading-block" id="p-2bb36a55b76"><p>有限深度版本还要规定剩余搜索层数。到达深度边界时，用评价函数代替真实终局收益；每经过一次参与者行动，深度通常减一。棋类讨论中的“一步”有时指单方落子，有时指双方各走一次，因此报告深度时应明确使用半回合还是完整回合，避免把两倍工作范围混为一谈。</p>
+</div>
+<div class="reading-block" id="p-ab7e3370839"><p>树可以用深度优先方式递归遍历，不必同时保存全部分支。程序先生成一个合法行动，修改或复制状态，递归求值，再恢复状态处理下一个行动。恢复若遗漏计数器、资源或历史标记，就会污染后续分支。这类状态管理错误与回传公式本身无关，却会直接改变最终判断。</p>
+</div>
+<h2 id="h-66a43a22033" data-heading><span class="anchor-alias" id="s-4"></span><span class="heading-chinese">一棵可复算的决策树</span></h2>
+<div class="reading-block" id="p-4503a31efeb"><p>构造一个只有两层行动的教学游戏。最大化方先选甲、乙或丙，对手随后各有三种回应，叶子分数统一从最大化方看。甲的三个结果为九、负二、八；乙为一、三、五；丙为零、八、负一。假定这些就是全部合法回应，结局之后游戏立即结束。</p>
+</div>
+<div class="reading-block" id="p-1202aecb6e9"><p>对手在甲下会选负二，在乙下会选一，在丙下会选负一，因此三个行动的保障值依次为负二、一、负一。最大化方比较这三个数，选择乙，根值为一。甲下的九分确实存在，但对手有权避开它，所以它不能构成选择甲的充分理由。</p>
+</div>
+<div class="reading-block" id="p-6efc7b04e2a"><p>若误把对手回应取平均，甲的平均分为五，乙为三，丙为七除以三，就会选择甲。平均运算对应一种对手随机回应的假设，必须给出相应概率；minimax则以对手选择最不利回应为模型。二者的差别来自对行为的不同假设，不是同一棵树上算术精度的差异。</p>
+</div>
+<div class="reading-block" id="p-4a8fc8dab03"><p>再设乙的三个叶子只是深度边界上的估计，而非真实终局收益。回传仍然精确得到一，但这个一表示估计树的值。更深处可能出现尚未看到的反击。区分真实收益、静态评价和回传值，可以帮助设计者追踪错误究竟来自规则模型、搜索范围还是局面评分。</p>
+</div>
+<h2 id="h-09bee7782ad" data-heading><span class="anchor-alias" id="s-5"></span><span class="heading-chinese">评价函数与视野效应</span></h2>
+<div class="reading-block" id="p-633ddc9cdb1"><p>局面评价把无法立即展开的未来压缩成一个分数。棋类可以考虑材料、机动性、空间和安全，战术游戏可以考虑生命、射程、掩体与任务进展。特征权重决定程序偏好怎样的局势；“搜索更深”与“评价更好”是两条互相配合的改进路线，不能只靠其中一条解释全部强弱。</p>
+</div>
+<div class="reading-block" id="p-5280f04f994"><p>评价尺度还要保持一致。若真实获胜分低于普通局面中可能累积的材料分，程序就可能为追求静态优势而放弃获胜。较稳妥的做法是让终局结果在尺度上具有明确地位，再在同类结果内部区分速度或余量。若使用距终局远近奖励，还须注意缓存中数值随根距离变化的情况。</p>
+</div>
+<div class="reading-block" id="p-e1158c5fb0f"><p>视野效应发生在重要后果刚好被推到搜索边界之外时。一个行动可能只是延缓损失，静态评价却暂时看不到代价，于是显得有利。增加固定深度有时解决该局面，也可能让同类问题在更远处重新出现。针对强制变化延伸搜索，能把计算集中到仍不稳定的部分。</p>
+</div>
+<div class="reading-block" id="p-3222c943aab"><p>Shannon用正在进行的兑子说明稳定性：一方刚吃掉对方皇后、对方尚未回吃时，材料分暂时大幅偏斜。此时截断并评价，会把过渡局面当成持久优势。静止搜索（quiescence search）据此继续处理某些强迫动作，直到评价条件较合理；具体扩展条件需要依据游戏规则设计。</p>
+</div>
+<div class="reading-block" id="p-136e884e618"><p>选择性延伸也有成本。只研究显眼威胁可能漏掉安静而关键的布局，无限追踪交战又可能耗尽预算。开发者需要规定最大延伸、重复检测和终止条件，并把这种选择性与完整有限树上的精确minimax区分。它改变的是被搜索的树，而不仅是访问同一棵树的顺序。</p>
+</div>
+<h2 id="h-be0fecad34e" data-heading><span class="anchor-alias" id="s-6"></span><span class="heading-chinese">剪枝、重用与其他方法</span></h2>
+<div class="reading-block" id="p-e810fd8a17e"><p>α–β剪枝利用已经发现的上下界，跳过不可能改变祖先选择的分支。在同样的有限树和叶子评价下，它能返回相同根值，通常因此搜索得更深。行动排序影响它节约多少工作，但不会把一个错误的局面评价变成正确的终局判断；搜索范围与模型质量仍需分别检验。</p>
+</div>
+<div class="reading-block" id="p-54523a8c075"><p>不同动作顺序可能到达相同局面，搜索树于是包含重复子问题。置换表可保存已经求得的值或界限，重用时需要核对状态身份、剩余深度和数值类型。仅凭棋盘外观相同就复用结果，可能忽略回合、重复规则或资源状态；保存过浅结果也不能冒充更深搜索的结论。</p>
+</div>
+<div class="reading-block" id="p-76bf7d3a9fc"><p>在严格对称的零和模型中，negamax用“当前行动者立场的值”等于“后继对手值的负数”简化代码。每层取最大并翻转符号，可以得到与minimax相同的选择。它依赖价值立场一致和对称收益，若把最大化方固定视角的评价直接塞进来而忘记转换，就会在奇偶层交替偏爱错误结果。</p>
+</div>
+<div class="reading-block" id="p-3b2ddb5b9eb"><p>蒙特卡洛树搜索通过有选择的采样逐渐估计行动价值，minimax则按明确的对抗备份规则回传一棵已展开的树。两者可以结合领域评价、学习模型和预算控制，适合性取决于分支、模拟成本与反馈结构。把它们简单划为“传统规则”与“现代智能”，会遮蔽各自处理不确定性的具体方式。</p>
+</div>
+<h2 id="h-c98f555ee13" data-heading><span class="anchor-alias" id="s-7"></span><span class="heading-chinese">游戏设计中的对手与体验</span></h2>
+<div class="reading-block" id="p-8fa800faeed"><p>保障最坏情况适合需要可靠战术回应的棋盘对手，也适合小规模战斗决策或玩家解谜的对抗分析。用于战术动作游戏时，动作持续时间、同时运动与连续空间会提高建模难度。设计者可以将时间离散化或定义宏动作，但需检验抽象后的反击是否仍与玩家看到的规则相符。</p>
+</div>
+<div class="reading-block" id="p-40dbbe7716c"><p>最强对抗与合适的游玩体验是不同目标。程序总能选择保守平局时，可能避免一切有戏剧性的风险；初学者则可能需要一个会暴露可理解弱点的对手。改变搜索深度、评价权重或等价行动选择，都能调整风格，但这些改动应服从清楚的难度与反馈设计。</p>
+</div>
+<div class="reading-block" id="p-4e3416e4e4e"><p>利用玩家失误的对手模型，可以偏好那些使特定玩家更可能犯错的分支。它需要估计玩家回应，而不再只追求最坏结果保障。若保留minimax作为安全基线，再在安全行动中增加变化，也能兼顾可靠性与风格。这里的概率或学习依据应来自明确模型，不能从一次对局印象推断。</p>
+</div>
+<div class="reading-block" id="p-b16d8879068"><p>开发工具可以显示主变化、叶子评价和导致改选的关键回应，让设计者看懂程序为何选择防守。面向玩家时，解释还应使用可观察规则，例如“阻止下一回合被将死”，而不只是输出内部数字。可理解的理由有助于学习，却需要确保它确实对应搜索使用的信息和分支。</p>
+</div>
+<h2 id="h-d923b684a20" data-heading><span class="anchor-alias" id="s-8"></span><span class="heading-chinese">行动时序与数值可信度</span></h2>
+<div class="reading-block" id="p-cf1250a847a"><p>同时选择的对抗可以说明时序为何重要。设双方都秘密选左或右，相同选择使最大化方得一分，不同选择使其失一分。若错误地让最小化方看完己方选择再行动，每个分支都会得到负一；真实的同时选择游戏允许用随机混合避免被总是针对，求解对象已经发生变化。</p>
+</div>
+<div class="reading-block" id="p-a6c035171ef"><p>在实时战术中，把持续两秒的射击和瞬间闪避都记成一次等长回合，也可能制造虚假的响应机会。动作模型应包含持续时间、能否打断以及何时观察结果。宏动作能够减少分支，但需要把这些时序关系保留到足以支撑决策的程度，否则更深搜索只会更彻底地求解一个失真的模型。</p>
+</div>
+<div class="reading-block" id="p-3745b764571"><p>评价误差也能在固定树中追踪。若每个叶子的估计与真实值相差至多一，最大或最小运算都不会把这个一致误差界任意放大；回传值仍在对应真实树值的一分范围内。两个行动的估计值接近时，细小误差仍可能改变选择结果。</p>
+</div>
+<div class="reading-block" id="p-b9885627a8f"><p>这个误差论证依赖固定树和所有叶子共享的有效误差界。实际游戏中的学习评价通常没有这样的逐状态保证，选择性展开也会改变比较范围。创作者可将低置信度局面标记给调试工具，再做针对性分析。</p>
+</div>
+<div class="reading-block" id="p-3e323ed6779"><p>主变化是一串按当前搜索结果假定双方都最佳回应的行动，并非唯一可能发生的未来。玩家一旦采取不同回应，程序就要从新状态重新决策。用动画或提示展示主变化时，应让玩家理解这是一条条件性的预测路线，避免将其呈现为对手行为已经被确定的剧本。</p>
+</div>
+<h2 id="h-a5171284cf4" data-heading><span class="anchor-alias" id="s-9"></span><span class="heading-chinese">模型边界与评价</span></h2>
+<div class="reading-block" id="p-e34fa75f20b"><p>随机事件应通过机会节点及其概率处理，例如掷骰后的期望值；把随机结果都交给最小化方，会变成假定运气总是最坏的另一种模型。秘密手牌和雾区则涉及知识状态，直接搜索真实完整状态会泄漏信息。部分可观测的对抗游戏，需要专门处理信息集或信念，而非只增加树的深度。</p>
+</div>
+<div class="reading-block" id="p-bea59824d8d"><p>多人非零和游戏中，一名对手未必愿意牺牲自己只为降低另一方分数。将所有其他玩家合并成统一最小化者，会引入联盟假设。合作、外交和临时目标都可能超出这个模型。方法选择应先对齐行动权、信息和利益结构，再比较搜索速度。</p>
+</div>
+<div class="reading-block" id="p-b7e2c04ccf6"><p>规则允许循环时，必须明确重复局面的处理与终止条件。有限深度搜索总会停止，但它给出的只是该截断模型的结果；完整求解还需识别循环、平局或其他长期结果。深度优先递归本身不会为无限游戏自动建立正确的终局价值。</p>
+</div>
+<div class="reading-block" id="p-a7cc5c4b197"><p>评价一套minimax程序，需要同时记录合法性、搜索预算、评价质量和实际对局结果。针对固定树可以核对回传值，针对游戏则要考察多种开局、对手和随机种子，避免把个别胜局归因于算法本身。平均分、胜率和最坏收益对应不同问题，应按设计目标解释。</p>
+</div>
+<div class="reading-block" id="p-dc515b4a13b"><p>极小化极大搜索提供了一个清楚的对抗决策骨架：谁掌握下一次选择、结果按谁的利益计量、计算在哪里停止，都可以被显式检查。它的可靠性来自这些条件与回传规则共同成立。对游戏创作者而言，这种可追踪性既能支撑强对手，也能帮助设计适当的弱点、风险和学习空间。</p>
+</div>
+<h2 id="h-1184d9947b1" data-heading><span class="anchor-alias" id="s-10"></span><span class="heading-chinese">参考文献</span></h2>
+<div class="reading-block" id="p-00864021f42"><ul>
+<li>Shannon, C. E. 1950. <a href="https://gilkalai.wordpress.com/wp-content/uploads/2008/06/computerchess.pdf">Programming a Computer for Playing Chess</a>. Philosophical Magazine, 41(314):256–275。</li>
+<li>Knuth, D. E., &amp; Moore, R. W. 1974. <a href="https://ftpmirror.your.org/pub/misc/bitsavers/pdf/stanford/Stanford_CS_TR_Collection_2025-12-12/PDF/1974/CS-TR-74-441.pdf">An Analysis of Alpha-Beta Pruning</a>. Stanford CS-TR-74-441；1975年<a href="https://www.sciencedirect.com/science/article/pii/0004370275900193">期刊版出版记录</a>。</li>
+</ul>
+</div></article><section class="related graph-section" id="related" data-heading><h2>关系图谱</h2><div class="local-library-graph" data-library-graph data-graph-root="60e41461357d7b"></div></section></main></div></body></html>
