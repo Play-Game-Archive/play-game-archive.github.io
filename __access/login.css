@@ -15,3 +15,5 @@ button:disabled{opacity:.55}
 .access-links{display:flex;gap:18px;padding-top:14px;font-size:.875rem}
 a{color:#394474;text-underline-offset:3px}
 @media(max-width:430px){main{padding:22px}}
+
+.github-login button{display:block;width:100%}.github-login [role=status]{margin-top:12px}

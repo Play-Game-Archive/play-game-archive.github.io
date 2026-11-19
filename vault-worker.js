@@ -5,9 +5,9 @@ const owner = 'Play-Game-Archive';
 const ownerId = 358516810;
 const repo = 'repos/' + owner + '/play-game-archive-notes';
 const revision = 'e0d25dce19a95200c391845de7166e3d8bd77c55';
-const hours = 12;
+const oauthKeyPath = 'contents/reading-envelope.json?ref=owner-access';
 const publicFiles = new Set([
-  '/vault-worker.js', '/__access/login.html', '/__access/login.css',
+  '/vault-worker.js', '/__access/login.html', '/__access/github-callback.html', '/__access/login.css',
   '/__access/brand-en.svg', '/__access/brand-zh.svg', '/__access/member-protect.js', '/__access/member-session.js', '/__access/member-login.js'
 ]);
 const encoder = new TextEncoder(), decoder = new TextDecoder('utf-8', { fatal: true });
@@ -18,7 +18,7 @@ const forcedHeaders = {
 };
 const pagePolicy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://api.github.com; frame-src 'self' blob:; base-uri 'none'; object-src 'none'; frame-ancestors 'self'";
 const database = new Promise((resolve, reject) => {
-  const request = indexedDB.open('play-game-archive-owner-access', 1);
+  const request = indexedDB.open('play-game-archive-github-oauth', 1);
   request.onupgradeneeded = () => request.result.createObjectStore('session');
   request.onsuccess = () => resolve(request.result);
   request.onerror = () => reject(request.error);
@@ -60,8 +60,8 @@ async function github(path, token, raw = false) {
     credentials: 'omit', cache: 'no-store', redirect: 'error'
   });
   if (!response.ok) {
-    const error = new Error(response.status === 401 ? 'GitHub 访问令牌无效或已过期。' :
-      response.status === 403 || response.status === 404 ? '请检查令牌对私有资料馆仓库的访问权限。' : 'GitHub 连接暂时失败。');
+    const error = new Error(response.status === 401 ? 'GitHub 授权已过期，请重新登录。' :
+      response.status === 403 || response.status === 404 ? '请检查资料馆 GitHub App 的私有仓库权限。' : 'GitHub 连接暂时失败。');
     error.status = response.status;
     throw error;
   }
@@ -98,23 +98,33 @@ async function manifest(active) {
   return map.files;
 }
 
-async function signIn(username, token, readingKey) {
-  if (typeof username !== 'string' || username.toLowerCase() !== owner.toLowerCase() ||
-      typeof token !== 'string' || !/^github_pat_[A-Za-z0-9_]{40,255}$/.test(token) ||
-      typeof readingKey !== 'string' || !/^pga1\.[A-Za-z0-9_-]{43}$/.test(readingKey)) {
-    throw new Error('请填写资料馆所有者的 GitHub 用户名、访问令牌和阅读密钥。');
+async function readingKey(token, unlock) {
+  const encrypted = await github(repo + '/' + oauthKeyPath, token, true);
+  const setting = JSON.parse(decoder.decode(encrypted));
+  if (setting.version !== 1) throw new Error('资料馆阅读配置有误。');
+  const packet = /^pga-oauth-key1\.([A-Za-z0-9_-]{50,200})$/.exec(setting?.value || '')?.[1];
+  if (!packet) throw new Error('资料馆阅读配置有误。');
+  const bytes = unbase64(packet);
+  const wrappingKey = await crypto.subtle.importKey('raw', unbase64(unlock), 'AES-GCM', false, ['decrypt']);
+  const clear = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: bytes.subarray(0,12),
+    additionalData: encoder.encode('play-game-archive/oauth/reading-key/v1') }, wrappingKey, bytes.subarray(12));
+  if (clear.byteLength !== 32) throw new Error('资料馆阅读配置有误。');
+  return crypto.subtle.importKey('raw', clear, 'AES-GCM', false, ['decrypt']);
+}
+
+async function signIn(token, expiresIn, unlock) {
+  if (typeof token !== 'string' || !/^ghu_[A-Za-z0-9_]{24,255}$/.test(token) ||
+      !Number.isSafeInteger(expiresIn) || expiresIn < 60 || expiresIn > 28800 ||
+      typeof unlock !== 'string' || !/^[A-Za-z0-9_-]{43}$/.test(unlock)) {
+    throw new Error('GitHub 登录响应有误。');
   }
   const before = generation;
   const profile = await github('user', token);
-  if (profile.id !== ownerId || profile.login.toLowerCase() !== owner.toLowerCase()) {
-    throw new Error('此账号没有资料馆访问权限。');
-  }
+  if (profile.id !== ownerId || profile.login !== owner) throw new Error('此 GitHub 账号没有资料馆访问权限。');
   const repository = await github(repo, token);
-  if (!repository.private || repository.owner?.id !== ownerId) {
-    throw new Error('私有资料馆仓库不可用。');
-  }
-  const key = await crypto.subtle.importKey('raw', unbase64(readingKey.slice(5)), 'AES-GCM', false, ['decrypt']);
-  const next = { username: profile.login, token, key, expires: Date.now() + hours * 3_600_000 };
+  if (!repository.private || repository.owner?.id !== ownerId) throw new Error('私有资料馆仓库不可用。');
+  const key = await readingKey(token, unlock);
+  const next = { username: owner, token, key, expires: Date.now() + expiresIn * 1000 };
   const files = await manifest(next);
   if (generation !== before) throw new Error('会话已变化，请重新登录。');
   await db('put', next);
@@ -128,7 +138,7 @@ async function signIn(username, token, readingKey) {
 async function receive(message) {
   switch (message.type) {
     case 'login':
-      return signIn(message.username, message.token, message.readingKey);
+      return signIn(message.token, message.expiresIn, message.unlock);
     case 'session': {
       const active = await session();
       return active ? { username: active.username } : null;

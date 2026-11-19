@@ -20,7 +20,7 @@
   }
 
   window.PlayGameMember = {
-    login: (username, token, readingKey) => call('login', { username, token, readingKey }),
+    login: (token, expiresIn, unlock) => call('login', { token, expiresIn, unlock }),
     session: () => call('session'),
     account: () => call('account'),
     logout: () => call('logout')
