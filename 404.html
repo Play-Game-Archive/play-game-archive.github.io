@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <title>登录 · 玩/游戏资料馆</title>
+  <link rel="stylesheet" href="/__access/login.css">
+  <script defer src="/__access/member-session.js"></script>
+  <script defer src="/__access/member-login.js"></script>
+</head>
+<body>
+  <main>
+    <header><h1>玩/游戏资料馆</h1><img src="/__access/brand-en.svg" width="188" height="20" alt="Play/Game Archive"></header>
+    <p>请登录后查看资料馆。</p>
+    <form autocomplete="on">
+      <label>GitHub 用户名<input name="username" value="Play-Game-Archive" autocomplete="username" required maxlength="39"></label>
+      <label>访问令牌<input type="password" name="token" autocomplete="current-password" required maxlength="266"></label>
+      <label>阅读密钥<input type="file" name="readingKey" accept=".txt" required></label>
+      <button type="submit" disabled>登录</button>
+      <p role="status" aria-live="polite">正在连接…</p>
+    </form>
+    <div class="access-links">
+      <a href="https://github.com/settings/personal-access-tokens/new?name=Play%2FGame%20Archive&amp;target_name=Play-Game-Archive&amp;contents=write" rel="noreferrer">创建令牌</a>
+      <a href="https://github.com/signup" rel="noreferrer">注册 GitHub</a>
+    </div>
+  </main>
+</body>
+</html>

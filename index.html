@@ -1,1 +1,31 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="site-root" content="./"><meta name="archive-notes" content="github"><meta name="description" content="玩/游戏资料馆"><title>首页 · 玩/游戏资料馆</title><link rel="icon" href="./assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="./assets/brand-en.svg" as="image"><link rel="stylesheet" href="./assets/style.css"><script src="./assets/catalog.js" defer></script><script src="./assets/app.js" defer></script><script src="./assets/graph.js" defer></script><script src="./assets/account.js" defer></script><script src="./assets/browser-export.js" defer></script><script src="./assets/notes.js" defer></script><script src="./assets/export.js" defer></script></head><body class="home-body"><header class="site-header"><a class="wordmark" href="./" aria-label="玩/游戏资料馆首页"><svg class="brand-zh" viewBox="0 0 188 36" role="img" aria-label="玩/游戏资料馆"><text x="0" y="29" textLength="188" lengthAdjust="spacingAndGlyphs">玩/游戏资料馆</text></svg><img class="brand-en brand-fixed" src="./assets/brand-en.svg" alt="Play/Game Archive" width="188" height="20"></a><div class="header-search-area"><form class="header-search" action="./search/" role="search"><label class="sr-only" for="header-query">搜索馆藏</label><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="header-query" name="q" type="search" placeholder="搜索" autocomplete="off"><button type="submit" aria-label="搜索">↵</button></form><div class="header-tools" role="group" aria-label="笔记与导出"><button data-archive-account>登录</button><button data-open-notes>笔记</button><button data-export>导出</button></div></div><nav aria-label="栏目"><a href="./articles/" >文章</a><a href="./books/" >书目</a><a href="./works/" >作品</a><a href="./archives/" >档案卡片</a><a href="./concepts/" >索引标签</a><a href="./courses/" >参考资料</a></nav></header><main class="home-page"><div class="catalog-heading home-heading"><h1>全部<span class="count">318</span></h1><a class="pixel-button graph-entry-button" href="graph/">关系图谱</a><div class="catalog-actions"><div class="view-switch"><a href="?view=random" data-home-view="random" aria-current="true">随机</a><a href="?view=all" data-home-view="all">全部</a></div><span class="home-paging" hidden><button data-home-prev aria-label="上一组">‹</button><output data-home-page></output><button data-home-next aria-label="下一组">›</button></span><button class="shuffle-button" data-home-shuffle aria-label="重新随机">↻</button></div></div><div class="bubble-board" id="bubble-board" data-pool="all"><div class="bubble-sheen" aria-hidden="true"></div></div></main></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <title>登录 · 玩/游戏资料馆</title>
+  <link rel="stylesheet" href="/__access/login.css">
+  <script defer src="/__access/member-session.js"></script>
+  <script defer src="/__access/member-login.js"></script>
+</head>
+<body>
+  <main>
+    <header><h1>玩/游戏资料馆</h1><img src="/__access/brand-en.svg" width="188" height="20" alt="Play/Game Archive"></header>
+    <p>请登录后查看资料馆。</p>
+    <form autocomplete="on">
+      <label>GitHub 用户名<input name="username" value="Play-Game-Archive" autocomplete="username" required maxlength="39"></label>
+      <label>访问令牌<input type="password" name="token" autocomplete="current-password" required maxlength="266"></label>
+      <label>阅读密钥<input type="file" name="readingKey" accept=".txt" required></label>
+      <button type="submit" disabled>登录</button>
+      <p role="status" aria-live="polite">正在连接…</p>
+    </form>
+    <div class="access-links">
+      <a href="https://github.com/settings/personal-access-tokens/new?name=Play%2FGame%20Archive&amp;target_name=Play-Game-Archive&amp;contents=write" rel="noreferrer">创建令牌</a>
+      <a href="https://github.com/signup" rel="noreferrer">注册 GitHub</a>
+    </div>
+  </main>
+</body>
+</html>
