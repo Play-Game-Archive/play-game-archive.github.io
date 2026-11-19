@@ -117,8 +117,6 @@ html[data-language=original] .reading-body .editorial-intro.textual-foreign{disp
 .archive-account-form header button{font-size:25px;line-height:1}
 .archive-account-form label{display:grid;gap:4px}
 .archive-account-form input{width:100%;border:1px solid var(--line);border-radius:6px;padding:9px 10px;background:#fff;color:var(--ink)}
-.archive-account-form .account-mode{display:flex;gap:14px}
-.archive-account-form .account-mode [aria-pressed="true"]{color:var(--accent);font-weight:600}
 .archive-account-form .account-hint,.archive-account-form .account-intent,.archive-account-form .account-status{font-size:13px;color:var(--muted)}
 .account-submit{color:#fff;background:var(--accent);border-radius:6px;padding:8px 15px}
 .account-submit:disabled{opacity:.5}
