@@ -2,9 +2,9 @@
 *{box-sizing:border-box}
 body{margin:0;display:grid;min-height:100svh;place-items:center;padding:max(20px,env(safe-area-inset-top)) 20px}
 main{width:min(100%,400px);padding:28px;background:#fff;border:1px solid #e1e5ef;border-radius:20px}
-header{display:grid;justify-items:start;gap:10px}
-header h1{margin:0;font-size:1.75rem;letter-spacing:-.045em}
-header img{width:192px;height:auto;display:block}
+header{display:grid;width:min(100%,208px);margin-inline:auto;gap:4px}
+header h1{margin:0}
+header img{width:100%;height:auto;display:block}
 main>p{margin:23px 0;color:#626a7d}
 form{display:grid;gap:14px}
 label{display:grid;gap:6px;font-size:.9rem}

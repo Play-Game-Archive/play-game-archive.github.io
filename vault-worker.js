@@ -4,11 +4,11 @@ const api = 'https://api.github.com/';
 const owner = 'Play-Game-Archive';
 const ownerId = 358516810;
 const repo = 'repos/' + owner + '/play-game-archive-notes';
-const revision = '96a91b06e052f9d53beeecc8262516017827255f';
+const revision = 'e0d25dce19a95200c391845de7166e3d8bd77c55';
 const hours = 12;
 const publicFiles = new Set([
   '/vault-worker.js', '/__access/login.html', '/__access/login.css',
-  '/__access/brand-en.svg', '/__access/member-protect.js', '/__access/member-session.js', '/__access/member-login.js'
+  '/__access/brand-en.svg', '/__access/brand-zh.svg', '/__access/member-protect.js', '/__access/member-session.js', '/__access/member-login.js'
 ]);
 const encoder = new TextEncoder(), decoder = new TextDecoder('utf-8', { fatal: true });
 const forcedHeaders = {
