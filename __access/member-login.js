@@ -60,15 +60,15 @@
     history.replaceState(null, '', callbackPath);
     const pending = JSON.parse(sessionStorage.getItem(stateKey) || 'null');
     sessionStorage.removeItem(stateKey);
-    if (query.has('error')) throw new Error('GitHub 登录已取消。');
+    if (query.has('error')) throw new Error('GitHub 登入已取消。');
     if (!pending || query.get('state') !== pending.state || !query.get('code') ||
-        Date.now() - pending.date > 30 * 60000) throw new Error('本次登录已失效，请重新登录。');
+        Date.now() - pending.date > 30 * 60000) throw new Error('本次登入已失效，请重新登入。');
     status.textContent = '正在核对 GitHub 授权…';
     const res = await fetch(relay, { method: 'POST', credentials: 'omit', cache: 'no-store', redirect: 'error',
       headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: query.get('code'), verifier: pending.verifier }),
       signal: AbortSignal.timeout(25000) });
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || '登录暂时失败。');
+    if (!res.ok) throw new Error(data.error || '登入暂时失败。');
     await activate();
     await window.PlayGameMember.login(data.token, data.expiresIn, data.unlock);
     location.replace(returnTo(pending.returnTo));
@@ -86,7 +86,7 @@
       }
     });
   whenReady.catch(error => {
-    status.textContent = error.message || '暂时无法完成登录。';
+    status.textContent = error.message || '暂时无法完成登入。';
     button.disabled = false;
   });
   button.addEventListener('click', () => {

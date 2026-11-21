@@ -4,9 +4,10 @@ const api = 'https://api.github.com/';
 const owner = 'Play-Game-Archive';
 const ownerId = 358516810;
 const repo = 'repos/' + owner + '/play-game-archive-notes';
-const revision = 'e0d25dce19a95200c391845de7166e3d8bd77c55';
+const revision = '1ffb5d42ded50f77a7089680c6844aba972acf69';
 const oauthKeyPath = 'contents/reading-envelope.json?ref=owner-access';
 const publicFiles = new Set([
+  '/__access/app-icon.svg','/__access/app-icon-180.png','/__access/app-icon-192.png','/__access/app-icon-512.png','/__access/site.webmanifest',
   '/vault-worker.js', '/__access/login.html', '/__access/github-callback.html', '/__access/login.css',
   '/__access/brand-en.svg', '/__access/brand-zh.svg', '/__access/member-protect.js', '/__access/member-session.js', '/__access/member-login.js'
 ]);
@@ -60,7 +61,7 @@ async function github(path, token, raw = false) {
     credentials: 'omit', cache: 'no-store', redirect: 'error'
   });
   if (!response.ok) {
-    const error = new Error(response.status === 401 ? 'GitHub 授权已过期，请重新登录。' :
+    const error = new Error(response.status === 401 ? 'GitHub 授权已过期，请重新登入。' :
       response.status === 403 || response.status === 404 ? '请检查资料馆 GitHub App 的私有仓库权限。' : 'GitHub 连接暂时失败。');
     error.status = response.status;
     throw error;
@@ -116,7 +117,7 @@ async function signIn(token, expiresIn, unlock) {
   if (typeof token !== 'string' || !/^ghu_[A-Za-z0-9_]{24,255}$/.test(token) ||
       !Number.isSafeInteger(expiresIn) || expiresIn < 60 || expiresIn > 28800 ||
       typeof unlock !== 'string' || !/^[A-Za-z0-9_-]{43}$/.test(unlock)) {
-    throw new Error('GitHub 登录响应有误。');
+    throw new Error('GitHub 登入响应有误。');
   }
   const before = generation;
   const profile = await github('user', token);
@@ -126,9 +127,9 @@ async function signIn(token, expiresIn, unlock) {
   const key = await readingKey(token, unlock);
   const next = { username: owner, token, key, expires: Date.now() + expiresIn * 1000 };
   const files = await manifest(next);
-  if (generation !== before) throw new Error('会话已变化，请重新登录。');
+  if (generation !== before) throw new Error('会话已变化，请重新登入。');
   await db('put', next);
-  if (generation !== before) throw new Error('会话已变化，请重新登录。');
+  if (generation !== before) throw new Error('会话已变化，请重新登入。');
   state = next;
   manifestPromise = Promise.resolve(files);
   generation++;
