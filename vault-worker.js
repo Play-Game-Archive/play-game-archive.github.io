@@ -4,7 +4,7 @@ const api = 'https://api.github.com/';
 const owner = 'Play-Game-Archive';
 const ownerId = 358516810;
 const repo = 'repos/' + owner + '/play-game-archive-notes';
-const revision = '536adb2c6b605cb674ef401102d8df23e73121c6';
+const revision = 'd7ad425b166c961b29e62bee0b49a47c823988dc';
 const oauthKeyPath = 'contents/reading-envelope.json?ref=owner-access';
 const publicFiles = new Set([
   '/__access/favicon.ico','/__access/app-icon-32.png','/__access/app-icon.svg','/__access/app-icon-180.png','/__access/app-icon-192.png','/__access/app-icon-512.png','/__access/site.webmanifest',
