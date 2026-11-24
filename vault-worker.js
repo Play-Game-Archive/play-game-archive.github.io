@@ -4,7 +4,7 @@ const api = 'https://api.github.com/';
 const owner = 'Play-Game-Archive';
 const ownerId = 358516810;
 const repo = 'repos/' + owner + '/play-game-archive-notes';
-const revision = '081a4ffffe0813d59422730e183a1b8e394c453d';
+const revision = '7f7c34966725e9fc37fdb7116fdc1f29743b27cf';
 const oauthKeyPath = 'contents/reading-envelope.json?ref=owner-access';
 const publicFiles = new Set([
   '/favicon.ico','/apple-touch-icon.png','/apple-touch-icon-precomposed.png',
@@ -38,6 +38,9 @@ function db(type, value) {
 }
 
 let state, manifestPromise = null, generation = 0;
+const clearFiles = new Map();
+let clearBytes = 0;
+function clearReadingMemory() { clearFiles.clear(); clearBytes = 0; }
 async function session() {
   if (state === undefined) {
     const before = generation;
@@ -50,14 +53,32 @@ async function session() {
 async function forget() {
   state = null;
   manifestPromise = null;
+  clearReadingMemory();
   generation++;
   await db('delete');
   const tabs = await self.clients.matchAll({ type: 'window' });
   tabs.forEach(tab => tab.postMessage({ type: 'private-logout' }));
 }
 
+async function readingFetch(url, options) {
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const signal = typeof AbortSignal !== 'undefined' && AbortSignal.timeout ? AbortSignal.timeout(15000) : undefined;
+      const response = await fetch(url, { ...options, signal });
+      if (attempt === 0 && [429, 500, 502, 503, 504].includes(response.status)) {
+        await response.body?.cancel();
+        await new Promise(resolve => setTimeout(resolve, 300));
+        continue;
+      }
+      return response;
+    } catch (error) {
+      if (attempt) throw error;
+      await new Promise(resolve => setTimeout(resolve, 300));
+    }
+  }
+}
 async function github(path, token, raw = false) {
-  const response = await fetch(new URL(path, api), {
+  const response = await readingFetch(new URL(path, api), {
     headers: { Authorization: 'Bearer ' + token, Accept: raw ? 'application/vnd.github.raw+json' : 'application/vnd.github+json' },
     credentials: 'omit', cache: 'no-store', redirect: 'error'
   });
@@ -131,6 +152,7 @@ async function signIn(token, expiresIn, unlock) {
   if (generation !== before) throw new Error('会话已变化，请重新登入。');
   await db('put', next);
   if (generation !== before) throw new Error('会话已变化，请重新登入。');
+  clearReadingMemory();
   state = next;
   manifestPromise = Promise.resolve(files);
   generation++;
@@ -203,9 +225,22 @@ async function openFile(active, path, change) {
   if (!record) return null;
   const [object, type, compressed] = record;
   if (!/^[0-9a-f]{64}$/.test(object)) throw new Error('索引记录无效。');
-  const bytes = await loadEncrypted(object, active);
-  const clear = await decrypt(active.key, bytes, object);
-  const body = compressed ? await inflate(clear) : clear;
+  let body = clearFiles.get(object);
+  if (body) { clearFiles.delete(object); clearFiles.set(object, body); }
+  else {
+    const bytes = await loadEncrypted(object, active);
+    const clear = await decrypt(active.key, bytes, object);
+    body = compressed ? await inflate(clear) : clear;
+    if (change !== generation || (await session()) !== active) return null;
+    // Large search indexes are not retained alongside long reading pages.
+    if (body.byteLength <= 6 * 1024 * 1024) {
+      while (clearFiles.size && (clearFiles.size >= 12 || clearBytes + body.byteLength > 16 * 1024 * 1024)) {
+        const first = clearFiles.keys().next().value;
+        clearBytes -= clearFiles.get(first).byteLength; clearFiles.delete(first);
+      }
+      clearFiles.set(object, body); clearBytes += body.byteLength;
+    }
+  }
   if (change !== generation || (await session()) !== active) return null;
   return new Response(body, {
     headers: { ...forcedHeaders, 'Content-Type': type,
