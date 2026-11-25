@@ -4,7 +4,7 @@ const api = 'https://api.github.com/';
 const owner = 'Play-Game-Archive';
 const ownerId = 358516810;
 const repo = 'repos/' + owner + '/play-game-archive-notes';
-const revision = '926cb86aa864f91bb360df556e9035c47ae28ce2';
+const revision = 'a49f9efe0eb333f61923ef672117bf92ebb06f25';
 const oauthKeyPath = 'contents/reading-envelope.json?ref=owner-access';
 const publicFiles = new Set([
   '/favicon.ico','/apple-touch-icon.png','/apple-touch-icon-precomposed.png',
