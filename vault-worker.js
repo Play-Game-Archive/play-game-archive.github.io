@@ -104,31 +104,30 @@ async function decrypt(key, bytes, name) {
 }
 // Contents responses can transcode binary bytes when mistaken for UTF-16 text.
 // Git blob base64 is byte-preserving; use it only after authenticated decryption fails.
-const exactEncryptedReads = new Map();
+const authenticatedReads = new WeakMap();
 async function decryptExact(key, bytes, name, path, token) {
-  try { return await decrypt(key, bytes, name); }
-  catch {
-    let pending = exactEncryptedReads.get(path);
-    if (!pending) {
-      pending = (async () => {
-        const file = await github(vaultPath(path), token);
-        if (!/^[0-9a-f]{40,64}$/.test(file.sha || '')) throw new Error('资料馆文件标识无效。');
-        const blob = await github(repo + '/git/blobs/' + file.sha, token);
-        if (blob.encoding !== 'base64' || !Number.isSafeInteger(blob.size) || blob.size < 29 || blob.size > 98000000 || typeof blob.content !== 'string') throw new Error('资料馆原始文件格式无效。');
-        const exact = unbase64(blob.content);
-        if (exact.byteLength !== blob.size || blob.size !== file.size) throw new Error('资料馆原始文件不完整。');
-        return exact;
-      })().finally(() => exactEncryptedReads.delete(path));
-      exactEncryptedReads.set(path, pending);
+  let reads = authenticatedReads.get(key);
+  if (!reads) { reads = new Map(); authenticatedReads.set(key, reads); }
+  if (reads.has(path)) return reads.get(path);
+  const pending = (async () => {
+    try { return await decrypt(key, bytes, name); }
+    catch {
+      const file = await github(vaultPath(path), token);
+      if (!/^[0-9a-f]{40,64}$/.test(file.sha || '')) throw new Error('资料馆文件标识无效。');
+      const blob = await github(repo + '/git/blobs/' + file.sha, token);
+      if (blob.encoding !== 'base64' || !Number.isSafeInteger(blob.size) || blob.size < 29 || blob.size > 98000000 || typeof blob.content !== 'string') throw new Error('资料馆原始文件格式无效。');
+      const exact = unbase64(blob.content);
+      if (exact.byteLength !== blob.size || blob.size !== file.size) throw new Error('资料馆原始文件不完整。');
+      const clear = await decrypt(key, exact, name);
+      if (name !== 'manifest') {
+        const cache = await caches.open('play-game-encrypted-files-v1').catch(() => null);
+        await cache?.put(new URL('/__access/cache/' + path, self.location.origin), new Response(exact)).catch(() => {});
+      }
+      return clear;
     }
-    const exact = await pending;
-    const clear = await decrypt(key, exact, name);
-    if (name !== 'manifest') {
-      const cache = await caches.open('play-game-encrypted-files-v1').catch(() => null);
-      await cache?.put(new URL('/__access/cache/' + path, self.location.origin), new Response(exact)).catch(() => {});
-    }
-    return clear;
-  }
+  })().finally(() => reads.delete(path));
+  reads.set(path, pending);
+  return pending;
 }
 
 async function inflate(bytes) {
